@@ -1,8 +1,16 @@
 ---
-title: "Henrique Bolfarine 2"
+title: "Henrique Bolfarine"
+image: picture_01.jpg
+about:
+  template: trestles
+  image-shape: round
+  image-width: 23em
+  links:
+    - text: Email
+      href: mailto:hbolfarine@gmail.com
+    - icon: github
+      text: Github
+      href: https://github.com/hbolfarine/
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
+Teste
