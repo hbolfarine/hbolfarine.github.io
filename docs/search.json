@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Henrique Bolfarine",
     "section": "",
-    "text": "Teste"
+    "text": "Finley Malloc is the Chief Data Scientist at Wengo Analytics. When not innovating on data platforms, Finley enjoys spending time unicycling and playing with her pet iguana."
   },
   {
     "objectID": "about.html",
@@ -12,5 +12,12 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Henrique Bolfarine",
+    "section": "Education",
+    "text": "Education\nUniversidade de São Paulo (USP), São Paulo\nPhD in Statistics | Sept 2011 - June 2015\nMacalester College | St. Paul MA B.A in Economics | Sept 2007 - June 2011"
   }
 ]

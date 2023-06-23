@@ -13,4 +13,12 @@ about:
       href: https://github.com/hbolfarine/
 ---
 
-Teste
+Finley Malloc is the Chief Data Scientist at Wengo Analytics. When not innovating on data platforms, Finley enjoys spending  time unicycling and playing with her pet iguana.
+
+## Education
+
+Universidade de São Paulo (USP), São Paulo\
+PhD in Statistics | Sept 2011 - June 2015
+
+Macalester College | St. Paul MA
+B.A in Economics | Sept 2007 - June 2011
