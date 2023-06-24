@@ -13,7 +13,9 @@ about:
       href: https://github.com/hbolfarine/
 ---
 
-Finley Malloc is the Chief Data Scientist at Wengo Analytics. When not innovating on data platforms, Finley enjoys spending  time unicycling and playing with her pet iguana.
+## About
+
+Henrique Bolfarine is a lecturer at the
 
 ## Education
 
