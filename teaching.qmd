@@ -2,5 +2,5 @@
 title: "Teaching"
 ---
 
-- STA 235 honors
+- STA 235 honors change
   - [class 01 - day of the class](class_01.qmd)
