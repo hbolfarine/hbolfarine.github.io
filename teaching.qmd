@@ -2,6 +2,5 @@
 title: "Teaching"
 ---
 
-## Teaching
-
-- Modifcation
+- STA 235 honors
+  - class 01 - 
