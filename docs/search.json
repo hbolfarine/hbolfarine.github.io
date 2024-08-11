@@ -40,5 +40,320 @@
     "title": "Teaching",
     "section": "",
     "text": "Modifcation"
+  },
+  {
+    "objectID": "class_01.html#what-is-data-science",
+    "href": "class_01.html#what-is-data-science",
+    "title": "Data Science for Business Applications",
+    "section": "What is Data Science?",
+    "text": "What is Data Science?\n\nIn Data Science we use the available data to obtain:"
+  },
+  {
+    "objectID": "class_01.html#data-science-tasks",
+    "href": "class_01.html#data-science-tasks",
+    "title": "Data Science for Business Applications",
+    "section": "Data Science tasks",
+    "text": "Data Science tasks\n\nDescription: Can we classify our customers into different segments? (simple task)\nPrediction: What is the probability of a shopper coming back to our website? (kind of a simple task)\nCausal Inference: What is the effect of increasing our advertising budget on our total revenue? (difficult task)"
+  },
+  {
+    "objectID": "class_01.html#simple-and-multiple-regression",
+    "href": "class_01.html#simple-and-multiple-regression",
+    "title": "Data Science for Business Applications",
+    "section": "Simple and Multiple Regression",
+    "text": "Simple and Multiple Regression\n\nLinear Regression will be the most important tool for solving these Data Science tasks.\nBasically, in the linear regression model, we are explaining the relation between different variables by a line (that’s where the linear comes from.)\nMany fancy methods are generalizations or extensions of Linear Regression!\nIn this class, we will do a quick review on linear regression."
+  },
+  {
+    "objectID": "class_01.html#cookie-example",
+    "href": "class_01.html#cookie-example",
+    "title": "Data Science for Business Applications",
+    "section": "Cookie Example",
+    "text": "Cookie Example\n\n\n\nSuppose we have some data, and we want to understand how happiness changes in relation to the number of cookies eaten.\nTo do so, we summarize the relation between these two variables through a line.\nThis line is the linear regression line.\nLet’s see how this works!\n\n\n\n\n\ncookies\nhappiness\n\n\n\n\n1\n0.1\n\n\n2\n2\n\n\n3\n1\n\n\n4\n2.5\n\n\n5\n3\n\n\n6\n1.3\n\n\n7\n1.9\n\n\n8\n2.4\n\n\n9\n1.8\n\n\n10\n3"
+  },
+  {
+    "objectID": "class_01.html#cookie-example-1",
+    "href": "class_01.html#cookie-example-1",
+    "title": "Data Science for Business Applications",
+    "section": "Cookie Example",
+    "text": "Cookie Example\n\n\n\nThe regression line is defined by two values, the intercept and the slope.\nThe intercept is where the line intercepts the happiness axis.\nThe slope relates to the inclination of the line.\nIf the slope is positive the line has a upward direction.\nIf the slope is negative the line has a downward direction.\nThe regression line is a model of the relation between happiness and the number of cookies eaten."
+  },
+  {
+    "objectID": "class_01.html#some-questions-on-regression",
+    "href": "class_01.html#some-questions-on-regression",
+    "title": "Data Science for Business Applications",
+    "section": "Some questions on regression",
+    "text": "Some questions on regression\n\nFrom the regression line, what is the relationship between happiness and the number of cookies eaten?\nAre there other factors other than the number of cookies that might affect the happiness level?\nFrom this model, can we conclude that eating cookies alone causes happiness?\nWhy not look only at the correlation between happiness and the number of cookies?\nHow do we obtain the intercept and the slope?\nDoes this result apply to the entire population?"
+  },
+  {
+    "objectID": "class_01.html#regressions-details",
+    "href": "class_01.html#regressions-details",
+    "title": "Data Science for Business Applications",
+    "section": "Regressions Details",
+    "text": "Regressions Details\n\nThe Linear Regression model is represented by the formula: \\[\nY = \\beta_0 + \\beta_1\\cdot X_1 + \\beta_2\\cdot X_2 + e\n\\]\nMultiple Regression means we have two or more \\(X\\)’s.\nLet’s break down this model into its essential parts."
+  },
+  {
+    "objectID": "class_01.html#essential-parts-of-a-regression",
+    "href": "class_01.html#essential-parts-of-a-regression",
+    "title": "Data Science for Business Applications",
+    "section": "Essential Parts of a Regression",
+    "text": "Essential Parts of a Regression\n\n\\(Y\\) - Outcome Variable, Response Variable, Dependent Variable (Thing you want to explain or predict)\n\\(X\\) - Explanatory Variable, Predictor Variable, Independent Variable, Covariate (Thing you use to explain or predict \\(Y\\))\n\\(\\beta\\)’s - Coefficients, Parameters (How \\(Y\\) changes numerically in relation to \\(X\\))\n\\(e\\) - Residual, Noise (Things we didn’t account in our model)"
+  },
+  {
+    "objectID": "class_01.html#two-purposes-of-regression",
+    "href": "class_01.html#two-purposes-of-regression",
+    "title": "Data Science for Business Applications",
+    "section": "Two Purposes of Regression",
+    "text": "Two Purposes of Regression"
+  },
+  {
+    "objectID": "class_01.html#back-to-the-cookie-example",
+    "href": "class_01.html#back-to-the-cookie-example",
+    "title": "Data Science for Business Applications",
+    "section": "Back to the Cookie example",
+    "text": "Back to the Cookie example\n\nBy writing the cookie example as a model where the variable happiness is the response variable and the number of cookies is the predictor, we have \\[\n\\texttt{happiness} = \\beta_0 + \\beta_1\\cdot\\texttt{cookies} + e\n\\]\nhappiness is the response variable (\\(Y\\)).\ncookies is the predictor variable (\\(X\\)).\n\\(\\beta_0\\) is the intercept.\n\\(\\beta_1\\) is the slope associate to the cookies variable.\n\\(e\\) are the unknown factors that might explain the relation between cookies and happiness.\nThe challenge now is to estimate the parameters \\(\\beta_0\\), and \\(\\beta_1\\)."
+  },
+  {
+    "objectID": "class_01.html#how-do-we-estimate-the-coefficients-in-a-regression",
+    "href": "class_01.html#how-do-we-estimate-the-coefficients-in-a-regression",
+    "title": "Data Science for Business Applications",
+    "section": "How do we estimate the coefficients in a regression?",
+    "text": "How do we estimate the coefficients in a regression?\n\nA very useful strategy is use what is called the Ordinary Least Squares (OLS).\nThe method is called ordinary least squares because the algorithm selects the coefficients (\\(\\beta\\)’s) that minimize the sum of the squares of the errors in our sample.\nSo the data in this case is fundamental.\nWe use R to learn \\(\\beta\\).\nThe estimated coefficients are referred to as \\(\\widehat{\\beta}\\)."
+  },
+  {
+    "objectID": "class_01.html#lets-get-into-some-data",
+    "href": "class_01.html#lets-get-into-some-data",
+    "title": "Data Science for Business Applications",
+    "section": "Let’s get into some data",
+    "text": "Let’s get into some data\n\nExample: Movie data Set (movie_1990_data.csv)\nWe will create a model that explains and predicts the movie revenue in terms of the budget.\nThere are 1,368 different movies in the data, with 22 different attributes.\nThis means that the data contains 1,368 lines and 22 columns.\nWe are interested in two attributes, the movie budget, and movie revenue.\nMovie budget is in the predictor variable - Adj_Budget.\nMovie revenue is in the response variable - Adj_Revenue.\nThe units in this case are important (both are in millions of dollars).\nLet’s visualize the relation between these two variables."
+  },
+  {
+    "objectID": "class_01.html#section",
+    "href": "class_01.html#section",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "First we load the library tidyverse, then we use the ggplot function to make plot between Adj_Budget and Adj_Revenue\n\n\n# Load library\nlibrary(tidyverse)\n\n# Create plot\nggplot(movie_1990_data) +\n  geom_point(aes(x = Adj_Budget, y = Adj_Revenue))"
+  },
+  {
+    "objectID": "class_01.html#section-1",
+    "href": "class_01.html#section-1",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "We encode the model below in R.\n\\[\n\\texttt{Adj_Revenue} = \\beta_0 + \\beta_1\\cdot\\texttt{Adj_Budget} + e\n\\]\n\n# The model\n# Revenue = intercept + slope*Budget + e\nlm1 &lt;- lm(Adj_Revenue ~ Adj_Budget, data = movie_1990_data)\nsummary(lm1)\n\n\nCall:\nlm(formula = Adj_Revenue ~ Adj_Budget, data = movie_1990_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-262.40  -38.01  -16.39   19.24  619.23 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 22.66095    3.15001   7.194 1.03e-12 ***\nAdj_Budget   1.11043    0.03738  29.709  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 79.78 on 1366 degrees of freedom\nMultiple R-squared:  0.3925,    Adjusted R-squared:  0.3921 \nF-statistic: 882.6 on 1 and 1366 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "class_01.html#lets-interpret-the-output",
+    "href": "class_01.html#lets-interpret-the-output",
+    "title": "Data Science for Business Applications",
+    "section": "Let’s interpret the output",
+    "text": "Let’s interpret the output\n\nFrom the coefficients, \\(\\widehat\\beta_0 = 22.7\\), \\(\\widehat\\beta_1 = 1.11\\) we have the updated model: \\[\n\\widehat{\\texttt{Adj_Revenue}} = 22.7 + 1.11\\cdot\\texttt{Adj_Budget}\n\\]\nWhen there’s a hat, it means that the values were generated from the data.\n\\(e\\) (noise) vanishes because we eliminated the unknown factors and concentrated the effect on what we observe.\nNow we have the residuals, that is the distance between the points in the data and the regression model.\nThe question now is: how can we interpret this result?"
+  },
+  {
+    "objectID": "class_01.html#explanation",
+    "href": "class_01.html#explanation",
+    "title": "Data Science for Business Applications",
+    "section": "Explanation",
+    "text": "Explanation\n\nIntercept: By setting the movie budget to zero, we have that the average revenue is equal to $22.7 million dollars.\nSlope: For one unit change in the movie budget, that is, millions, there will be an increase of $1.11 million dollars in the movie’s revenue."
+  },
+  {
+    "objectID": "class_01.html#section-2",
+    "href": "class_01.html#section-2",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "Let’s visualize this model.\n\n# Create plot with regression line\nggplot(movie_1990_data) +\n  geom_point(aes(x = Adj_Budget, y = Adj_Revenue)) +\n  geom_smooth(aes(x = Adj_Budget, y = Adj_Revenue), method = \"lm\", se = FALSE)"
+  },
+  {
+    "objectID": "class_01.html#statistical-significance-of-the-model",
+    "href": "class_01.html#statistical-significance-of-the-model",
+    "title": "Data Science for Business Applications",
+    "section": "Statistical significance of the model",
+    "text": "Statistical significance of the model\n\nAre these coefficients statistically significant?\nCan we extrapolate the results to the larger population?\nWe can answer these questions by looking at the confidence interval (CI).\n\n\n# We use the confint() function to get the confidence interval\nconfint(lm1)\n\n                2.5 %    97.5 %\n(Intercept) 16.481572 28.840332\nAdj_Budget   1.037112  1.183756"
+  },
+  {
+    "objectID": "class_01.html#statistical-significance-of-the-model-1",
+    "href": "class_01.html#statistical-significance-of-the-model-1",
+    "title": "Data Science for Business Applications",
+    "section": "Statistical significance of the model",
+    "text": "Statistical significance of the model\nFrom the confidence interval we have that:\n\n\n\nThe value of the intercept is statistically different from zero since zero is not between the lower and upper values of the interval.\nThe value of the slope is statistically different from zero since zero is not between the lower and upper values of the interval.\n\n\n\nWith 95% confidence, the value of the intercept at the population level is between 16.5 and 28.8 million dollars.\nWith 95% confidence, the value of the slope at the population level is between 1.04 and 28.8 million dollars."
+  },
+  {
+    "objectID": "class_01.html#predictions",
+    "href": "class_01.html#predictions",
+    "title": "Data Science for Business Applications",
+    "section": "Predictions",
+    "text": "Predictions\n\nSuppose we want to predict the revenue of a movie, knowing that the revenue was $25 million.\nWe can use our estimated model to make the prediction.\nInput the value into the adjusted budget, resulting in: \\[\n\\widehat{\\texttt{Adj_Revenue}} = 22.7 + 1.11\\cdot 25 = 50.45\n\\]\nThe average predicted revenue of a $25 million dollar budget movie is $50 million dollars.\nWe can also do this using the predict function in R\n\n\n# We use the predict() function to get predictions\npredict(lm1, list(Adj_Budget = 25))\n\n       1 \n50.42179"
+  },
+  {
+    "objectID": "class_01.html#predictions-1",
+    "href": "class_01.html#predictions-1",
+    "title": "Data Science for Business Applications",
+    "section": "Predictions",
+    "text": "Predictions\n\nHow good are these predictions?\nWe can use the residual standard error (RSE), which is a result of the summary function.\n\\(\\texttt{Residual standard error: 79.78}\\),\nThese mean that our predictions will be off by approximately 79.78.\nWith 95% confidence, the prediction of the revenue will be 50.42 plus and minus \\(2\\times 79.78. = 159.56\\).\nQuite a big variation."
+  },
+  {
+    "objectID": "class_01.html#adding-more-variables",
+    "href": "class_01.html#adding-more-variables",
+    "title": "Data Science for Business Applications",
+    "section": "Adding more variables",
+    "text": "Adding more variables\n\nWe can add more variables in our model.\nWe will add the variable imdbRating which encodes the different IMDB ratings in the data.\nThe resulting model now is \\[\n\\texttt{Adj_Revenue} = \\beta_0 + \\beta_1\\cdot\\texttt{Adj_Budget} + \\beta_2\\cdot\\texttt{imdbRating} + e\n\\]\nYou can observe that we have an extra slope in the equation.\nThis will have an impact in how we interpret the model.\nNext we econde this model in R"
+  },
+  {
+    "objectID": "class_01.html#explore-the-data-beauty",
+    "href": "class_01.html#explore-the-data-beauty",
+    "title": "Data Science for Business Applications",
+    "section": "Explore the data: beauty",
+    "text": "Explore the data: beauty"
+  },
+  {
+    "objectID": "class_01.html#relation-bewteen-variables",
+    "href": "class_01.html#relation-bewteen-variables",
+    "title": "Data Science for Business Applications",
+    "section": "Relation bewteen variables",
+    "text": "Relation bewteen variables\n\nDo you think there is a positive or negative relationship between beauty and teaching ratings?"
+  },
+  {
+    "objectID": "class_01.html#correlation",
+    "href": "class_01.html#correlation",
+    "title": "Data Science for Business Applications",
+    "section": "Correlation",
+    "text": "Correlation\n\nRegressions are super useful…\nBut you need to know how to interpret them.\nBe sure not to overstate your claims!\nRemember the magic words for interpretation"
+  },
+  {
+    "objectID": "class_01.html#correlation-1",
+    "href": "class_01.html#correlation-1",
+    "title": "Data Science for Business Applications",
+    "section": "Correlation",
+    "text": "Correlation"
+  },
+  {
+    "objectID": "class_01.html#correlation-between-variables",
+    "href": "class_01.html#correlation-between-variables",
+    "title": "Data Science for Business Applications",
+    "section": "Correlation between variables",
+    "text": "Correlation between variables\n\nLet’s calculate the correlation between evaluation and beauty\n\n\ncor(profs$eval, profs$beauty)\n\n[1] 0.1890391\n\n\n\nHow can we interpret this?\nInstead of trying to interpret the correlation, we can build a model that reveals the relationship between the professor’s evaluation and their beauty score."
+  },
+  {
+    "objectID": "class_01.html#simple-regression-model",
+    "href": "class_01.html#simple-regression-model",
+    "title": "Data Science for Business Applications",
+    "section": "Simple regression model",
+    "text": "Simple regression model\n\nmodel &lt;- lm(eval ~ beauty, data=profs)\nsummary(model)\n\n\nCall:\nlm(formula = eval ~ beauty, data = profs)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.80015 -0.36304  0.07254  0.40207  1.10373 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  3.99827    0.02535 157.727  &lt; 2e-16 ***\nbeauty       0.13300    0.03218   4.133 4.25e-05 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.5455 on 461 degrees of freedom\nMultiple R-squared:  0.03574,   Adjusted R-squared:  0.03364 \nF-statistic: 17.08 on 1 and 461 DF,  p-value: 4.247e-05"
+  },
+  {
+    "objectID": "class_01.html#interpreting-the-model",
+    "href": "class_01.html#interpreting-the-model",
+    "title": "Data Science for Business Applications",
+    "section": "Interpreting the model",
+    "text": "Interpreting the model\n\neval is the response variable (\\(Y\\));\nbeauty is the predicton variable (\\(X\\))\nSimple regression uses the best fit line to give us a linear equation to predict \\(Y\\) from \\(X\\):\n\n\\[\n\\text{eval} = 3.998 + 0.133\\cdot \\text{beauty}\n\\]\n\nWe can predict the evaluation score for someone based on their beauty score just by plugging into the equation.\nWhat do the coefficients mean?"
+  },
+  {
+    "objectID": "class_01.html#interpreting-the-model-1",
+    "href": "class_01.html#interpreting-the-model-1",
+    "title": "Data Science for Business Applications",
+    "section": "Interpreting the model",
+    "text": "Interpreting the model"
+  },
+  {
+    "objectID": "class_01.html#interpreting-the-model-2",
+    "href": "class_01.html#interpreting-the-model-2",
+    "title": "Data Science for Business Applications",
+    "section": "Interpreting the model",
+    "text": "Interpreting the model\n\nWe can predict the evaluation score for someone based on their beauty score just by plugging into the equation.\nWhat do the coefficients mean?\nBut what does the population that it was drawn from look like?"
+  },
+  {
+    "objectID": "class_01.html#statistical-significance-of-the-model-2",
+    "href": "class_01.html#statistical-significance-of-the-model-2",
+    "title": "Data Science for Business Applications",
+    "section": "Statistical significance of the model",
+    "text": "Statistical significance of the model\n\n\nWhich one is the true population?"
+  },
+  {
+    "objectID": "class_01.html#statistical-significance-of-the-model-3",
+    "href": "class_01.html#statistical-significance-of-the-model-3",
+    "title": "Data Science for Business Applications",
+    "section": "Statistical significance of the model",
+    "text": "Statistical significance of the model\n\nThe population regression line (the best fit line in the population) is \\[Y = \\beta_0 + \\beta_1 X + \\text{noise}\\]\nUsually we don’t have access to the entire population, so we can’t know this\nThe noise term represents what we haven’t accounted for in our model"
+  },
+  {
+    "objectID": "class_01.html#statistical-significance-of-the-model-4",
+    "href": "class_01.html#statistical-significance-of-the-model-4",
+    "title": "Data Science for Business Applications",
+    "section": "Statistical significance of the model",
+    "text": "Statistical significance of the model\n\nOur regression equation is the best fit line in the sample, or \\[\\widehat{Y} = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 X\\]\nThis is what we get from our sample data\nThe sample intercept and slope \\(\\widehat\\beta_0\\) and \\(\\widehat\\beta_1\\)\nare our best estimates for the population intercept\nand slope \\(\\beta_0\\) and \\(\\beta_1\\)\nBut we need to get a sense of how close \\(\\widehat\\beta_0\\) and \\(\\widehat\\beta_1\\) are to \\(\\beta_0\\) and \\(\\beta_1\\)!"
+  },
+  {
+    "objectID": "class_01.html#confidence-intervals",
+    "href": "class_01.html#confidence-intervals",
+    "title": "Data Science for Business Applications",
+    "section": "Confidence intervals",
+    "text": "Confidence intervals\n\nLet’s form confidence intervals for the slope and intercept to get a sense of the uncertainty in our estimates:\n\n\nconfint(model)\n\n                 2.5 %    97.5 %\n(Intercept) 3.94845765 4.0480866\nbeauty      0.06976869 0.1962342"
+  },
+  {
+    "objectID": "class_01.html#confidence-intervals-1",
+    "href": "class_01.html#confidence-intervals-1",
+    "title": "Data Science for Business Applications",
+    "section": "Confidence intervals",
+    "text": "Confidence intervals\n\n\\(\\beta_1\\): We are 95% confident that the incremental impact of each additional beauty point is between \\(0.07\\) and \\(0.20\\) student evaluation points.\n\\(\\beta_0\\): We are 95% confident that the average student evaluation score for average-looking professors (beauty = 0) is between \\(3.95\\) and \\(4.05\\)"
+  },
+  {
+    "objectID": "class_01.html#confidence-intervals-for-predictions",
+    "href": "class_01.html#confidence-intervals-for-predictions",
+    "title": "Data Science for Business Applications",
+    "section": "Confidence intervals for predictions",
+    "text": "Confidence intervals for predictions\n\nConfidence for a given prediction\n\n\npredict(model, list(beauty=1), interval=\"prediction\")\n\n       fit      lwr      upr\n1 4.131274 3.056375 5.206172\n\n\n\nWe are 95% confident that a single professor with a beauty score of 1 will get rated between 3.06 and 5.21."
+  },
+  {
+    "objectID": "class_01.html#confidence-intervals-for-predictions-1",
+    "href": "class_01.html#confidence-intervals-for-predictions-1",
+    "title": "Data Science for Business Applications",
+    "section": "Confidence intervals for predictions",
+    "text": "Confidence intervals for predictions\n\nConfidence for the average prediction\n\n\npredict(model, list(beauty=1), interval=\"confidence\")\n\n       fit      lwr      upr\n1 4.131274 4.050776 4.211771\n\n\n\nWe are 95% confident that the will be between\n4.05 and 4.21"
+  },
+  {
+    "objectID": "class_01.html#residuals",
+    "href": "class_01.html#residuals",
+    "title": "Data Science for Business Applications",
+    "section": "Residuals",
+    "text": "Residuals\n\nEach instructor has a residual: the difference between their actual and predicted scores (the prediction error)."
+  },
+  {
+    "objectID": "class_01.html#residuals-1",
+    "href": "class_01.html#residuals-1",
+    "title": "Data Science for Business Applications",
+    "section": "Residuals",
+    "text": "Residuals\n\nThis instructor has a positive residual—their evaluation score was higher than expected given their beauty:"
+  },
+  {
+    "objectID": "class_01.html#residuals-2",
+    "href": "class_01.html#residuals-2",
+    "title": "Data Science for Business Applications",
+    "section": "Residuals",
+    "text": "Residuals\n\nThis instructor has a negative residual—their evaluation score was lower than expected given their beauty:"
+  },
+  {
+    "objectID": "class_01.html#residuals-3",
+    "href": "class_01.html#residuals-3",
+    "title": "Data Science for Business Applications",
+    "section": "Residuals",
+    "text": "Residuals\n\nThe residuals are approximately Normally distributed with a mean of 0:"
+  },
+  {
+    "objectID": "class_01.html#practical-significance-of-the-model",
+    "href": "class_01.html#practical-significance-of-the-model",
+    "title": "Data Science for Business Applications",
+    "section": "Practical significance of the model",
+    "text": "Practical significance of the model\n\nWe know that there is a statistically significant relationship between beauty and eval, so we can be highly confident they are indeed related in the larger population. But it that relationship meaningful?\nThe of \\(0.545\\) tells us that the standard deviation of the residuals is about \\(0.545\\) points"
+  },
+  {
+    "objectID": "class_01.html#practical-significance-of-the-model-1",
+    "href": "class_01.html#practical-significance-of-the-model-1",
+    "title": "Data Science for Business Applications",
+    "section": "Practical significance of the model",
+    "text": "Practical significance of the model\n\nThat means that 95% of the residuals are less than \\(2\\cdot 0.545=1.09\\) (since 95% of a Normal distribution is within \\(\\pm 2\\) SD of the mean)\nIn other words, 95% of the time when using beauty to predict evaluation scores, we’ll be off by\nless than 1.09 point"
+  },
+  {
+    "objectID": "class_01.html#practical-significance-of-the-model-2",
+    "href": "class_01.html#practical-significance-of-the-model-2",
+    "title": "Data Science for Business Applications",
+    "section": "Practical significance of the model",
+    "text": "Practical significance of the model\n\nThe \\(R^2\\) of \\(0.0357\\) tells us that about 4% of the variation between professors in student evaluations can be explained by their beauty\nLook at the difference in \\(\\widehat{\\text{eval}}\\) between someone super-hot (beauty = 2) and super-not (beauty = \\(-1.5\\)); the difference in their predicted student evaluations is \\(3.5 \\cdot 0.133 = 0.466\\)\nWe have to use our subjective judgment to decide whether these indicate a meaningful (practically significant) relationship"
   }
 ]

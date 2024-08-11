@@ -1,0 +1,604 @@
+---
+title: "Data Science for Business Applications"
+author: "Class 01 - Linear Regression Review"
+title-slide-attributes:
+    data-background-image: image/background_sta235h.png
+format:
+  revealjs: 
+    theme: "my-styles.css"
+    logo: image/texas_logo2.png
+    incremental: true 
+    self-contained-math: true
+    
+---
+
+## What is Data Science?
+
+- In Data Science we use the available [data]{style="color:darkorange;"} to obtain:
+
+![](image/image_01.png){fig-align="center"width=50%}
+
+## Data Science tasks
+
+*   [**Description**]{style="color:darkslateblue;"}: *Can we classify our customers into different segments?* ([simple task]{style="color:darkred;"})
+*   [**Prediction**]{style="color:darkorchid;"}: *What is the probability of a shopper coming back to our website?* ([kind of a simple task]{style="color:darkred;"})
+*   [**Causal Inference**]{style="color:orange;"}: *What is the effect of increasing our advertising budget on our total revenue?* ([difficult task]{style="color:darkred;"})
+
+## Simple and Multiple Regression
+
+- [Linear Regression]{style="color:darkorange;"} will be the most important tool for solving these Data Science tasks.
+- Basically, in the [linear regression]{style="color:darkorange;"} model, we are [explaining]{style="color:darkorange;"} the relation between different variables by a line ([that's where the linear comes from.]{style="color:darkred;"})
+- Many fancy methods are [generalizations or extensions]{style="color:darkorange;"} of Linear Regression!
+- In this class, we will do a quick review on linear regression.
+
+## Cookie Example {.smaller}
+
+:::: {.columns}
+
+::: {.column width="60%"}
+- Suppose we have some data, and we want to understand how happiness [changes]{style="color:darkorange;"} in relation to the number of cookies eaten.
+- To do so, we [summarize]{style="color:darkorange;"} the relation between these two variables through a [line]{style="color:darkorange;"}.
+- This line is the [linear regression]{style="color:darkorange;"} line.
+- Let's see how this works!
+:::
+
+::: {.column width="40%"}
+
+cookies| happiness
+:-----:|:-----:
+1|0.1
+2|2
+3|1
+4|2.5
+5|3
+6|1.3
+7|1.9
+8|2.4
+9|1.8
+10|3
+:::
+
+::::
+
+## Cookie Example {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+- The [regression line]{style="color:darkorange;"} is defined by two values, the [intercept]{style="color:darkorange;"} and the [slope]{style="color:darkorange;"}. 
+- The [intercept]{style="color:darkorange;"} is where the line intercepts the happiness axis.
+- The [slope]{style="color:darkorange;"} relates to the inclination of the line.
+- If the [slope is positive]{style="color:darkorange;"} the line has a upward direction.
+- If the [slope is negative]{style="color:darkorange;"} the line has a downward direction.
+- The [regression line]{style="color:darkorange;"} is a [model]{style="color:darkorange;"} of the relation between happiness and the number of cookies eaten.
+<!-- - We also refer to these parameters to the Greek letter $\beta$. -->
+
+:::
+
+::: {.column width="50%"}
+![](image/cookie_image_03.png){fig-align="center"width=100%}
+:::
+
+::::
+
+
+## Some questions on regression {.smaller}
+
+- From the [regression line]{style="color:darkorchid;"}, what is the relationship between happiness and the number of cookies eaten?
+- Are there [other factors]{style="color:darkorchid;"} other than the number of cookies that might affect the happiness level?
+- From this model, can we conclude that eating cookies alone [causes]{style="color:darkorchid;"} happiness?
+- Why not look only at the [correlation]{style="color:darkorchid;"} between happiness and the number of cookies?
+- How do we [obtain]{style="color:darkorchid;"} the intercept and the slope?
+- Does this result apply to the [entire population]{style="color:darkorchid;"}?
+
+## Regressions Details
+
+- The [Linear Regression model]{style="color:darkorange;"} is represented by the formula:
+$$
+Y = \beta_0 + \beta_1\cdot X_1 + \beta_2\cdot X_2 + e 
+$$
+- [Multiple Regression]{style="color:darkorange;"} means we have two or more $X$'s.
+- Let's break down this model into its essential parts.
+
+## Essential Parts of a Regression
+
+- $Y$ - Outcome Variable, Response Variable, Dependent Variable ([Thing you want to explain or predict]{style="color:darkorchid;"})
+- $X$ - Explanatory Variable, Predictor Variable, Independent Variable, Covariate ([Thing you use to explain or predict]{style="color:darkorchid;"} $Y$)
+- $\beta$'s - Coefficients, Parameters ([How]{style="color:darkorchid;"} $Y$ [changes numerically in relation  to]{style="color:darkorchid;"} $X$)
+- $e$ - Residual, Noise ([Things we didn't account in our model]{style="color:darkorchid;"})
+
+## Two Purposes of Regression
+
+![](image/image_02.png){fig-align="center"}
+
+## Back to the Cookie example {.smaller}
+
+- By writing the cookie example as a model where the variable happiness is the [response variable]{style="color:darkorange;"} and the number of cookies is the [predictor]{style="color:darkorange;"}, we have
+$$
+\texttt{happiness} = \beta_0 + \beta_1\cdot\texttt{cookies} + e
+$$
+- `happiness` is the [response variable]{style="color:darkorange;"} ($Y$).
+- `cookies` is the [predictor variable]{style="color:darkorange;"} ($X$).
+- $\beta_0$ is the [intercept]{style="color:darkorange;"}.
+- $\beta_1$ is the [slope]{style="color:darkorange;"} associate to the `cookies` variable. 
+- $e$ are the [unknown factors]{style="color:darkorange;"} that might explain the relation between cookies and happiness.
+- The challenge now is to [estimate]{style="color:darkorange;"} the parameters $\beta_0$, and $\beta_1$.
+
+## How do we estimate the coefficients in a regression?
+
+* A very useful strategy is use what is called the [Ordinary Least Squares]{style="color:darkorange;"} (OLS).
+* The method is called ordinary least squares because the algorithm selects the coefficients ($\beta$'s) that
+minimize the sum of the squares of the errors in our sample.
+* So the data in this case is fundamental.
+* We use [**R**]{style="color:blue;"} to learn $\beta$.
+* The estimated coefficients are referred to as $\widehat{\beta}$.
+
+## Let's get into some data  {.smaller}
+
+- **Example**: [Movie data Set]{style="color:darkorange;"} (`movie_1990_data.csv`)
+- We will create a model that [explains]{style="color:darkorange;"} and [predicts]{style="color:darkorange;"} the movie revenue in terms of the budget. 
+- There are 1,368 different movies in the data, with 22 different attributes.
+- This means that the data contains 1,368 lines and 22 columns.
+- We are interested in two attributes, the [movie budget]{style="color:darkorange;"}, and [movie revenue]{style="color:darkorange;"}.
+- [Movie budget]{style="color:darkorange;"} is in the predictor variable - `Adj_Budget`.
+- [Movie revenue]{style="color:darkorange;"} is in the response variable - `Adj_Revenue`.
+- The units in this case are important (both are in millions of dollars).
+- Let's visualize the relation between these two variables.
+
+## {.smaller}
+- First we load the library `tidyverse`, then we use the `ggplot` function to make 
+plot between `Adj_Budget` and `Adj_Revenue`
+```{r}
+movie_1990_data = read.csv("rscript_class_01/movie_1990_data.csv")
+```
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+#| 
+# Load library
+library(tidyverse)
+
+# Create plot
+ggplot(movie_1990_data) +
+  geom_point(aes(x = Adj_Budget, y = Adj_Revenue))
+```
+
+<!-- :::: {.columns} -->
+
+<!-- ::: {.column width="45%"} -->
+<!-- - Example: [Movie data Set]{style="color:darkorange;"} -->
+<!-- - Three criteria: -->
+<!-- 1. At least two named women -->
+<!-- 2. Who talk to each other -->
+<!-- 3. About something besides a man -->
+<!-- ::: -->
+
+<!-- ::: {.column width="54%"} -->
+<!-- ![](image/bechdel_test_02.png){width=90%} -->
+<!-- ::: -->
+
+<!-- :::: -->
+
+## {.smaller}
+
+We encode the model below in [**R**]{style="color:blue;"}.
+
+$$
+\texttt{Adj_Revenue} = \beta_0 + \beta_1\cdot\texttt{Adj_Budget} + e
+$$
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+
+
+# The model
+# Revenue = intercept + slope*Budget + e
+lm1 <- lm(Adj_Revenue ~ Adj_Budget, data = movie_1990_data)
+summary(lm1)
+```
+
+
+## Let's interpret the output {.smaller}
+
+- From the coefficients, $\widehat\beta_0 = 22.7$, $\widehat\beta_1 = 1.11$  we have the updated model:
+$$
+\widehat{\texttt{Adj_Revenue}} = 22.7 + 1.11\cdot\texttt{Adj_Budget}
+$$
+- When there's a hat, it means that the values were generated from the data.
+- $e$ (noise) vanishes because we eliminated the unknown factors and concentrated the effect on what we observe.
+- Now we have the [residuals]{style="color:darkorange;"}, that is the distance between the points in the data and the regression model.
+- The question now is: how can we [interpret]{style="color:darkorange;"} this result?
+
+
+## Explanation {.small}
+
+- [**Intercept**]{style="color:darkorange;"}: By setting the movie budget to zero, we have that the average revenue is equal to [$22.7 million dollars]{style="color:darkorange;"}.
+- [**Slope**]{style="color:darkorange;"}: For one unit change in the movie budget, that is, millions, there will be an increase of [$1.11 million dollars]{style="color:darkorange;"} in the movie's revenue.
+
+## {.smaller}
+
+Let's visualize this model.
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+#| 
+# Create plot with regression line
+ggplot(movie_1990_data) +
+  geom_point(aes(x = Adj_Budget, y = Adj_Revenue)) +
+  geom_smooth(aes(x = Adj_Budget, y = Adj_Revenue), method = "lm", se = FALSE)
+```
+
+## Statistical significance of the model {.small}
+
+- Are these coefficients [statistically significant]{style="color:darkorange;"}?
+- Can we extrapolate the results to the larger population?
+- We can answer these questions by looking at the [confidence interval]{style="color:darkorange;"} (CI).
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+#| 
+# We use the confint() function to get the confidence interval
+confint(lm1)
+```
+
+## Statistical significance of the model {.smaller}
+
+From the confidence interval we have that:
+
+:::: {.columns}
+
+::: {.column width="50%"}
+- The value of the intercept is statistically different from zero since zero is not between the lower and upper values of the interval.
+- The value of the slope is statistically different from zero since zero is not between the lower and upper values of the interval.
+
+:::
+
+::: {.column width="50%"}
+
+- With 95% confidence, the value of the intercept at the population level is between 16.5 and 28.8 million dollars.
+- With 95% confidence, the value of the slope at the population level is between 1.04 and 28.8 million dollars.
+
+:::
+
+::::
+
+
+## Predictions {.smaller}
+
+- Suppose we want to predict the revenue of a movie, knowing that the revenue was $25 million.
+- We can use our estimated model to make the prediction.
+- Input the value into the adjusted budget, resulting in:
+$$
+\widehat{\texttt{Adj_Revenue}} = 22.7 + 1.11\cdot 25 = 50.45
+$$
+- The average predicted revenue of a \$25 million dollar budget movie is \$50 million dollars.
+- We can also do this using the `predict` function in [**R**]{style="color:blue;"}
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+#| 
+# We use the predict() function to get predictions
+predict(lm1, list(Adj_Budget = 25))
+```
+## Predictions {.smaller}
+
+- How good are these predictions?
+- We can use the residual standard error (RSE), which is a result of the `summary` function.
+- $\texttt{Residual standard error: 79.78}$,
+- These mean that our predictions will be off by approximately 79.78.
+- With 95% confidence, the prediction of the revenue will be 50.42 plus and minus $2\times 79.78. = 159.56$.
+- Quite a big variation.
+
+## Adding more variables {.smaller}
+
+- We can add more variables in our model.
+- We will add the variable `imdbRating` which encodes the different IMDB ratings in the data.
+- The resulting model now is 
+$$
+\texttt{Adj_Revenue} = \beta_0 + \beta_1\cdot\texttt{Adj_Budget} + \beta_2\cdot\texttt{imdbRating} + e
+$$
+- You can observe that we have an extra slope in the equation.
+- This will have an impact in how we interpret the model.
+- Next we econde this model in [**R**]{style="color:blue;"}
+
+
+##
+
+![](image/3d_plot_movie.png){fig-align="center"}
+
+```{r}
+library(tidyverse)
+
+profs <- read.csv("data/pretty-profs.csv")
+
+ggplot(profs, aes(eval)) +
+  geom_histogram(binwidth=0.2, col="black", fill="lightblue") +
+  labs(x="Average student evaluation")
+```
+
+## Explore the data: beauty
+
+```{r}
+ggplot(profs, aes(beauty)) +
+  geom_histogram(binwidth=0.4, col="black", fill="lightblue") +
+  labs(x="Beauty rating (0 is average)")
+```
+
+## Relation bewteen variables
+
+- Do you think there is a positive or negative relationship 
+between beauty and teaching ratings?
+
+```{r, fig.align = 'center'}
+ggplot(profs, aes(beauty, eval)) +
+  geom_point() + 
+  # geom_smooth(method="lm", se=F, col="blue") +
+  labs(y="Average student evaluation", x="Beauty")
+```
+
+## Correlation
+
+- Regressions are super useful...
+- But you need to know how to interpret them.
+- Be sure not to overstate your claims!
+- Remember the magic words for interpretation
+<!-- ```{r} -->
+<!-- #| eval: true -->
+<!-- #| echo: true -->
+<!-- #| output: true -->
+<!-- # test show code -->
+<!-- x <- 1:10 -->
+<!-- x -->
+<!-- LETTERS[x] -->
+<!-- ``` -->
+
+## Correlation
+
+```{r, fig.align = 'center'}
+set.seed(1)
+par(mfrow=c(3, 5), mai=c(.25, .3, .25, .05))
+for (r in c(-1, -0.9, -0.8, -0.5, -0.2, NA, NA, 0, NA, NA, 0.2, 0.5, 0.8, 0.9, 1)) {
+  if (is.na(r)) {
+    plot.new()
+  } else {
+    x = rnorm(100)
+    y = rnorm(100)
+    if (abs(r) < 1) {
+      a = r/sqrt(1-r^2)
+      z = a*x + y
+    } else {
+      z = r*x/2
+    }
+    plot(x, z, xlab="", ylab="", main=sprintf("r = %.2f", r), pch=".")
+  }
+}
+par(mfrow=c(1, 1), mai=c(1.02, 0.82, 0.22, 0.42))
+
+```
+
+## Correlation between variables
+
+- Let's calculate the correlation between 
+evaluation and beauty
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+cor(profs$eval, profs$beauty)
+```
+
+- How can we interpret this?
+
+- Instead of trying to interpret the correlation, we can build a [model]{style="color:orange;"} that reveals the relationship between the professor's evaluation and their beauty score.
+
+## Simple regression model
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+model <- lm(eval ~ beauty, data=profs)
+summary(model)
+```
+
+## Interpreting the model
+
+- ***eval*** is the [response]{style="color:orange;"} variable ($Y$); 
+- ***beauty*** is the [predicton]{style="color:orange;"} variable ($X$)
+- Simple regression uses the best fit line to give us a linear equation to predict $Y$ from $X$:
+
+$$
+\text{eval} = 3.998 + 0.133\cdot \text{beauty}
+$$
+
+- We can predict the evaluation score for someone based on their beauty score just by plugging into the equation.
+
+- What do the coefficients mean?
+
+## Interpreting the model
+
+```{r}
+#| output: true
+ggplot(profs, aes(beauty, eval)) +
+  geom_point() + 
+  geom_smooth(method="lm", se=F, col="blue") +
+  labs(y="Average student evaluation", x="Beauty")
+```
+
+## Interpreting the model
+
+- We can [predict]{style="color:orange;"} the evaluation score for someone based on their beauty score just by plugging into the equation.
+
+- What do the coefficients mean?
+
+- But what does the [population]{style="color:orange;"} that it was drawn from look like?
+
+## Statistical significance of the model
+
+```{r, fig.align = 'center'}
+library(patchwork)
+x <- c(jitter(profs$beauty, 20), jitter(profs$beauty, 20), profs$beauty)
+y <- c(jitter(profs$eval, 20), jitter(profs$eval, 20), profs$eval)
+type <- c(rep("population", 2*nrow(profs)), rep("sample", nrow(profs)))
+p1 = ggplot(data.frame(beauty=x, eval=y, type=type), aes(x=beauty, y=eval)) +
+  geom_point(aes(col=type), show.legend=F) + 
+  scale_color_manual(values=c("darkgray", "black")) +
+  labs(y="Average student evaluation", x="Beauty")
+
+x <- 3.5*runif(500) - 1.5
+y <- 3*runif(500) + 2
+x <- c(x, profs$beauty)
+y <- c(y, profs$eval)
+type <- c(rep("population", 500), rep("sample", nrow(profs)))
+p2 = ggplot(data.frame(beauty=x, eval=y, type=type), aes(x=beauty, y=eval)) +
+  geom_point(aes(col=type), show.legend=F) + 
+  scale_color_manual(values=c("darkgray", "black")) +
+  labs(y="Average student evaluation", x="Beauty")
+
+p1+p2
+
+```
+
+- Which one is the true population?
+
+## Statistical significance of the model
+
+- The population regression line (the best fit line in the population) is 
+$$Y = \beta_0 + \beta_1 X + \text{noise}$$ 
+
+- Usually we don't have access to the entire population, so we can't know this 
+- The **noise** term represents what we haven't accounted for in our model
+
+## Statistical significance of the model
+
+- Our regression equation is the best fit line in the sample, or 
+$$\widehat{Y} = \widehat{\beta}_0 + \widehat{\beta}_1 X$$ 
+
+- This is what we get from our [sample data]{style="color:orange;"}
+- The sample intercept and slope $\widehat\beta_0$ and $\widehat\beta_1$\
+are our best estimates for the population intercept\
+and slope $\beta_0$ and $\beta_1$
+- But we need to get a sense of how close $\widehat\beta_0$ and $\widehat\beta_1$ are\ to $\beta_0$ and $\beta_1$!
+
+## Confidence intervals
+
+- Let's form confidence intervals for the slope and intercept to get a sense of the uncertainty in our estimates:
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+confint(model)
+```
+
+## Confidence intervals
+
+- $\beta_1$: We are 95\% confident that the incremental impact of each additional beauty point is between $0.07$ and $0.20$ student evaluation points.
+- $\beta_0$: We are 95\% confident that the average student evaluation score for average-looking professors (beauty = 0) is between $3.95$ and $4.05$
+
+## Confidence intervals for predictions
+
+- Confidence for a given prediction 
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+predict(model, list(beauty=1), interval="prediction")
+```
+
+- We are 95\% confident that a single professor with a beauty score of 1 will get rated between 3.06 and 5.21.
+
+## Confidence intervals for predictions
+
+- Confidence for the average prediction
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+predict(model, list(beauty=1), interval="confidence")
+```
+
+- We are 95\% confident that the \alert{average rating of all professors with beauty scores of 1} will be between\
+4.05 and 4.21
+
+## Residuals
+
+- Each instructor has a [residual]{style="color:orange;"}: the difference between their actual and predicted scores (the [prediction error]{style="color:orange;"}).
+```{r, fig.align = 'center'}
+profs$fitted <- predict(model)
+ggplot(profs, aes(beauty, eval)) +
+  geom_point() + 
+  geom_segment(aes(xend=beauty, yend=fitted, col=ifelse(fitted-eval>0, "green", "red")), show.legend=F) +
+  geom_smooth(method="lm", se=F, col="blue") +
+  labs(y="Average student evaluation", x="Beauty")
+```
+
+## Residuals
+
+- This instructor has a [positive]{style="color:orange;"} residual---their evaluation score was [higher than expected]{style="color:orange;"} given their beauty:
+```{r, fig.align = 'center'}
+ggplot(profs, aes(beauty, eval)) +
+  geom_point() + 
+  geom_segment(aes(x=beauty[46], xend=beauty[46], y=eval[46], yend=fitted[46]), col="red", show.legend=F) +
+  scale_colour_identity() +
+  geom_smooth(method="lm", se=F, col="blue") +
+  labs(y="Average student evaluation", x="Beauty")
+```
+
+## Residuals
+
+-  This instructor has a [negative]{style="color:orange;"} residual---their evaluation score was [lower than expected]{style="color:orange;"} given their beauty:
+```{r, fig.align = 'center'}
+ggplot(profs, aes(beauty, eval)) +
+  geom_point() + 
+  geom_segment(aes(x=beauty[43], xend=beauty[43], y=eval[43], yend=fitted[43]), col="red", show.legend=F) +
+  scale_colour_identity() +
+  geom_smooth(method="lm", se=F, col="blue") +
+  labs(y="Average student evaluation", x="Beauty")
+```
+
+## Residuals
+
+-  The residuals are approximately Normally distributed with a mean of 0:
+
+```{r, fig.align = 'center'}
+profs$residuals <- residuals(model)
+ggplot(profs, aes(residuals)) +
+  geom_histogram(aes(y=after_stat(density)), binwidth=0.3, col="black", fill="lightblue") +
+  stat_function(fun=dnorm, args=list(mean=mean(profs$residuals), sd=sd(profs$residuals)), col="blue") +
+  labs(x="Residuals") +
+  xlim(c(-2,2))
+```
+
+## Practical significance of the model
+
+-  We know that there is a statistically significant relationship between beauty and eval, so we can be highly confident they are indeed related in the larger population. But it that relationship [meaningful]{style="color:orange;"}?
+- The \alert{residual standard error} of $0.545$ tells us that the standard deviation of the residuals is about $0.545$ points
+
+## Practical significance of the model
+
+- That means that 95\% of the residuals are less than $2\cdot 0.545=1.09$ (since 95\% of a Normal distribution is within $\pm 2$ SD of the mean)
+- In other words, 95\% of the time when using beauty to predict evaluation scores, we'll be off by\
+less than 1.09 point
+
+## Practical significance of the model
+
+- The $R^2$ of $0.0357$ tells us that about 4\% of the variation between professors in student evaluations can be explained by their beauty
+- Look at the difference in $\widehat{\text{eval}}$ between someone super-hot (beauty = 2) and super-not (beauty = $-1.5$); the difference in their predicted student evaluations is $3.5 \cdot 0.133 = 0.466$
+- We have to use our subjective judgment to decide whether these indicate a meaningful ([practically significant]{style="color:orange;"}) relationship
+
+
+
+
+
