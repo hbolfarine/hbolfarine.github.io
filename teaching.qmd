@@ -3,4 +3,4 @@ title: "Teaching"
 ---
 
 - STA 235 honors
-  - class 01 - 
+  - class 01 - day of the class
