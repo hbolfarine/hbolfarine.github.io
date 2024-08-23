@@ -193,7 +193,7 @@
     "href": "class_01.html#adding-more-variables",
     "title": "Data Science for Business Applications",
     "section": "Adding more variables",
-    "text": "Adding more variables\n\nWe can add more variables in our model.\nWe will add the variable imdbRating which encodes the different IMDB ratings in the data.\nThe resulting model now is \\[\n\\texttt{Adj_Revenue} = \\beta_0 + \\beta_1\\cdot\\texttt{Adj_Budget} + \\beta_2\\cdot\\texttt{imdbRating} + e\n\\]\nYou can observe that we have an extra slope in the equation.\nThis will have an impact in how we interpret the model.\nNext we econde this model in R"
+    "text": "Adding more variables\n\nWe can add more variables in our model.\nWe will add the variable imdbRating which encodes the different IMDB ratings in the data.\nThe resulting model now is \\[\n\\texttt{Adj_Revenue} = \\beta_0 + \\beta_1\\cdot\\texttt{Adj_Budget} + \\beta_2\\cdot\\texttt{imdbRating} + e\n\\]\nYou can observe that we have an extra slope in the equation.\nThis will have an impact in how we interpret the model.\nNext we encode this model in R"
   },
   {
     "objectID": "class_01.html#explore-the-data-beauty",
@@ -207,7 +207,7 @@
     "href": "class_01.html#relation-bewteen-variables",
     "title": "Data Science for Business Applications",
     "section": "Relation bewteen variables",
-    "text": "Relation bewteen variables\n\nDo you think there is a positive or negative relationship between beauty and teaching ratings?"
+    "text": "Relation bewteen variables\n\\[\n\\texttt{Adj_Revenue} = \\beta_0 + \\beta_1\\cdot\\texttt{Adj_Budget} + \\beta_2\\cdot\\texttt{imdbRating} + e\n\\]"
   },
   {
     "objectID": "class_01.html#correlation",
@@ -362,5 +362,12 @@
     "title": "Data Science for Business Applications",
     "section": "Adding more variables",
     "text": "Adding more variables\n\n# The model\n# Revenue = intercept + slope*Budget + slope*Rating + e\nlm2 &lt;- lm(Adj_Revenue ~ Adj_Budget + imdbRating, data = movie_1990_data)\nsummary(lm2)\n\n\nCall:\nlm(formula = Adj_Revenue ~ Adj_Budget + imdbRating, data = movie_1990_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-256.79  -41.25  -14.97   26.55  598.53 \n\nCoefficients:\n              Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -136.50696   14.64962  -9.318   &lt;2e-16 ***\nAdj_Budget     1.09103    0.03585  30.433   &lt;2e-16 ***\nimdbRating    24.09935    2.17050  11.103   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 76.43 on 1365 degrees of freedom\nMultiple R-squared:  0.4428,    Adjusted R-squared:  0.442 \nF-statistic: 542.5 on 2 and 1365 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "class_01.html#visualizing-the-model",
+    "href": "class_01.html#visualizing-the-model",
+    "title": "Data Science for Business Applications",
+    "section": "Visualizing the model",
+    "text": "Visualizing the model"
   }
 ]
