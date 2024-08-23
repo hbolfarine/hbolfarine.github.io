@@ -256,15 +256,15 @@ From the confidence interval we have that:
 :::: {.columns}
 
 ::: {.column width="50%"}
-- The value of the intercept is statistically different from zero since zero is not between the lower and upper values of the interval.
-- The value of the slope is statistically different from zero since zero is not between the lower and upper values of the interval.
+- The value of the intercept is statistically different from zero [since zero is not between the lower and upper values of the interval]{style="color:darkorange;"} .
+- The value of the slope is statistically different from zero [since zero is not between the lower and upper values of the interval]{style="color:darkorange;"} .
 
 :::
 
 ::: {.column width="50%"}
 
-- With 95% confidence, the value of the intercept at the population level is between 16.5 and 28.8 million dollars.
-- With 95% confidence, the value of the slope at the population level is between 1.04 and 28.8 million dollars.
+- With 95% confidence, the value of the intercept at the population level is [between 16.5 and 28.8 million dollars]{style="color:darkorange;"} .
+- With 95% confidence, the value of the slope at the population level is [between 1.04 and 28.8 million dollars]{style="color:darkorange;"} .
 
 :::
 

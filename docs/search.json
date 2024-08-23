@@ -172,7 +172,7 @@
     "href": "class_01.html#statistical-significance-of-the-model-1",
     "title": "Data Science for Business Applications",
     "section": "Statistical significance of the model",
-    "text": "Statistical significance of the model\nFrom the confidence interval we have that:\n\n\n\nThe value of the intercept is statistically different from zero since zero is not between the lower and upper values of the interval.\nThe value of the slope is statistically different from zero since zero is not between the lower and upper values of the interval.\n\n\n\nWith 95% confidence, the value of the intercept at the population level is between 16.5 and 28.8 million dollars.\nWith 95% confidence, the value of the slope at the population level is between 1.04 and 28.8 million dollars."
+    "text": "Statistical significance of the model\nFrom the confidence interval we have that:\n\n\n\nThe value of the intercept is statistically different from zero since zero is not between the lower and upper values of the interval .\nThe value of the slope is statistically different from zero since zero is not between the lower and upper values of the interval .\n\n\n\nWith 95% confidence, the value of the intercept at the population level is between 16.5 and 28.8 million dollars .\nWith 95% confidence, the value of the slope at the population level is between 1.04 and 28.8 million dollars ."
   },
   {
     "objectID": "class_01.html#predictions",
