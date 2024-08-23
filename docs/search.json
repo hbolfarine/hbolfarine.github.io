@@ -179,7 +179,7 @@
     "href": "class_01.html#predictions",
     "title": "Data Science for Business Applications",
     "section": "Predictions",
-    "text": "Predictions\n\nSuppose we want to predict the revenue of a movie, knowing that the revenue was $25 million.\nWe can use our estimated model to make the prediction.\nInput the value into the adjusted budget, resulting in: \\[\n\\widehat{\\texttt{Adj_Revenue}} = 22.7 + 1.11\\cdot 25 = 50.45\n\\]\nThe average predicted revenue of a $25 million dollar budget movie is $50 million dollars.\nWe can also do this using the predict function in R\n\n\n# We use the predict() function to get predictions\npredict(lm1, list(Adj_Budget = 25))\n\n       1 \n50.42179"
+    "text": "Predictions\n\nSuppose we want to predict the revenue of a movie , knowing that the revenue was $25 million.\nWe can use our estimated model to make the prediction.\nInput the value into the adjusted budget, resulting in: \\[\n\\widehat{\\texttt{Adj_Revenue}} = 22.7 + 1.11\\cdot 25 = 50.45\n\\]\nThe average predicted revenue of a $25 million dollar budget movie is $50 million dollars.\nWe can also do this using the predict function in R\n\n\n# We use the predict() function to get predictions\npredict(lm1, list(Adj_Budget = 25))\n\n       1 \n50.42179"
   },
   {
     "objectID": "class_01.html#predictions-1",

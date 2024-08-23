@@ -273,7 +273,7 @@ From the confidence interval we have that:
 
 ## Predictions {.smaller}
 
-- Suppose we want to predict the revenue of a movie, knowing that the revenue was $25 million.
+- Suppose we want to [predict the revenue of a movie]{style="color:darkorange;"} , knowing that the revenue was $25 million.
 - We can use our estimated model to make the prediction.
 - Input the value into the adjusted budget, resulting in:
 $$
@@ -294,20 +294,20 @@ predict(lm1, list(Adj_Budget = 25))
 - How good are these predictions?
 - We can use the residual standard error (RSE), which is a result of the `summary` function.
 - $\texttt{Residual standard error: 79.78}$,
-- These mean that our predictions will be off by approximately 79.78.
+- These mean that our predictions [will be off]{style="color:darkorange;"}  by approximately 79.78.
 - With 95% confidence, the prediction of the revenue will be 50.42 plus and minus $2\times 79.78 = 159.56$.
 - Quite a big variation.
 
 ## Adding more variables {.smaller}
 
-- We can add more variables in our model.
+- We can add [more variables]{style="color:darkorange;"}  in our model.
 - We will add the variable `imdbRating` which encodes the different IMDB ratings in the data (1-10).
 - The resulting model now is 
 $$
 \texttt{Adj_Revenue} = \beta_0 + \beta_1\cdot\texttt{Adj_Budget} + \beta_2\cdot\texttt{imdbRating} + e
 $$
-- You can observe that we have an extra slope in the equation.
-- This will have an impact in how we interpret the model.
+- You can observe that we have an [extra slope]{style="color:darkorange;"}  in the equation.
+- This will have an impact in how we [interpret]{style="color:darkorange;"}  the model.
 - Next we encode this model in [**R**]{style="color:blue;"}
 
 

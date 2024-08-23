@@ -710,7 +710,7 @@ Adj_Budget   1.037112  1.183756</code></pre>
 <section id="predictions" class="slide level2 smaller">
 <h2>Predictions</h2>
 <ul>
-<li class="fragment">Suppose we want to predict the revenue of a movie, knowing that the revenue was $25 million.</li>
+<li class="fragment">Suppose we want to <span style="color:darkorange;">predict the revenue of a movie</span> , knowing that the revenue was $25 million.</li>
 <li class="fragment">We can use our estimated model to make the prediction.</li>
 <li class="fragment">Input the value into the adjusted budget, resulting in: <span class="math display">\[
 \widehat{\texttt{Adj_Revenue}} = 22.7 + 1.11\cdot 25 = 50.45
@@ -733,7 +733,7 @@ Adj_Budget   1.037112  1.183756</code></pre>
 <li class="fragment">How good are these predictions?</li>
 <li class="fragment">We can use the residual standard error (RSE), which is a result of the <code>summary</code> function.</li>
 <li class="fragment"><span class="math inline">\(\texttt{Residual standard error: 79.78}\)</span>,</li>
-<li class="fragment">These mean that our predictions will be off by approximately 79.78.</li>
+<li class="fragment">These mean that our predictions <span style="color:darkorange;">will be off</span> by approximately 79.78.</li>
 <li class="fragment">With 95% confidence, the prediction of the revenue will be 50.42 plus and minus <span class="math inline">\(2\times 79.78 = 159.56\)</span>.</li>
 <li class="fragment">Quite a big variation.</li>
 </ul>
@@ -741,13 +741,13 @@ Adj_Budget   1.037112  1.183756</code></pre>
 <section id="adding-more-variables" class="slide level2 smaller">
 <h2>Adding more variables</h2>
 <ul>
-<li class="fragment">We can add more variables in our model.</li>
+<li class="fragment">We can add <span style="color:darkorange;">more variables</span> in our model.</li>
 <li class="fragment">We will add the variable <code>imdbRating</code> which encodes the different IMDB ratings in the data (1-10).</li>
 <li class="fragment">The resulting model now is <span class="math display">\[
 \texttt{Adj_Revenue} = \beta_0 + \beta_1\cdot\texttt{Adj_Budget} + \beta_2\cdot\texttt{imdbRating} + e
 \]</span></li>
-<li class="fragment">You can observe that we have an extra slope in the equation.</li>
-<li class="fragment">This will have an impact in how we interpret the model.</li>
+<li class="fragment">You can observe that we have an <span style="color:darkorange;">extra slope</span> in the equation.</li>
+<li class="fragment">This will have an impact in how we <span style="color:darkorange;">interpret</span> the model.</li>
 <li class="fragment">Next we encode this model in <span style="color:blue;"><strong>R</strong></span></li>
 </ul>
 </section>
