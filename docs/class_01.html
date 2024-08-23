@@ -649,8 +649,8 @@ F-statistic: 882.6 on 1 and 1366 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li class="fragment">From the coefficients, <span class="math inline">\(\widehat\beta_0 = 22.7\)</span>, <span class="math inline">\(\widehat\beta_1 = 1.11\)</span> we have the updated model: <span class="math display">\[
 \widehat{\texttt{Adj_Revenue}} = 22.7 + 1.11\cdot\texttt{Adj_Budget}
 \]</span></li>
-<li class="fragment">When there’s a hat, it means that the values were generated from the data.</li>
-<li class="fragment"><span class="math inline">\(e\)</span> (noise) vanishes because we eliminated the unknown factors and concentrated the effect on what we observe.</li>
+<li class="fragment">When there’s a <span style="color:darkorange;">hat</span>, it means that the values were <span style="color:darkorange;">generated from the data</span>.</li>
+<li class="fragment"><span class="math inline">\(e\)</span> (noise) <span style="color:darkorange;">vanishes</span> because we eliminated the unknown factors and concentrated the effect on what we observe.</li>
 <li class="fragment">Now we have the <span style="color:darkorange;">residuals</span>, that is the distance between the points in the data and the regression model.</li>
 <li class="fragment">The question now is: how can we <span style="color:darkorange;">interpret</span> this result?</li>
 </ul>
@@ -817,14 +817,14 @@ imdbRating    19.841475   28.357234</code></pre>
 </div>
 </div>
 <ul>
-<li class="fragment">All coefficients are statistically significant.</li>
+<li class="fragment">All coefficients are <span style="color:darkorange;">statistically significant</span>.</li>
 </ul>
 </section>
 <section id="what-about-the-predictions" class="slide level2 smaller">
 <h2>What about the predictions?</h2>
 <ul>
 <li class="fragment">We can observe from the summary that the <code>residual standard error</code> when down to <span class="math inline">\(\texttt{76.43}\)</span>.</li>
-<li class="fragment">Which will result in more accurate predictions.</li>
+<li class="fragment">Which will result in more <span style="color:darkorange;">accurate predictions</span>.</li>
 <li class="fragment">Suppose we have a movie 25 million dollar budget and the movie has a IMDb rating of 5.4 what is the prediction for this movie?</li>
 <li class="fragment">What about the 95% prediction interval for this prediction?</li>
 </ul>
@@ -840,6 +840,13 @@ imdbRating    19.841475   28.357234</code></pre>
 <li class="fragment">What about the 95% prediction interval for this prediction?</li>
 <li class="fragment">upper bound: <span class="math inline">\(20.90542 + 2\times 76.43 = 173.7654\)</span></li>
 <li class="fragment">lower bound: <span class="math inline">\(20.90542 - 2\times 76.43 = -131.9546\)</span></li>
+</ul>
+</section>
+<section id="whats-next" class="slide level2">
+<h2>What’s next?</h2>
+<ul>
+<li class="fragment">We’ll include <span style="color:darkorange;">categorical variables</span>.</li>
+<li class="fragment"><span style="color:darkorange;">Interactions</span> between categorical and numerical variables.</li>
 </ul>
 
 <div class="quarto-auto-generated-content">

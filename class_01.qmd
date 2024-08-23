@@ -208,8 +208,8 @@ summary(lm1)
 $$
 \widehat{\texttt{Adj_Revenue}} = 22.7 + 1.11\cdot\texttt{Adj_Budget}
 $$
-- When there's a hat, it means that the values were generated from the data.
-- $e$ (noise) vanishes because we eliminated the unknown factors and concentrated the effect on what we observe.
+- When there's a [hat]{style="color:darkorange;"}, it means that the values were [generated from the data]{style="color:darkorange;"}.
+- $e$ (noise) [vanishes]{style="color:darkorange;"} because we eliminated the unknown factors and concentrated the effect on what we observe.
 - Now we have the [residuals]{style="color:darkorange;"}, that is the distance between the points in the data and the regression model.
 - The question now is: how can we [interpret]{style="color:darkorange;"} this result?
 
@@ -355,12 +355,12 @@ $$
 confint(lm2)
 ```
 
-- All coefficients are statistically significant.
+- All coefficients are [statistically significant]{style="color:darkorange;"}.
 
 ## What about the predictions? {.smaller}
 
 - We can observe from the summary that the `residual standard error` when down to $\texttt{76.43}$.
-- Which will result in more accurate predictions.
+- Which will result in more [accurate predictions]{style="color:darkorange;"}.
 - Suppose we have a movie 25 million dollar budget and the movie has a IMDb rating of 5.4 what is the prediction for this movie?
 - What about the 95% prediction interval for this prediction?
 ```{r, fig.align = 'center'}
@@ -374,6 +374,11 @@ predict(lm2, list(Adj_Budget = 25, imdbRating = 5.4))
 - What about the 95% prediction interval for this prediction?
 - upper bound: $20.90542 + 2\times 76.43 = 173.7654$
 - lower bound: $20.90542 - 2\times 76.43 = -131.9546$
+
+## What's next?
+
+- We'll include [categorical variables]{style="color:darkorange;"}.
+- [Interactions]{style="color:darkorange;"} between categorical and numerical variables.
 
 
 

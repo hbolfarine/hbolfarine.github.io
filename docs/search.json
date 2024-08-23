@@ -383,5 +383,12 @@
     "title": "Data Science for Business Applications",
     "section": "What about the predictions?",
     "text": "What about the predictions?\n\nWe can observe from the summary that the residual standard error when down to \\(\\texttt{76.43}\\).\nWhich will result in more accurate predictions.\nSuppose we have a movie 25 million dollar budget and the movie has a IMDb rating of 5.4 what is the prediction for this movie?\nWhat about the 95% prediction interval for this prediction?\n\n\n# We use the confint() function to get the confidence interval\npredict(lm2, list(Adj_Budget = 25, imdbRating = 5.4))\n\n       1 \n20.90542 \n\n\n\nWhat about the 95% prediction interval for this prediction?\nupper bound: \\(20.90542 + 2\\times 76.43 = 173.7654\\)\nlower bound: \\(20.90542 - 2\\times 76.43 = -131.9546\\)"
+  },
+  {
+    "objectID": "class_01.html#whats-next",
+    "href": "class_01.html#whats-next",
+    "title": "Data Science for Business Applications",
+    "section": "What’s next?",
+    "text": "What’s next?\n\nWe’ll include categorical variables.\nInteractions between categorical and numerical variables."
   }
 ]
