@@ -742,7 +742,7 @@ Adj_Budget   1.037112  1.183756</code></pre>
 <h2>Adding more variables</h2>
 <ul>
 <li class="fragment">We can add more variables in our model.</li>
-<li class="fragment">We will add the variable <code>imdbRating</code> which encodes the different IMDB ratings in the data.</li>
+<li class="fragment">We will add the variable <code>imdbRating</code> which encodes the different IMDB ratings in the data (1-10).</li>
 <li class="fragment">The resulting model now is <span class="math display">\[
 \texttt{Adj_Revenue} = \beta_0 + \beta_1\cdot\texttt{Adj_Budget} + \beta_2\cdot\texttt{imdbRating} + e
 \]</span></li>
@@ -785,11 +785,62 @@ F-statistic: 542.5 on 2 and 1365 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Visualizing the model</h2>
 
 <img data-src="image/3d_plot_movie.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="relation-bewteen-variables" class="slide level2">
-<h2>Relation bewteen variables</h2>
+<section id="explanation-1" class="slide level2 smaller">
+<h2>Explanation</h2>
+<div>
+<ul>
+<li>Let’s interpret the model:</li>
+</ul>
+</div>
 <p><span class="math display">\[
-\texttt{Adj_Revenue} = \beta_0 + \beta_1\cdot\texttt{Adj_Budget} + \beta_2\cdot\texttt{imdbRating} + e
+\texttt{Adj_Revenue} = -136.507 + 1.091 \cdot\texttt{Adj_Budget} + 24.099\cdot\texttt{imdbRating}
 \]</span></p>
+<ul>
+<li class="fragment"><span style="color:darkorange;"><strong>Intercept</strong></span>: By setting the movie budget and the rating to zero, we have that the average revenue is equal to <span style="color:darkorange;">$-137 million dollars</span>.</li>
+<li class="fragment"><span style="color:darkorange;"><strong>Slope Budget</strong></span>: For movies with the same fixed rating, for one unit change in the movie budget, there will be an increase of <span style="color:darkorange;">$1.091 million dollars</span> in the movie’s revenue.</li>
+<li class="fragment"><span style="color:darkorange;"><strong>Slope Rating</strong></span>: For movies with the same fixed budget, for one unit change in the movie rating, there will be an increase of <span style="color:darkorange;">$24.1 million dollars</span> in the movie’s revenue.</li>
+</ul>
+</section>
+<section id="statistical-significance-of-the-model-2" class="slide level2 small">
+<h2>Statistical significance of the model</h2>
+<ul>
+<li class="fragment">Let’s analyse the confidence interval</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="co"># We use the confint() function to get the confidence interval</span></span>
+<span id="cb11-2"><a></a><span class="fu">confint</span>(lm2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  2.5 %      97.5 %
+(Intercept) -165.245169 -107.768758
+Adj_Budget     1.020706    1.161364
+imdbRating    19.841475   28.357234</code></pre>
+</div>
+</div>
+<ul>
+<li class="fragment">All coefficients are statistically significant.</li>
+</ul>
+</section>
+<section id="what-about-the-predictions" class="slide level2 smaller">
+<h2>What about the predictions?</h2>
+<ul>
+<li class="fragment">We can observe from the summary that the <code>residual standard error</code> when down to <code>76.43</code>.</li>
+<li class="fragment">Which will result in more accurate predictions.</li>
+<li class="fragment">Suppose we have a movie 25 million dollar budget and the movie has a IMDb rating of 5.4 what is the prediction for this movie?</li>
+<li class="fragment">What about the 95% prediction interval for this prediction?</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="co"># We use the confint() function to get the confidence interval</span></span>
+<span id="cb13-2"><a></a><span class="fu">predict</span>(lm2, <span class="fu">list</span>(<span class="at">Adj_Budget =</span> <span class="dv">25</span>, <span class="at">imdbRating =</span> <span class="fl">5.4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       1 
+20.90542 </code></pre>
+</div>
+</div>
+<ul>
+<li class="fragment">What about the 95% prediction interval for this prediction?</li>
+<li class="fragment">upper bound: <span class="math inline">\(20.90542 + 2\times 76.43 = 173.7654\)</span></li>
+<li class="fragment">lower bound: <span class="math inline">\(20.90542 - 2\times 76.43 = -131.9546\)</span></li>
+</ul>
 
 <div class="quarto-auto-generated-content">
 <p><img src="image/texas_logo2.png" class="slide-logo"></p>

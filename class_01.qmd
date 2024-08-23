@@ -301,7 +301,7 @@ predict(lm1, list(Adj_Budget = 25))
 ## Adding more variables {.smaller}
 
 - We can add more variables in our model.
-- We will add the variable `imdbRating` which encodes the different IMDB ratings in the data.
+- We will add the variable `imdbRating` which encodes the different IMDB ratings in the data (1-10).
 - The resulting model now is 
 $$
 \texttt{Adj_Revenue} = \beta_0 + \beta_1\cdot\texttt{Adj_Budget} + \beta_2\cdot\texttt{imdbRating} + e
@@ -330,8 +330,50 @@ summary(lm2)
 
 ![](image/3d_plot_movie.png){fig-align="center"}
 
-## Relation bewteen variables
+## Explanation {.smaller}
+::: {.nonincremental}
+- Let's interpret the model:
+:::
+$$
+\texttt{Adj_Revenue} = -136.507 + 1.091 \cdot\texttt{Adj_Budget} + 24.099\cdot\texttt{imdbRating}
+$$
 
-$$
-\texttt{Adj_Revenue} = \beta_0 + \beta_1\cdot\texttt{Adj_Budget} + \beta_2\cdot\texttt{imdbRating} + e
-$$
+- [**Intercept**]{style="color:darkorange;"}: By setting the movie budget and the rating to zero, we have that the average revenue is equal to [$-137 million dollars]{style="color:darkorange;"}.
+- [**Slope Budget**]{style="color:darkorange;"}: For movies with the same fixed rating, for one unit change in the movie budget, there will be an increase of [$1.091 million dollars]{style="color:darkorange;"} in the movie's revenue.
+- [**Slope Rating**]{style="color:darkorange;"}: For movies with the same fixed budget, for one unit change in the movie rating, there will be an increase of [$24.1 million dollars]{style="color:darkorange;"} in the movie's revenue.
+
+## Statistical significance of the model {.small}
+
+- Let's analyse the confidence interval
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+#| 
+# We use the confint() function to get the confidence interval
+confint(lm2)
+```
+
+- All coefficients are statistically significant.
+
+## What about the predictions? {.smaller}
+
+- We can observe from the summary that the `residual standard error` when down to `76.43`.
+- Which will result in more accurate predictions.
+- Suppose we have a movie 25 million dollar budget and the movie has a IMDb rating of 5.4 what is the prediction for this movie?
+- What about the 95% prediction interval for this prediction?
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+#| 
+# We use the confint() function to get the confidence interval
+predict(lm2, list(Adj_Budget = 25, imdbRating = 5.4))
+```
+- What about the 95% prediction interval for this prediction?
+- upper bound: $20.90542 + 2\times 76.43 = 173.7654$
+- lower bound: $20.90542 - 2\times 76.43 = -131.9546$
+
+
+

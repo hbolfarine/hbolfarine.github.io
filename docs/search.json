@@ -193,7 +193,7 @@
     "href": "class_01.html#adding-more-variables",
     "title": "Data Science for Business Applications",
     "section": "Adding more variables",
-    "text": "Adding more variables\n\nWe can add more variables in our model.\nWe will add the variable imdbRating which encodes the different IMDB ratings in the data.\nThe resulting model now is \\[\n\\texttt{Adj_Revenue} = \\beta_0 + \\beta_1\\cdot\\texttt{Adj_Budget} + \\beta_2\\cdot\\texttt{imdbRating} + e\n\\]\nYou can observe that we have an extra slope in the equation.\nThis will have an impact in how we interpret the model.\nNext we encode this model in R"
+    "text": "Adding more variables\n\nWe can add more variables in our model.\nWe will add the variable imdbRating which encodes the different IMDB ratings in the data (1-10).\nThe resulting model now is \\[\n\\texttt{Adj_Revenue} = \\beta_0 + \\beta_1\\cdot\\texttt{Adj_Budget} + \\beta_2\\cdot\\texttt{imdbRating} + e\n\\]\nYou can observe that we have an extra slope in the equation.\nThis will have an impact in how we interpret the model.\nNext we encode this model in R"
   },
   {
     "objectID": "class_01.html#explore-the-data-beauty",
@@ -207,7 +207,7 @@
     "href": "class_01.html#relation-bewteen-variables",
     "title": "Data Science for Business Applications",
     "section": "Relation bewteen variables",
-    "text": "Relation bewteen variables\n\\[\n\\texttt{Adj_Revenue} = \\beta_0 + \\beta_1\\cdot\\texttt{Adj_Budget} + \\beta_2\\cdot\\texttt{imdbRating} + e\n\\]"
+    "text": "Relation bewteen variables\n\n\nLet’s interpret the model:\n\n\n\\[\n\\texttt{Adj_Revenue} = -136.507 + 1.091 \\cdot\\texttt{Adj_Budget} + 24.099\\cdot\\texttt{imdbRating}\n\\]"
   },
   {
     "objectID": "class_01.html#correlation",
@@ -263,7 +263,7 @@
     "href": "class_01.html#statistical-significance-of-the-model-2",
     "title": "Data Science for Business Applications",
     "section": "Statistical significance of the model",
-    "text": "Statistical significance of the model\n\n\nWhich one is the true population?"
+    "text": "Statistical significance of the model\n\nLet’s analyse the confidence interval\n\n\n# We use the confint() function to get the confidence interval\nconfint(lm2)\n\n                  2.5 %      97.5 %\n(Intercept) -165.245169 -107.768758\nAdj_Budget     1.020706    1.161364\nimdbRating    19.841475   28.357234\n\n\n\nAll coefficients are statistically significant."
   },
   {
     "objectID": "class_01.html#statistical-significance-of-the-model-3",
@@ -369,5 +369,19 @@
     "title": "Data Science for Business Applications",
     "section": "Visualizing the model",
     "text": "Visualizing the model"
+  },
+  {
+    "objectID": "class_01.html#explanation-1",
+    "href": "class_01.html#explanation-1",
+    "title": "Data Science for Business Applications",
+    "section": "Explanation",
+    "text": "Explanation\n\n\nLet’s interpret the model:\n\n\n\\[\n\\texttt{Adj_Revenue} = -136.507 + 1.091 \\cdot\\texttt{Adj_Budget} + 24.099\\cdot\\texttt{imdbRating}\n\\]\n\nIntercept: By setting the movie budget and the rating to zero, we have that the average revenue is equal to $-137 million dollars.\nSlope Budget: For movies with the same fixed rating, for one unit change in the movie budget, there will be an increase of $1.091 million dollars in the movie’s revenue.\nSlope Rating: For movies with the same fixed budget, for one unit change in the movie rating, there will be an increase of $24.1 million dollars in the movie’s revenue."
+  },
+  {
+    "objectID": "class_01.html#what-about-the-predictions",
+    "href": "class_01.html#what-about-the-predictions",
+    "title": "Data Science for Business Applications",
+    "section": "What about the predictions?",
+    "text": "What about the predictions?\n\nWe can observe from the summary that the residual standard error when down to 76.43.\nWhich will result in more accurate predictions.\nSuppose we have a movie 25 million dollar budget and the movie has a IMDb rating of 5.4 what is the prediction for this movie?\nWhat about the 95% prediction interval for this prediction?\n\n\n# We use the confint() function to get the confidence interval\npredict(lm2, list(Adj_Budget = 25, imdbRating = 5.4))\n\n       1 \n20.90542 \n\n\n\nWhat about the 95% prediction interval for this prediction?\nupper bound: \\(20.90542 + 2\\times 76.43 = 173.7654\\)\nlower bound: \\(20.90542 - 2\\times 76.43 = -131.9546\\)"
   }
 ]
