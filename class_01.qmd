@@ -295,7 +295,7 @@ predict(lm1, list(Adj_Budget = 25))
 - We can use the residual standard error (RSE), which is a result of the `summary` function.
 - $\texttt{Residual standard error: 79.78}$,
 - These mean that our predictions will be off by approximately 79.78.
-- With 95% confidence, the prediction of the revenue will be 50.42 plus and minus $2\times 79.78. = 159.56$.
+- With 95% confidence, the prediction of the revenue will be 50.42 plus and minus $2\times 79.78 = 159.56$.
 - Quite a big variation.
 
 ## Adding more variables {.smaller}
@@ -359,7 +359,7 @@ confint(lm2)
 
 ## What about the predictions? {.smaller}
 
-- We can observe from the summary that the `residual standard error` when down to `76.43`.
+- We can observe from the summary that the `residual standard error` when down to $\texttt{76.43}$.
 - Which will result in more accurate predictions.
 - Suppose we have a movie 25 million dollar budget and the movie has a IMDb rating of 5.4 what is the prediction for this movie?
 - What about the 95% prediction interval for this prediction?

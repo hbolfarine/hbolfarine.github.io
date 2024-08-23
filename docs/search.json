@@ -186,7 +186,7 @@
     "href": "class_01.html#predictions-1",
     "title": "Data Science for Business Applications",
     "section": "Predictions",
-    "text": "Predictions\n\nHow good are these predictions?\nWe can use the residual standard error (RSE), which is a result of the summary function.\n\\(\\texttt{Residual standard error: 79.78}\\),\nThese mean that our predictions will be off by approximately 79.78.\nWith 95% confidence, the prediction of the revenue will be 50.42 plus and minus \\(2\\times 79.78. = 159.56\\).\nQuite a big variation."
+    "text": "Predictions\n\nHow good are these predictions?\nWe can use the residual standard error (RSE), which is a result of the summary function.\n\\(\\texttt{Residual standard error: 79.78}\\),\nThese mean that our predictions will be off by approximately 79.78.\nWith 95% confidence, the prediction of the revenue will be 50.42 plus and minus \\(2\\times 79.78 = 159.56\\).\nQuite a big variation."
   },
   {
     "objectID": "class_01.html#adding-more-variables",
@@ -382,6 +382,6 @@
     "href": "class_01.html#what-about-the-predictions",
     "title": "Data Science for Business Applications",
     "section": "What about the predictions?",
-    "text": "What about the predictions?\n\nWe can observe from the summary that the residual standard error when down to 76.43.\nWhich will result in more accurate predictions.\nSuppose we have a movie 25 million dollar budget and the movie has a IMDb rating of 5.4 what is the prediction for this movie?\nWhat about the 95% prediction interval for this prediction?\n\n\n# We use the confint() function to get the confidence interval\npredict(lm2, list(Adj_Budget = 25, imdbRating = 5.4))\n\n       1 \n20.90542 \n\n\n\nWhat about the 95% prediction interval for this prediction?\nupper bound: \\(20.90542 + 2\\times 76.43 = 173.7654\\)\nlower bound: \\(20.90542 - 2\\times 76.43 = -131.9546\\)"
+    "text": "What about the predictions?\n\nWe can observe from the summary that the residual standard error when down to \\(\\texttt{76.43}\\).\nWhich will result in more accurate predictions.\nSuppose we have a movie 25 million dollar budget and the movie has a IMDb rating of 5.4 what is the prediction for this movie?\nWhat about the 95% prediction interval for this prediction?\n\n\n# We use the confint() function to get the confidence interval\npredict(lm2, list(Adj_Budget = 25, imdbRating = 5.4))\n\n       1 \n20.90542 \n\n\n\nWhat about the 95% prediction interval for this prediction?\nupper bound: \\(20.90542 + 2\\times 76.43 = 173.7654\\)\nlower bound: \\(20.90542 - 2\\times 76.43 = -131.9546\\)"
   }
 ]
