@@ -308,12 +308,28 @@ $$
 $$
 - You can observe that we have an extra slope in the equation.
 - This will have an impact in how we interpret the model.
-- Next we econde this model in [**R**]{style="color:blue;"}
+- Next we encode this model in [**R**]{style="color:blue;"}
+
+
+## Adding more variables {.smaller}
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+
+
+# The model
+# Revenue = intercept + slope*Budget + slope*Rating + e
+lm2 <- lm(Adj_Revenue ~ Adj_Budget + imdbRating, data = movie_1990_data)
+summary(lm2)
+```
 
 
 ##
 
 ![](image/3d_plot_movie.png){fig-align="center"}
+
 
 ```{r}
 library(tidyverse)

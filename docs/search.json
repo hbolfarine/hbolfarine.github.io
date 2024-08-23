@@ -355,5 +355,12 @@
     "title": "Data Science for Business Applications",
     "section": "Practical significance of the model",
     "text": "Practical significance of the model\n\nThe \\(R^2\\) of \\(0.0357\\) tells us that about 4% of the variation between professors in student evaluations can be explained by their beauty\nLook at the difference in \\(\\widehat{\\text{eval}}\\) between someone super-hot (beauty = 2) and super-not (beauty = \\(-1.5\\)); the difference in their predicted student evaluations is \\(3.5 \\cdot 0.133 = 0.466\\)\nWe have to use our subjective judgment to decide whether these indicate a meaningful (practically significant) relationship"
+  },
+  {
+    "objectID": "class_01.html#adding-more-variables-1",
+    "href": "class_01.html#adding-more-variables-1",
+    "title": "Data Science for Business Applications",
+    "section": "Adding more variables",
+    "text": "Adding more variables\n\n# The model\n# Revenue = intercept + slope*Budget + slope*Rating + e\nlm2 &lt;- lm(Adj_Revenue ~ Adj_Budget + imdbRating, data = movie_1990_data)\nsummary(lm2)\n\n\nCall:\nlm(formula = Adj_Revenue ~ Adj_Budget + imdbRating, data = movie_1990_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-256.79  -41.25  -14.97   26.55  598.53 \n\nCoefficients:\n              Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -136.50696   14.64962  -9.318   &lt;2e-16 ***\nAdj_Budget     1.09103    0.03585  30.433   &lt;2e-16 ***\nimdbRating    24.09935    2.17050  11.103   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 76.43 on 1365 degrees of freedom\nMultiple R-squared:  0.4428,    Adjusted R-squared:  0.442 \nF-statistic: 542.5 on 2 and 1365 DF,  p-value: &lt; 2.2e-16"
   }
 ]
