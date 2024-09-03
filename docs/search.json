@@ -571,6 +571,6 @@
     "href": "class_02.html#conlusion",
     "title": "Data Science for Business Applications",
     "section": "Conlusion",
-    "text": "Conlusion\n\nInteractions make a model more complex to analyze and explain, so it’s only worth doing so when you get better interpretation and more accurate predictions.\nChoose interactions by thinking about what you are trying to model: if you suspect that the impact of one variable depends on the value of another, try an interaction term between them"
+    "text": "Conlusion\n\nInteractions make a model more complex to analyze and explain, so it’s only worth doing so when you get better interpretation and more accurate predictions.\nWe can have interactions between different kinds of variables. Between categorical variables, numerical and categorical and, numerical and numerical.\nChoose interactions by thinking about what you are trying to model: if you suspect that the impact of one variable depends on the value of another, try an interaction term between them"
   }
 ]

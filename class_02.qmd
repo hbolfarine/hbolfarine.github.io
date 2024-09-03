@@ -364,5 +364,6 @@ predict(lm3, list(mileage = 50000, luxury = "yes"))
 ## Conlusion
 
 * [Interactions]{style="color:darkorange;"} make a model more complex to analyze and explain, so it’s only worth doing so when you get better interpretation and more accurate predictions.
+* We can have [interactions]{style="color:darkorange;"} between different kinds of variables. Between categorical variables, numerical and categorical and, numerical and numerical.
 * Choose [interactions]{style="color:darkorange;"} by thinking about what you are trying to model: if you suspect that [the impact of one variable depends on the value of another]{style="color:darkorange;"}, try an interaction term between them
 
