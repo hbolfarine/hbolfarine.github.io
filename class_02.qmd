@@ -1,0 +1,368 @@
+---
+title: "Data Science for Business Applications"
+author: "Class 02 - Categorical Variable and Interactions"
+title-slide-attributes:
+    data-background-image: image/background_sta235h.png
+format:
+  revealjs: 
+    theme: "my-styles.css"
+    logo: image/texas_logo2.png
+    incremental: true 
+    self-contained-math: true
+    
+---
+
+## Regresison model goals {.smaller}
+::: {.nonincremental}
+- Recall what are the goals of the linear regression model
+:::
+![](image/image_02.png){fig-align="center"width=50%}
+
+## Data Science tasks
+
+- We found that [adding more predictors]{style="color:darkorange;"} to linear models increases their accuracy and explanatory power.
+- What if we want to add instead of [Quantative predictors]{style="color:darkorange;"}, [Qualitative predictors]{style="color:darkorange;"}?
+- [Categorical]{style="color:darkorchid;"} or [Qualitative Variables]{style="color:darkorchid;"} split the data into [different groups]{style="color:darkorchid;"} or [levels]{style="color:darkorchid;"}.
+- How can we add these types of variables in the regression model?
+
+## Let's start with an example! {.smaller}
+
+```{r}
+cars_luxury = read.csv("script_class_02/cars_luxury.csv")
+```
+
+::: {.nonincremental}
+- **Example**: [Cars dataset]{style="color:darkorange;"} (`cars_luxury.csv`)
+- Data on 2,088 [used cars]{style="color:darkorange;"} in South California
+- For each car there are several predictors as:
+- `price`: Price of the car in dollars. 
+- `mileage`: Car mileage.
+- `luxury`: If the car is a luxury car: "$\texttt{yes}$"or "$\texttt{no}$"
+- `badge`: Badge indicating if the car is considered some type of deal, that can be: "$\texttt{Good Deal}$", "$\texttt{Great Deal}$", "$\texttt{No Badge}$" or "$\texttt{Fair Price}$".
+- (and others)
+:::
+
+
+## Luxury and price {.smaller}
+::: {.nonincremental}
+- Before we start our analysis, let's see if there's a difference between the used price of luxury and not luxury cars.
+:::
+<!-- - We can visualize the difference in price between luxury and non-luxury cars using a boxplot. We can do this since price is a numerical variable and luxury is categorical. -->
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+#| 
+library(tidyverse)
+ggplot(cars_luxury, aes(x = luxury, y = price)) +
+  geom_boxplot()
+```
+
+## Regression model
+
+- It's interesting to incorporate the categorical variable `luxury`, into the multiple regression model.
+- We want to see the impact of [mileage]{style="color:darkorange;"} on [price]{style="color:darkorange;"} controlling for the type of car. If it's a luxury or not.
+- The resulting model is equal to:
+$$
+\texttt{price} = \beta_0 + \beta_1\texttt{mileage} + \beta_2\texttt{luxury} + e
+$$
+- How can we assess the categorical variable `luxury`?
+
+## Price in terms of mileage and luxury {.smaller}
+::: {.nonincremental}
+- Let's plot the relation between `mileage`, `price` and `luxury`
+:::
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+#| 
+ggplot(cars_luxury, aes(x = mileage, y = price, col = luxury)) +
+  geom_point()
+```
+
+## Dummy variable {.smaller}
+
+- `luxury` is a categorical variable ($\texttt{"yes"}$ or $\texttt{"no"}$ in this data set).
+- This variable contains two groups or two levels.
+- Recode `luxury` into a [quantitative]{style="color:darkorange;"} variable where $\texttt{1 = "yes"}$, $\texttt{0 = "yes"}$.
+- This quantitative variable is known as [dummy]{style="color:darkorange;"} variable.
+- [**R**]{style="color:blue;"} does this for us.
+- [**R**]{style="color:blue;"} will choose the alphabetically first category as the 0 level.
+
+## Regression model {.smaller}
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+
+# Remove scientific notation 
+options(scipen = 999)
+
+# Regression Model
+lm1 = lm(price ~ mileage + luxury, data = cars_luxury)
+summary(lm1)
+```
+- How can we [interpret]{style="color:darkorange;"} these numbers?
+
+## Interpretation of the model {.smaller}
+::: {.nonincremental}
+- Estimated model:
+:::
+$$
+\texttt{price} = 25,423 - 0.19\times \texttt{mileage} + 12,986 \times \texttt{luxury} 
+$$
+
+- How can we interpret the coefficients? 
+
+- `intercept`: For a car with zero mileage and `luxury` = $\texttt{"no"}$ = 0, the average selling price is equal to US$ 25,423. 
+
+- `mileage`: For a fixed type of car, for each extra increase in mileage (in miles), there will be a decrease of US$ 0.19 in the price of the car.
+
+- `luxury`: For cars with the same mileage, the added price of being a luxury car (`luxury` = $\texttt{"yes"}$ = 1) is US$ 12,986.
+
+- [**Important**]{style="color:darkorange;"}: When we add a categorical variable to the regression model, the intercept is also referred to as the [baseline]{style="color:darkorange;"}. The effect of the categorical variable is also known as the [offset]{style="color:darkorange;"}.
+
+## Interpretation of the model {.smaller}
+
+- By adding a categorical variable, we can also interpret this as [different regression models]{style="color:darkorange;"} depending on the number of groups.
+- To do so we [add the effect]{style="color:darkorange;"} of the categorical variable to the [intercept]{style="color:darkorange;"}.
+
+- `luxury` = $\texttt{"yes"}$ = 1
+$$
+\begin{align}
+\texttt{price} &= 25,423 - 0.19\times \texttt{mileage} + 12,986 \times (1) \\
+               &= (25,423 + 12,986) - 0.19\times \texttt{mileage} \\
+               &= 38,409 - 0.19\times \texttt{mileage} \\
+\end{align}
+$$
+
+- `luxury` = $\texttt{"no"}$ = 0
+$$
+\begin{align}
+\texttt{price} &= 25,423 - 0.19\times \texttt{mileage} + 12,986 \times (0) \\
+               &= 25,423 - 0.19\times \texttt{mileage} \\
+\end{align}
+$$
+
+## {.smaller}
+
+::: {.nonincremental}
+- We can even visualize these two models in a plot
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+    ggplot(cars_luxury, aes(x = mileage, y = price, col = luxury)) +
+      geom_point() + 
+      geom_line(aes(y=predict(lm1)))
+```
+:::
+
+## Significance and Predictions {.smaller}
+
+- Is the price of a luxury cars statistically different of a non-luxury car?
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+#| 
+confint(lm1)
+```
+- Yes, with 95% confidence we can conclude that the price of a luxury car is different from a non luxury one.
+
+- What is estimated price of luxury vehicle that has as mileage of 50000.
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+predict(lm1, list(mileage = 50000, luxury = "yes"))
+```
+
+- The estimated price of a 50,000-mile luxury car will be US\$ 29,120.
+
+## More than two groups
+
+- Suppose, instead of controlling the fact that a car is a luxury car or not, we want to observe the effect of badge on price.
+- The variable `badge` contains for groups or levels: "$\texttt{Good Deal}$", "$\texttt{Great Deal}$", "$\texttt{No Badge}$" or "$\texttt{Fair Price}$".
+- Is there a [difference in the price]{style="color:darkorange;"} of the car depending on what [type of badge]{style="color:darkorange;"} it holds?
+
+## {.smaller}
+
+::: {.nonincremental}
+- Let's plot the relation between `mileage`, `price` and `badge`
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+#| 
+ggplot(cars_luxury, aes(x = mileage, y = price, col = badge)) +
+  geom_point()
+```
+:::
+
+## Regressions model {.smaller}
+
+::: {.nonincremental}
+- Run the model: $\texttt{price} = \beta_0 + \beta_1\times \texttt{mileage} + \beta_2 \times \texttt{badge} + e$
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+#| 
+lm2 = lm(price ~ mileage + badge, data = cars_luxury)
+summary(lm2)
+```
+
+:::
+
+## Interpretation of the model {.smaller}
+
+<!-- $$ -->
+<!-- \texttt{price} = 35,932 -0.21\times \texttt{mileage} -3,557 \times \texttt{Good Deal} -8,988 \times \texttt{Great Deal} -9,931 \times \texttt{No Badge}  -->
+<!-- $$ -->
+- `intercept` (baseline): For a car with zero mileage and with a [fair price badge]{style="color:darkorange;"}, the average selling price is equal to US\$ 35,932 ($\texttt{Good Deal} = 0$,$\texttt{Great Deal} = 0$, $\texttt{No Badge} = 0$). 
+
+- `mileage`: For a car with a fixed badge, for each extra increase in mileage (in miles), there will be a decrease of US\$ 0.21 in the price of the car.
+
+- $\texttt{Good Deal} = 1$, remainig levels equal to zero: For cars with the same mileage, there will be a decrease in their price if they have a [good deal badge]{style="color:darkorange;"} of US$ 3,557 compared to the baseline, that is, cars with a fair price badge.
+
+- $\texttt{Great Deal}  = 1$, remainig levels equal to zero: For cars with the same mileage, there will be a decrease in their price if they have a [great deal badge]{style="color:darkorange;"} of US$ 8,988 compared to the baseline, that is, cars with a fair price badge.
+
+- $\texttt{No Badge}  = 1$, remainig levels equal to zero: For cars with the same mileage, there will be a decrease in their price if they have [no badge]{style="color:darkorange;"} of US$ 8,988 compared to the baseline, that is, cars with a fair price badge.
+
+
+## {.smaller}
+
+::: {.nonincremental}
+- We have now 4 different models, one for each badge catgory.
+- We have four different intecepts.
+
+```{r, fig.align = 'center'}
+ggplot(cars_luxury, aes(x = mileage, y = price, col = badge)) + 
+  geom_point() + 
+  geom_line(aes(y=predict(lm2)))
+```
+:::
+
+## Interactions 
+
+- We observed that there was a significant difference between the price of luxury and non-luxury cars. 
+- Is there a difference in the price of the car depending on what type of badge it holds?
+- In other words, does the [effect]{style="color:darkorange;"}  of one variable (i.e., its slope coefficient) depend on the value of another?
+- For this we will include a [interaction]{style="color:darkorange;"}.
+
+## Interactions {.smaller}
+
+* The idea is to add a term that is the [product]{style="color:darkorange;"} of the two variables:
+
+$$
+\texttt{price} = \beta_0 + \beta_1\texttt{mileage} + \beta_2\texttt{luxury} + \beta_3 (\texttt{luxury} \times \texttt{mileage}) + e
+$$
+
+* If we have a non-luxury car, then `luxury` = $\texttt{"no"} = 0$, so the $\beta_2$ and $\beta_3$ terms cancel out: 
+$$
+\texttt{price} = \beta_0 + \beta_1\texttt{mileage} + e
+$$
+
+* If we have a luxury car, then `luxury` = $\texttt{"yes"}  = 1$, so we get both a [different
+intercept]{style="color:darkorange;"} and a [different slope]{style="color:darkorange;"} for mileage:
+$$
+\texttt{price} = (\beta_0 + \beta_2) + (\beta_1 + \beta_3) \texttt{mileage} + e
+$$
+
+## Regression Model {.smaller}
+
+::: {.nonincremental}
+- Let's run the regression model
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+#| 
+lm3 = lm(price ~ mileage*luxury, data = cars_luxury)
+summary(lm3)
+```
+:::
+
+## Interpretation of the model  {.smaller}
+
+- How do we interpret this model?
+- `intercept` (baseline), `luxury` = $\texttt{"no"}$ = 0: For a [non-luxury]{style="color:darkorange;"} car with zero mileage, the average selling price is equal to US$ 23,894.  
+
+- Now we have [two cases]{style="color:darkorange;"}:
+- `luxury` = $\texttt{"no"}$ = 0:
+- `mileage`: For each extra increase in mileage (in miles), there will be a decrease of US$ 0.15 in the price of [non-luxury]{style="color:darkorange;"} cars.
+
+- `luxury` = $\texttt{"yes"}$ = 1:
+- `mileage`: For each extra increase in mileage (in miles), there will be a decrease of US\$ 0.16 in the price of [luxury]{style="color:darkorange;"} cars [on top]{style="color:darkorange;"} of the decrease of US\$ 0.15 of non-luxury cars.
+
+## Interpretation of the model {.smaller}
+
+- We also have the following interpretation:
+
+- `luxury` = $\texttt{"yes"}$ = 0
+$$
+\begin{align}
+\texttt{price} &= 23,894 - 0.15\times \texttt{mileage} + 19,772 (0) - 0.16\times \texttt{mileage} (0) \\
+               &=  23,894 - 0.15\times \texttt{mileage}
+\end{align}
+$$
+- `luxury` = $\texttt{"yes"}$ = 1
+$$
+\begin{align}
+\texttt{price} &= 23,894 - 0.15\times \texttt{mileage} + 19,772 (1) - 0.16\times \texttt{mileage} (1) \\
+               &=  (23,894 + 19,772) - (0.15 + 0.16) \times \texttt{mileage} \\
+               &=  43,666 - 0.31 \times \texttt{mileage} \\
+\end{align}
+$$
+- We have that not only the [intercept]{style="color:darkorange;"} change but also the [slope]{style="color:darkorange;"}.
+
+## {.smaller}
+::: {.nonincremental}
+- The lines are not parallel in this case which indicates a change in the slope due to the [intercation]{style="color:darkorange;"} term.
+:::
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+    ggplot(cars_luxury, aes(x = mileage, y = price, col = luxury)) +
+      geom_point() + 
+      geom_smooth(method = "lm", se = FALSE)
+```
+
+## Significance and Predictions {.smaller}
+
+- Do luxury cars depreciate faster than non-luxury cars?
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+#| 
+confint(lm3)
+```
+- Yes, with 95% confidence we can conclude that the price of a luxury car depreciates faster than a non-luxury one.
+
+- What is estimated price of luxury vehicle that has as mileage of 50000.
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+predict(lm3, list(mileage = 50000, luxury = "yes"))
+```
+
+- The estimated price of a 50,000-mile luxury car will be US\$ 28,158.
+- There was also a decrese in the RSE of this model compared to the model without the interaction. From $\texttt{11860}$ to $\texttt{10,880}$.
+
+## Conlusion
+
+* [Interactions]{style="color:darkorange;"} make a model more complex to analyze and explain, so it’s only worth doing so when you get better interpretation and more accurate predictions.
+* Choose [interactions]{style="color:darkorange;"} by thinking about what you are trying to model: if you suspect that [the impact of one variable depends on the value of another]{style="color:darkorange;"}, try an interaction term between them
+

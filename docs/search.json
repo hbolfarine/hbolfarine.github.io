@@ -32,7 +32,7 @@
     "href": "teaching.html",
     "title": "Teaching",
     "section": "",
-    "text": "STA 235 honors change 25\n\nclass 01 - day of the class"
+    "text": "STA 235 honors change 25\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions"
   },
   {
     "objectID": "teaching.html#teaching",
@@ -390,5 +390,187 @@
     "title": "Data Science for Business Applications",
     "section": "What’s next?",
     "text": "What’s next?\n\nWe’ll include categorical variables.\nInteractions between categorical and numerical variables."
+  },
+  {
+    "objectID": "class_02.html",
+    "href": "class_02.html",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "Recall what are the goals of the linear regression model"
+  },
+  {
+    "objectID": "class_02.html#regresison-model-goals",
+    "href": "class_02.html#regresison-model-goals",
+    "title": "Data Science for Business Applications",
+    "section": "Regresison model goals",
+    "text": "Regresison model goals\n\n\nRecall what are the goals of the linear regression model"
+  },
+  {
+    "objectID": "class_02.html#data-science-tasks",
+    "href": "class_02.html#data-science-tasks",
+    "title": "Data Science for Business Applications",
+    "section": "Data Science tasks",
+    "text": "Data Science tasks\n\nWe found that adding more predictors to linear models increases their accuracy and explanatory power.\nWhat if we want to add instead of Quantative predictors, Qualitative predictors?\nCategorical or Qualitative Variables split the data into different groups or levels.\nHow can we add these types of variables in the regression model?"
+  },
+  {
+    "objectID": "class_02.html#lets-start-with-an-example",
+    "href": "class_02.html#lets-start-with-an-example",
+    "title": "Data Science for Business Applications",
+    "section": "Let’s start with an example!",
+    "text": "Let’s start with an example!\n\n\nExample: Cars dataset (cars_luxury.csv)\nData on 2,088 used cars in South California\nFor each car there are several predictors as:\nprice: Price of the car in dollars.\nmileage: Car mileage.\nluxury: If the car is a luxury car: “\\(\\texttt{yes}\\)”or “\\(\\texttt{no}\\)”\nbadge: Badge indicating if the car is considered some type of deal, that can be: “\\(\\texttt{Good Deal}\\)”, “\\(\\texttt{Great Deal}\\)”, “\\(\\texttt{No Badge}\\)” or “\\(\\texttt{Fair Price}\\)”.\n(and others)"
+  },
+  {
+    "objectID": "class_02.html#luxury-and-price",
+    "href": "class_02.html#luxury-and-price",
+    "title": "Data Science for Business Applications",
+    "section": "Luxury and price",
+    "text": "Luxury and price\n\n\nBefore we start our analysis, let’s see if there’s a difference between the used price of luxury and not luxury cars.\n\n\n\n\nlibrary(tidyverse)\nggplot(cars_luxury, aes(x = luxury, y = price)) +\n  geom_boxplot()"
+  },
+  {
+    "objectID": "class_02.html#regression-model",
+    "href": "class_02.html#regression-model",
+    "title": "Data Science for Business Applications",
+    "section": "Regression model",
+    "text": "Regression model\n\nIt’s interesting to incorporate the categorical variable luxury, into the multiple regression model.\nWe want to see the impact of mileage on price controlling for the type of car. If it’s a luxury or not.\nThe resulting model is equal to: \\[\n\\texttt{price} = \\beta_0 + \\beta_1\\texttt{mileage} + \\beta_2\\texttt{luxury} + e\n\\]\nHow can we assess the categorical variable luxury?"
+  },
+  {
+    "objectID": "class_02.html#price-in-terms-of-mileage-and-luxury",
+    "href": "class_02.html#price-in-terms-of-mileage-and-luxury",
+    "title": "Data Science for Business Applications",
+    "section": "Price in terms of mileage and luxury",
+    "text": "Price in terms of mileage and luxury\n\n\nLet’s plot the relation between mileage, price and luxury\n\n\n\nggplot(cars_luxury, aes(x = mileage, y = price, col = luxury)) +\n  geom_point()"
+  },
+  {
+    "objectID": "class_02.html#dummy-variable",
+    "href": "class_02.html#dummy-variable",
+    "title": "Data Science for Business Applications",
+    "section": "Dummy variable",
+    "text": "Dummy variable\n\nluxury is a categorical variable (\\(\\texttt{\"yes\"}\\) or \\(\\texttt{\"no\"}\\) in this data set).\nThis variable contains two groups or two levels.\nRecode luxury into a quantitative variable where \\(\\texttt{1 = \"yes\"}\\), \\(\\texttt{0 = \"yes\"}\\).\nThis quantitative variable is known as dummy variable.\nR does this for us.\nR will choose the alphabetically first category as the 0 level."
+  },
+  {
+    "objectID": "class_02.html#regression-model-1",
+    "href": "class_02.html#regression-model-1",
+    "title": "Data Science for Business Applications",
+    "section": "Regression model",
+    "text": "Regression model\n\n# Remove scientific notation \noptions(scipen = 999)\n\n# Regression Model\nlm1 = lm(price ~ mileage + luxury, data = cars_luxury)\nsummary(lm1)\n\n\nCall:\nlm(formula = price ~ mileage + luxury, data = cars_luxury)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-24018  -6204  -1919   3727  78453 \n\nCoefficients:\n                Estimate   Std. Error t value            Pr(&gt;|t|)    \n(Intercept) 25422.756210   508.681485   49.98 &lt;0.0000000000000002 ***\nmileage        -0.185784     0.008688  -21.39 &lt;0.0000000000000002 ***\nluxuryyes   12986.388662   569.304402   22.81 &lt;0.0000000000000002 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 11010 on 2085 degrees of freedom\nMultiple R-squared:  0.3439,    Adjusted R-squared:  0.3433 \nF-statistic: 546.4 on 2 and 2085 DF,  p-value: &lt; 0.00000000000000022\n\n\n\nHow can we interpret these numbers?"
+  },
+  {
+    "objectID": "class_02.html#interpretation-of-the-model",
+    "href": "class_02.html#interpretation-of-the-model",
+    "title": "Data Science for Business Applications",
+    "section": "Interpretation of the model",
+    "text": "Interpretation of the model\n\n\nEstimated model:\n\n\n\\[\n\\texttt{price} = 25,423 - 0.19\\times \\texttt{mileage} + 12,986 \\times \\texttt{luxury}\n\\]\n\nHow can we interpret the coefficients?\nintercept: For a car with zero mileage and luxury = \\(\\texttt{\"no\"}\\) = 0, the average selling price is equal to US$ 25,423.\nmileage: For a fixed type of car, for each extra increase in mileage (in miles), there will be a decrease of US$ 0.19 in the price of the car.\nluxury: For cars with the same mileage, the added price of being a luxury car (luxury = \\(\\texttt{\"yes\"}\\) = 1) is US$ 12,986.\nImportant: When we add a categorical variable to the regression model, the intercept is also referred to as the baseline. The effect of the categorical variable is also known as the offset."
+  },
+  {
+    "objectID": "class_02.html#interpretation-of-the-model-1",
+    "href": "class_02.html#interpretation-of-the-model-1",
+    "title": "Data Science for Business Applications",
+    "section": "Interpretation of the model",
+    "text": "Interpretation of the model\n\nBy adding a categorical variable, we can also interpret this as different regression models depending on the number of groups.\nTo do so we add the effect of the categorical variable to the intercept.\nluxury = \\(\\texttt{\"yes\"}\\) = 1 \\[\n\\begin{align}\n\\texttt{price} &= 25,423 - 0.19\\times \\texttt{mileage} + 12,986 \\times (1) \\\\\n             &= (25,423 + 12,986) - 0.19\\times \\texttt{mileage} \\\\\n             &= 38,409 - 0.19\\times \\texttt{mileage} \\\\\n\\end{align}\n\\]\nluxury = \\(\\texttt{\"no\"}\\) = 0 \\[\n\\begin{align}\n\\texttt{price} &= 25,423 - 0.19\\times \\texttt{mileage} + 12,986 \\times (0) \\\\\n             &= 25,423 - 0.19\\times \\texttt{mileage} \\\\\n\\end{align}\n\\]"
+  },
+  {
+    "objectID": "class_02.html#section",
+    "href": "class_02.html#section",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "We can even visualize these two models in a plot\n\n\n    ggplot(cars_luxury, aes(x = mileage, y = price, col = luxury)) +\n      geom_point() + \n      geom_line(aes(y=predict(lm1)))"
+  },
+  {
+    "objectID": "class_02.html#significance-and-predictions",
+    "href": "class_02.html#significance-and-predictions",
+    "title": "Data Science for Business Applications",
+    "section": "Significance and Predictions",
+    "text": "Significance and Predictions\n\nIs the price of a luxury cars statistically different of a non-luxury car?\n\n\nconfint(lm1)\n\n                    2.5 %        97.5 %\n(Intercept) 24425.1797220 26420.3326977\nmileage        -0.2028214    -0.1687463\nluxuryyes   11869.9244244 14102.8528996\n\n\n\nYes, with 95% confidence we can conclude that the price of a luxury car is different from a non luxury one.\nWhat is estimated price of luxury vehicle that has as mileage of 50000.\n\n\npredict(lm1, list(mileage = 50000, luxury = \"yes\"))\n\n       1 \n29119.95 \n\n\n\nThe estimated price of a 50,000-mile luxury car will be US$ 29,120."
+  },
+  {
+    "objectID": "class_02.html#more-than-two-groups",
+    "href": "class_02.html#more-than-two-groups",
+    "title": "Data Science for Business Applications",
+    "section": "More than two groups",
+    "text": "More than two groups\n\nSuppose, instead of controlling the fact that a car is a luxury car or not, we want to observe the effect of badge on price.\nThe variable badge contains for groups or levels: “\\(\\texttt{Good Deal}\\)”, “\\(\\texttt{Great Deal}\\)”, “\\(\\texttt{No Badge}\\)” or “\\(\\texttt{Fair Price}\\)”.\nIs there a difference in the price of the car depending on what type of badge it holds?"
+  },
+  {
+    "objectID": "class_02.html#section-1",
+    "href": "class_02.html#section-1",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "Let’s plot the relation between mileage, price and badge\n\n\nggplot(cars_luxury, aes(x = mileage, y = price, col = badge)) +\n  geom_point()"
+  },
+  {
+    "objectID": "class_02.html#regressions-model",
+    "href": "class_02.html#regressions-model",
+    "title": "Data Science for Business Applications",
+    "section": "Regressions model",
+    "text": "Regressions model\n\n\nRun the model: \\(\\texttt{price} = \\beta_0 + \\beta_1\\times \\texttt{mileage} + \\beta_2 \\times \\texttt{badge} + e\\)\n\n\nlm2 = lm(price ~ mileage + badge, data = cars_luxury)\nsummary(lm2)\n\n\nCall:\nlm(formula = price ~ mileage + badge, data = cars_luxury)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-19961  -6981  -2395   3629  82508 \n\nCoefficients:\n                    Estimate   Std. Error t value             Pr(&gt;|t|)    \n(Intercept)     35931.481715  1140.032009  31.518 &lt; 0.0000000000000002 ***\nmileage            -0.209568     0.009527 -21.997 &lt; 0.0000000000000002 ***\nbadgeGood Deal  -3556.561624  1057.385699  -3.364             0.000783 ***\nbadgeGreat Deal -8988.415770  1062.334934  -8.461 &lt; 0.0000000000000002 ***\nbadgeNo Badge   -9930.896296  1143.713386  -8.683 &lt; 0.0000000000000002 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 11860 on 2083 degrees of freedom\nMultiple R-squared:  0.2388,    Adjusted R-squared:  0.2374 \nF-statistic: 163.4 on 4 and 2083 DF,  p-value: &lt; 0.00000000000000022"
+  },
+  {
+    "objectID": "class_02.html#interpretation-of-the-model-2",
+    "href": "class_02.html#interpretation-of-the-model-2",
+    "title": "Data Science for Business Applications",
+    "section": "Interpretation of the model",
+    "text": "Interpretation of the model\n\n\n\n\nintercept (baseline): For a car with zero mileage and with a fair price badge, the average selling price is equal to US$ 35,932 (\\(\\texttt{Good Deal} = 0\\),\\(\\texttt{Great Deal} = 0\\), \\(\\texttt{No Badge} = 0\\)).\nmileage: For a car with a fixed badge, for each extra increase in mileage (in miles), there will be a decrease of US$ 0.21 in the price of the car.\n\\(\\texttt{Good Deal} = 1\\), remainig levels equal to zero: For cars with the same mileage, there will be a decrease in their price if they have a good deal badge of US$ 3,557 compared to the baseline, that is, cars with a fair price badge.\n\\(\\texttt{Great Deal}  = 1\\), remainig levels equal to zero: For cars with the same mileage, there will be a decrease in their price if they have a great deal badge of US$ 8,988 compared to the baseline, that is, cars with a fair price badge.\n\\(\\texttt{No Badge}  = 1\\), remainig levels equal to zero: For cars with the same mileage, there will be a decrease in their price if they have no badge of US$ 8,988 compared to the baseline, that is, cars with a fair price badge."
+  },
+  {
+    "objectID": "class_02.html#section-2",
+    "href": "class_02.html#section-2",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "We have now 4 different models, one for each badge catgory.\nWe have four different intecepts."
+  },
+  {
+    "objectID": "class_02.html#interactions",
+    "href": "class_02.html#interactions",
+    "title": "Data Science for Business Applications",
+    "section": "Interactions",
+    "text": "Interactions\n\nWe observed that there was a significant difference between the price of luxury and non-luxury cars.\nIs there a difference in the price of the car depending on what type of badge it holds?\nIn other words, does the effect of one variable (i.e., its slope coefficient) depend on the value of another?\nFor this we will include a interaction."
+  },
+  {
+    "objectID": "class_02.html#interactions-1",
+    "href": "class_02.html#interactions-1",
+    "title": "Data Science for Business Applications",
+    "section": "Interactions",
+    "text": "Interactions\n\nThe idea is to add a term that is the product of the two variables:\n\n\\[\n\\texttt{price} = \\beta_0 + \\beta_1\\texttt{mileage} + \\beta_2\\texttt{luxury} + \\beta_3 (\\texttt{luxury} \\times \\texttt{mileage}) + e\n\\]\n\nIf we have a non-luxury car, then luxury = \\(\\texttt{\"no\"} = 0\\), so the \\(\\beta_2\\) and \\(\\beta_3\\) terms cancel out: \\[\n\\texttt{price} = \\beta_0 + \\beta_1\\texttt{mileage} + e\n\\]\nIf we have a luxury car, then luxury = \\(\\texttt{\"yes\"}  = 1\\), so we get both a different intercept and a different slope for mileage: \\[\n\\texttt{price} = (\\beta_0 + \\beta_2) + (\\beta_1 + \\beta_3) \\texttt{mileage} + e\n\\]"
+  },
+  {
+    "objectID": "class_02.html#regression-model-2",
+    "href": "class_02.html#regression-model-2",
+    "title": "Data Science for Business Applications",
+    "section": "Regression Model",
+    "text": "Regression Model\n\n\nLet’s run the regression model\n\n\nlm3 = lm(price ~ mileage*luxury, data = cars_luxury)\nsummary(lm3)\n\n\nCall:\nlm(formula = price ~ mileage * luxury, data = cars_luxury)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-25662  -6055  -2066   3563  83626 \n\nCoefficients:\n                      Estimate   Std. Error t value             Pr(&gt;|t|)    \n(Intercept)       23893.601384   545.040269  43.838 &lt; 0.0000000000000002 ***\nmileage              -0.154697     0.009595 -16.122 &lt; 0.0000000000000002 ***\nluxuryyes         19772.433662  1092.529243  18.098 &lt; 0.0000000000000002 ***\nmileage:luxuryyes    -0.155457     0.021457  -7.245    0.000000000000606 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 10880 on 2084 degrees of freedom\nMultiple R-squared:   0.36, Adjusted R-squared:  0.3591 \nF-statistic: 390.8 on 3 and 2084 DF,  p-value: &lt; 0.00000000000000022"
+  },
+  {
+    "objectID": "class_02.html#interpretation-of-the-model-3",
+    "href": "class_02.html#interpretation-of-the-model-3",
+    "title": "Data Science for Business Applications",
+    "section": "Interpretation of the model",
+    "text": "Interpretation of the model\n\nHow do we interpret this model?\nintercept (baseline), luxury = \\(\\texttt{\"no\"}\\) = 0: For a non-luxury car with zero mileage, the average selling price is equal to US$ 23,894.\nNow we have two cases:\nluxury = \\(\\texttt{\"no\"}\\) = 0:\nmileage: For each extra increase in mileage (in miles), there will be a decrease of US$ 0.15 in the price of non-luxury cars.\nluxury = \\(\\texttt{\"yes\"}\\) = 1:\nmileage: For each extra increase in mileage (in miles), there will be a decrease of US$ 0.16 in the price of luxury cars on top of the decrease of US$ 0.15 of non-luxury cars."
+  },
+  {
+    "objectID": "class_02.html#interpretation-of-the-model-4",
+    "href": "class_02.html#interpretation-of-the-model-4",
+    "title": "Data Science for Business Applications",
+    "section": "Interpretation of the model",
+    "text": "Interpretation of the model\n\nWe also have the following interpretation:\nluxury = \\(\\texttt{\"yes\"}\\) = 0 \\[\n\\begin{align}\n\\texttt{price} &= 23,894 - 0.15\\times \\texttt{mileage} + 19,772 (0) - 0.16\\times \\texttt{mileage} (0) \\\\\n             &=  23,894 - 0.15\\times \\texttt{mileage}\n\\end{align}\n\\]\nluxury = \\(\\texttt{\"yes\"}\\) = 1 \\[\n\\begin{align}\n\\texttt{price} &= 23,894 - 0.15\\times \\texttt{mileage} + 19,772 (1) - 0.16\\times \\texttt{mileage} (1) \\\\\n             &=  (23,894 + 19,772) - (0.15 + 0.16) \\times \\texttt{mileage} \\\\\n             &=  43,666 - 0.31 \\times \\texttt{mileage} \\\\\n\\end{align}\n\\]\nWe have that not only the intercept change but also the slope."
+  },
+  {
+    "objectID": "class_02.html#section-3",
+    "href": "class_02.html#section-3",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "The lines are not parallel in this case which indicates a change in the slope due to the intercation term.\n\n\n\n    ggplot(cars_luxury, aes(x = mileage, y = price, col = luxury)) +\n      geom_point() + \n      geom_smooth(method = \"lm\", se = FALSE)"
+  },
+  {
+    "objectID": "class_02.html#significance-and-predictions-1",
+    "href": "class_02.html#significance-and-predictions-1",
+    "title": "Data Science for Business Applications",
+    "section": "Significance and Predictions",
+    "text": "Significance and Predictions\n\nDo luxury cars depreciate faster than non-luxury cars?\n\n\nconfint(lm3)\n\n                          2.5 %        97.5 %\n(Intercept)       22824.7212986 24962.4814687\nmileage              -0.1735141    -0.1358795\nluxuryyes         17629.8713295 21914.9959940\nmileage:luxuryyes    -0.1975365    -0.1133770\n\n\n\nYes, with 95% confidence we can conclude that the price of a luxury car depreciates faster than a non-luxury one.\nWhat is estimated price of luxury vehicle that has as mileage of 50000.\n\n\npredict(lm3, list(mileage = 50000, luxury = \"yes\"))\n\n       1 \n28158.36 \n\n\n\nThe estimated price of a 50,000-mile luxury car will be US$ 28,158.\nThere was also a decrese in the RSE of this model compared to the model without the interaction. From \\(\\texttt{11860}\\) to \\(\\texttt{10,880}\\)."
+  },
+  {
+    "objectID": "class_02.html#conlusion",
+    "href": "class_02.html#conlusion",
+    "title": "Data Science for Business Applications",
+    "section": "Conlusion",
+    "text": "Conlusion\n\nInteractions make a model more complex to analyze and explain, so it’s only worth doing so when you get better interpretation and more accurate predictions.\nChoose interactions by thinking about what you are trying to model: if you suspect that the impact of one variable depends on the value of another, try an interaction term between them"
   }
 ]
