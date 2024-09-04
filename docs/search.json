@@ -445,7 +445,7 @@
     "href": "class_02.html#dummy-variable",
     "title": "Data Science for Business Applications",
     "section": "Dummy variable",
-    "text": "Dummy variable\n\nluxury is a categorical variable (\\(\\texttt{\"yes\"}\\) or \\(\\texttt{\"no\"}\\) in this data set).\nThis variable contains two groups or two levels.\nRecode luxury into a quantitative variable where \\(\\texttt{1 = \"yes\"}\\), \\(\\texttt{0 = \"yes\"}\\).\nThis quantitative variable is known as dummy variable.\nR does this for us.\nR will choose the alphabetically first category as the 0 level."
+    "text": "Dummy variable\n\nluxury is a categorical variable (\\(\\texttt{\"yes\"}\\) or \\(\\texttt{\"no\"}\\) in this data set).\nThis variable contains two groups or two levels.\nRecode luxury into a quantitative variable where \\(\\texttt{1 = \"yes\"}\\), \\(\\texttt{0 = \"no\"}\\).\nThis quantitative variable is known as dummy variable.\nR does this for us.\nR will choose the alphabetically first category as the 0 level."
   },
   {
     "objectID": "class_02.html#regression-model-1",

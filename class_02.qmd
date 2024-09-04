@@ -86,7 +86,7 @@ ggplot(cars_luxury, aes(x = mileage, y = price, col = luxury)) +
 
 - `luxury` is a categorical variable ($\texttt{"yes"}$ or $\texttt{"no"}$ in this data set).
 - This variable contains two groups or two levels.
-- Recode `luxury` into a [quantitative]{style="color:darkorange;"} variable where $\texttt{1 = "yes"}$, $\texttt{0 = "yes"}$.
+- Recode `luxury` into a [quantitative]{style="color:darkorange;"} variable where $\texttt{1 = "yes"}$, $\texttt{0 = "no"}$.
 - This quantitative variable is known as [dummy]{style="color:darkorange;"} variable.
 - [**R**]{style="color:blue;"} does this for us.
 - [**R**]{style="color:blue;"} will choose the alphabetically first category as the 0 level.
