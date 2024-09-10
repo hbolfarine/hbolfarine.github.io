@@ -32,7 +32,7 @@
     "href": "teaching.html",
     "title": "Teaching",
     "section": "",
-    "text": "STA 235 honors change 25\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions"
+    "text": "STA 235 honors change 25\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers"
   },
   {
     "objectID": "teaching.html#teaching",
@@ -572,5 +572,243 @@
     "title": "Data Science for Business Applications",
     "section": "Conlusion",
     "text": "Conlusion\n\nInteractions make a model more complex to analyze and explain, so it’s only worth doing so when you get better interpretation and more accurate predictions.\nWe can have interactions between different kinds of variables. Between categorical variables, numerical and categorical and, numerical and numerical.\nChoose interactions by thinking about what you are trying to model: if you suspect that the impact of one variable depends on the value of another, try an interaction term between them"
+  },
+  {
+    "objectID": "class_03.html",
+    "href": "class_03.html",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "Linear models are useful:\n\nPrediction - given a new observations\nExplanatory power - which variables affects the response\n\nBut issues in linear model are not uncommon:\n\nThey can affect the explanatory, and predictive power of our model\nThey can affect our confidence in our model\nWe will look at some of the most common problems in linear regression, and how we can fix them"
+  },
+  {
+    "objectID": "class_03.html#regression-assumptions-and-potential-problems",
+    "href": "class_03.html#regression-assumptions-and-potential-problems",
+    "title": "Data Science for Business Applications",
+    "section": "Regression Assumptions, and Potential Problems",
+    "text": "Regression Assumptions, and Potential Problems\nLinear models are useful:\n\nPrediction - given a new observations\nExplanatory power - which variables affects the response\n\nBut issues in linear model are not uncommon:\n\nThey can affect the explanatory, and predictive power of our model\nThey can affect our confidence in our model\nWe will look at some of the most common problems in linear regression, and how we can fix them"
+  },
+  {
+    "objectID": "class_03.html#regression-assumptions-and-potential-problems-1",
+    "href": "class_03.html#regression-assumptions-and-potential-problems-1",
+    "title": "Data Science for Business Applications",
+    "section": "Regression Assumptions, and Potential Problems",
+    "text": "Regression Assumptions, and Potential Problems\nThese issues are related to:\n\nRegression model assumptions\nInfluential observations, and outliers"
+  },
+  {
+    "objectID": "class_03.html#multiple-regression-assumptions",
+    "href": "class_03.html#multiple-regression-assumptions",
+    "title": "Data Science for Business Applications",
+    "section": "Multiple regression assumptions",
+    "text": "Multiple regression assumptions\nWe need four things to be true for regression to work properly:\n\nLinearity: \\(Y\\) is a linear function of the \\(X\\)’s (except for the prediction errors).\nIndependence: The prediction errors are independent.\nNormality: The prediction errors are normally distributed.\nEqual Variance: The variance of \\(Y\\) is the same for any value of \\(X\\) (“homoscedasticity”)."
+  },
+  {
+    "objectID": "class_03.html#non-linearity",
+    "href": "class_03.html#non-linearity",
+    "title": "Data Science for Business Applications",
+    "section": "Non-Linearity",
+    "text": "Non-Linearity\n\n\nWhat we would expect to observe in a regression where there is a linear relation?\n\n\n\nlibrary(tidyverse)\nggplot(linear_data, aes(x=X, y=Y)) +\n  geom_point() +\n  geom_smooth(method=\"lm\", se = FALSE)"
+  },
+  {
+    "objectID": "class_03.html#residuals",
+    "href": "class_03.html#residuals",
+    "title": "Data Science for Business Applications",
+    "section": "Residuals",
+    "text": "Residuals\n\nLet’s plot the residuals \\(r_i\\), such that \\[r_i = y_i − \\widehat{y}_i\\] where \\(\\widehat{y}_i = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 x_i\\) vs \\(x_i\\)\nHopefully identify non-linear relationships\nWe are looking for patterns or trends in the residuals"
+  },
+  {
+    "objectID": "class_03.html#residuals-1",
+    "href": "class_03.html#residuals-1",
+    "title": "Data Science for Business Applications",
+    "section": "Residuals",
+    "text": "Residuals\n\n\nPlot of the residuals\nHow can these residuals be useful for us?"
+  },
+  {
+    "objectID": "class_03.html#regression-diagnostic-plots",
+    "href": "class_03.html#regression-diagnostic-plots",
+    "title": "Data Science for Business Applications",
+    "section": "Regression diagnostic plots",
+    "text": "Regression diagnostic plots\nWe’ll use regression diagnostic plots to help us evaluate some of the assumptions.\nThe residuals vs fitted graph plots:\n\nResiduals on the \\(Y\\)-axis\nFitted values (predicted \\(Y\\) values) on the \\(X\\)-axis\n\nThis graph effectively subtracts out the linear trend between \\(Y\\) and the \\(X\\)’s, so we want to see no trend left in this graph."
+  },
+  {
+    "objectID": "class_03.html#regression-diagnostic-plot",
+    "href": "class_03.html#regression-diagnostic-plot",
+    "title": "Data Science for Business Applications",
+    "section": "Regression diagnostic plot",
+    "text": "Regression diagnostic plot\n\n\nTo check non-linearity we focus on the Residual vs. Fitted plot\n\n\n\nlibrary(ggfortify)\n\nlm1 = lm(Y ~ X, data = linear_data)\nautoplot(lm1)"
+  },
+  {
+    "objectID": "class_03.html#regression-diagnostic-plot-1",
+    "href": "class_03.html#regression-diagnostic-plot-1",
+    "title": "Data Science for Business Applications",
+    "section": "Regression diagnostic plot",
+    "text": "Regression diagnostic plot\n\nFrom the Residual vs. Fitted plot, we can observe that since the residuals are evenly distributed around zero in relation to the fitted values, we have that the linear regression model is a good fit for this data.\nThis means that we are learning the linear representation contained in this data."
+  },
+  {
+    "objectID": "class_03.html#non-linearity-example",
+    "href": "class_03.html#non-linearity-example",
+    "title": "Data Science for Business Applications",
+    "section": "Non-Linearity Example",
+    "text": "Non-Linearity Example\n\n\nWhat we would expect to observe if the relation is non linear?\n\n\n\nggplot(nonlinear_data, aes(x = X, y = Y)) +\n  geom_point() +\n  geom_smooth(method=\"lm\", se = FALSE)"
+  },
+  {
+    "objectID": "class_03.html#non-linearity-example-1",
+    "href": "class_03.html#non-linearity-example-1",
+    "title": "Data Science for Business Applications",
+    "section": "Non-Linearity Example",
+    "text": "Non-Linearity Example\n\nLet’s look at the residuals for this model\n\n\n\nLet’s check the residual plot"
+  },
+  {
+    "objectID": "class_03.html#non-linearity-example-2",
+    "href": "class_03.html#non-linearity-example-2",
+    "title": "Data Science for Business Applications",
+    "section": "Non-Linearity Example",
+    "text": "Non-Linearity Example\n\nlm2 = lm(Y ~ X, data = nonlinear_data)\nautoplot(lm2)"
+  },
+  {
+    "objectID": "class_03.html#non-linearity-example-3",
+    "href": "class_03.html#non-linearity-example-3",
+    "title": "Data Science for Business Applications",
+    "section": "Non-Linearity Example",
+    "text": "Non-Linearity Example\n\nFrom the Residual vs. Fitted, we can observe that the residuals are not evenly distributed around zero.\nThis indicates that for lower and higher values of \\(x_i\\) our model is overpredicting and underpredicting in the mid values.\nWhat are the implications in this case?\nWorse predictions"
+  },
+  {
+    "objectID": "class_03.html#independence",
+    "href": "class_03.html#independence",
+    "title": "Data Science for Business Applications",
+    "section": "Independence",
+    "text": "Independence\n\nIndependence means that knowing the prediction error for one observation doesn’t tell you anything about the error for another observation\nData collected over time are usually not independent\nWe can’t use regression diagnostics to decide the independence\nWe have to measure the autocorrelation of the residuals\nWe’ll get back to autocorrelation when we discuss Time Series models"
+  },
+  {
+    "objectID": "class_03.html#normality-assumption",
+    "href": "class_03.html#normality-assumption",
+    "title": "Data Science for Business Applications",
+    "section": "Normality assumption",
+    "text": "Normality assumption\n\nWhen we’ve been interpreting residual standard error (RSE) , we’ve used the following interpretation:\n95% of our predictions will be accurate to within plus or minus \\(2\\times RSE\\).\nIn order for this to be true, the residuals have to be Normally distributed"
+  },
+  {
+    "objectID": "class_03.html#normality-example",
+    "href": "class_03.html#normality-example",
+    "title": "Data Science for Business Applications",
+    "section": "Normality example",
+    "text": "Normality example\n\n\nWe can check the distribution of the residuals\n\n\n\nlinear_data = linear_data %&gt;% \n  mutate(resid = residuals(lm1))\n\nggplot(linear_data, aes(x = resid)) + \n  geom_histogram(color = \"grey\", binwidth = 0.2)"
+  },
+  {
+    "objectID": "class_03.html#normality-example-1",
+    "href": "class_03.html#normality-example-1",
+    "title": "Data Science for Business Applications",
+    "section": "Normality example",
+    "text": "Normality example\n\nBut how can we judge if the residuals follows a Normal distribution?\nThe key is to look at the Normal Q-Q plot, which compares the distribution of our residuals to a perfect Normal distribution.\nIf the dots line up along an (approximately) straight line, then the Normality assumption is satisfied."
+  },
+  {
+    "objectID": "class_03.html#regression-diagnostic-plot-2",
+    "href": "class_03.html#regression-diagnostic-plot-2",
+    "title": "Data Science for Business Applications",
+    "section": "Regression diagnostic plot",
+    "text": "Regression diagnostic plot\n\n\nTo check for Normality we focus on the Normal Q-Q plot\n\n\n\nlm1 = lm(Y ~ X, data = linear_data)\nautoplot(lm1)\n\n\n\nIn this case the normality assumptions seem to be met"
+  },
+  {
+    "objectID": "class_03.html#normality-example-2",
+    "href": "class_03.html#normality-example-2",
+    "title": "Data Science for Business Applications",
+    "section": "Normality example",
+    "text": "Normality example\n\nLet’s look at different data.\nIn this case the data has non Normal errors."
+  },
+  {
+    "objectID": "class_03.html#normality-example-3",
+    "href": "class_03.html#normality-example-3",
+    "title": "Data Science for Business Applications",
+    "section": "Normality example",
+    "text": "Normality example\n\n\nHistogram of the residuals (right skewed)\n\n\n\nlm3 = lm(Y ~ X, data = non_normal)\n\nnon_normal = non_normal %&gt;% \n  mutate(resid = residuals(lm3))\n\nggplot(non_normal, aes(x = resid)) + \n  geom_histogram(color = \"grey\", binwidth = 1)"
+  },
+  {
+    "objectID": "class_03.html#regression-diagnostic-plot-3",
+    "href": "class_03.html#regression-diagnostic-plot-3",
+    "title": "Data Science for Business Applications",
+    "section": "Regression diagnostic plot",
+    "text": "Regression diagnostic plot\n\nautoplot(lm3)"
+  },
+  {
+    "objectID": "class_03.html#interpretation-of-the-plot",
+    "href": "class_03.html#interpretation-of-the-plot",
+    "title": "Data Science for Business Applications",
+    "section": "Interpretation of the plot",
+    "text": "Interpretation of the plot\n\nFrom the Normal Q-Q plot, we can observe that the residuals are not following the line that indicates the Normal quantiles\nThis means that our model results in non-normal residuals\nThis affects statistical tests, and confidence intervals"
+  },
+  {
+    "objectID": "class_03.html#equal-variance",
+    "href": "class_03.html#equal-variance",
+    "title": "Data Science for Business Applications",
+    "section": "Equal variance",
+    "text": "Equal variance\n\nEqual variance is also known as “homoscedasticity”\nThe variance of \\(Y\\) should be about the same at any \\(X\\) value (or combination of values for the \\(X\\)’s).\nIn other words, the vertical spread of the points should be the same anywhere along the \\(X\\)-axis.\nIf there’s no equal variance then we might have heteroskedasticity.\nLower precision, estimates are further from the correct population value."
+  },
+  {
+    "objectID": "class_03.html#equal-variance-example",
+    "href": "class_03.html#equal-variance-example",
+    "title": "Data Science for Business Applications",
+    "section": "Equal variance example",
+    "text": "Equal variance example\n\nThe vertical spread of the points is larger along the right side of the graph\n\n\nggplot(heter_data, aes(x = X, y = Y)) +\n  geom_point() +\n  geom_smooth(method=\"lm\", se = FALSE)"
+  },
+  {
+    "objectID": "class_03.html#regression-diagnostic-plot-4",
+    "href": "class_03.html#regression-diagnostic-plot-4",
+    "title": "Data Science for Business Applications",
+    "section": "Regression diagnostic plot",
+    "text": "Regression diagnostic plot\n\n\nTo check for homoscidacity we focus on the Scale-Location plot\n\n\n\nlm4 = lm(Y ~ X, data = heter_data)\nautoplot(lm4)"
+  },
+  {
+    "objectID": "class_03.html#interpretation-of-the-plot-1",
+    "href": "class_03.html#interpretation-of-the-plot-1",
+    "title": "Data Science for Business Applications",
+    "section": "Interpretation of the plot",
+    "text": "Interpretation of the plot\n\nFrom the Sacle-Location plot, we can observe that the residuals have a fan shape, indicating that there is heteroscedacity in the data.\nThis resulted in lower precision; thus, estimates are further from the correct population value."
+  },
+  {
+    "objectID": "class_03.html#influential-observations",
+    "href": "class_03.html#influential-observations",
+    "title": "Data Science for Business Applications",
+    "section": "Influential observations",
+    "text": "Influential observations\n\nAdding a new observation with \\(X\\) near the mean of \\(X\\) doesn’t matter much even if it’s out of line with the rest of the data:\n\n\n\nThis point has high residual but low leverage. RSE = 0.5504"
+  },
+  {
+    "objectID": "class_03.html#diagnostics-plot",
+    "href": "class_03.html#diagnostics-plot",
+    "title": "Data Science for Business Applications",
+    "section": "Diagnostics Plot",
+    "text": "Diagnostics Plot\n\nWe can observe the point with high residual on the Residual vs. Leverage plot\n\n\nlm5 = lm(Y ~ X, data = outlier_residual)\nautoplot(lm5)"
+  },
+  {
+    "objectID": "class_03.html#high-leverage",
+    "href": "class_03.html#high-leverage",
+    "title": "Data Science for Business Applications",
+    "section": "High leverage",
+    "text": "High leverage\n\nWe can also have points with high leverage - when a point in \\(X\\) is distant from the average on \\(X\\)\n\n\n\nThis point has low residual but high leverage. RSE = 0.2956"
+  },
+  {
+    "objectID": "class_03.html#high-leverage-1",
+    "href": "class_03.html#high-leverage-1",
+    "title": "Data Science for Business Applications",
+    "section": "High leverage",
+    "text": "High leverage\n\nWe can observe the point with high leverage on the Residual vs. Leverage plot\n\n\nlm6 = lm(Y ~ X, data = outlier_leverage)\nautoplot(lm6)"
+  },
+  {
+    "objectID": "class_03.html#points-with-high-influence",
+    "href": "class_03.html#points-with-high-influence",
+    "title": "Data Science for Business Applications",
+    "section": "Points with high influence",
+    "text": "Points with high influence\n\nPoints with high leverage and high residuals are known as influential points\n\n\n\nThis point has high residual but high leverage. RSE = 0.8281"
+  },
+  {
+    "objectID": "class_03.html#points-with-high-influence-1",
+    "href": "class_03.html#points-with-high-influence-1",
+    "title": "Data Science for Business Applications",
+    "section": "Points with high influence",
+    "text": "Points with high influence\n\nWe can observe the point with high influence on the Residual vs. Leverage plot\n\n\nlm7 = lm(Y ~ X, data = outlier_influence)\nautoplot(lm7)"
+  },
+  {
+    "objectID": "class_03.html#points-with-high-influence-2",
+    "href": "class_03.html#points-with-high-influence-2",
+    "title": "Data Science for Business Applications",
+    "section": "Points with high influence",
+    "text": "Points with high influence\n\nWhen a case has a very unusual \\(X\\) value, it has leverage — the potential to have a big impact on the regression line\nIf the case is in line with the overall trend of the regression line, it won’t be a problem\nBut when that case also has a Y (high residual) value that is out of line\nWe need both a large residual and high leverage for an observation to be influential\nWe should be worried about these points\nThey affect the coefficents and predictions"
   }
 ]

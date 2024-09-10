@@ -5,3 +5,4 @@ title: "Teaching"
 - STA 235 honors change 25
   - [class 01 - Simple and Multiple Regression](class_01.qmd)
   - [class 02 - Categorical Variables and Interactions](class_02.qmd)
+  - [class 03 - Regression assumptions and Outliers](class_03.qmd)

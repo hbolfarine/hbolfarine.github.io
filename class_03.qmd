@@ -1,0 +1,430 @@
+---
+title: "Data Science for Business Applications"
+author: "Class 03 - Regression Assumptions, and Potential Problems"
+title-slide-attributes:
+    data-background-image: image/background_sta235h.png
+format:
+  revealjs: 
+    theme: "my-styles.css"
+    logo: image/texas_logo2.png
+    incremental: true 
+    self-contained-math: true
+    
+---
+
+## Regression Assumptions, and Potential Problems {.smaller}
+
+ Linear models are useful: 
+ 
+* [Prediction]{style="color:darkorange;"} - given a new observations
+
+* [Explanatory power]{style="color:darkorange;"} - which variables affects the response
+
+But issues in linear model are [not uncommon]{style="color:darkorange;"}:
+
+* They can affect the [explanatory]{style="color:darkorange;"}, and [predictive]{style="color:darkorange;"} power of our model
+
+* They can affect our [confidence]{style="color:darkorange;"} in our model
+
+* We will look at some of the most common [problems]{style="color:darkorange;"} in linear regression, and how we can [fix]{style="color:darkorange;"} them
+
+## Regression Assumptions, and Potential Problems 
+
+These issues are related to:
+
+-  Regression [model assumptions]{style="color:darkorange;"}
+-  [Influential observations]{style="color:darkorange;"}, and [outliers]{style="color:darkorange;"} 
+
+## Multiple regression assumptions
+
+We need four things to be true for regression to work properly:
+
+- [Linearity]{style="color:darkorange;"}: $Y$ is a linear function of the $X$’s (except for the prediction errors).
+
+- [Independence]{style="color:darkorange;"}: The prediction errors are independent.
+
+- [Normality]{style="color:darkorange;"}: The prediction errors are normally distributed.
+
+- [Equal Variance]{style="color:darkorange;"}: The variance of $Y$ is the same for any value of $X$ (“homoscedasticity”).
+
+```{r}
+linear_data = read.csv("script_class_03/linear_data.csv")
+```
+
+## Non-Linearity {.smaller}
+::: {.nonincremental}
+- What we would expect to observe in a regression where there is a [linear relation]{style="color:darkorange;"}?
+:::
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+library(tidyverse)
+ggplot(linear_data, aes(x=X, y=Y)) +
+  geom_point() +
+  geom_smooth(method="lm", se = FALSE)
+```
+
+
+## Residuals
+
+- Let's plot the [residuals]{style="color:darkorange;"} $r_i$, such that
+$$r_i = y_i − \widehat{y}_i$$
+where $\widehat{y}_i = \widehat{\beta}_0 + \widehat{\beta}_1 x_i$ vs $x_i$
+- Hopefully identify non-linear relationships
+- We are looking for [patterns]{style="color:darkorange;"} or [trends]{style="color:darkorange;"} in the [residuals]{style="color:darkorange;"}
+
+## Residuals {.smaller}
+::: {.nonincremental}
+- Plot of the [residuals]{style="color:darkorange;"}
+- How can these residuals be useful for us?
+:::
+```{r, fig.align = 'center', echo = FALSE}
+set.seed(2)
+x=rnorm(300) 
+y=x+rnorm(300, 0, 0.3)
+model <- lm(y ~ x)
+fitted = predict(model)
+ggplot(data.frame(x=x, y=y), aes(x=x, y=y)) +
+  geom_segment(aes(xend=x, yend=fitted, col=ifelse(fitted-y>0, "green", "red")), show.legend=F) +
+  geom_point() +
+  geom_smooth(method="lm", se=F)
+```
+
+## Regression diagnostic plots
+
+We’ll use [regression diagnostic]{style="color:darkorange;"} plots to help us evaluate some of the assumptions.
+
+The [residuals vs fitted]{style="color:darkorange;"} graph plots: 
+
+- [Residuals]{style="color:darkorange;"}  on the $Y$-axis
+- [Fitted values]{style="color:darkorange;"}  (predicted $Y$ values) on the $X$-axis
+
+This graph effectively subtracts out the linear trend between $Y$ and the $X$’s, so we want to [see no trend left]{style="color:darkorange;"} in this graph.
+
+## Regression diagnostic plot {.smaller}
+::: {.nonincremental}
+- To check non-linearity we focus on the [Residual vs. Fitted]{style="color:darkorange;"} plot
+:::
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+library(ggfortify)
+
+lm1 = lm(Y ~ X, data = linear_data)
+autoplot(lm1)
+```
+
+## Regression diagnostic plot
+
+- From the [Residual vs. Fitted]{style="color:darkorange;"} plot, we can observe that since the residuals [are evenly distributed]{style="color:darkorange;"} around zero in relation to the fitted values, we have that the [linear regression model is a good fit]{style="color:darkorange;"} for this data.
+
+- This means that we are [learning the linear representation]{style="color:darkorange;"} contained in this data.
+
+```{r}
+nonlinear_data = read.csv("script_class_03/nonlinear_data.csv")
+```
+
+## Non-Linearity Example {.smaller}
+::: {.nonincremental}
+- What we would expect to observe if the relation is [non linear]{style="color:darkorange;"}?
+:::
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+ggplot(nonlinear_data, aes(x = X, y = Y)) +
+  geom_point() +
+  geom_smooth(method="lm", se = FALSE)
+```
+
+## Non-Linearity Example {.smaller}
+
+- Let's look at the residuals for this model
+```{r, fig.align = 'center', echo = FALSE}
+set.seed(2)
+x=rnorm(300) 
+y=x^2+rnorm(300, 0, 0.2)
+model <- lm(y ~ x)
+fitted = predict(model)
+ggplot(data.frame(x=x, y=y), aes(x=x, y=y)) +
+  geom_segment(aes(xend=x, yend=fitted, col=ifelse(fitted-y>0, "green", "red")), show.legend=F) +
+  geom_point() +
+  geom_smooth(method="lm", se = FALSE)
+```
+- Let's check the [residual plot]{style="color:darkorange;"}
+
+## Non-Linearity Example {.smaller}
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+lm2 = lm(Y ~ X, data = nonlinear_data)
+autoplot(lm2)
+```
+
+## Non-Linearity Example 
+
+- From the [Residual vs. Fitted]{style="color:darkorange;"}, we can observe that the residuals are not evenly distributed around zero.
+
+- This indicates that for lower and higher values of $x_i$ our model is [overpredicting]{style="color:darkorange;"} and [underpredicting]{style="color:darkorange;"} in the mid values.
+
+- What are the implications in this case?
+
+- [Worse predictions]{style="color:darkorange;"}
+
+## Independence
+
+- [Independence]{style="color:darkorange;"} means that knowing the prediction error for one observation doesn’t tell you anything about the error for another observation
+- Data collected over time are usually not independent
+- We [can’t use regression diagnostics]{style="color:darkorange;"} to decide the independence
+- We have to measure the [autocorrelation]{style="color:darkorange;"} of the residuals 
+- We'll get back to [autocorrelation]{style="color:darkorange;"} when we discuss Time Series models
+
+## Normality assumption
+
+- When we’ve been interpreting [residual standard error (RSE)]{style="color:darkorange;"} , we’ve used the following interpretation:
+- 95% of our [predictions]{style="color:darkorange;"} will be accurate to within plus or minus $2\times RSE$.
+- In order for this to be true, the residuals have to be [Normally distributed]{style="color:darkorange;"}
+
+## Normality example {.smaller}
+
+::: {.nonincremental}
+- We can check the distribution of the residuals 
+:::
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+
+linear_data = linear_data %>% 
+  mutate(resid = residuals(lm1))
+
+ggplot(linear_data, aes(x = resid)) + 
+  geom_histogram(color = "grey", binwidth = 0.2) 
+
+```
+
+## Normality example
+
+- But how can we judge if the residuals follows a Normal distribution?
+- The key is to look at the [Normal Q-Q]{style="color:darkorange;"} plot, which compares the distribution of our residuals to a perfect Normal distribution.
+- If the dots line up along an [(approximately) straight line]{style="color:darkorange;"}, then the Normality assumption is satisfied.
+
+## Regression diagnostic plot {.smaller}
+
+::: {.nonincremental}
+- To check for Normality we focus on the [Normal Q-Q]{style="color:darkorange;"} plot
+:::
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+
+lm1 = lm(Y ~ X, data = linear_data)
+autoplot(lm1)
+```
+
+- In this case the normality assumptions seem to be met
+
+```{r} 
+non_normal = read.csv("script_class_03/nonnormal_data.csv")
+```
+
+## Normality example {.smaller}
+
+- Let's look at different data.
+- In this case the data has non Normal errors.
+```{r}
+ggplot(non_normal, aes(x = X, y = Y)) +
+  geom_point() +
+  geom_smooth(method="lm", se=F)
+```
+
+## Normality example {.smaller}
+::: {.nonincremental}
+- Histogram of the residuals (right skewed)
+:::
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+lm3 = lm(Y ~ X, data = non_normal)
+
+non_normal = non_normal %>% 
+  mutate(resid = residuals(lm3))
+
+ggplot(non_normal, aes(x = resid)) + 
+  geom_histogram(color = "grey", binwidth = 1) 
+```
+
+## Regression diagnostic plot {.smaller}
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+
+autoplot(lm3)
+```
+
+## Interpretation of the plot 
+
+- From the [Normal Q-Q]{style="color:darkorange;"} plot, we can observe that the residuals [are not]{style="color:darkorange;"} following the line that indicates the Normal quantiles
+
+- This means that our model results in [non-normal residuals]{style="color:darkorange;"}
+
+- This affects [statistical tests]{style="color:darkorange;"}, and [confidence intervals]{style="color:darkorange;"}
+
+
+## Equal variance {.smaller}
+
+- Equal variance is also known as [“homoscedasticity”]{style="color:darkorange;"}
+- The variance of $Y$ should be about the same at any $X$ value (or combination of values for the $X$’s).
+- In other words, the vertical spread of the points should be the same anywhere along the $X$-axis.
+- If there's no equal variance then we might have heteroskedasticity.
+- Lower precision, estimates are further from the correct population value.
+```{r} 
+heter_data = read.csv("script_class_03/heter_data.csv")
+```
+
+## Equal variance example {.smaller}
+
+- The vertical spread of the points is larger along the right side of the graph
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+ggplot(heter_data, aes(x = X, y = Y)) +
+  geom_point() +
+  geom_smooth(method="lm", se = FALSE)
+```
+
+## Regression diagnostic plot {.smaller}
+
+::: {.nonincremental}
+- To check for [homoscidacity]{style="color:darkorange;"} we focus on the [Scale-Location]{style="color:darkorange;"} plot
+:::
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+
+lm4 = lm(Y ~ X, data = heter_data)
+autoplot(lm4)
+```
+
+## Interpretation of the plot 
+
+- From the [Sacle-Location]{style="color:darkorange;"} plot, we can observe that the residuals have a [fan shape]{style="color:darkorange;"}, indicating that there is heteroscedacity in the data.
+
+- This resulted in lower precision; thus, estimates are further from the correct population value.
+
+```{r}
+outlier_residual = read.csv("script_class_03/outlier_residual.csv")
+```
+
+## Influential observations {.smaller}
+
+- Adding a new observation with $X$ near the mean of $X$ doesn’t matter much even if it’s out of line with the rest of the data:
+
+```{r, echo = FALSE, fig.align = 'center'}
+hx <- 0
+hy <- -8
+ggplot(outlier_residual, aes(x=X, y=Y)) +
+  geom_point(col = ifelse(outlier_residual$X == hx & outlier_residual$Y == hy, "red", "black")) +
+  geom_smooth(method = "lm", se=F)
+```
+
+- This point has high residual but low leverage. RSE = 0.5504
+
+## Diagnostics Plot {.smaller}
+
+- We can observe the point with high residual on the Residual vs. Leverage plot
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+lm5 = lm(Y ~ X, data = outlier_residual)
+autoplot(lm5)
+```
+
+
+```{r}
+outlier_leverage = read.csv("script_class_03/outlier_leverage.csv")
+```
+
+## High leverage {.smaller}
+
+- We can also have points with high leverage - when a point in $X$ is distant from the average on $X$
+
+```{r, echo = FALSE, fig.align = 'center'}
+hx <- 5
+hy <- 5
+ggplot(outlier_leverage, aes(x=X, y=Y)) +
+  geom_point(col = ifelse(outlier_leverage$X == hx & outlier_leverage$Y == hy, "red", "black")) +
+  geom_smooth(method = "lm", se=F)
+```
+
+- This point has low residual but high leverage. RSE = 0.2956
+
+## High leverage {.smaller}
+
+- We can observe the point with high leverage on the Residual vs. Leverage plot
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+lm6 = lm(Y ~ X, data = outlier_leverage)
+autoplot(lm6)
+```
+
+```{r}
+outlier_influence = read.csv("script_class_03/outlier_influence.csv")
+```
+
+## Points with high influence {.smaller}
+
+- Points with high leverage and high residuals are known as influential points
+
+```{r, echo = FALSE, fig.align = 'center'}
+hx <- 7.5
+hy <- -7
+ggplot(outlier_influence, aes(x=X, y=Y)) +
+  geom_point(col = ifelse(outlier_influence$X == hx & outlier_influence$Y == hy, "red", "black")) +
+  geom_smooth(method = "lm", se=F)
+```
+
+- This point has high residual but high leverage. RSE = 0.8281
+
+## Points with high influence {.smaller}
+
+- We can observe the point with high influence on the Residual vs. Leverage plot
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+lm7 = lm(Y ~ X, data = outlier_influence)
+autoplot(lm7)
+```
+
+## Points with high influence {.smaller}
+
+- When a case has a very unusual $X$ value, it has leverage — the potential to have a big impact on the regression line
+- If the case is in line with the overall trend of the regression line, it won’t be a problem
+- But when that case also has a Y (high residual) value that is out of line
+- We need both a large residual and high leverage for an observation to be influential
+- We should be worried about these points
+- They affect the coefficents and predictions 
+
+
+
