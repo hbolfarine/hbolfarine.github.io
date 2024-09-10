@@ -12,7 +12,7 @@ format:
     
 ---
 
-## Regression Assumptions, and Potential Problems {.smaller}
+## Regression Assumptions, and Outliers {.smaller}
 
  Linear models are useful: 
  
@@ -308,7 +308,7 @@ ggplot(heter_data, aes(x = X, y = Y)) +
 ## Regression diagnostic plot {.smaller}
 
 ::: {.nonincremental}
-- To check for [homoscidacity]{style="color:darkorange;"} we focus on the [Scale-Location]{style="color:darkorange;"} plot
+- To check for [homoscedasticity]{style="color:darkorange;"} we focus on the [Scale-Location]{style="color:darkorange;"} plot
 :::
 
 ```{r, fig.align = 'center'}
@@ -330,7 +330,7 @@ autoplot(lm4)
 outlier_residual = read.csv("script_class_03/outlier_residual.csv")
 ```
 
-## Influential observations {.smaller}
+## Outliers and influential observations {.smaller}
 
 - Adding a new observation with $X$ near the mean of $X$ doesn’t matter much even if it’s out of line with the rest of the data:
 
@@ -342,11 +342,11 @@ ggplot(outlier_residual, aes(x=X, y=Y)) +
   geom_smooth(method = "lm", se=F)
 ```
 
-- This point has high residual but low leverage. RSE = 0.5504
+- This point has [high residual]{style="color:darkorange;"} but [low leverage]{style="color:darkorange;"}. RSE = 0.5504
 
 ## Diagnostics Plot {.smaller}
 
-- We can observe the point with high residual on the Residual vs. Leverage plot
+- We can observe the point with [high residual]{style="color:darkorange;"} on the [Residual vs. Leverage]{style="color:darkorange;"} plot
 
 ```{r}
 #| eval: true
@@ -363,7 +363,7 @@ outlier_leverage = read.csv("script_class_03/outlier_leverage.csv")
 
 ## High leverage {.smaller}
 
-- We can also have points with high leverage - when a point in $X$ is distant from the average on $X$
+- We can also have points with [high leverage]{style="color:darkorange;"} - when a point in $X$ is distant from the average on $X$
 
 ```{r, echo = FALSE, fig.align = 'center'}
 hx <- 5
@@ -373,11 +373,11 @@ ggplot(outlier_leverage, aes(x=X, y=Y)) +
   geom_smooth(method = "lm", se=F)
 ```
 
-- This point has low residual but high leverage. RSE = 0.2956
+- This point has [low residual]{style="color:darkorange;"} but [high leverage]{style="color:darkorange;"}. RSE = 0.2956
 
 ## High leverage {.smaller}
 
-- We can observe the point with high leverage on the Residual vs. Leverage plot
+- We can observe the point with [high leverage]{style="color:darkorange;"} on the [Residual vs. Leverage]{style="color:darkorange;"} plot
 
 ```{r}
 #| eval: true
@@ -393,7 +393,7 @@ outlier_influence = read.csv("script_class_03/outlier_influence.csv")
 
 ## Points with high influence {.smaller}
 
-- Points with high leverage and high residuals are known as influential points
+- Points with [high leverage]{style="color:darkorange;"} and [high residuals]{style="color:darkorange;"} are known as [influential points]{style="color:darkorange;"}
 
 ```{r, echo = FALSE, fig.align = 'center'}
 hx <- 7.5
@@ -403,11 +403,11 @@ ggplot(outlier_influence, aes(x=X, y=Y)) +
   geom_smooth(method = "lm", se=F)
 ```
 
-- This point has high residual but high leverage. RSE = 0.8281
+- This point has [high residual]{style="color:darkorange;"} but [high leverage]{style="color:darkorange;"}. RSE = 0.8281
 
 ## Points with high influence {.smaller}
 
-- We can observe the point with high influence on the Residual vs. Leverage plot
+- We can observe the point with [high influence]{style="color:darkorange;"} on the [Residual vs. Leverage]{style="color:darkorange;"} plot
 
 ```{r}
 #| eval: true
@@ -419,12 +419,12 @@ autoplot(lm7)
 
 ## Points with high influence {.smaller}
 
-- When a case has a very unusual $X$ value, it has leverage — the potential to have a big impact on the regression line
-- If the case is in line with the overall trend of the regression line, it won’t be a problem
-- But when that case also has a Y (high residual) value that is out of line
-- We need both a large residual and high leverage for an observation to be influential
+- When a case has a [very unusual]{style="color:darkorange;"} $X$ value, it [has leverage]{style="color:darkorange;"} — the potential to have a big impact on the regression line
+- If the case is in line with the [overall trend]{style="color:darkorange;"} of the regression line, [it won’t be a problem]{style="color:darkorange;"}
+- But when that case also has a $Y$ ([high residual]{style="color:darkorange;"}) value that is out of line
+- We need [both]{style="color:darkorange;"} a [large residual]{style="color:darkorange;"} and [high leverage]{style="color:darkorange;"} for an observation to be influential
 - We should be worried about these points
-- They affect the coefficents and predictions 
+- They affect the ]{style="color:darkorange;"}coefficients]{style="color:darkorange;"} and [predictions]{style="color:darkorange;"} 
 
 
 

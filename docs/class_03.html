@@ -402,8 +402,8 @@ Class 03 - Regression Assumptions, and Potential Problems
 </div>
 
 </section>
-<section id="regression-assumptions-and-potential-problems" class="slide level2 smaller">
-<h2>Regression Assumptions, and Potential Problems</h2>
+<section id="regression-assumptions-and-outliers" class="slide level2 smaller">
+<h2>Regression Assumptions, and Outliers</h2>
 <p>Linear models are useful:</p>
 <ul>
 <li class="fragment"><p><span style="color:darkorange;">Prediction</span> - given a new observations</p></li>
@@ -416,7 +416,7 @@ Class 03 - Regression Assumptions, and Potential Problems
 <li class="fragment"><p>We will look at some of the most common <span style="color:darkorange;">problems</span> in linear regression, and how we can <span style="color:darkorange;">fix</span> them</p></li>
 </ul>
 </section>
-<section id="regression-assumptions-and-potential-problems-1" class="slide level2">
+<section id="regression-assumptions-and-potential-problems" class="slide level2">
 <h2>Regression Assumptions, and Potential Problems</h2>
 <p>These issues are related to:</p>
 <ul>
@@ -665,7 +665,7 @@ Class 03 - Regression Assumptions, and Potential Problems
 <h2>Regression diagnostic plot</h2>
 <div>
 <ul>
-<li>To check for <span style="color:darkorange;">homoscidacity</span> we focus on the <span style="color:darkorange;">Scale-Location</span> plot</li>
+<li>To check for <span style="color:darkorange;">homoscedasticity</span> we focus on the <span style="color:darkorange;">Scale-Location</span> plot</li>
 </ul>
 </div>
 <div class="cell" data-layout-align="center">
@@ -681,20 +681,20 @@ Class 03 - Regression Assumptions, and Potential Problems
 <li class="fragment"><p>This resulted in lower precision; thus, estimates are further from the correct population value.</p></li>
 </ul>
 </section>
-<section id="influential-observations" class="slide level2 smaller">
-<h2>Influential observations</h2>
+<section id="outliers-and-influential-observations" class="slide level2 smaller">
+<h2>Outliers and influential observations</h2>
 <ul>
 <li class="fragment">Adding a new observation with <span class="math inline">\(X\)</span> near the mean of <span class="math inline">\(X\)</span> doesn’t matter much even if it’s out of line with the rest of the data:</li>
 </ul>
 
 <img data-src="class_03_files/figure-revealjs/unnamed-chunk-19-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><ul>
-<li class="fragment">This point has high residual but low leverage. RSE = 0.5504</li>
+<li class="fragment">This point has <span style="color:darkorange;">high residual</span> but <span style="color:darkorange;">low leverage</span>. RSE = 0.5504</li>
 </ul>
 </section>
 <section id="diagnostics-plot" class="slide level2 smaller">
 <h2>Diagnostics Plot</h2>
 <ul>
-<li class="fragment">We can observe the point with high residual on the Residual vs.&nbsp;Leverage plot</li>
+<li class="fragment">We can observe the point with <span style="color:darkorange;">high residual</span> on the <span style="color:darkorange;">Residual vs.&nbsp;Leverage</span> plot</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>lm5 <span class="ot">=</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> outlier_residual)</span>
@@ -705,17 +705,17 @@ Class 03 - Regression Assumptions, and Potential Problems
 <section id="high-leverage" class="slide level2 smaller">
 <h2>High leverage</h2>
 <ul>
-<li class="fragment">We can also have points with high leverage - when a point in <span class="math inline">\(X\)</span> is distant from the average on <span class="math inline">\(X\)</span></li>
+<li class="fragment">We can also have points with <span style="color:darkorange;">high leverage</span> - when a point in <span class="math inline">\(X\)</span> is distant from the average on <span class="math inline">\(X\)</span></li>
 </ul>
 
 <img data-src="class_03_files/figure-revealjs/unnamed-chunk-22-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><ul>
-<li class="fragment">This point has low residual but high leverage. RSE = 0.2956</li>
+<li class="fragment">This point has <span style="color:darkorange;">low residual</span> but <span style="color:darkorange;">high leverage</span>. RSE = 0.2956</li>
 </ul>
 </section>
 <section id="high-leverage-1" class="slide level2 smaller">
 <h2>High leverage</h2>
 <ul>
-<li class="fragment">We can observe the point with high leverage on the Residual vs.&nbsp;Leverage plot</li>
+<li class="fragment">We can observe the point with <span style="color:darkorange;">high leverage</span> on the <span style="color:darkorange;">Residual vs.&nbsp;Leverage</span> plot</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>lm6 <span class="ot">=</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> outlier_leverage)</span>
@@ -726,17 +726,17 @@ Class 03 - Regression Assumptions, and Potential Problems
 <section id="points-with-high-influence" class="slide level2 smaller">
 <h2>Points with high influence</h2>
 <ul>
-<li class="fragment">Points with high leverage and high residuals are known as influential points</li>
+<li class="fragment">Points with <span style="color:darkorange;">high leverage</span> and <span style="color:darkorange;">high residuals</span> are known as <span style="color:darkorange;">influential points</span></li>
 </ul>
 
 <img data-src="class_03_files/figure-revealjs/unnamed-chunk-25-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><ul>
-<li class="fragment">This point has high residual but high leverage. RSE = 0.8281</li>
+<li class="fragment">This point has <span style="color:darkorange;">high residual</span> but <span style="color:darkorange;">high leverage</span>. RSE = 0.8281</li>
 </ul>
 </section>
 <section id="points-with-high-influence-1" class="slide level2 smaller">
 <h2>Points with high influence</h2>
 <ul>
-<li class="fragment">We can observe the point with high influence on the Residual vs.&nbsp;Leverage plot</li>
+<li class="fragment">We can observe the point with <span style="color:darkorange;">high influence</span> on the <span style="color:darkorange;">Residual vs.&nbsp;Leverage</span> plot</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>lm7 <span class="ot">=</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> outlier_influence)</span>
@@ -747,12 +747,12 @@ Class 03 - Regression Assumptions, and Potential Problems
 <section id="points-with-high-influence-2" class="slide level2 smaller">
 <h2>Points with high influence</h2>
 <ul>
-<li class="fragment">When a case has a very unusual <span class="math inline">\(X\)</span> value, it has leverage — the potential to have a big impact on the regression line</li>
-<li class="fragment">If the case is in line with the overall trend of the regression line, it won’t be a problem</li>
-<li class="fragment">But when that case also has a Y (high residual) value that is out of line</li>
-<li class="fragment">We need both a large residual and high leverage for an observation to be influential</li>
+<li class="fragment">When a case has a <span style="color:darkorange;">very unusual</span> <span class="math inline">\(X\)</span> value, it <span style="color:darkorange;">has leverage</span> — the potential to have a big impact on the regression line</li>
+<li class="fragment">If the case is in line with the <span style="color:darkorange;">overall trend</span> of the regression line, <span style="color:darkorange;">it won’t be a problem</span></li>
+<li class="fragment">But when that case also has a <span class="math inline">\(Y\)</span> (<span style="color:darkorange;">high residual</span>) value that is out of line</li>
+<li class="fragment">We need <span style="color:darkorange;">both</span> a <span style="color:darkorange;">large residual</span> and <span style="color:darkorange;">high leverage</span> for an observation to be influential</li>
 <li class="fragment">We should be worried about these points</li>
-<li class="fragment">They affect the coefficents and predictions</li>
+<li class="fragment">They affect the ]{style=“color:darkorange;”}coefficients]{style=“color:darkorange;”} and <span style="color:darkorange;">predictions</span></li>
 </ul>
 
 <div class="quarto-auto-generated-content">
