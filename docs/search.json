@@ -809,7 +809,7 @@
     "href": "class_03.html#points-with-high-influence-2",
     "title": "Data Science for Business Applications",
     "section": "Points with high influence",
-    "text": "Points with high influence\n\nWhen a case has a very unusual \\(X\\) value, it has leverage — the potential to have a big impact on the regression line\nIf the case is in line with the overall trend of the regression line, it won’t be a problem\nBut when that case also has a \\(Y\\) (high residual) value that is out of line\nWe need both a large residual and high leverage for an observation to be influential\nWe should be worried about these points\nThey affect the ]{style=“color:darkorange;”}coefficients]{style=“color:darkorange;”} and predictions"
+    "text": "Points with high influence\n\nWhen a case has a very unusual \\(X\\) value, it has leverage — the potential to have a big impact on the regression line\nIf the case is in line with the overall trend of the regression line, it won’t be a problem\nBut when that case also has a \\(Y\\) (high residual) value that is out of line\nWe need both a large residual and high leverage for an observation to be influential\nWe should be worried about these points\nThey affect the coefficients and predictions"
   },
   {
     "objectID": "class_03.html#regression-assumptions-and-outliers",

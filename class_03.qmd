@@ -424,7 +424,7 @@ autoplot(lm7)
 - But when that case also has a $Y$ ([high residual]{style="color:darkorange;"}) value that is out of line
 - We need [both]{style="color:darkorange;"} a [large residual]{style="color:darkorange;"} and [high leverage]{style="color:darkorange;"} for an observation to be influential
 - We should be worried about these points
-- They affect the ]{style="color:darkorange;"}coefficients]{style="color:darkorange;"} and [predictions]{style="color:darkorange;"} 
+- They affect the [coefficients]{style="color:darkorange;"} and [predictions]{style="color:darkorange;"} 
 
 
 
