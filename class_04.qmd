@@ -47,7 +47,7 @@ summary(lm1)
 ```
 
 * Let's interpret this relation
-* For one unit increase in temperature (Fahrenheit), there will be a 7-cent decrease in spending
+* For one unit increase in temperature (Fahrenheit), there will be a 10-cent decrease in spending
 
 ## Polynomial models {.smaller}
 
@@ -322,6 +322,7 @@ $$
 But our prediction is not 26.49:
 
 $e^{\log(\texttt{Transistors})} = e^{26.49} = 319,492,616,196$
+
 
 ## Interpretation of the model {.smaller}
 
