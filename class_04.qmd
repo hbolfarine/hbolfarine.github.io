@@ -1,0 +1,360 @@
+---
+title: "Data Science for Business Applications"
+author: "Class 04 - Modeling nonlinear relationships"
+title-slide-attributes:
+    data-background-image: image/background_sta235h.png
+format:
+  revealjs: 
+    theme: "my-styles.css"
+    logo: image/texas_logo2.png
+    incremental: true 
+    self-contained-math: true
+    
+---
+
+## Polynomial models 
+
+The data set `utilities` contains information on the utility bills for a house in Minnesota. We’ll focus on two variables:
+
+* `dailyspend` is the average amount of money spent on utilities (e.g. heating) for each day during the month
+* `temp` is the average temperature outside for that month
+
+```{r}
+utilities = read.csv("script_class_04/utilities.csv")
+```
+
+## Polynomial models  {.smaller}
+
+What problems do you see here?
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+library(tidyverse)
+ggplot(utilities, aes(x = temp, y = dailyspend)) +
+  geom_point()
+```
+
+## Polynomial models  {.smaller}
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+lm1 <- lm(dailyspend ~ temp, data=utilities) 
+summary(lm1)
+```
+
+* Let's interpret this relation
+* For one unit increase in temperature (Fahrenheit), there will be a 7-cent decrease in spending
+
+## Polynomial models {.smaller}
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+library(ggfortify)
+autoplot(lm1)
+```
+
+ * Linearity and homoscedasticity are violated
+ 
+## Polynomial models
+
+* We'll use [polynomial regression]{style="color:darkorange;"} to fix problems
+* If a polynomial curve (e.g., quadratic, cubic, etc) would be a better fit for the data than a line, we can fit a curve to the data.
+* The way we do this is by [adding]{style="color:darkorange;"}  $X^2$ to the model as a second predictor variable.
+* This can “fix” the linearity problem because now $Y$ is a linear function of $X$ and $X^2$, resulting in:
+$$
+Y = \beta_0 + \beta_1\cdot X + \beta\cdot X^2 + e
+$$
+
+## Polynomial models {.smaller}
+
+* We add the term `I(temp^2)` in the regression equation:
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+lm2 <- lm(dailyspend ~ temp + I(temp^2), data=utilities) 
+summary(lm2)
+```
+* We have that the new term is evaluated as an extra variable.
+
+## Polynomial models {.smaller}
+
+Writing out the equation:
+$$
+\widehat{\texttt{dailyspend}} = 9.4723 −0.2116\cdot \texttt{temp} + 0.0012\cdot \texttt{temp}^2 
+$$
+The effect of the extra variable is statistically significant:
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+confint(lm2)
+```
+
+* The residual standard error of the polynomial model is $\texttt{0.75}$.
+* The residual standard error of the linear model is $\texttt{0.87}$.
+
+## Polynomial models {.smaller}
+
+Adding an $X^2$ term fits a [parabola]{style="color:darkorange;"} to the data (orange line)
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+ggplot(utilities, aes(x = temp, y = dailyspend)) +
+  geom_point() + 
+  geom_line(aes(x = temp, y = predict(lm1)), col = "lightblue") + 
+  geom_line(aes(x = temp, y = predict(lm2)), col = "orange")
+```
+
+
+## Polynomial models {.smaller}
+
+It solves the linearity problem
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+autoplot(lm2)
+```
+
+## Polynomial models {.smaller}
+
+* What about a higher-order polynomial?
+* We could fit a cubic curve by adding an $X^3$ term
+* Making the polynomial higher order will decrease the `RSE`
+* Why not go nuts and fit a 7th degree polynomial?
+
+| Degree | name | RSE |
+|:-------:|:-----:|:------:|
+| 1      | linear   |    0.866 |
+| 2     | quadratic  |   0.754 |
+| 3       | cubic    |  0.755 |
+| 4       | quartic    |  0.755 |
+| 5       | quintic    |  0.758 |
+| 6       |           |  0.761 |
+| 7       |           |  0.761 |
+
+```{r, echo=FALSE, results=FALSE}
+lm1 <- lm(dailyspend ~ temp, data=utilities) 
+summary(lm1)
+
+lm2 <- lm(dailyspend ~ poly(temp,2), data=utilities) 
+summary(lm2)
+
+lm3 <- lm(dailyspend ~ poly(temp,3), data=utilities) 
+summary(lm3)
+
+lm4 <- lm(dailyspend ~ poly(temp,4), data=utilities) 
+summary(lm4)
+
+lm5 <- lm(dailyspend ~ poly(temp,5), data=utilities) 
+summary(lm5)
+
+lm6 <- lm(dailyspend ~ poly(temp,6), data=utilities) 
+summary(lm6)
+
+lm7 <- lm(dailyspend ~ poly(temp,7), data=utilities) 
+summary(lm7)
+```
+
+
+## Polynomial models {.smaller}
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+lm7 <- lm(dailyspend ~ poly(temp,7), data=utilities) 
+ggplot(utilities, aes(x = temp, y = dailyspend)) +
+  geom_point() + 
+  geom_line(aes(x = temp, y = predict(lm7)), col = "red") + 
+  geom_line(aes(x = temp, y = predict(lm2)), col = "orange")
+```
+
+* Too high a degree creates dangers with [extrapolation]{style="color:darkorange;"}
+
+## Building polynomial models{.smaller}
+
+[Start simple]{style="color:darkorange;"}: only add higher-degree terms to the extent it gives you a substantial decrease in the `RSE`, or satisfies an assumption hold that wasn’t satisfied before
+
+* You must include lower-order terms: e.g., if you add $X^3$, you must also include $X$ and $X^2$
+* Be careful about [overfitting]{style="color:darkorange;"} when adding higher-order terms!
+* Be particularly careful about extrapolating beyond the range of the data!
+* Mind-bender: We can think about an $X^2$ term as an interaction of $X$ with itself: in a parabola, the slope depends on the value of $X$
+
+## The log transformation
+
+* We saw that we can use [transformations]{style="color:darkorange;"} to fix problems
+* Sometimes, a violation of regression assumptions can be fixed by [transforming]{style="color:darkorange;"}  one or the other of the variables (or both).
+* When we transform a variable, we have to also transform our interpretation of the equation.
+
+## The log transformation {.smaller}
+
+The [log transformation]{style="color:darkorange;"} is frequently useful in regression, because many nonlinear relationships are naturally exponential.
+
+* $\log_b x=y$ when $b^y=x$
+* For example, $\log_{10} 1000 = 3$, $\log_{10}100 = 2$, and $\log_{10}10 = 1$
+
+![](image/exp_log.png){fig-align="center"width=50%}
+
+## The log transformation {.smaller}
+
+* Anytime you need to [”squash”]{style="color:darkorange;"} one of the variables (logs make huge numbers not so big!)
+* [Skewed]{style="color:darkorange;"} data is also a good candidate for log
+
+![](image/exp_normal.png){fig-align="center"width=50%}
+
+
+
+## Moore’s Law {.smaller}
+
+* Moore’s Law was a prediction made by Gordon Moore in 1965 (!) that the number of transistors on computer chips would double every 2 years
+
+* This implies [exponential growth]{style="color:darkorange;"}, so a linear model won’t fit well (and neither will any polynomial)
+
+```{r}
+moores = read.csv("script_class_04/moores-law.csv")
+```
+
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+ggplot(moores, aes(x = Date.of.introduction, y = Transistor.count)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+
+## Moore’s Law {.smaller}
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+lm_moore = lm(Transistor.count ~ Date.of.introduction, data = moores)
+autoplot(lm_moore)
+```
+
+* A linear model is a spectacular fail
+
+## Modeling exponential growth
+
+If $Y = ae^{bX}$, then 
+
+$$\log(Y) = \log(a)+ bX$$
+
+* In other words, $\log(Y)$ is a [linear function]{style="color:darkorange;"} of $X$ when $Y$ is an [exponential function]{style="color:darkorange;"} of $X$
+
+* So if we think $Y$ is an exponential function of $X$, predict $\log(Y)$ as a linear function of $X$
+
+## Modeling exponential growth {.smaller}
+
+- Transistors does [NOT]{style="color:darkorange;"} have a linear relationship with year
+- $\log(\texttt{Transistors})$ does have a [linear relationship]{style="color:darkorange;"} with year
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+ggplot(moores, aes(x = Date.of.introduction, y = log(Transistor.count))) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+
+## Log-linear Model {.smaller}
+
+Let's run the regression model
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+options(scipen = 999)
+lm_moore = lm(log(Transistor.count) ~ Date.of.introduction, data = moores)
+summary(lm_moore)
+```
+
+## Modeling exponential growth {.smaller}
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+autoplot(lm_moore)
+```
+
+
+## Interpretation of the model {.smaller}
+
+Our model is
+$$\widehat{\log(\texttt{Transistors})} = −681.21 + 0.35 \cdot \texttt{Year}$$
+
+Two interpretations of the slope coefficient:
+
+* Every year, the [predicted log of transistors]{style="color:darkorange;"} goes up by 0.35
+
+* More useful: Every year, the predicted number of transistors goes up by 35%
+
+* A [constant percentage increase]{style="color:darkorange;"} every year is exponential growth!
+
+## Interpretation of the model {.smaller}
+
+- Making predictions using the [log-linear model]{style="color:darkorange;"}
+
+- When making predictions, we have to remember that our equation gives us predictions for $\log(\texttt{Transistors})$, not Transistors!
+
+Example: To make a prediction for the number of transistors in 2022:
+$$
+\log(\texttt{Transistors}) = −681.21 + 0.35(2022) = 26.49
+$$
+But our prediction is not 26.49:
+
+$e^{\log(\texttt{Transistors})} = e^{26.49} = 319,492,616,196$
+
+## Interpretation of the model {.smaller}
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+ggplot(moores, aes(x = Date.of.introduction, y = Transistor.count)) +
+  geom_point() +
+  geom_line(aes(x = Date.of.introduction, y = exp(predict(lm_moore))), col = "orange") 
+```
+
+## Interpretation of the model {.smaller}
+
+| Model         | Equation                                 | Interpretation                                                                |
+|:------------------|:-----------------------------------------|:-----------------------------------------------------------------------------------|
+| Linear    | $\widehat{Y} = \widehat{\beta}_0 + \widehat{\beta}_1 X$ | 1 unit increase in $X$ implies $\widehat{\beta}_1$ unit increase in $\widehat{Y}$ |
+| Log-linear| $\log(\widehat{Y}) = \widehat{\beta}_0 + \widehat{\beta}_1 X$ | 1 unit increase in $X$ implies ≈ $100 \cdot \widehat{\beta}_1 \%$ increase in $\widehat{Y}$ |
+| Linear-log| $\widehat{Y} = \widehat{\beta}_0 + \widehat{\beta}_1 \log(X)$ | 1% increase in $X$ implies ≈ $0.01 \cdot \widehat{\beta}_1$ unit increase in $\widehat{Y}$ |
+| Log-log   | $\log(\widehat{Y}) = \widehat{\beta}_0 + \widehat{\beta}_1 \log(X)$ | 1% increase in $X$ implies ≈ $\widehat{\beta}_1 \%$ increase in $\widehat{Y}$ |
+
+
+
+## Conclusion {.smaller}
+
+* When is the log transformation useful?
+
+* You can transform $X \rightarrow \log(X)$, $Y \rightarrow \log(Y)$, or both
+
+* Anytime you need to [”squash”]{style="color:darkorange;"} one of the variables (logs make huge numbers not so big!), try transforming it with a log
+
+* In this case, Transistors is [skewed]{style="color:darkorange;"} right so it is a good candidate for log
+
+* You may need to do a little bit of trial and error to see what works best
+
+* Other transformations are possible!
