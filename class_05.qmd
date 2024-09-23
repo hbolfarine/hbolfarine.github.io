@@ -1,0 +1,459 @@
+---
+title: "Data Science for Business Applications"
+author: "Class 05 - Time series"
+title-slide-attributes:
+    data-background-image: image/background_sta235h.png
+format:
+  revealjs: 
+    theme: "my-styles.css"
+    logo: image/texas_logo2.png
+    incremental: true 
+    self-contained-math: true
+    slide-number: true
+    show-slide-number: print
+    
+---
+
+```{r}
+apple = read.csv("script_class_05/apple_revenue.csv")
+dell = read.csv("script_class_05/dell.csv")
+ozone = read.csv("script_class_05/ozone.csv")
+```
+
+## Basic time series concepts {.smaller}
+
+* Apple quarterly revenue (Billions of dollars)
+* Goal: What is the [pattern]{style="color:darkorange;"} here, and how can we [forecast]{style="color:darkorange;"} future earnings?
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+library(tidyverse)
+library(ggfortify)
+ggplot(apple, aes(x=Time, y=Revenue)) + 
+  geom_line()
+```
+
+## What are time series? {.smaller}
+
+* Data where the cases represent [time]{style="color:darkorange;"}: data collected [every day]{style="color:darkorange;"}, [month]{style="color:darkorange;"}, [year]{style="color:darkorange;"}, etc.
+* [Time series]{style="color:darkorange;"} are important for both explaining how [variables change over time]{style="color:darkorange;"} and forecasting the future
+* [Examples]{style="color:darkorange;"} of time series data:
+* *Google’s closing daily stock price every day in 2020*
+* *Inventory levels of each item at a retail store at the end of every week in 2020*
+* *Number of new COVID cases in the US each day since the start of the pandemic*
+* *Apple’s quarterly revenue since 2009*
+
+## Anatomy of a time series {.smaller}
+
+Some notation: 
+
+* $t = 1,2,3,...$, [time index]{style="color:darkorange;"}
+
+* $Y_t$, is the [value]{style="color:darkorange;"}: of the variable of interest at time $t$
+
+* $Y_t$ may be [composed]{style="color:darkorange;"} of one or more components:
+
+* [*Trend*]{style="color:darkorange;"}
+* [*Seasonal*]{style="color:darkorange;"}
+* [*Cyclical*]{style="color:darkorange;"}
+* [*Random*]{style="color:darkorange;"}
+
+## Trend component {.smaller}
+
+* A [trend]{style="color:darkorange;"} is persistent [upwards]{style="color:darkorange;"} or [downwards]{style="color:darkorange;"} movement in the data ([not necessarily linear]{style="color:darkorange;"}).
+
+![](image/image_trend_time_series.png){fig-align="center"width=50%}
+ 
+## Trend component
+
+* [Example]{style="color:darkorange;"}: *Moore’s Law (accelerating increase of transistor count)*
+* [Example]{style="color:darkorange;"}: *US population over time*
+* A time series with no trend is called [stationary]{style="color:darkorange;"}.
+
+## Seasonal component {.smaller}
+
+* [Seasonal fluctuation]{style="color:darkorange;"} occurs when [predictable]{style="color:darkorange;"} up or down movements occur over a regular interval.
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: false
+#| output: true
+x <- 0:100
+ggplot(data.frame(x=x, y=sin(x/6)), aes(x=x, y=y)) + geom_line() + xlab("t") + ylab(expression("Y"["t"]))
+```
+
+## Seasonal component 
+
+* The ups and downs must occur over a [regular interval]{style="color:darkorange;"} (e.g., every month, or every year)
+* [Example]{style="color:darkorange;"}: *Highway traffic volume is highest during rush hour every day*
+* [Example]{style="color:darkorange;"}: *Supermarket sales may be highest every month right after common paydays like the 15th and 30th*
+
+## Cyclic component {.smaller}
+
+* [Cyclic]{style="color:darkorange;"} fluctuations occur at [unpredictable intervals]{style="color:darkorange;"}, e.g. due to changing business or economic conditions.
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: false
+#| output: true
+x <- 0:100
+ggplot(data.frame(x=x, y=(2000000+x*(x-20)*(x-50)*(x-95))/10000), aes(x=x, y=y)) + geom_line() + xlab("t") + ylab(expression("Y"["t"]))
+```
+
+## Cyclic component {.smaller}
+
+* In contrast to seasonal fluctuations, cyclic fluctuations [do not occur at regular]{style="color:darkorange;"}, predictable intervals
+* It may be possible to predict cyclic components based on some other (non-time) variable
+* [Example]{style="color:darkorange;"}: *Restaurant sales dropped dramatically in 2020 due to COVID, as people ate out less*
+* [Example]{style="color:darkorange;"}: *Sales of bell bottoms rose in the 60s and 70s, declined by the 80s, and then had a resurgence in the 90s*
+
+## Remainder/Error component {.smaller}
+
+* Any real time series will always have [random noise]{style="color:darkorange;"} as well, which [can’t be predicted]{style="color:darkorange;"} or forecast.
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: false
+#| output: true
+set.seed(1)
+ggplot(data.frame(x=x, y=runif(length(x))), aes(x=x, y=y)) + geom_line() + xlab("t") + ylab(expression("Y"["t"]))
+```
+
+
+## Time Series Components {.smaller}
+
+* Which [component(s)]{style="color:darkorange;"} you see in each of these time series?
+
+![](image/image_time_series.png){fig-align="center"width=50%}
+
+## Putting these together {.smaller}
+
+[Real time series]{style="color:darkorange;"} will usually include a [combination]{style="color:darkorange;"} of these four components. We will model the time series $Y_t$ either [additively]{style="color:darkorange;"}:
+
+$$
+Y_t = \text{Trend} + \text{Seasonal} + \text{Random} = T_t +S_t +E_t
+$$
+Or [multiplicatively]{style="color:darkorange;"}:
+$$
+Y_t = \text{Trend}\cdot\text{Seasonal}\cdot\text{Random}= T_t \cdot S_t \cdot E_t
+$$
+* ($E_t$ consists of both the cyclic and error components, as both are [unpredictable]{style="color:darkorange;"}.)
+This model can be rewritten as a log model:
+$$
+\log{Y_t} = \log(T_t) + \log(S_t) + \log(E_t)
+$$
+
+## Additive models {.smaller}
+
+$$
+Y_t = \text{Trend} + \text{Seasonal} + \text{Random} = T_t +S_t +E_t
+$$
+
+* Most appropriate when seasonal fluctuations are consistent (do not increase or decrease over time)
+
+* The trend component $T_t$ is a function of t (e.g., linear or quadratic)
+
+* The seasonal component $S_t$ is a set of [dummy variable]{style="color:darkorange;"} representing “seasons”
+
+* So we can [estimate]{style="color:darkorange;"} additive models using [regular regression]{style="color:darkorange;"}
+
+## Additive decomposition {.smaller}
+
+1. Run a regression predicting $Y$ as a function of:
+* $t$, $t^2$, $\log(t)$ etc (the trend component $T_t$)
+* Dummy variables for the seasons (the seasonal component $S_t$)
+2. To make a [prediction]{style="color:darkorange;"}  for $Y$, plug into the model!
+3. The residuals of this model correspond to the [error component]{style="color:darkorange;"}  $E_t$
+
+## Apple quarterly revenue {.smaller}
+
+* What components do you see here?
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+library(tidyverse)
+ggplot(apple, aes(x=Time, y=Revenue)) + 
+  geom_line()
+```
+
+## Fitting additive model {.smaller}
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+lm_additive = lm(Revenue ~ Period + Quarter, data=apple) 
+summary(lm_additive)
+```
+
+## Interpretation of the model {.smaller}
+
+* The [trend]{style="color:darkorange;"} that we can infer from the variable `Period` indicates a positive growth in revenue of US$ 1.4 billion for each increase in the periods.
+
+* The [seasonal]{style="color:darkorange;"} from the `Quarter` component indicates:
+
+1. `Q2`’s are expected to be $20.7 worse than `Q1`’s
+2. `Q3`’s are expected to be $27.4 worse than `Q1`’s
+3. `Q4`’s are expected to be $24.2 worse than `Q1`’s
+4. `Q3`’s are significantly worse than `Q1`’s
+
+* These effects are statistically significant (`confint(lm_additive)`)
+* The RSE from this model is US$ 7.921 billions of dollars.
+* How can we interpret these results?
+
+## Fitting additive model {.smaller}
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+ggplot(apple, aes(x = Time, y = Revenue)) + 
+  geom_line() +
+  geom_line(aes(x = Time, y = predict(lm_additive)), col = "orange") 
+```
+
+## Fitting additive model {.smaller}
+
+* What does the final model [predict]{style="color:darkorange;"} from the `Quarter` component indicates:
+ for Apple in 2024 `Q3`?
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+predict(lm_additive, list(Period = 61, Quarter = "Q3"), interval = "prediction")
+```
+ 
+* The [actual revenue](https://www.apple.com/newsroom/2024/08/apple-reports-third-quarter-results/){preview-link="false"} was US$ 85.78 billions 
+* What does the final model [predict]{style="color:darkorange;"} from the `Quarter` component indicates:
+ for Apple in 2030 `Q1`? (Should we trust that prediction?)
+ 
+## Fitting additive model {.smaller}
+
+* The residuals from this model show the “[detrended]{style="color:darkorange;"} and [deasonalized]{style="color:darkorange;"}” data (but there’s still some trend left!):
+* We hadn't yet dealt with the time [dependence]{style="color:darkorange;"}  
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+ggplot(apple, aes(x = Time, y = Revenue)) + 
+  geom_line(aes(x = Time, y = residuals(lm_additive)))
+```
+
+## Autorgression model {.smaller}
+
+* How we deal with the [time dependence]{style="color:darkorange;"} ? 
+Key idea: Instead of predicting $Y_t$ as a function of $t$ (or other variables), predict $Y_t$ as a function of $Y_{t-1}$:
+$$
+Y_t = \beta_0 + \beta_1 Y_{t-1} + e_t
+$$
+      
+* $Y_{t-1}$ is called the "1st lag" of $Y$ 
+* This is called [autoregressive]{style="color:darkorange;"} (AR) because it predicts the values of a time series based on previous values
+* The model above is an AR(1) model 
+* We can have AR($p$) models, with lag $p$
+
+## Autocorrelation
+
+* [Autocorrelation]{style="color:darkorange;"}, is the correlation of $Y_t$ with each of its lags $Y_t, Y_{t−1},\dots$
+$$
+Cor(Y_t, Y_{t−1}), Cor(Y_t, Y_{t−2}),\dots
+$$
+
+* We also have the [autocorrelation of the residuals]{style="color:darkorange;"}, $r_t$'s, which indicates that there's a strong indication that the independence assumption is violated
+$$
+Cor(r_t, r_{t−1}), Cor(r_t, r_{t−2}),\dots
+$$
+
+
+## Ozone example {.smaller}
+
+* Creating an AR(1) model: Daily ozone levels in Houston
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+ggplot(ozone, aes(x = day, y = ozone)) + 
+  geom_line()
+```
+
+## ACF plot  {.smaller}
+
+* Visualizing the [autocorrelation function]{style="color:darkorange;"} (ACF)
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+acf(ozone$ozone)
+```
+
+* [Autocorrelations]{style="color:darkorange;"} outside of the dashed blue lines are statistically significant.
+
+## Autorgression of the model {.smaller}
+* We use the `lag` function to create the lagged observations
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+ozone <- ozone %>% 
+  mutate(lag1=lag(ozone)) 
+ozone.model = lm(ozone ~ lag1, data=ozone) 
+summary(ozone.model)
+```
+
+## Assumptions of an AR(1) model
+
+* [Linearity]{style="color:darkorange;"}, [Normality]{style="color:darkorange;"}, [Equal Variance]{style="color:darkorange;"}: Check using residual plot (linearity + homoscedasticity), Q-Q plot (normality), scale/location (homoscedasticity) like any other regression model
+
+* [Independence]{style="color:darkorange;"}: Since this is a time series, we can actually check this by looking at the autocorrelation of the residuals (we want no significant autocorrelation)
+
+## Autoplot
+
+* Linearity, Normality, Equal Variance
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+autoplot(ozone.model)
+```
+
+## ACF of the residuals {.smaller}
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+acf(ozone.model$residuals)
+```
+
+* We expect [5% of autocorrelations]{style="color:darkorange;"} to be significant just by chance, so having just 1 out of the 20 lags flagged as significant indicates we are OK on independence!
+
+## Making predictions in time series {.smaller}
+
+| Type           | Model                                      | Predicted $Y_t$            |
+|:----------------------|:------------------------------------|----------------------------|
+| White noise    | $Y_t = e_t$                         | $0$                                      |
+| Random sample  | $Y_t = \beta_0 + e_t$               | $\widehat{\beta}_0$ (or average $Y$)         |
+| Random walk    | $Y_t = \beta_0 + Y_{t-1} + e_t$     | $\widehat{\beta}_0 + Y_{t-1}$                |
+| General AR(1)  | $Y_t = \beta_0 + \beta_1 Y_{t-1} + e_t$ | $\widehat{\beta}_0 + \widehat{\beta}_1 Y_{t-1}$ |
+
+
+- Unit root occurs when $\beta_1 = 1$. This means:
+- The series is a **random walk**.
+- There's **no mean reversion**, and any shocks will have a **permanent effect**.
+- When $\beta_1 = 1$, the model is non-stationary, meaning the series tends to "drift" without stabilizing around a fixed mean.
+- If $|\beta_1| < 1$, the series is **mean-reverting**, and shocks are **temporary**.
+
+
+## Statistical Analysis
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+confint(ozone.model)
+```
+
+* The coefficient $\widehat{\beta}_1$ is associated with the variable `lag1`.
+* In this case, for the [larger population]{style="color:darkorange;"}, with 95% confidence, $\widehat{\beta}_1$ lies between 0.24 and 0.57.
+* This means that $|\beta_1| < 1$, indicating that the series is mean-reverting.
+
+## Apple Revenue ACF plot {.smaller}
+
+* ACF plot of the residuals of the additive model.
+
+```{r}
+acf(lm_additive$residuals)
+```
+
+## Apple Revenue {.smaller}
+
+* Combining [decomposition]{style="color:darkorange;"} and [autoregression]{style="color:darkorange;"} in a multiplicative model
+
+$$
+\log(\texttt{Revenue}_t) = \log(\texttt{Period}_t) + \texttt{Quarter}_t + \log(\texttt{Revenue}_{t-1})
+$$
+
+* We need to create the lag variable.
+
+* It will have [only one lag]{style="color:darkorange;"}, and thus is an AR(1) model.
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+apple = apple %>% 
+  mutate(lag1 = lag(Revenue)) 
+```
+
+## Apple Revenue {.smaller}
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+log_apple = lm(log(Revenue) ~ log(Period) + Quarter + log(lag1), data = apple)
+summary(log_apple)
+```
+
+## Apple Revenue Predictions {.smaller}
+
+* Predictions of multiplicative model
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: false
+#| output: true
+
+apple_mod = apple[-1,]
+ggplot(apple_mod, aes(x = Time, y = Revenue)) + 
+  geom_line() +
+  geom_line(aes(x = Time, y = exp(predict(log_apple))), col = "orange")
+```
+## Apple Revenue Predictions {.smaller}
+
+* [Confidence interval]{style="color:darkorange;"} of the multiplicative model
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+confint(log_apple)
+```
+
+* The slope associated with [lag]{style="color:darkorange;"} is statistically significant, and its value is between minus and plus one; we have that this is a [mean-reverting]{style="color:darkorange;"} time series.  
+
+* We also have a [better fit]{style="color:darkorange;"} (here we feed `lag1` with prediction from the previous period, US$ 90.75 billions):
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+ exp(predict(log_apple, list(Period = 61, Quarter = "Q3", lag1 = 90.75), interval = "prediction"))
+```
+
+* The confidence interval for the forecast is [narrower]{style="color:darkorange;"}, and the difference between what we observe and predict is smaller.
+
+## Apple Revenue ACF plot {.smaller}
+
+* ACF plot of the residuals of the multiplicative model.
+
+```{r}
+acf(log_apple$residuals)
+```
+
+* The independent assumptions look better, but it might be [necessary]{style="color:darkorange;"} to add [more lags]{style="color:darkorange;"}.
+
+## Time Series Strategy {.smaller}
+
+To building a time series model:
+
+* Start with a an [additive]{style="color:darkorange;"} or [multiplicative]{style="color:darkorange;"} model with trend and seasonal components. (Plot your data! If the seasonal variation increases or decreases over time you’ll want a multiplicative model.)
+
+* Examine the usual [diagnostic plots]{style="color:darkorange;"}, and plot your [residuals as a function of time]{style="color:darkorange;"}. Do you need a (different) nonlinear time trend? A transformation of $Y$?
+
+* Check your [residuals for autocorrelation]{style="color:darkorange;"}. If it’s present, add appropriate [lag terms]{style="color:darkorange;"} to your model.
