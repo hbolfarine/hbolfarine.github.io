@@ -32,7 +32,7 @@
     "href": "teaching.html",
     "title": "Teaching",
     "section": "",
-    "text": "STA 235 honors change 25\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression"
+    "text": "STA 235 honors change 25\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection"
   },
   {
     "objectID": "teaching.html#teaching",
@@ -1265,5 +1265,138 @@
     "title": "Data Science for Business Applications",
     "section": "Time Series Strategy",
     "text": "Time Series Strategy\nTo building a time series model:\n\nStart with a an additive or multiplicative model with trend and seasonal components. (Plot your data! If the seasonal variation increases or decreases over time you’ll want a multiplicative model.)\nExamine the usual diagnostic plots, and plot your residuals as a function of time. Do you need a (different) nonlinear time trend? A transformation of \\(Y\\)?\nCheck your residuals for autocorrelation. If it’s present, add appropriate lag terms to your model."
+  },
+  {
+    "objectID": "class_06.html#introduction-to-prediction",
+    "href": "class_06.html#introduction-to-prediction",
+    "title": "Data Science for Business Applications",
+    "section": "Introduction to prediction",
+    "text": "Introduction to prediction\n\nSo far, we have been focusing mostly on trying to explain the effects from the predictors \\(X\\) through the coefficients.\nWe made some predictions, but our focus until now was on the soundness of our model in relation to statistical significance and how our model was fitting the data. If there were any issues that could violate the regression assumptions, leading to models with undesirable properties.\nToday, we will focus on making models that return Estimate/predict outcomes with high accuracy without extrapolating , with previously unseen data ."
+  },
+  {
+    "objectID": "class_06.html#inference-and-prediction",
+    "href": "class_06.html#inference-and-prediction",
+    "title": "Data Science for Business Applications",
+    "section": "Inference and Prediction",
+    "text": "Inference and Prediction\n\nInference \\(\\rightarrow\\) focus on the predictor\nInterpretability of model\nPrediction \\(\\rightarrow\\) focus on outcome variable\nAccuracy of model"
+  },
+  {
+    "objectID": "class_06.html#bias-vs.-variance",
+    "href": "class_06.html#bias-vs.-variance",
+    "title": "Data Science for Business Applications",
+    "section": "Bias vs. Variance",
+    "text": "Bias vs. Variance\n\nBias vs Variance trade-off\nVariance: The amount by which the function \\(f\\) would change if we estimated it using a different training dataset\nBias: Error introduced by approximating a real-life problem with a model\nMore flexible models have a higher variance and a lower bias\nLess flexible models have a lower variance but a higher bias\nValidation set approach: Training and testing data\nBalance between flexibility and accuracy"
+  },
+  {
+    "objectID": "class_06.html#bias-vs.-variance-1",
+    "href": "class_06.html#bias-vs.-variance-1",
+    "title": "Data Science for Business Applications",
+    "section": "Bias vs. Variance",
+    "text": "Bias vs. Variance\n\nWhen explaining, bias is usually greater than variance\nIn prediction, we care about both\nMeasures of accuracy will have both bias and variance."
+  },
+  {
+    "objectID": "class_06.html#measures-of-accuracy",
+    "href": "class_06.html#measures-of-accuracy",
+    "title": "Data Science for Business Applications",
+    "section": "Measures of accuracy",
+    "text": "Measures of accuracy\n\nHow do we measure accuracy?\nMean Squared Error (MSE): Can be decomposed into variance and bias terms \\[\n\\text{MSE} = \\text{Var} + \\text{Bias}^2 + \\text{Irreducible Error}\n\\] where MSE is equal to \\[\nMSE = \\frac{1}{n} \\sum_{i = 1}^n(y_i-\\widehat{y}_i)^2\n\\]\nRoot Mean Squared Error (RMSE): Measured in the same units as the outcome \\[\n\\text{RMSE} = \\sqrt{\\text{MSE}}\n\\]\nOther measures: Bayesian Information Criterion (BIC) and Akaike Information Criterion (AIC)"
+  },
+  {
+    "objectID": "class_06.html#is-flexibility-always-better",
+    "href": "class_06.html#is-flexibility-always-better",
+    "title": "Data Science for Business Applications",
+    "section": "Is flexibility always better?",
+    "text": "Is flexibility always better?"
+  },
+  {
+    "objectID": "class_06.html#measures-of-accuracy-1",
+    "href": "class_06.html#measures-of-accuracy-1",
+    "title": "Data Science for Business Applications",
+    "section": "Measures of accuracy",
+    "text": "Measures of accuracy\n\nModels with increasing flexibility (linear, cubic, spline).\nThink of a spline as a polynomial model with a high degree.\nRMSE decreases with flexibility in the training data.\nThe spline overfits the training data since the RMSE of the testing data is large."
+  },
+  {
+    "objectID": "class_06.html#what-is-churn",
+    "href": "class_06.html#what-is-churn",
+    "title": "Data Science for Business Applications",
+    "section": "What is churn?",
+    "text": "What is churn?\n\n\n\nChurn: Measure of how many customers stop using your product (e.g. cancel a subscription).\nLess costly to keep a customer than bring a new one\nGoal: Prevent churn\nIdentify customer that are likely to cancel/quit/fail to renew"
+  },
+  {
+    "objectID": "class_06.html#predicting-pre-churn",
+    "href": "class_06.html#predicting-pre-churn",
+    "title": "Data Science for Business Applications",
+    "section": "Predicting “pre-churn”",
+    "text": "Predicting “pre-churn”\n\nWe will predict “pre-churn”.\nAt a good measure for someone at risk of unsubscribing (“pre-churn”) is the times they’ve logged in the past week.\nWe are interested in the number of log ins in the variable login.\nWe will predict login from the other variable in the data.\nWe two candidates: Simple vs Complex"
+  },
+  {
+    "objectID": "class_06.html#predicting-pre-churn-1",
+    "href": "class_06.html#predicting-pre-churn-1",
+    "title": "Data Science for Business Applications",
+    "section": "Predicting “pre-churn”",
+    "text": "Predicting “pre-churn”\n\nSimple Model: \\[\nlogins = \\beta_0 + \\beta_1 \\cdot Succession + \\beta_2 \\cdot city + \\epsilon\n\\]\nComplex Model: \\[\nlogins = \\beta_0 + \\beta_1 \\cdot Succession + \\beta_2 \\cdot age + \\beta_3 \\cdot age^2 + \\beta_4 \\cdot city + \\beta_5 \\cdot female + \\epsilon\n\\]\nCan we build more complex methods? Yes!\nFirst we will just analyse these two."
+  },
+  {
+    "objectID": "class_06.html#create-validation-sets",
+    "href": "class_06.html#create-validation-sets",
+    "title": "Data Science for Business Applications",
+    "section": "Create Validation Sets",
+    "text": "Create Validation Sets\n\nCreate Training and Testing sets\nWe will use 75% of the data to train the data\nThe remaining part of the data, 25%, we reserve for testing\nThis split is done randomly\nTo do so we use the libraries modelr, and rsample\n\n\nlibrary(modelr) # for common model performance metrics\nlibrary(rsample)  # for creating train/test splits\n\nset.seed(100) #Always set seed for replication\nhbo_split =  initial_split(hbo, prop=0.75)\nhbo_train = training(hbo_split)\nhbo_test  = testing(hbo_split)"
+  },
+  {
+    "objectID": "class_06.html#rmse-in-training-and-testing-data",
+    "href": "class_06.html#rmse-in-training-and-testing-data",
+    "title": "Data Science for Business Applications",
+    "section": "RMSE in training and testing data",
+    "text": "RMSE in training and testing data\n\n# Simple Model\nlm_simple = lm(logins ~ succession + city, data = hbo_train)\n\n# Complex Model\nlm_complex = lm(logins ~ female + city + age + I(age^2) + succession, data = hbo_train)\n\n# Testing error for the simple model:\nrmse(lm_simple, hbo_test)\n\n[1] 2.075106\n\n# Testing error for the complex model:\nrmse(lm_complex, hbo_test)\n\n[1] 2.080211\n\n\n\nWhich model we should choose?\nThe model with the smallest out of sample error\nOut of sample means evaluation in the testing data"
+  },
+  {
+    "objectID": "class_06.html#cross-validation",
+    "href": "class_06.html#cross-validation",
+    "title": "Data Science for Business Applications",
+    "section": "Cross-Validation",
+    "text": "Cross-Validation\n\nTo avoid using only one training and testing dataset, we can iterate over k-fold division of our data:\n\n\n\nGrey: all of the data\nPink: Testing data\nYellow: Training data"
+  },
+  {
+    "objectID": "class_06.html#cross-validation-1",
+    "href": "class_06.html#cross-validation-1",
+    "title": "Data Science for Business Applications",
+    "section": "Cross-Validation",
+    "text": "Cross-Validation\nProcedure for k-fold cross-validation:\n\nDivide your data in k-folds (usually, \\(K = 5\\) or \\(K = 10\\)).\nUse as \\(k = 1\\) the testing data and \\(k = 2,3,\\dots, K\\) as the training data.\nCalculate the accuracy measure on the testing data, \\(RMSE_k\\).\nRepeat for each \\(k\\).\nAverage \\(RMSE_k\\) for all \\(k\\).\n\nMain advantage: Use the entire dataset for training AND testing."
+  },
+  {
+    "objectID": "class_06.html#apple-quarterly-revenue",
+    "href": "class_06.html#apple-quarterly-revenue",
+    "title": "Data Science for Business Applications",
+    "section": "Apple quarterly revenue",
+    "text": "Apple quarterly revenue\n\nInstall the library caret\n\n\nlibrary(caret)\nset.seed(100)\ntrain.control = trainControl(method = \"cv\", number = 10)\n\nlm_simple = train(logins ~ succession + city, data = hbo, method= \"lm\", trControl = train.control)\n\nlm_simple\n\nLinear Regression \n\n5000 samples\n   2 predictor\n\nNo pre-processing\nResampling: Cross-Validated (10 fold) \nSummary of sample sizes: 4500, 4501, 4499, 4500, 4500, 4501, ... \nResampling results:\n\n  RMSE      Rsquared   MAE     \n  2.087314  0.6724741  1.639618\n\nTuning parameter 'intercept' was held constant at a value of TRUE"
+  },
+  {
+    "objectID": "class_06.html#stepwise-selection",
+    "href": "class_06.html#stepwise-selection",
+    "title": "Data Science for Business Applications",
+    "section": "Stepwise selection",
+    "text": "Stepwise selection\n\nWe have seen how to choose between some given models. But what if we want to test all possible models?\nStepwise selection: Computationally-efficient algorithm to select a model based on the data we have (subset selection).\nAlgorithm for forward stepwise selection:\n\n\nStart with the null model , (no predictors)\nFor : (a) Consider all models that augment with one additional predictor. (b) Choose the best among these models and call it .\nSelect the single best model from using CV.\n\n\nBackwards stepwise follows the same procedure, but starts with the full model."
+  },
+  {
+    "objectID": "class_06.html#stepwise-selection-and-cv",
+    "href": "class_06.html#stepwise-selection-and-cv",
+    "title": "Data Science for Business Applications",
+    "section": "Stepwise selection and CV",
+    "text": "Stepwise selection and CV\n\nset.seed(100)\n# Linear Regression with Forward Selection\n# Remove unsubscribe\ntrain.control = trainControl(method = \"cv\", number = 10) #set up a 10-fold cv\nlm.fwd = train(logins ~.- unsubscribe, data = hbo, method = \"leapForward\", \n               tuneGrid = data.frame(nvmax = 1:5), trControl = train.control)\n\n\nlm.fwd$results\n\n  nvmax     RMSE    Rsquared      MAE     RMSESD  RsquaredSD      MAESD\n1     1 3.643876 0.001423859 3.168804 0.05856896 0.001837302 0.08173805\n2     2 3.643778 0.002541723 3.168174 0.06094142 0.003036447 0.08474783\n3     3 3.186594 0.206309738 2.719227 0.62445616 0.282844240 0.59591617\n4     4 2.580810 0.468546464 2.125469 0.62430763 0.278310925 0.59607716\n5     5 2.087951 0.672274342 1.640141 0.04906724 0.014296583 0.04888083\n\n\n\nWhich one would you choose out of the 5 models? Why?\nThe model with the smallest RMSE, which is model 5.\nCan we see this model?"
+  },
+  {
+    "objectID": "class_06.html#stepwise-selection-and-cv-1",
+    "href": "class_06.html#stepwise-selection-and-cv-1",
+    "title": "Data Science for Business Applications",
+    "section": "Stepwise selection and CV",
+    "text": "Stepwise selection and CV\n\nAnd how does that model looks like:\n\n\nsummary(lm.fwd$finalModel)\n\nSubset selection object\n6 Variables  (and intercept)\n           Forced in Forced out\nX              FALSE      FALSE\nfemale         FALSE      FALSE\ncity           FALSE      FALSE\nage            FALSE      FALSE\nsuccession     FALSE      FALSE\nid             FALSE      FALSE\n1 subsets of each size up to 5\nSelection Algorithm: forward\n         X   id  female city age succession\n1  ( 1 ) \" \" \" \" \" \"    \" \"  \" \" \"*\"       \n2  ( 1 ) \" \" \" \" \" \"    \"*\"  \" \" \"*\"       \n3  ( 1 ) \" \" \" \" \" \"    \"*\"  \"*\" \"*\"       \n4  ( 1 ) \" \" \" \" \"*\"    \"*\"  \"*\" \"*\"       \n5  ( 1 ) \"*\" \" \" \"*\"    \"*\"  \"*\" \"*\"       \n\n\n\nThe selected model has the following variables:\nfemale, city, age, succession, id"
+  },
+  {
+    "objectID": "class_06.html#conclusion",
+    "href": "class_06.html#conclusion",
+    "title": "Data Science for Business Applications",
+    "section": "Conclusion",
+    "text": "Conclusion\n\nIn prediction, everything is going to be about\nBias vs Variance.\nImportance of validation sets.\nWe now have methods to select models."
   }
 ]

@@ -1,0 +1,281 @@
+---
+title: "Data Science for Business Applications"
+author: "Class 05 - Model Selection"
+title-slide-attributes:
+    data-background-image: image/background_sta235h.png
+format:
+  revealjs: 
+    theme: "my-styles.css"
+    logo: image/texas_logo2.png
+    incremental: true 
+    self-contained-math: true
+    slide-number: true
+    show-slide-number: print
+    
+---
+
+## Introduction to prediction {.smaller}
+
+* So far, we have been focusing mostly on trying to [explain]{style="color:darkorange;"} the effects from the predictors $X$ through the coefficients.
+* We made some predictions, but our focus until now was on the [soundness of our model]{style="color:darkorange;"} in relation to [statistical significance]{style="color:darkorange;"} and how our model was fitting the data. If there were any issues that could violate the [regression assumptions]{style="color:darkorange;"}, leading to models with undesirable properties.
+* Today, we will focus on making models that return [Estimate/predict]{style="color:darkorchid;"}  outcomes with high accuracy [without extrapolating]{style="color:darkorchid;"} , with [previously unseen data]{style="color:darkorchid;"} .
+
+## Inference and Prediction 
+
+* Inference $\rightarrow$ focus on the [predictor]{style="color:darkorange;"}
+* [*Interpretability of model*]{style="color:darkorchid;"}
+
+* Prediction $\rightarrow$ focus on [outcome variable]{style="color:darkorange;"}
+* [*Accuracy of model*]{style="color:darkorchid;"} 
+
+## Bias vs. Variance {.smaller}
+
+* Bias vs Variance trade-off
+* **Variance**: *The amount by which the function $f$ would change if we estimated it using a different training dataset*
+* **Bias**: *Error introduced by approximating a real-life problem with a model*
+
+* More flexible models have a higher variance and a lower bias 
+* Less flexible models have a lower variance but a higher bias
+
+* Validation set approach: **Training and testing data**
+* Balance between flexibility and accuracy
+
+## Bias vs. Variance
+
+* When explaining, bias is usually greater than variance
+* In prediction, we care about both
+* Measures of accuracy will have both bias and variance.
+ 
+## Measures of accuracy {.smaller}
+
+* How do we measure accuracy?
+* Mean Squared Error (MSE): Can be decomposed into variance and bias terms
+$$
+\text{MSE} = \text{Var} + \text{Bias}^2 + \text{Irreducible Error} 
+$$
+where MSE is equal to 
+$$
+MSE = \frac{1}{n} \sum_{i = 1}^n(y_i-\widehat{y}_i)^2
+$$
+
+* Root Mean Squared Error (RMSE): Measured in the same units as the outcome
+$$
+\text{RMSE} = \sqrt{\text{MSE}}
+$$
+
+* Other measures: Bayesian Information Criterion (BIC) and Akaike Information Criterion (AIC)
+
+## Is flexibility always better? {.smaller}
+
+![](image/RMSE_train_pred.png){fig-align="center"width=100%}
+
+## Measures of accuracy
+
+* Models with increasing flexibility (linear, cubic, spline).
+* Think of a spline as a polynomial model with a high degree.
+* RMSE decreases with flexibility in the training data. 
+* The spline overfits the training data since the RMSE of the testing data is large.
+
+## What is churn? {.smaller}
+
+:::: {.columns}
+
+::: {.column width="55%"}
+* Churn: Measure of how many customers stop using your product (e.g. cancel a subscription).
+* Less costly to keep a customer than bring a new one
+* Goal: Prevent churn
+* Identify customer that are likely to cancel/quit/fail to renew
+
+:::
+
+::: {.column width="45%"}
+![](image/Model_selec_churn.png){fig-align="center"}
+:::
+
+::::
+
+```{r}
+hbo = read.csv("script_class_06/hbomax.csv")
+```
+
+## Predicting "pre-churn"
+
+* We will predict "pre-churn".
+* At a good measure for someone at risk of unsubscribing ("pre-churn") is the times they've [logged in the past week]{style="color:darkorange;"}.
+* We are interested in the number of log ins in the variable `login`.
+* We will predict `login` from the other variable in the data.
+* We two candidates: *Simple* vs *Complex*
+
+## Predicting "pre-churn" {.smaller}
+
+* *Simple* Model:
+$$
+logins = \beta_0 + \beta_1 \cdot Succession + \beta_2 \cdot city + \epsilon
+$$
+
+* *Complex* Model:
+$$
+logins = \beta_0 + \beta_1 \cdot Succession + \beta_2 \cdot age + \beta_3 \cdot age^2 + \beta_4 \cdot city + \beta_5 \cdot female + \epsilon
+$$
+
+* Can we build more complex methods? Yes!
+* First we will just analyse these two.
+
+## Create Validation Sets {.smaller}
+
+* Create Training and Testing sets
+* We will use 75% of the data to train the data
+* The remaining part of the data, 25%, we reserve for testing 
+* This split is done randomly
+* To do so we use the libraries `modelr`, and `rsample`
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+library(modelr) # for common model performance metrics
+library(rsample)  # for creating train/test splits
+
+set.seed(100) #Always set seed for replication
+hbo_split =  initial_split(hbo, prop=0.75)
+hbo_train = training(hbo_split)
+hbo_test  = testing(hbo_split)
+```
+
+## RMSE in training and testing data {.smaller}
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+
+# Simple Model
+lm_simple = lm(logins ~ succession + city, data = hbo_train)
+
+# Complex Model
+lm_complex = lm(logins ~ female + city + age + I(age^2) + succession, data = hbo_train)
+
+# Testing error for the simple model:
+rmse(lm_simple, hbo_test)
+
+# Testing error for the complex model:
+rmse(lm_complex, hbo_test)
+```
+
+* Which model we should choose?
+* The model with the smallest out of sample error
+* Out of sample means evaluation in the testing data
+
+## Cross-Validation {.smaller}
+
+* To avoid using only one training and testing dataset, we can iterate over k-fold division of our data:
+
+![](image/cross_validation_S2024.png){fig-align="center"width=85%}
+
+* Grey: all of the data
+
+* Pink: Testing data
+
+* Yellow: Training data
+
+## Cross-Validation {.smaller}
+
+Procedure for k-fold cross-validation:
+
+1. Divide your data in k-folds (usually, $K = 5$ or $K = 10$).
+
+2. Use as $k = 1$ the testing data and $k = 2,3,\dots, K$ as the training data.
+
+3. Calculate the accuracy measure on the testing data, $RMSE_k$.
+
+4. Repeat for each $k$.
+
+5. Average $RMSE_k$ for all $k$.
+
+**Main advantage**: Use the entire dataset for training AND testing.
+
+## Apple quarterly revenue {.smaller}
+
+* Install the library `caret`
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+library(caret)
+set.seed(100)
+train.control = trainControl(method = "cv", number = 10)
+
+lm_simple = train(logins ~ succession + city, data = hbo, method= "lm", trControl = train.control)
+
+lm_simple
+```
+
+
+## Stepwise selection {.smaller}
+
+* We have seen how to choose between some given models. But what if we want to test all possible models?
+
+* Stepwise selection: Computationally-efficient algorithm to select a model based on the data we have (subset selection).
+
+* Algorithm for forward stepwise selection:
+
+1. Start with the null model , (no predictors)
+
+2. For : (a) Consider all models that augment with one additional predictor. (b) Choose the best among these models and call it .
+
+3. Select the single best model from using CV.
+
+* Backwards stepwise follows the same procedure, but starts with the full model.
+
+## Stepwise selection and CV {.smaller}
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: false
+set.seed(100)
+# Linear Regression with Forward Selection
+# Remove unsubscribe
+train.control = trainControl(method = "cv", number = 10) #set up a 10-fold cv
+lm.fwd = train(logins ~.- unsubscribe, data = hbo, method = "leapForward", 
+               tuneGrid = data.frame(nvmax = 1:5), trControl = train.control)
+```
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+lm.fwd$results
+```
+
+
+* Which one would you choose out of the 5 models? Why?
+* The model with the smallest RMSE, which is model 5.
+* Can we see this model?
+
+## Stepwise selection and CV {.smaller}
+
+* And how does that model looks like:
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+summary(lm.fwd$finalModel)
+```
+
+* The selected model has the following variables:
+
+* `female`, `city`, `age`, `succession`, `id` 
+
+## Conclusion
+
+* In prediction, everything is going to be about
+
+* Bias vs Variance.
+
+* Importance of validation sets.
+
+* We now have methods to select models.
+ 

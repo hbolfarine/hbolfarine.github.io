@@ -8,3 +8,4 @@ title: "Teaching"
   - [class 03 - Regression assumptions and Outliers](class_03.qmd)
   - [class 04 - Modeling nonlinear relationships](class_04.qmd)
   - [class 05 - Time Series Decomposition and Autoregression](class_05.qmd)
+  - [class 06 - Model Selection](class_06.qmd)
