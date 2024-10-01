@@ -512,7 +512,7 @@ logins = \beta_0 + \beta_1 \cdot Succession + \beta_2 \cdot age + \beta_3 \cdot 
 <section id="create-validation-sets" class="slide level2 smaller">
 <h2>Create Validation Sets</h2>
 <ul>
-<li class="fragment">Create Training and Testing sets</li>
+<li class="fragment">Create <span style="color:darkorange;">Training</span> and <span style="color:darkorange;">Testing</span> sets</li>
 <li class="fragment">We will use 75% of the data to train the data</li>
 <li class="fragment">The remaining part of the data, 25%, we reserve for testing</li>
 <li class="fragment">This split is done randomly</li>
@@ -550,14 +550,14 @@ logins = \beta_0 + \beta_1 \cdot Succession + \beta_2 \cdot age + \beta_3 \cdot 
 </div>
 <ul>
 <li class="fragment">Which model we should choose?</li>
-<li class="fragment">The model with the smallest out of sample error</li>
+<li class="fragment">The model with the <span style="color:darkorange;">smallest out of sample error</span></li>
 <li class="fragment">Out of sample means evaluation in the testing data</li>
 </ul>
 </section>
 <section id="cross-validation" class="slide level2 smaller">
 <h2>Cross-Validation</h2>
 <ul>
-<li class="fragment">To avoid using only one training and testing dataset, we can iterate over k-fold division of our data:</li>
+<li class="fragment">To avoid using only one training and testing dataset, we can iterate over <span style="color:darkorange;">k-fold</span> division of our data:</li>
 </ul>
 
 <img data-src="image/cross_validation_S2024.png" class="quarto-figure quarto-figure-center r-stretch" style="width:85.0%"><ul>
@@ -613,12 +613,12 @@ Tuning parameter 'intercept' was held constant at a value of TRUE</code></pre>
 <h2>Stepwise selection</h2>
 <ul>
 <li class="fragment"><p>We have seen how to choose between some given models. But what if we want to test all possible models?</p></li>
-<li class="fragment"><p>Stepwise selection: Computationally-efficient algorithm to select a model based on the data we have (subset selection).</p></li>
+<li class="fragment"><p><span style="color:darkorange;">Stepwise selection</span>: Computationally-efficient algorithm to select a model based on the data we have (subset selection).</p></li>
 <li class="fragment"><p>Algorithm for forward stepwise selection:</p></li>
 </ul>
 <ol type="1">
-<li class="fragment"><p>Start with the null model , (no predictors)</p></li>
-<li class="fragment"><p>For : (a) Consider all models that augment with one additional predictor. (b) Choose the best among these models and call it .</p></li>
+<li class="fragment"><p>Start with the null model, (no predictors)</p></li>
+<li class="fragment"><p>For : <span style="color:darkorange;">(a)</span> Consider all models that augment with one additional predictor. <span style="color:darkorange;">(b)</span> Choose the best among these models and call it .</p></li>
 <li class="fragment"><p>Select the single best model from using CV.</p></li>
 </ol>
 <ul>
@@ -648,7 +648,7 @@ Tuning parameter 'intercept' was held constant at a value of TRUE</code></pre>
 </div>
 <ul>
 <li class="fragment">Which one would you choose out of the 5 models? Why?</li>
-<li class="fragment">The model with the smallest RMSE, which is model 5.</li>
+<li class="fragment">The model with the <span style="color:darkorange;">smallest RMSE</span>, which is model 5.</li>
 <li class="fragment">Can we see this model?</li>
 </ul>
 </section>
@@ -687,10 +687,10 @@ Selection Algorithm: forward
 <section id="conclusion" class="slide level2">
 <h2>Conclusion</h2>
 <ul>
-<li class="fragment"><p>In prediction, everything is going to be about</p></li>
-<li class="fragment"><p>Bias vs Variance.</p></li>
-<li class="fragment"><p>Importance of validation sets.</p></li>
-<li class="fragment"><p>We now have methods to select models.</p></li>
+<li class="fragment"><p>In prediction, everything is going to be about:</p></li>
+<li class="fragment"><p><span style="color:darkorange;"><strong>Bias vs Variance</strong></span></p></li>
+<li class="fragment"><p><span style="color:darkorange;"><strong>Importance of validation sets</strong></span></p></li>
+<li class="fragment"><p><span style="color:darkorange;"><strong>We now have methods to select models</strong></span></p></li>
 </ul>
 
 <div class="quarto-auto-generated-content">

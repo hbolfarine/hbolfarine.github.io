@@ -1376,7 +1376,7 @@
     "href": "class_06.html#stepwise-selection",
     "title": "Data Science for Business Applications",
     "section": "Stepwise selection",
-    "text": "Stepwise selection\n\nWe have seen how to choose between some given models. But what if we want to test all possible models?\nStepwise selection: Computationally-efficient algorithm to select a model based on the data we have (subset selection).\nAlgorithm for forward stepwise selection:\n\n\nStart with the null model , (no predictors)\nFor : (a) Consider all models that augment with one additional predictor. (b) Choose the best among these models and call it .\nSelect the single best model from using CV.\n\n\nBackwards stepwise follows the same procedure, but starts with the full model."
+    "text": "Stepwise selection\n\nWe have seen how to choose between some given models. But what if we want to test all possible models?\nStepwise selection: Computationally-efficient algorithm to select a model based on the data we have (subset selection).\nAlgorithm for forward stepwise selection:\n\n\nStart with the null model, (no predictors)\nFor : (a) Consider all models that augment with one additional predictor. (b) Choose the best among these models and call it .\nSelect the single best model from using CV.\n\n\nBackwards stepwise follows the same procedure, but starts with the full model."
   },
   {
     "objectID": "class_06.html#stepwise-selection-and-cv",
@@ -1397,6 +1397,6 @@
     "href": "class_06.html#conclusion",
     "title": "Data Science for Business Applications",
     "section": "Conclusion",
-    "text": "Conclusion\n\nIn prediction, everything is going to be about\nBias vs Variance.\nImportance of validation sets.\nWe now have methods to select models."
+    "text": "Conclusion\n\nIn prediction, everything is going to be about:\nBias vs Variance\nImportance of validation sets\nWe now have methods to select models"
   }
 ]

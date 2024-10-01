@@ -123,7 +123,7 @@ $$
 
 ## Create Validation Sets {.smaller}
 
-* Create Training and Testing sets
+* Create [Training]{style="color:darkorange;"} and [Testing]{style="color:darkorange;"} sets
 * We will use 75% of the data to train the data
 * The remaining part of the data, 25%, we reserve for testing 
 * This split is done randomly
@@ -163,12 +163,12 @@ rmse(lm_complex, hbo_test)
 ```
 
 * Which model we should choose?
-* The model with the smallest out of sample error
+* The model with the [smallest out of sample error]{style="color:darkorange;"}
 * Out of sample means evaluation in the testing data
 
 ## Cross-Validation {.smaller}
 
-* To avoid using only one training and testing dataset, we can iterate over k-fold division of our data:
+* To avoid using only one training and testing dataset, we can iterate over [k-fold]{style="color:darkorange;"} division of our data:
 
 ![](image/cross_validation_S2024.png){fig-align="center"width=85%}
 
@@ -216,13 +216,13 @@ lm_simple
 
 * We have seen how to choose between some given models. But what if we want to test all possible models?
 
-* Stepwise selection: Computationally-efficient algorithm to select a model based on the data we have (subset selection).
+* [Stepwise selection]{style="color:darkorange;"}: Computationally-efficient algorithm to select a model based on the data we have (subset selection).
 
 * Algorithm for forward stepwise selection:
 
-1. Start with the null model , (no predictors)
+1. Start with the null model, (no predictors)
 
-2. For : (a) Consider all models that augment with one additional predictor. (b) Choose the best among these models and call it .
+2. For : [(a)]{style="color:darkorange;"} Consider all models that augment with one additional predictor. [(b)]{style="color:darkorange;"} Choose the best among these models and call it .
 
 3. Select the single best model from using CV.
 
@@ -251,7 +251,7 @@ lm.fwd$results
 
 
 * Which one would you choose out of the 5 models? Why?
-* The model with the smallest RMSE, which is model 5.
+* The model with the [smallest RMSE]{style="color:darkorange;"}, which is model 5.
 * Can we see this model?
 
 ## Stepwise selection and CV {.smaller}
@@ -271,11 +271,11 @@ summary(lm.fwd$finalModel)
 
 ## Conclusion
 
-* In prediction, everything is going to be about
+* In prediction, everything is going to be about:
 
-* Bias vs Variance.
+* [**Bias vs Variance**]{style="color:darkorange;"}
 
-* Importance of validation sets.
+* [**Importance of validation sets**]{style="color:darkorange;"}
 
-* We now have methods to select models.
+* [**We now have methods to select models**]{style="color:darkorange;"}
  
