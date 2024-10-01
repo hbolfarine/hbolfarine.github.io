@@ -406,8 +406,8 @@ Class 06 - Model Selection
 <h2>Introduction to prediction</h2>
 <ul>
 <li class="fragment">So far, we have been focusing mostly on trying to <span style="color:darkorange;">explain</span> the effects from the predictors <span class="math inline">\(X\)</span> through the coefficients.</li>
-<li class="fragment">We made some predictions, but our focus until now was on the <span style="color:darkorange;">soundness of our model</span> in relation to <span style="color:darkorange;">statistical significance</span> and how our model was fitting the data. If there were any issues that could violate the <span style="color:darkorange;">regression assumptions</span>, leading to models with undesirable properties.</li>
-<li class="fragment">Today, we will focus on making models that return <span style="color:darkorchid;">Estimate/predict</span> outcomes with high accuracy <span style="color:darkorchid;">without extrapolating</span> , with <span style="color:darkorchid;">previously unseen data</span> .</li>
+<li class="fragment">Until now, our focus was on the <span style="color:darkorange;">soundness of our model</span> in relation to <span style="color:darkorange;">statistical significance</span> and how well our model was fitting the data (Regression Assumptions).</li>
+<li class="fragment">Today, we will focus on making models that return <span style="color:darkorchid;">Estimate/predict</span> outcomes with high accuracy <span style="color:darkorchid;">without extrapolating</span>, with <span style="color:darkorchid;">previously unseen data</span>.</li>
 </ul>
 </section>
 <section id="inference-and-prediction" class="slide level2">
@@ -436,7 +436,7 @@ Class 06 - Model Selection
 <ul>
 <li class="fragment">When explaining, <span style="color:darkorange;">bias</span> is usually greater than <span style="color:darkorange;">variance</span></li>
 <li class="fragment">In <span style="color:darkorange;">prediction</span>, we care about <span style="color:darkorange;">both</span></li>
-<li class="fragment">Measures of <span style="color:darkorange;">accuracy</span> will have both <span style="color:darkorange;">bias</span> and <span style="color:darkorange;">variance</span>.</li>
+<li class="fragment">Measures of <span style="color:darkorange;">accuracy</span> will have both <span style="color:darkorange;">bias</span> and <span style="color:darkorange;">variance</span></li>
 </ul>
 </section>
 <section id="measures-of-accuracy" class="slide level2 smaller">
@@ -561,9 +561,9 @@ logins = \beta_0 + \beta_1 \cdot Succession + \beta_2 \cdot age + \beta_3 \cdot 
 </ul>
 
 <img data-src="image/cross_validation_S2024.png" class="quarto-figure quarto-figure-center r-stretch" style="width:85.0%"><ul>
-<li class="fragment"><p>Grey: all of the data</p></li>
-<li class="fragment"><p>Pink: Testing data</p></li>
-<li class="fragment"><p>Yellow: Training data</p></li>
+<li class="fragment"><p><span style="color:darkorange;">Grey</span>: all of the data</p></li>
+<li class="fragment"><p><span style="color:darkorange;">Pink</span>: Testing data</p></li>
+<li class="fragment"><p><span style="color:darkorange;">Yellow</span>: Training data</p></li>
 </ul>
 </section>
 <section id="cross-validation-1" class="slide level2 smaller">

@@ -17,8 +17,8 @@ format:
 ## Introduction to prediction {.smaller}
 
 * So far, we have been focusing mostly on trying to [explain]{style="color:darkorange;"} the effects from the predictors $X$ through the coefficients.
-* We made some predictions, but our focus until now was on the [soundness of our model]{style="color:darkorange;"} in relation to [statistical significance]{style="color:darkorange;"} and how our model was fitting the data. If there were any issues that could violate the [regression assumptions]{style="color:darkorange;"}, leading to models with undesirable properties.
-* Today, we will focus on making models that return [Estimate/predict]{style="color:darkorchid;"}  outcomes with high accuracy [without extrapolating]{style="color:darkorchid;"} , with [previously unseen data]{style="color:darkorchid;"} .
+* Until now, our focus was on the [soundness of our model]{style="color:darkorange;"} in relation to [statistical significance]{style="color:darkorange;"} and how well our model was fitting the data (Regression Assumptions).
+* Today, we will focus on making models that return [Estimate/predict]{style="color:darkorchid;"} outcomes with high accuracy [without extrapolating]{style="color:darkorchid;"}, with [previously unseen data]{style="color:darkorchid;"}.
 
 ## Inference and Prediction 
 
@@ -44,7 +44,7 @@ format:
 
 * When explaining, [bias]{style="color:darkorange;"} is usually greater than [variance]{style="color:darkorange;"}
 * In [prediction]{style="color:darkorange;"}, we care about [both]{style="color:darkorange;"}
-* Measures of [accuracy]{style="color:darkorange;"} will have both [bias]{style="color:darkorange;"} and [variance]{style="color:darkorange;"}.
+* Measures of [accuracy]{style="color:darkorange;"} will have both [bias]{style="color:darkorange;"} and [variance]{style="color:darkorange;"}
  
 ## Measures of accuracy {.smaller}
 
@@ -172,11 +172,11 @@ rmse(lm_complex, hbo_test)
 
 ![](image/cross_validation_S2024.png){fig-align="center"width=85%}
 
-* Grey: all of the data
+* [Grey]{style="color:darkorange;"}: all of the data
 
-* Pink: Testing data
+* [Pink]{style="color:darkorange;"}: Testing data
 
-* Yellow: Training data
+* [Yellow]{style="color:darkorange;"}: Training data
 
 ## Cross-Validation {.smaller}
 

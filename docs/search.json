@@ -1271,7 +1271,7 @@
     "href": "class_06.html#introduction-to-prediction",
     "title": "Data Science for Business Applications",
     "section": "Introduction to prediction",
-    "text": "Introduction to prediction\n\nSo far, we have been focusing mostly on trying to explain the effects from the predictors \\(X\\) through the coefficients.\nWe made some predictions, but our focus until now was on the soundness of our model in relation to statistical significance and how our model was fitting the data. If there were any issues that could violate the regression assumptions, leading to models with undesirable properties.\nToday, we will focus on making models that return Estimate/predict outcomes with high accuracy without extrapolating , with previously unseen data ."
+    "text": "Introduction to prediction\n\nSo far, we have been focusing mostly on trying to explain the effects from the predictors \\(X\\) through the coefficients.\nUntil now, our focus was on the soundness of our model in relation to statistical significance and how well our model was fitting the data (Regression Assumptions).\nToday, we will focus on making models that return Estimate/predict outcomes with high accuracy without extrapolating, with previously unseen data."
   },
   {
     "objectID": "class_06.html#inference-and-prediction",
@@ -1292,7 +1292,7 @@
     "href": "class_06.html#bias-vs.-variance-1",
     "title": "Data Science for Business Applications",
     "section": "Bias vs. Variance",
-    "text": "Bias vs. Variance\n\nWhen explaining, bias is usually greater than variance\nIn prediction, we care about both\nMeasures of accuracy will have both bias and variance."
+    "text": "Bias vs. Variance\n\nWhen explaining, bias is usually greater than variance\nIn prediction, we care about both\nMeasures of accuracy will have both bias and variance"
   },
   {
     "objectID": "class_06.html#measures-of-accuracy",
