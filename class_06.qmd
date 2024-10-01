@@ -1,6 +1,6 @@
 ---
 title: "Data Science for Business Applications"
-author: "Class 05 - Model Selection"
+author: "Class 06 - Model Selection"
 title-slide-attributes:
     data-background-image: image/background_sta235h.png
 format:
