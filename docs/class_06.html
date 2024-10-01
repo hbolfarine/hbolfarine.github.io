@@ -423,32 +423,32 @@ Class 06 - Model Selection
 <h2>Bias vs.&nbsp;Variance</h2>
 <ul>
 <li class="fragment"><p>Bias vs Variance trade-off</p></li>
-<li class="fragment"><p><strong>Variance</strong>: <em>The amount by which the function <span class="math inline">\(f\)</span> would change if we estimated it using a different training dataset</em></p></li>
-<li class="fragment"><p><strong>Bias</strong>: <em>Error introduced by approximating a real-life problem with a model</em></p></li>
-<li class="fragment"><p>More flexible models have a higher variance and a lower bias</p></li>
-<li class="fragment"><p>Less flexible models have a lower variance but a higher bias</p></li>
-<li class="fragment"><p>Validation set approach: <strong>Training and testing data</strong></p></li>
+<li class="fragment"><p><span style="color:darkorange;"><strong>Variance</strong></span>: <em>The amount by which the function <span class="math inline">\(f\)</span> would change if we estimated it using a different training dataset</em></p></li>
+<li class="fragment"><p><span style="color:darkorange;"><strong>Bias</strong></span>: <em>Error introduced by approximating a real-life problem with a model</em></p></li>
+<li class="fragment"><p><span style="color:darkorange;">More flexible</span> models have a <span style="color:darkorange;">higher variance</span> and a lower bias</p></li>
+<li class="fragment"><p><span style="color:darkorange;">Less flexible</span> models have a <span style="color:darkorange;">lower variance</span> but a higher bias</p></li>
+<li class="fragment"><p>Validation set approach: <span style="color:darkorange;"><strong>Training and testing data</strong></span></p></li>
 <li class="fragment"><p>Balance between flexibility and accuracy</p></li>
 </ul>
 </section>
 <section id="bias-vs.-variance-1" class="slide level2">
 <h2>Bias vs.&nbsp;Variance</h2>
 <ul>
-<li class="fragment">When explaining, bias is usually greater than variance</li>
-<li class="fragment">In prediction, we care about both</li>
-<li class="fragment">Measures of accuracy will have both bias and variance.</li>
+<li class="fragment">When explaining, <span style="color:darkorange;">bias</span> is usually greater than <span style="color:darkorange;">variance</span></li>
+<li class="fragment">In <span style="color:darkorange;">prediction</span>, we care about <span style="color:darkorange;">both</span></li>
+<li class="fragment">Measures of <span style="color:darkorange;">accuracy</span> will have both <span style="color:darkorange;">bias</span> and <span style="color:darkorange;">variance</span>.</li>
 </ul>
 </section>
 <section id="measures-of-accuracy" class="slide level2 smaller">
 <h2>Measures of accuracy</h2>
 <ul>
-<li class="fragment"><p>How do we measure accuracy?</p></li>
-<li class="fragment"><p>Mean Squared Error (MSE): Can be decomposed into variance and bias terms <span class="math display">\[
+<li class="fragment"><p>How do we <span style="color:darkorange;">measure accuracy</span>?</p></li>
+<li class="fragment"><p><span style="color:darkorange;">Mean Squared Error</span> (MSE): Can be decomposed into variance and bias terms <span class="math display">\[
 \text{MSE} = \text{Var} + \text{Bias}^2 + \text{Irreducible Error}
 \]</span> where MSE is equal to <span class="math display">\[
 MSE = \frac{1}{n} \sum_{i = 1}^n(y_i-\widehat{y}_i)^2
 \]</span></p></li>
-<li class="fragment"><p>Root Mean Squared Error (RMSE): Measured in the same units as the outcome <span class="math display">\[
+<li class="fragment"><p><span style="color:darkorange;">Root Mean Squared Error</span> (RMSE): Measured in the same units as the outcome <span class="math display">\[
 \text{RMSE} = \sqrt{\text{MSE}}
 \]</span></p></li>
 <li class="fragment"><p>Other measures: Bayesian Information Criterion (BIC) and Akaike Information Criterion (AIC)</p></li>
@@ -461,10 +461,10 @@ MSE = \frac{1}{n} \sum_{i = 1}^n(y_i-\widehat{y}_i)^2
 <section id="measures-of-accuracy-1" class="slide level2">
 <h2>Measures of accuracy</h2>
 <ul>
-<li class="fragment">Models with increasing flexibility (linear, cubic, spline).</li>
+<li class="fragment">Models with <span style="color:darkorange;">increasing flexibility</span> (linear, cubic, spline).</li>
 <li class="fragment">Think of a spline as a polynomial model with a high degree.</li>
-<li class="fragment">RMSE decreases with flexibility in the training data.</li>
-<li class="fragment">The spline overfits the training data since the RMSE of the testing data is large.</li>
+<li class="fragment"><span style="color:darkorange;">RMSE decreases</span> with flexibility in the <span style="color:darkorange;">training data</span>.</li>
+<li class="fragment">The spline <span style="color:darkorange;">overfits</span> the training data since the RMSE of the testing data is large.</li>
 </ul>
 </section>
 <section id="what-is-churn" class="slide level2 smaller">
@@ -472,9 +472,9 @@ MSE = \frac{1}{n} \sum_{i = 1}^n(y_i-\widehat{y}_i)^2
 <div class="columns">
 <div class="column" style="width:55%;">
 <ul>
-<li class="fragment">Churn: Measure of how many customers stop using your product (e.g.&nbsp;cancel a subscription).</li>
+<li class="fragment">Churn: Measure of how many customers <span style="color:darkorange;">stop</span> using your product (e.g.&nbsp;cancel a subscription).</li>
 <li class="fragment">Less costly to keep a customer than bring a new one</li>
-<li class="fragment">Goal: Prevent churn</li>
+<li class="fragment">Goal: <span style="color:darkorange;">Prevent churn</span></li>
 <li class="fragment">Identify customer that are likely to cancel/quit/fail to renew</li>
 </ul>
 </div><div class="column" style="width:45%;">
@@ -491,9 +491,9 @@ MSE = \frac{1}{n} \sum_{i = 1}^n(y_i-\widehat{y}_i)^2
 <ul>
 <li class="fragment">We will predict “pre-churn”.</li>
 <li class="fragment">At a good measure for someone at risk of unsubscribing (“pre-churn”) is the times they’ve <span style="color:darkorange;">logged in the past week</span>.</li>
-<li class="fragment">We are interested in the number of log ins in the variable <code>login</code>.</li>
-<li class="fragment">We will predict <code>login</code> from the other variable in the data.</li>
-<li class="fragment">We two candidates: <em>Simple</em> vs <em>Complex</em></li>
+<li class="fragment">We are interested in the number of log ins in the variable <code>logins</code>.</li>
+<li class="fragment">We will predict <code>logins</code> from the other variable in the data.</li>
+<li class="fragment">We two candidates: <span style="color:darkorange;"><em>Simple</em></span> vs <span style="color:darkorange;"><em>Complex</em></span></li>
 </ul>
 </section>
 <section id="predicting-pre-churn-1" class="slide level2 smaller">

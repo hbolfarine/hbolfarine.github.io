@@ -1327,7 +1327,7 @@
     "href": "class_06.html#predicting-pre-churn",
     "title": "Data Science for Business Applications",
     "section": "Predicting “pre-churn”",
-    "text": "Predicting “pre-churn”\n\nWe will predict “pre-churn”.\nAt a good measure for someone at risk of unsubscribing (“pre-churn”) is the times they’ve logged in the past week.\nWe are interested in the number of log ins in the variable login.\nWe will predict login from the other variable in the data.\nWe two candidates: Simple vs Complex"
+    "text": "Predicting “pre-churn”\n\nWe will predict “pre-churn”.\nAt a good measure for someone at risk of unsubscribing (“pre-churn”) is the times they’ve logged in the past week.\nWe are interested in the number of log ins in the variable logins.\nWe will predict logins from the other variable in the data.\nWe two candidates: Simple vs Complex"
   },
   {
     "objectID": "class_06.html#predicting-pre-churn-1",

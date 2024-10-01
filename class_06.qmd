@@ -31,25 +31,25 @@ format:
 ## Bias vs. Variance {.smaller}
 
 * Bias vs Variance trade-off
-* **Variance**: *The amount by which the function $f$ would change if we estimated it using a different training dataset*
-* **Bias**: *Error introduced by approximating a real-life problem with a model*
+* [**Variance**]{style="color:darkorange;"}: *The amount by which the function $f$ would change if we estimated it using a different training dataset*
+* [**Bias**]{style="color:darkorange;"}: *Error introduced by approximating a real-life problem with a model*
 
-* More flexible models have a higher variance and a lower bias 
-* Less flexible models have a lower variance but a higher bias
+* [More flexible]{style="color:darkorange;"} models have a [higher variance]{style="color:darkorange;"} and a lower bias 
+* [Less flexible]{style="color:darkorange;"} models have a [lower variance]{style="color:darkorange;"} but a higher bias
 
-* Validation set approach: **Training and testing data**
+* Validation set approach: [**Training and testing data**]{style="color:darkorange;"}
 * Balance between flexibility and accuracy
 
 ## Bias vs. Variance
 
-* When explaining, bias is usually greater than variance
-* In prediction, we care about both
-* Measures of accuracy will have both bias and variance.
+* When explaining, [bias]{style="color:darkorange;"} is usually greater than [variance]{style="color:darkorange;"}
+* In [prediction]{style="color:darkorange;"}, we care about [both]{style="color:darkorange;"}
+* Measures of [accuracy]{style="color:darkorange;"} will have both [bias]{style="color:darkorange;"} and [variance]{style="color:darkorange;"}.
  
 ## Measures of accuracy {.smaller}
 
-* How do we measure accuracy?
-* Mean Squared Error (MSE): Can be decomposed into variance and bias terms
+* How do we [measure accuracy]{style="color:darkorange;"}?
+* [Mean Squared Error]{style="color:darkorange;"} (MSE): Can be decomposed into variance and bias terms
 $$
 \text{MSE} = \text{Var} + \text{Bias}^2 + \text{Irreducible Error} 
 $$
@@ -58,7 +58,7 @@ $$
 MSE = \frac{1}{n} \sum_{i = 1}^n(y_i-\widehat{y}_i)^2
 $$
 
-* Root Mean Squared Error (RMSE): Measured in the same units as the outcome
+* [Root Mean Squared Error]{style="color:darkorange;"} (RMSE): Measured in the same units as the outcome
 $$
 \text{RMSE} = \sqrt{\text{MSE}}
 $$
@@ -71,19 +71,19 @@ $$
 
 ## Measures of accuracy
 
-* Models with increasing flexibility (linear, cubic, spline).
+* Models with [increasing flexibility]{style="color:darkorange;"} (linear, cubic, spline).
 * Think of a spline as a polynomial model with a high degree.
-* RMSE decreases with flexibility in the training data. 
-* The spline overfits the training data since the RMSE of the testing data is large.
+* [RMSE decreases]{style="color:darkorange;"} with flexibility in the [training data]{style="color:darkorange;"}. 
+* The spline [overfits]{style="color:darkorange;"} the training data since the RMSE of the testing data is large.
 
 ## What is churn? {.smaller}
 
 :::: {.columns}
 
 ::: {.column width="55%"}
-* Churn: Measure of how many customers stop using your product (e.g. cancel a subscription).
+* Churn: Measure of how many customers [stop]{style="color:darkorange;"} using your product (e.g. cancel a subscription).
 * Less costly to keep a customer than bring a new one
-* Goal: Prevent churn
+* Goal: [Prevent churn]{style="color:darkorange;"}
 * Identify customer that are likely to cancel/quit/fail to renew
 
 :::
@@ -102,9 +102,9 @@ hbo = read.csv("script_class_06/hbomax.csv")
 
 * We will predict "pre-churn".
 * At a good measure for someone at risk of unsubscribing ("pre-churn") is the times they've [logged in the past week]{style="color:darkorange;"}.
-* We are interested in the number of log ins in the variable `login`.
-* We will predict `login` from the other variable in the data.
-* We two candidates: *Simple* vs *Complex*
+* We are interested in the number of log ins in the variable `logins`.
+* We will predict `logins` from the other variable in the data.
+* We two candidates: [*Simple*]{style="color:darkorange;"} vs [*Complex*]{style="color:darkorange;"}
 
 ## Predicting "pre-churn" {.smaller}
 
