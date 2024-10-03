@@ -95,7 +95,7 @@ $$
 ::::
 
 ```{r}
-hbo = read.csv("script_class_06/hbomax.csv")
+hbomax = read.csv("script_class_06/hbomax.csv")
 ```
 
 ## Predicting "pre-churn"
@@ -137,7 +137,7 @@ library(modelr) # for common model performance metrics
 library(rsample)  # for creating train/test splits
 
 set.seed(100) #Always set seed for replication
-hbo_split =  initial_split(hbo, prop=0.75)
+hbo_split =  initial_split(hbomax, prop=0.75)
 hbo_train = training(hbo_split)
 hbo_test  = testing(hbo_split)
 ```
@@ -206,7 +206,7 @@ library(caret)
 set.seed(100)
 train.control = trainControl(method = "cv", number = 10)
 
-lm_simple = train(logins ~ succession + city, data = hbo, method= "lm", trControl = train.control)
+lm_simple = train(logins ~ succession + city, data = hbomax, method= "lm", trControl = train.control)
 
 lm_simple
 ```
@@ -238,7 +238,7 @@ set.seed(100)
 # Linear Regression with Forward Selection
 # Remove unsubscribe
 train.control = trainControl(method = "cv", number = 10) #set up a 10-fold cv
-lm.fwd = train(logins ~.- unsubscribe, data = hbo, method = "leapForward", 
+lm.fwd = train(logins ~.- unsubscribe, data = hbomax, method = "leapForward", 
                tuneGrid = data.frame(nvmax = 1:5), trControl = train.control)
 ```
 
