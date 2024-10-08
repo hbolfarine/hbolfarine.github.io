@@ -1516,7 +1516,7 @@
     "href": "class_07.html#making-predictions",
     "title": "Data Science for Business Applications",
     "section": "Making predictions",
-    "text": "Making predictions\n\nWhat is the probability of being male given we have a height of 69.\n\n\npredict(model, list(height=69), type=\"response\")\n\n        1 \n0.7725447 \n\n\n\nUsing the probability equation in R:\n\n\\[\n\\widehat{p(\\text{male})} = \\frac{\\exp(−44.45 + 0.66 \\cdot 69)}{1+ \\exp(−44.45 + 0.66 \\cdot 69)} = 0.77\n\\]\n\nexp(-44.448609 + 0.661904*69)/(1+exp(-44.45 + 0.66*69))\n\n[1] 0.8546399"
+    "text": "Making predictions\n\nWhat is the probability of being male given we have a height of 69.\n\n\npredict(model, list(height=69), type=\"response\")\n\n        1 \n0.7725447 \n\n\n\nUsing the probability equation in R:\n\n\\[\n\\widehat{p(\\text{male})} = \\frac{\\exp(−44.45 + 0.66 \\cdot 69)}{1+ \\exp(−44.45 + 0.66 \\cdot 69)} = 0.77\n\\]\n\nexp(-44.448609 + 0.661904*69)/(1+exp(-44.448609 + 0.661904*69))\n\n[1] 0.7725501"
   },
   {
     "objectID": "class_07.html#adding-more-predictors",

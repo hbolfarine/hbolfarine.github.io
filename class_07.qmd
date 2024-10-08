@@ -247,7 +247,7 @@ $$
 #| eval: true
 #| echo: true
 #| output: true
-exp(-44.448609 + 0.661904*69)/(1+exp(-44.45 + 0.66*69))
+exp(-44.448609 + 0.661904*69)/(1+exp(-44.448609 + 0.661904*69))
 ```
 
 ## Adding more predictors
