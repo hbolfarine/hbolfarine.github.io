@@ -24,6 +24,8 @@ This is what we covered in previous classes:
 
 * [Residual Analysis]{style="color:darkorange;"}
 
+* [Nonlinear Transformations]{style="color:darkorange;"}
+
 * [Time Series]{style="color:darkorange;"} 
 
 * [Model Selection]{style="color:darkorange;"} 
@@ -35,7 +37,7 @@ Today we will introduce a [*new model*]{style="color:darkorchid;"}.
 
 ::: {.column width="50%"}
 * The `OkCupid` data set contains information about 59826 profiles from users of the **OkCupid** online dating service.
-* We have data on user [*age*]{style="color:darkorange;"}, [*height*]{style="color:darkorange;"}, [*sex*]{style="color:darkorange;"}, [*income*]{style="color:darkorange;"} , [*sexual orientation*]{style="color:darkorange;"}, *education level*]{style="color:darkorange;"}, [*body type*]{style="color:darkorange;"} , [*ethnicity*]{style="color:darkorange;"}, and more.
+* We have data on user [*age*]{style="color:darkorange;"}, [*height*]{style="color:darkorange;"}, [*sex*]{style="color:darkorange;"}, [*income*]{style="color:darkorange;"} , [*sexual orientation*]{style="color:darkorange;"}, [*education level*]{style="color:darkorange;"}, [*body type*]{style="color:darkorange;"} , [*ethnicity*]{style="color:darkorange;"}, and more.
 * Let’s see if we can predict the `sex` of the user based on their `height`. (In this data set, everyone is classified as [male]{style="color:darkorange;"} or [female]{style="color:darkorange;"}.)
 
 :::

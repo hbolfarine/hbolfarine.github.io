@@ -32,7 +32,7 @@
     "href": "teaching.html",
     "title": "Teaching",
     "section": "",
-    "text": "STA 235 honors change 25\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection\nclass 07 - Logistic Regression"
+    "text": "STA 235 honors\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection\nclass 07 - Logistic Regression"
   },
   {
     "objectID": "teaching.html#teaching",
@@ -1411,14 +1411,14 @@
     "href": "class_07.html#quick-review-of-our-class",
     "title": "Data Science for Business Applications",
     "section": "Quick review of our Class",
-    "text": "Quick review of our Class\nThis is what we covered in previous classes:\n\nSimple and Multiple Regression\nCategorical Variables and Interactions\nResidual Analysis\nTime Series\nModel Selection\n\nToday we will introduce a new model."
+    "text": "Quick review of our Class\nThis is what we covered in previous classes:\n\nSimple and Multiple Regression\nCategorical Variables and Interactions\nResidual Analysis\nNonlinear Transformations\nTime Series\nModel Selection\n\nToday we will introduce a new model."
   },
   {
     "objectID": "class_07.html#the-okcupid-data-set",
     "href": "class_07.html#the-okcupid-data-set",
     "title": "Data Science for Business Applications",
     "section": "The OkCupid data set",
-    "text": "The OkCupid data set\n\n\n\nThe OkCupid data set contains information about 59826 profiles from users of the OkCupid online dating service.\nWe have data on user age, height, sex, income , sexual orientation, education level]{style=“color:darkorange;”}, body type , ethnicity, and more.\nLet’s see if we can predict the sex of the user based on their height. (In this data set, everyone is classified as male or female.)"
+    "text": "The OkCupid data set\n\n\n\nThe OkCupid data set contains information about 59826 profiles from users of the OkCupid online dating service.\nWe have data on user age, height, sex, income , sexual orientation, education level, body type , ethnicity, and more.\nLet’s see if we can predict the sex of the user based on their height. (In this data set, everyone is classified as male or female.)"
   },
   {
     "objectID": "class_07.html#lets-build-the-model",
@@ -1594,5 +1594,12 @@
     "title": "Data Science for Business Applications",
     "section": "Summary",
     "text": "Summary\nIn a logistic regression model, the response variable is binary, taking values of either zero or one.\n\nThe model estimates the log odds of the event associated with a response of one.\nThe model’s effects are interpreted in terms of odds.\nPredictions are expressed as probabilities.\nThe performance of the model is evaluated based on its prediction accuracy."
+  },
+  {
+    "objectID": "class_07.html",
+    "href": "class_07.html",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "This is what we covered in previous classes:\n\nSimple and Multiple Regression\nCategorical Variables and Interactions\nResidual Analysis\nNonlinear Transformations\nTime Series\nModel Selection\n\nToday we will introduce a new model."
   }
 ]
