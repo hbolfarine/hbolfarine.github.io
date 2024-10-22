@@ -32,7 +32,7 @@
     "href": "teaching.html",
     "title": "Teaching",
     "section": "",
-    "text": "STA 235 honors\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection\nclass 07 - Logistic Regression"
+    "text": "STA 235 honors\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection\nclass 07 - Logistic Regression\nclass 08 - Basic Causal Inference"
   },
   {
     "objectID": "teaching.html#teaching",
@@ -1601,5 +1601,89 @@
     "title": "Data Science for Business Applications",
     "section": "",
     "text": "This is what we covered in previous classes:\n\nSimple and Multiple Regression\nCategorical Variables and Interactions\nResidual Analysis\nNonlinear Transformations\nTime Series\nModel Selection\n\nToday we will introduce a new model."
+  },
+  {
+    "objectID": "class_08.html#what-is-causal-inference",
+    "href": "class_08.html#what-is-causal-inference",
+    "title": "Data Science for Business Applications",
+    "section": "What is Causal Inference?",
+    "text": "What is Causal Inference?"
+  },
+  {
+    "objectID": "class_08.html#early-key-ideas",
+    "href": "class_08.html#early-key-ideas",
+    "title": "Data Science for Business Applications",
+    "section": "Early key ideas",
+    "text": "Early key ideas\nInformal review on causes and effects\n\nFrancis Bacon (1561-1626) was talking about “control” and specifically “controlled experiments”.\nDavid Hume (1711-1776) was worried about “confounding”. Correlation is not causation.\nJohn Stuart Mill (1806-1873) Mill was focusing on “contrasts”.\nCan we measure causality from what we observe?"
+  },
+  {
+    "objectID": "class_08.html#causality",
+    "href": "class_08.html#causality",
+    "title": "Data Science for Business Applications",
+    "section": "Causality",
+    "text": "Causality\nCauses of effects: Given an outcome, what were its causes?\n\nA patient has a headache. Why?\nA city experiences a crime wave. Why?\nThe stock market is down today. Why?\n\nEffects of causes: Given a cause, what was its effect?\n\nThe patient took an aspirin. Did it mitigate the severity or duration of their headache?\nWhat is the impact of police presence on crime rates?\nHow much is the coronovirus affecting the stock market?\n\nWe will focus exclusively on the latter – measuring effects – in order to avoid the ill-posedness of multiple causes. Inferring the effect of one thing on another thing."
+  },
+  {
+    "objectID": "class_08.html#measuring-the-causal-effect",
+    "href": "class_08.html#measuring-the-causal-effect",
+    "title": "Data Science for Business Applications",
+    "section": "Measuring the causal effect",
+    "text": "Measuring the causal effect\nHow do measure this causal effect?\n\nCounterfactual comparison\n\nSuppose we are measuring the effect of college degree on income:\n\n\\(Z_i \\in \\{0,1\\}\\) is a binary variable indicating if a person went to college.\n\\(Y_{i}(1)\\) is the income of person \\(i\\) if they went to college, i.e., when \\(Z_i = 1\\).\n\\(Y_{i}(0)\\) is the income of person \\(i\\) if they did not go to college, i.e., when \\(Z_i = 0\\)\n\nThe causal effect of the college degree on income is: \\[\n\\text{causal effect of college on income} = Y_{i}(1)- Y_{i}(0)\n\\] - This framework is known as the Potential Outcomes approach to causal inference. - This framework is also known as the Neyman-Rubin model (1974)."
+  },
+  {
+    "objectID": "class_08.html#potential-outcomes",
+    "href": "class_08.html#potential-outcomes",
+    "title": "Data Science for Business Applications",
+    "section": "Potential Outcomes",
+    "text": "Potential Outcomes\nIn the Potential Outcomes framework, we aim to compare each unit to the alternative reality, that is, the counterfactual, where they received the opposite treatment assignment from what they actually received.\nIn the previous case:\n\n\\(Y_{i}(1)\\) is the counterfactual of \\(Y_{i}(0)\\), and vice versa.\nBoth are potential outcomes of income given the treatment \\(Z_i\\).\nThe causal effect is the difference between the potential outcomes.\n\\(Y_{i}(1)\\) is referred to as the treatment group.\n\\(Y_{i}(0)\\) is referred to as the control group.\nThe observations \\(Y_i\\) can be rewritten in terms of the potential outcomes as: \\[Y_i = Z_i \\cdot Y_i(1) + (1 − Z_i) ⋅ Y_i(0)\\]\nWhat is the problem with this framework?"
+  },
+  {
+    "objectID": "class_08.html#potential-outcomes-1",
+    "href": "class_08.html#potential-outcomes-1",
+    "title": "Data Science for Business Applications",
+    "section": "Potential Outcomes",
+    "text": "Potential Outcomes\n\nHolland (1986) defines in “Statistics and Causal Inference” the “fundamental problem” of causal inference.\nTo determine the causal effect, we must observe both \\(Y_{i}(1)\\) and \\(Y_{i}(0)\\), but we only get to see one of the two!\nThis means that either person \\(i\\) went to college or they did not. We cannot have both scenarios happening at the same time.\nHow can we deal with this problem?"
+  },
+  {
+    "objectID": "class_08.html#average-treatment-effect",
+    "href": "class_08.html#average-treatment-effect",
+    "title": "Data Science for Business Applications",
+    "section": "Average treatment effect",
+    "text": "Average treatment effect\n\nInstead of measuring the effect on an individual unit, we aim to estimate the average treatment effect (ATE) of going to college across several individuals in a population of interest. At the population level, we have: \\[\n\\text{Population ATE} = E[Y_{i}(1) - Y_{i}(0)]\n\\]\nHere, \\(E[X_i]\\) is the population average, or better known as the expected value of the random variable \\(X_i\\).\nBut this is on the population level we can’t infer nothing yet.\nAlso, we still have the problem of only observing one possible outcome \\(Y_{i}(1)\\) or \\(Y_{i}(0)\\)."
+  },
+  {
+    "objectID": "class_08.html#estimating-ate",
+    "href": "class_08.html#estimating-ate",
+    "title": "Data Science for Business Applications",
+    "section": "Estimating ATE",
+    "text": "Estimating ATE\n\nWe can estimate the sample ATE as:\n\n\\[\n\\text{Sample ATE} = E[Y_{i}(1)] - E[Y_{i}(0)] + \\text{bias}\n\\]\n\nThis bias can be eliminated if we adopt certain assumptions, such as the independence of treatment assumption (also called ignorability), which ensures that the treatment assignment is independent of the potential outcomes.\nIn our example, this would mean that the potential outcomes, \\(Y_{i}(1)\\) and \\(Y_{i}(0)\\), are independent of whether a person chooses to go to college (i.e., the treatment assignment \\(Z\\))."
+  },
+  {
+    "objectID": "class_08.html#sample-ate",
+    "href": "class_08.html#sample-ate",
+    "title": "Data Science for Business Applications",
+    "section": "Sample ATE",
+    "text": "Sample ATE\nSuppose we have \\(N\\) observations of incomes \\(Y_i\\) from individuals who did and did not go to college. \\(N_1\\) is the number of individuals who went to college, and \\(N_0\\) is the number of individuals who did not go to college, so \\(N = N_0 + N_1\\).\nFrom the sample ATE, we have: \\[E[Y_{i}(1)] = \\frac{1}{N_1}\\sum_{i = 1}^{N_1} (Y_i \\text{ given } Z = 1)\\] which is the sample average of the outcome for individuals who received the treatment (i.e., went to college). Similarly, we have: \\[E[Y_{i}(0)] = \\frac{1}{N_0}\\sum_{i = 1}^{N_0} (Y_i \\text{ given } Z = 0)\\] which is the sample average of the outcome for individuals who did not receive the treatment (i.e., did not go to college)."
+  },
+  {
+    "objectID": "class_08.html#sample-ate-1",
+    "href": "class_08.html#sample-ate-1",
+    "title": "Data Science for Business Applications",
+    "section": "Sample ATE",
+    "text": "Sample ATE\n\nSo the ATE is giving by: \\[\n\\text{Sample ATE} = \\frac{1}{N_1}\\sum_{i = 1}^{N_1} (Y_i\\text{ given } Z = 1) - \\frac{1}{N_0}\\sum_{i = 1}^{N_0} (Y_i\\text{ given } Z = 0)\n\\] Which can be rewritten in a more friendly way as \\[\n\\text{Sample ATE} = \\text{mean of the treated} - \\text{mean of the control}\n\\]"
+  },
+  {
+    "objectID": "class_08.html#example",
+    "href": "class_08.html#example",
+    "title": "Data Science for Business Applications",
+    "section": "Example",
+    "text": "Example\n\nIn this example we have sample of \\(N = 6\\) students that went to the college, \\(i = 1,2,\\dots,6\\).\nThree of the individuals went to college, \\(N_1 = 3\\), and the other three did not, \\(N_0 = 3\\).\n\\(Y_i\\) are the observed incomes, \\(Y_i(1)\\), and \\(Y_i(0)\\) are the potential outcomes.\n\\(Z_i\\in \\{0,1\\}\\) is the treatment.\n\n\n\n\n\\(i\\)\n\\(Z_i\\)\n\\(Y_i\\)\n\\(Y_i(1)\\)\n\\(Y_i(0)\\)\n\\(Y_i(1) - Y_i(0)\\)\n\n\n\n\n1\n0\n50.000\n?\n50.000\n?\n\n\n2\n1\n55.000\n55.000\n?\n?\n\n\n3\n1\n120.000\n120.000\n?\n?\n\n\n4\n0\n150.000\n?\n150.000\n?\n\n\n5\n0\n45.000\n?\n45.000\n?\n\n\n6\n1\n130.000\n130.000\n?\n?"
+  },
+  {
+    "objectID": "class_08.html#sample-ate-2",
+    "href": "class_08.html#sample-ate-2",
+    "title": "Data Science for Business Applications",
+    "section": "Sample ATE",
+    "text": "Sample ATE\n\nThe estimate of the ATE is giving by\n\n\\[\\begin{eqnarray}\n\\text{Sample ATE} &=& \\text{mean of the treated} - \\text{mean of the control} \\\\\n                  &=& \\frac{305,000}{3} - \\frac{245,000}{3} \\\\\n                  &=& 20,000\n\\end{eqnarray}\\]\n\nOn average, going to college has a positive causal effect of US$ 20,000 on income compared to those who do not go to college.\nAgain, this conclusion was made under very strong assumptions.\nWe will discuss these assumptions in the next class.\nWe are essentially assuming that the treatment is random, meaning that attending college or not was randomly assigned. This is not a reasonable assumption in most cases."
   }
 ]

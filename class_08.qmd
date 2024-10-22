@@ -1,0 +1,184 @@
+---
+title: "Data Science for Business Applications"
+author: "Class 07 - Introduction to Causal Inference"
+title-slide-attributes:
+    data-background-image: image/background_sta235h.png
+format:
+  revealjs: 
+    theme: "my-styles.css"
+    logo: image/texas_logo2.png
+    incremental: true 
+    self-contained-math: true
+    slide-number: true
+    show-slide-number: print
+    
+---
+
+## What is Causal Inference?
+
+![](image/experiments.png){fig-align="center"}
+
+## Early key ideas
+
+Informal review on causes and effects
+
+- Francis Bacon (1561-1626) was talking about “control” and specifically [“controlled experiments”]{style="color:darkorange;"}.
+
+- David Hume (1711-1776) was worried about [“confounding”]{style="color:darkorange;"}. Correlation is not causation.
+
+- John Stuart Mill (1806-1873) Mill was focusing on [“contrasts”]{style="color:darkorange;"}.
+
+- [Can we measure causality from what we observe?]{style="color:darkorchid;"}
+
+## Causality {.smaller}
+
+[*Causes of effects*]{style="color:darkorange;"}: Given an outcome, what were its causes?
+
+- A patient has a headache. Why?
+
+- A city experiences a crime wave. Why? 
+
+- The stock market is down today. Why?
+
+[*Effects of causes*]{style="color:darkorange;"}: Given a cause, what was its effect?
+
+- The patient took an aspirin. Did it mitigate the severity or duration of their headache?
+
+-  What is the impact of police presence on crime rates?
+
+-  How much is the coronovirus affecting the stock market?
+
+We will focus exclusively on the latter – [**measuring effects**]{style="color:darkorange;"} – in order to avoid the ill-posedness of multiple causes. [Inferring the effect of one thing on another thing.]{style="color:darkorchid;"}
+
+## Measuring the causal effect {.smaller}
+
+How do [measure this causal]{style="color:darkorchid;"} effect?
+
+- [Counterfactual comparison]{style="color:darkorange;"}
+
+Suppose we are measuring the effect of college degree on income:
+
+- $Z_i \in \{0,1\}$ is a binary variable indicating if a person went to college.
+
+- $Y_{i}(1)$ is the income of person $i$ [if they went to college]{style="color:darkorange;"}, i.e., when $Z_i = 1$.
+
+- $Y_{i}(0)$ is the income of person $i$ [if they did not go to college]{style="color:darkorange;"}, i.e., when $Z_i = 0$
+
+The causal effect of the college degree on income is:
+$$
+\text{causal effect of college on income} = Y_{i}(1)- Y_{i}(0)
+$$
+- This framework is known as the [**Potential Outcomes**]{style="color:darkorange;"} approach to causal inference.
+- This framework is also known as the Neyman-Rubin model (1974).
+
+## Potential Outcomes {.smaller}
+
+In the [Potential Outcomes framework]{style="color:darkorange;"}, we aim to compare each unit to the alternative reality, that is, the counterfactual, where they received the opposite treatment assignment from what they actually received.
+
+In the previous case:
+
+- $Y_{i}(1)$ is the counterfactual of $Y_{i}(0)$, and vice versa.
+
+- Both are potential outcomes of income given the treatment $Z_i$.
+
+- The [causal effect]{style="color:darkorange;"} is the [difference between the potential outcomes]{style="color:darkorange;"}.
+
+- $Y_{i}(1)$ is referred to as the [treatment group]{style="color:darkorange;"}.
+
+- $Y_{i}(0)$ is referred to as the [control group]{style="color:darkorange;"}.
+
+- The observations $Y_i$ can be rewritten in terms of the potential outcomes as:
+$$Y_i = Z_i \cdot Y_i(1) + (1 − Z_i) ⋅ Y_i(0)$$
+
+- [What is the problem with this framework?]{style="color:darkorchid;"}
+
+## Potential Outcomes
+
+- Holland (1986) defines in *"Statistics and Causal Inference"* the [**"fundamental problem"**]{style="color:darkorchid;"} of causal inference.
+
+- To determine the causal effect, we must observe both $Y_{i}(1)$ and $Y_{i}(0)$, but we only get to see one of the two!
+
+- This means that either person $i$ [went]{style="color:darkorchid;"} to college or [they did not]{style="color:darkorchid;"}. We cannot have [both scenarios]{style="color:darkorchid;"} happening at the same time.
+
+- [How can we deal with this problem?]{style="color:darkorchid;"}
+
+
+## Average treatment effect {.smaller}
+
+- Instead of measuring the effect on an individual unit, we aim to estimate the [*average treatment effect*]{style="color:darkorange;"} (ATE) of going to college across several individuals in a population of interest. At the population level, we have:
+$$
+\text{Population ATE} = E[Y_{i}(1) - Y_{i}(0)]
+$$
+- Here, $E[X_i]$ is the population average, or better known as the expected value of the random variable $X_i$.
+
+- But this is on the population level we [can't infer nothing yet]{style="color:darkorchid;"}.
+
+- Also, we still have the problem of only observing one possible outcome $Y_{i}(1)$ or $Y_{i}(0)$.
+
+## Estimating ATE {.smaller}
+
+- We can estimate the sample ATE as:
+
+$$
+\text{Sample ATE} = E[Y_{i}(1)] - E[Y_{i}(0)] + \text{bias}
+$$
+
+- This bias can be eliminated if we adopt certain assumptions, such as the **independence of treatment** assumption (also called **ignorability**), which ensures that the treatment assignment is independent of the potential outcomes. 
+
+- In our example, this would mean that the potential outcomes, $Y_{i}(1)$ and $Y_{i}(0)$, are independent of whether a person chooses to go to college (i.e., the treatment assignment $Z$).
+
+
+## Sample ATE{.smaller}
+
+Suppose we have $N$ observations of incomes $Y_i$ from individuals who did and did not go to college. $N_1$ is the number of individuals who went to college, and $N_0$ is the number of individuals who did not go to college, so $N = N_0 + N_1$.
+
+From the sample ATE, we have:
+$$E[Y_{i}(1)] = \frac{1}{N_1}\sum_{i = 1}^{N_1} (Y_i \text{ given } Z = 1)$$
+which is the sample average of the outcome for individuals who received the treatment (i.e., went to college). Similarly, we have:
+$$E[Y_{i}(0)] = \frac{1}{N_0}\sum_{i = 1}^{N_0} (Y_i \text{ given } Z = 0)$$
+which is the sample average of the outcome for individuals who did not receive the treatment (i.e., did not go to college).
+
+
+## Sample ATE{.smaller}
+
+- So the ATE is giving by:
+$$
+\text{Sample ATE} = \frac{1}{N_1}\sum_{i = 1}^{N_1} (Y_i\text{ given } Z = 1) - \frac{1}{N_0}\sum_{i = 1}^{N_0} (Y_i\text{ given } Z = 0)
+$$
+Which can be rewritten in a more friendly way as 
+$$
+\text{Sample ATE} = \text{mean of the treated} - \text{mean of the control}
+$$
+
+## Example {.smaller}
+
+- In this example we have sample of $N = 6$ students that went to the college, $i = 1,2,\dots,6$.
+- Three of the individuals went to college, $N_1 = 3$, and the other three did not, $N_0 = 3$.
+- $Y_i$ are the observed incomes, $Y_i(1)$, and $Y_i(0)$ are the potential outcomes.
+- $Z_i\in \{0,1\}$ is the treatment.
+
+| $i$  | $Z_i$  | $Y_i$  | $Y_i(1)$ | $Y_i(0)$ | $Y_i(1) - Y_i(0)$ |
+|:----:|:----:|:----:|:------:|:------:|:------------:|
+| 1  | 0  | 50.000  |  ?   |  50.000   |     ?       |
+| 2  | 1  | 55.000  |  55.000   |  ?   |     ?       |
+| 3  | 1  | 120.000  |  120.000   |  ?   |     ?       |
+| 4  | 0  | 150.000  |  ?   |  150.000   |     ?       |
+| 5  | 0  | 45.000  |  ?   |  45.000   |     ?       |
+| 6  | 1  | 130.000  |  130.000   |  ?   |     ?       |
+
+
+## Sample ATE {.smaller}
+
+- The estimate of the ATE is giving by 
+
+\begin{eqnarray}
+\text{Sample ATE} &=& \text{mean of the treated} - \text{mean of the control} \\
+                  &=& \frac{305,000}{3} - \frac{245,000}{3} \\
+                  &=& 20,000
+\end{eqnarray}
+
+
+- On average, going to college has a positive causal effect of US$ 20,000 on income compared to those who do not go to college.
+- Again, this conclusion was made under very strong assumptions.
+- We will discuss these assumptions in the next class.
+- We are essentially assuming that the treatment is random, meaning that attending college or not was randomly assigned. This is not a reasonable assumption in most cases. 

@@ -10,3 +10,4 @@ title: "Teaching"
   - [class 05 - Time Series Decomposition and Autoregression](class_05.qmd)
   - [class 06 - Model Selection](class_06.qmd)
   - [class 07 - Logistic Regression](class_07.qmd)
+  - [class 08 - Basic Causal Inference](class_08.qmd)
