@@ -301,7 +301,8 @@ confint(glm_vote)
 
 ## Blocking {.smaller}
 
-- The effect of the treatment is not significant.
+- The effect of the treatment [is not]{style="color:darkorange;"}
+  significant under [blocking]{style="color:darkorange;"}.
 
 - What if some callers didn’t stick to the script?
 
@@ -313,10 +314,10 @@ confint(glm_vote)
 
 - Although powerful for inferring causation, RCTs are difficult to apply.
 
-- They can be incredibly expensive.
+- They can be incredibly [expensive]{style="color:darkorchid;"}.
 
-- Compliance with the treatment protocol isn’t perfect (e.g., mask-wearing, picking up the phone)
+- [Compliance]{style="color:darkorchid;"} with the treatment protocol isn’t perfect (e.g., mask-wearing, picking up the phone)
 
-- It can be hard to generalize beyond the participants involved in the study.
+- It can be [hard to generalize]{style="color:darkorchid;"} beyond the participants involved in the study.
 
 - They can be impractical or (e.g., effect of education on performance) or unethical to conduct (e.g., seatbelts, parachutes, even medical trials)
