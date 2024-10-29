@@ -94,9 +94,9 @@ Let's identify some confounders
 
 - Often called the [“gold standard”]{style="color:darkorange;"} for establishing causality.
 
-- [Randomly]{style="color:darkorange;"} assign the $X$, [“treatment”]{style="color:darkorange;"}, to participants
+- [Randomly]{style="color:darkorange;"} assign the $Z$, [“treatment”]{style="color:darkorange;"}, to participants
 
-- Now, any observed relationship between $X$ and $Y$ must be due to $X$, since the only reason an individual had a particular value of $X$ was the random assignment.
+- Now, any observed relationship between $Z$ and $Y$ must be due to $Z$, since the only reason an individual had a particular value of $X$ was the random assignment.
 
 ## Randomized controlled trials (RCTs)
 
@@ -104,7 +104,10 @@ Let's identify some confounders
 
 ## RCT - Steps 
 
-1. Check for balance - (balance between the treated and untreated)
+1. Check for [balance]{style="color:darkorange;"}
+  - (We will see what this is about)
+
+2. [Randomize]{style="color:darkorange;"}
 
 2. Calculate difference in sample means between [treatment]{style="color:darkorange;"} and
 [control group]{style="color:darkorange;"}
@@ -213,9 +216,9 @@ $$
 
 - [Important]{style="color:darkorange;"}: the regression needs to be logistic if $Y$ is categorical.
 
-## Get Out The Vote (GOTV) {.smaller}
+## Get Out The Vote (GOTV)
 
-- [*Fact*]{style="color:darkorange;"}: lots of people don’t vote.
+- [**Fact**]{style="color:darkorchid;"}: lots of people don’t vote.
 
 - It’s important for people to vote, to ensure that our government reflects the will of its constituents. 
 
@@ -257,7 +260,8 @@ summary(glm)
 confint(glm)
 ```
 
-- Receiving a phone call increases the likelihood of voting by 19% compared to those who did not receive a call.
+- Receiving a phone call [increases the likelihood]{style="color:darkorange;"}
+  of voting by 19% compared to those who did not receive a call.
 
 - Confidence interval for the treatment
 
@@ -268,11 +272,12 @@ confint(glm)
 confint(glm)
 ```
 
-## Blocking {.smaller}
+## Blocking
 
-- The researchers actually used a blocking design with two variables that they thought could impact voting rates (separately from the phone calls):
+- The researchers actually used a [blocking]{style="color:darkorange;"}
+  design with two variables that they thought could impact voting rates (separately from the phone calls):
 
-- The state of the voter (Iowa or Michigan)
+- The state of the voter (Iowa (0) or Michigan (1))
 
 - Whether the voter was in a “competitive” district (one where there was likely to be a close election)
 

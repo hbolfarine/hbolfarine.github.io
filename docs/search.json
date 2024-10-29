@@ -1733,7 +1733,7 @@
     "href": "class_09.html#randomized-controlled-trials-rcts",
     "title": "Data Science for Business Applications",
     "section": "Randomized controlled trials (RCTs)",
-    "text": "Randomized controlled trials (RCTs)\n\nOften called the “gold standard” for establishing causality.\nRandomly assign the \\(X\\), “treatment”, to participants\nNow, any observed relationship between \\(X\\) and \\(Y\\) must be due to \\(X\\), since the only reason an individual had a particular value of \\(X\\) was the random assignment."
+    "text": "Randomized controlled trials (RCTs)\n\nOften called the “gold standard” for establishing causality.\nRandomly assign the \\(Z\\), “treatment”, to participants\nNow, any observed relationship between \\(Z\\) and \\(Y\\) must be due to \\(Z\\), since the only reason an individual had a particular value of \\(X\\) was the random assignment."
   },
   {
     "objectID": "class_09.html#randomized-controlled-trials-rcts-1",
@@ -1747,7 +1747,7 @@
     "href": "class_09.html#rct---steps",
     "title": "Data Science for Business Applications",
     "section": "RCT - Steps",
-    "text": "RCT - Steps\n\nCheck for balance - (balance between the treated and untreated)\nCalculate difference in sample means between treatment and control group"
+    "text": "RCT - Steps\n\nCheck for balance\n\n\n(We will see what this is about)\n\n\nRandomize\nCalculate difference in sample means between treatment and control group"
   },
   {
     "objectID": "class_09.html#section",
@@ -1852,7 +1852,7 @@
     "href": "class_09.html#blocking-3",
     "title": "Data Science for Business Applications",
     "section": "Blocking",
-    "text": "Blocking\n\nThe researchers actually used a blocking design with two variables that they thought could impact voting rates (separately from the phone calls):\nThe state of the voter (Iowa or Michigan)\nWhether the voter was in a “competitive” district (one where there was likely to be a close election)"
+    "text": "Blocking\n\nThe researchers actually used a blocking design with two variables that they thought could impact voting rates (separately from the phone calls):\nThe state of the voter (Iowa (0) or Michigan (1))\nWhether the voter was in a “competitive” district (one where there was likely to be a close election)"
   },
   {
     "objectID": "class_09.html#blocking-4",

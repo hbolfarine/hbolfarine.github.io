@@ -476,8 +476,8 @@ Class 09 - Randomized Control Trials
 <h2>Randomized controlled trials (RCTs)</h2>
 <ul>
 <li class="fragment"><p>Often called the <span style="color:darkorange;">“gold standard”</span> for establishing causality.</p></li>
-<li class="fragment"><p><span style="color:darkorange;">Randomly</span> assign the <span class="math inline">\(X\)</span>, <span style="color:darkorange;">“treatment”</span>, to participants</p></li>
-<li class="fragment"><p>Now, any observed relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> must be due to <span class="math inline">\(X\)</span>, since the only reason an individual had a particular value of <span class="math inline">\(X\)</span> was the random assignment.</p></li>
+<li class="fragment"><p><span style="color:darkorange;">Randomly</span> assign the <span class="math inline">\(Z\)</span>, <span style="color:darkorange;">“treatment”</span>, to participants</p></li>
+<li class="fragment"><p>Now, any observed relationship between <span class="math inline">\(Z\)</span> and <span class="math inline">\(Y\)</span> must be due to <span class="math inline">\(Z\)</span>, since the only reason an individual had a particular value of <span class="math inline">\(X\)</span> was the random assignment.</p></li>
 </ul>
 </section>
 <section id="randomized-controlled-trials-rcts-1" class="slide level2">
@@ -487,7 +487,13 @@ Class 09 - Randomized Control Trials
 <section id="rct---steps" class="slide level2">
 <h2>RCT - Steps</h2>
 <ol type="1">
-<li class="fragment"><p>Check for balance - (balance between the treated and untreated)</p></li>
+<li class="fragment">Check for <span style="color:darkorange;">balance</span></li>
+</ol>
+<ul>
+<li class="fragment">(We will see what this is about)</li>
+</ul>
+<ol start="2" type="1">
+<li class="fragment"><p><span style="color:darkorange;">Randomize</span></p></li>
 <li class="fragment"><p>Calculate difference in sample means between <span style="color:darkorange;">treatment</span> and <span style="color:darkorange;">control group</span></p></li>
 </ol>
 </section>
@@ -605,10 +611,10 @@ T =
 <li class="fragment"><p><span style="color:darkorange;">Important</span>: the regression needs to be logistic if <span class="math inline">\(Y\)</span> is categorical.</p></li>
 </ul>
 </section>
-<section id="get-out-the-vote-gotv" class="slide level2 smaller">
+<section id="get-out-the-vote-gotv" class="slide level2">
 <h2>Get Out The Vote (GOTV)</h2>
 <ul>
-<li class="fragment"><p><span style="color:darkorange;"><em>Fact</em></span>: lots of people don’t vote.</p></li>
+<li class="fragment"><p><span style="color:darkorchid;"><strong>Fact</strong></span>: lots of people don’t vote.</p></li>
 <li class="fragment"><p>It’s important for people to vote, to ensure that our government reflects the will of its constituents.</p></li>
 <li class="fragment"><p>How do we get people to vote?</p></li>
 </ul>
@@ -670,7 +676,7 @@ treatmenttreatment 0.1339278 0.2077954</code></pre>
 </div>
 </div>
 <ul>
-<li class="fragment"><p>Receiving a phone call increases the likelihood of voting by 19% compared to those who did not receive a call.</p></li>
+<li class="fragment"><p>Receiving a phone call <span style="color:darkorange;">increases the likelihood</span> of voting by 19% compared to those who did not receive a call.</p></li>
 <li class="fragment"><p>Confidence interval for the treatment</p></li>
 </ul>
 <div class="cell">
@@ -682,11 +688,11 @@ treatmenttreatment 0.1339278 0.2077954</code></pre>
 </div>
 </div>
 </section>
-<section id="blocking-3" class="slide level2 smaller">
+<section id="blocking-3" class="slide level2">
 <h2>Blocking</h2>
 <ul>
-<li class="fragment"><p>The researchers actually used a blocking design with two variables that they thought could impact voting rates (separately from the phone calls):</p></li>
-<li class="fragment"><p>The state of the voter (Iowa or Michigan)</p></li>
+<li class="fragment"><p>The researchers actually used a <span style="color:darkorange;">blocking</span> design with two variables that they thought could impact voting rates (separately from the phone calls):</p></li>
+<li class="fragment"><p>The state of the voter (Iowa (0) or Michigan (1))</p></li>
 <li class="fragment"><p>Whether the voter was in a “competitive” district (one where there was likely to be a close election)</p></li>
 </ul>
 </section>
