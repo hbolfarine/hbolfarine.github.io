@@ -1,0 +1,317 @@
+---
+title: "Data Science for Business Applications"
+author: "Class 09 - Randomized Control Trials"
+title-slide-attributes:
+    data-background-image: image/background_sta235h.png
+format:
+  revealjs: 
+    theme: "my-styles.css"
+    logo: image/texas_logo2.png
+    incremental: true 
+    self-contained-math: true
+    slide-number: true
+    show-slide-number: print
+    
+---
+
+## Potential Outcomes {.smaller}
+
+- Last week we discussed [potential outcomes]{style="color:darkorange;"}., (e.g. $Y_i(1)$ and $Y_i(0)$):
+- [*"The outcome that we would have observed under different scenarios"*]{style="color:darkorchid;"}
+- Potential outcomes are related to your [choices/possible]{style="color:darkorange;"} conditions:
+- One for each path (Counterfactuals).
+- Do not confuse them with the values that your [outcome variable]{style="color:darkorchid;"} can take.
+- Definition of [Causal Effect]{style="color:darkorange;"} for individual $i$:
+$$
+\text{causal effect for an individual} = Y_{i}(1)- Y_{i}(0)
+$$
+- Better to assume for a population ([Difference in means]{style="color:darkorange;"})
+$$
+\text{ATE} = E\left[Y_{i}(1)- Y_{i}(0)\right] = E\left[Y_{i}(1)\right] - E\left[Y_{i}(0)\right]
+$$
+
+
+## Causal effect  {.smaller}
+
+* For a sample:
+
+$$
+\text{Average} [Y_{i}(1)- Y_{i}(0)] = \text{mean of the treated} - \text{mean of the untreated} 
+$$
+
+* Under what [assumptions]{style="color:darkorange;"} is our estimate causal?
+
+* [Key assumption]{style="color:darkorange;"}: [**Ignorability**]{style="color:darkorchid;"} means that the potential outcomes $Y_i(0)$ and $Y_i(1)$ are [independent]{style="color:darkorange;"} of the treatment.
+
+* In our example this means that the decision to pursue a college degree [should not be related to unmeasured factors]{style="color:darkorchid;"} that [could influence income]{style="color:darkorchid;"}. 
+
+* In reality, this assumption can be [difficult to fully satisfy]{style="color:darkorange;"}. There could be [unobserved factors]{style="color:darkorange;"}, such as intrinsic ability or motivation, that [affect both the likelihood]{style="color:darkorange;"} of obtaining a college degree and future income, leading to potential confounding.
+
+* **What can we do to make the [ignorability assumption]{style="color:darkorchid;"} hold?**
+
+## Randomization
+
+One way to make sure the [ignorability assumption]{style="color:darkorchid;"} holds is to do it by [design]{style="color:darkorchid;"}: 
+
+- [**Randomize the assignment of the treatment**]{style="color:darkorange;"} $Z$
+
+- i.e. Some units will [randomly be chosen]{style="color:darkorange;"} to be in the [treatment group]{style="color:darkorchid;"} and others to be in the [control group]{style="color:darkorchid;"}.
+
+- What does randomization buy us?
+
+- Control for [unforeseen factors]{style="color:darkorange;"} (confounders) 
+
+## Confounders {.smaller}
+
+- [**Confounder**]{style="color:darkorange;"} is a variable that affects both the [treatment]{style="color:darkorchid;"} AND the [outcome]{style="color:darkorchid;"}
+
+![](image/confounders_class_09.png){fig-align="center"  width="500"}
+
+
+## Confounders {.smaller}
+
+Let's identify some confounders
+
+- Estimate the effect of insurance vs no insurance on number of accidents $\rightarrow$ Compare people with insurance vs people without insurance.
+
+- [**Confounder**]{style="color:darkorange;"}: (Driving Behavior/Risk Aversion) Risk-averse individuals are more likely to purchase insurance and may also drive more cautiously, reducing their number of accidents.
+
+- Estimate the effect of gym membership vs no gym membership on physical health $\rightarrow$ Compare people with gym memberships vs people without gym memberships.
+
+-  [**Confounder**]{style="color:darkorange;"}: (Motivation for Fitness) Individuals who are more motivated to improve their health are more likely to purchase a gym membership and are also more likely to engage in other healthy behaviors, such as maintaining a balanced diet, which improves their physical health.
+
+## Randomization {.smaller}
+
+- Due to [**randomization**]{style="color:darkorange;"}, we know that the treatment is [not affected]{style="color:darkorchid;"} by a confounder
+
+![](image/randomization_class_09.png){fig-align="center"  width="500"}
+
+* We have "clean effect" of the treatment on the outcome 
+
+* This would be the causal effect of the treatment
+
+## Randomized controlled trials (RCTs)
+
+- Often called the [“gold standard”]{style="color:darkorange;"} for establishing causality.
+
+- [Randomly]{style="color:darkorange;"} assign the $X$, [“treatment”]{style="color:darkorange;"}, to participants
+
+- Now, any observed relationship between $X$ and $Y$ must be due to $X$, since the only reason an individual had a particular value of $X$ was the random assignment.
+
+## Randomized controlled trials (RCTs)
+
+![](image/image_dice_random.png){fig-align="center"  width="500"}
+
+## RCT - Steps 
+
+1. Check for balance - (balance between the treated and untreated)
+
+2. Calculate difference in sample means between [treatment]{style="color:darkorange;"} and
+[control group]{style="color:darkorange;"}
+ 
+## {.smaller}
+
+**Example 1**: Clinical Trial for the Moderna COVID-19 vaccine
+
+[Randomly]{style="color:darkorange;"} assign study participants to get either the vaccine:
+
+- an treatment group of 14,134 people
+
+- control group, the same size 
+
+- Results: 11 vaccine recipients got COVID; 235 of placebo recipients got COVID
+
+```{r}
+data.rct = read.csv("script_class_09/data_rct.csv")
+```
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+library(mosaic)
+
+# Control and treatment group 
+
+# Difference in proportions
+prop.test(outcome ~ treatment, data = data.rct, success = 1)
+```
+
+## Issues with RCT {.smaller}
+
+- [**Internal validity**]{style="color:darkorchid;"} is the ability of an experiment to establish cause-and-effect of the treatment within the sample studied.
+- Examples of threats to internal validity:
+- [Failure to randomize]{style="color:darkorchid;"}.
+- Failure to follow the [treatment protocol/attrition]{style="color:darkorchid;"}.
+- Small sample sizes
+
+## Issues with RCT {.smaller}
+
+- [**External validity**]{style="color:darkorange;"} is the ability of an experimental result to generalize to a larger context or population.
+- Examples of threats to external validity:
+- [Failure to randomize]{style="color:darkorchid;"}.
+- Non representative samples.
+- Non representative protocol/policy.
+
+## Blocking {.smaller}
+
+- Randomization works ["on average"]{style="color:darkorange;"} but we only get one opportunity at creating treatment and control groups, and there might be [imbalances]{style="color:darkorange;"} in ["nuisance"]{style="color:darkorange;"} variables that could affect the outcome.
+
+- For example, what will happen if the treatment group for the Moderna trial happens to get younger people in it than the control group?
+
+- We can solve this by [blocking]{style="color:darkorange;"} or [stratifying]{style="color:darkorange;"}: randomly assigning to treatment/control within groups.
+
+## Blocking {.smaller}
+
+- [Unbalanced]{style="color:darkorange;"} sample
+
+![](image/block_01.png){fig-align="center"  width="700"}
+
+## Blocking {.smaller}
+
+- [Blocking or stratification]{style="color:darkorange;"} sample
+
+![](image/block_02.png){fig-align="center"  width="700"}
+
+## Blocking in vaccine trial
+
+- In the Moderna vaccine trial, they identified two possible variables that could impact COVID outcomes:
+
+- Age (65+ vs under 65)
+
+- Underlying health condition
+
+## Blocking in vaccine trial
+
+![](image/block_03.png){fig-align="center"  width="800"}
+
+## Experiments using regression {.smaller}
+
+- Non-blocked design: use a simple regression
+$$
+\widehat{Y} = \widehat{\beta}_0 + \widehat{\beta}_1 T,
+$$
+- where $T$ is a [dummy variable]{style="color:darkorange;"} that is 
+$$
+T = 
+\begin{cases}
+    1, & \text{for the treatment group}, \\
+    0, & \text{for the control group}
+\end{cases}
+$$
+- $\widehat{\beta}_1$ represents the [estimated average treatment effect]{style="color:darkorange;"}. The regression needs to be logistic if Y is categorical!
+
+## Experiments using regression {.smaller}
+
+- [Blocked design]{style="color:darkorange;"}: use a regression that controls for the blocking variable $B$:
+
+$$
+\widehat{Y} = \widehat{\beta}_0 + \widehat{\beta}_1 T + \widehat{\beta}_2 B,
+$$
+
+- where $B$ is the fixed effect of each strata, that are interactions between categories.
+
+- [Important]{style="color:darkorange;"}: the regression needs to be logistic if $Y$ is categorical.
+
+## Get Out The Vote (GOTV) {.smaller}
+
+- [*Fact*]{style="color:darkorange;"}: lots of people don’t vote.
+
+- It’s important for people to vote, to ensure that our government reflects the will of its constituents. 
+
+- How do we get people to vote?
+
+## Get Out The Vote (GOTV) {.smaller}
+
+- In 2002, researchers at Temple and Yale conducted a large phone banking experiment to see calling voters helps:
+
+- From among about 381,062 phone numbers of voters in Iowa and Michigan they randomly contacted about 12000 voters
+
+- The outcome Y of interest is whether each voter actually voted.
+
+```{r}
+GOTV = read.csv("script_class_09/GOTV.csv")
+```
+
+## No blocking {.smaller}
+
+Estimating the average treatment effect with [logistic regression]{style="color:darkorange;"}:
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+glm = glm(vote02 ~ treatment,data = GOTV, family = "binomial")
+summary(glm)
+```
+
+- The coefficients are in log odds.
+
+## No blocking {.smaller}
+
+- The [average treatment effect]{style="color:darkorange;"} will be of approximately 19%
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+(exp(0.17)-1)*100
+confint(glm)
+```
+
+- Receiving a phone call increases the likelihood of voting by 19% compared to those who did not receive a call.
+
+- Confidence interval for the treatment
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+confint(glm)
+```
+
+## Blocking {.smaller}
+
+- The researchers actually used a blocking design with two variables that they thought could impact voting rates (separately from the phone calls):
+
+- The state of the voter (Iowa or Michigan)
+
+- Whether the voter was in a “competitive” district (one where there was likely to be a close election)
+
+## Blocking {.smaller}
+
+![](image/block_04.png){fig-align="center"  width="800"}
+
+## Blocking {.smaller}
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+
+GOTV = GOTV %>%
+       mutate(block = interaction(state, competiv))
+glm_vote = glm(vote02 ~ treatment + block, data = GOTV, family = 'binomial')
+summary(glm_vote)
+confint(glm_vote)
+```
+
+## Blocking {.smaller}
+
+- The effect of the treatment is not significant.
+
+- What if some callers didn’t stick to the script?
+
+- Many people didn’t answer the phone!
+
+- What about voters outside of the Midwest?
+
+## The limitations of RCTs {.smaller}
+
+- Although powerful for inferring causation, RCTs are difficult to apply.
+
+- They can be incredibly expensive.
+
+- Compliance with the treatment protocol isn’t perfect (e.g., mask-wearing, picking up the phone)
+
+- It can be hard to generalize beyond the participants involved in the study.
+
+- They can be impractical or (e.g., effect of education on performance) or unethical to conduct (e.g., seatbelts, parachutes, even medical trials)
