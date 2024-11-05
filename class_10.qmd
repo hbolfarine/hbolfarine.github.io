@@ -29,11 +29,11 @@ Although they are powerful for inferring causation, RCTs are hard to pull off:
 
 ## Quasi-and natural experiments 
 
-[Key idea]{style="color:darkorange;"}: Find a comparison group that is effectively “the same as” the treatment group to create a “quasi-experiment” or “natural experiment”
+[**Key idea**]{style="color:darkorange;"}: Find a comparison group that is effectively “the same as” the treatment group to create a [“quasi-experiment”a]{style="color:darkorange;"} or [“natural experiment”a]{style="color:darkorange;"}
 
 - [**Causal Question**]{style="color:darkorange;"}: Does serving in the military have an impact upon your long-term earnings after discharge?
 
-- [Why won’t this work]{style="color:darkorchid;"}: Compare the wages of people who served in the US military in Afghanistan or Iraq, 10 years after discharge, to wages of the general public
+- [**Why won’t this work**]{style="color:darkorchid;"}: Compare the wages of people who served in the US military in Afghanistan or Iraq, 10 years after discharge, to wages of the general public
 
 ##
 
@@ -59,7 +59,7 @@ Angrist (1990) wanted to determine what effect military service had on future ea
 
 ## Quasi-and natural experiments
 
-- These are called [**quasi-experiments**]{style="color:darkorange;"} or [natural experiments]{style="color:darkorange;"} because participants are not randomly assigned to treatment and control groups, but groups are selected in such a way that the assignment can be thought of as effectively random.
+- These are called [**quasi-experiments**]{style="color:darkorange;"} or [**natural experiments**]{style="color:darkorange;"} because participants are not randomly assigned to treatment and control groups, but groups are selected in such a way that the assignment can be thought of as effectively random.
 
 ## Difference-in-differences
 

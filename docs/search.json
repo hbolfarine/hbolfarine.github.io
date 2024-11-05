@@ -1894,7 +1894,7 @@
     "href": "class_10.html#quasi-and-natural-experiments",
     "title": "Data Science for Business Applications",
     "section": "Quasi-and natural experiments",
-    "text": "Quasi-and natural experiments\nKey idea: Find a comparison group that is effectively “the same as” the treatment group to create a “quasi-experiment” or “natural experiment”\n\nCausal Question: Does serving in the military have an impact upon your long-term earnings after discharge?\nWhy won’t this work: Compare the wages of people who served in the US military in Afghanistan or Iraq, 10 years after discharge, to wages of the general public"
+    "text": "Quasi-and natural experiments\nKey idea: Find a comparison group that is effectively “the same as” the treatment group to create a “quasi-experiment”a or “natural experiment”a\n\nCausal Question: Does serving in the military have an impact upon your long-term earnings after discharge?\nWhy won’t this work: Compare the wages of people who served in the US military in Afghanistan or Iraq, 10 years after discharge, to wages of the general public"
   },
   {
     "objectID": "class_10.html#the-effect-of-military-service-on-earnings",
