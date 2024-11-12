@@ -32,7 +32,7 @@
     "href": "teaching.html",
     "title": "Teaching",
     "section": "",
-    "text": "STA 235 honors\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection\nclass 07 - Logistic Regression\nclass 08 - Basic Causal Inference\nclass 09 - Randomized Control Trials\nclass 10 - Natural Experiments"
+    "text": "STA 235 honors\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection\nclass 07 - Logistic Regression\nclass 08 - Basic Causal Inference\nclass 09 - Randomized Control Trials\nclass 10 - Natural Experiments - Diff-in-Diff\nclass 11 - Natural Experiments - RDD"
   },
   {
     "objectID": "teaching.html#teaching",
@@ -2007,5 +2007,152 @@
     "title": "Data Science for Business Applications",
     "section": "Natural experiments",
     "text": "Natural experiments\nWays to create natural experiments\n\nGeographic boundaries (e.g., NJ vs PA minimum wage example)\nPolicy changes (e.g., financial aid policy change example)\nLotteries (e.g., Vietnam draft lottery example)\nArbitrary cutoffs"
+  },
+  {
+    "objectID": "class_11.html#causal-inference",
+    "href": "class_11.html#causal-inference",
+    "title": "Data Science for Business Applications",
+    "section": "Causal Inference",
+    "text": "Causal Inference\n\nNatural Experiments (RCTs in the wild).\nAlways check for balance! (All things equal!)\nDifference-in-Differences (Diff-in-Diff):\nHow we can use two wrong estimates to get a right one.\nAssumptions behind DD (Parallel changes)."
+  },
+  {
+    "objectID": "class_11.html#regression-discontinuity-design",
+    "href": "class_11.html#regression-discontinuity-design",
+    "title": "Data Science for Business Applications",
+    "section": "Regression Discontinuity Design",
+    "text": "Regression Discontinuity Design\n\nWhat will we learn today?\nRegression Discontinuity Design (RDD)\nHow can we use discontinuities to recover causal effects?\nAssumptions behind RDD designs."
+  },
+  {
+    "objectID": "class_11.html#introduction",
+    "href": "class_11.html#introduction",
+    "title": "Data Science for Business Applications",
+    "section": "Introduction",
+    "text": "Introduction\n\nArbitrary rules determine treatment assignment:\nIf you are above a threshold, you are assigned to treatment, and if your below, you are not (or vice versa)\nGeographic discontinuities\nTime discontinuities\nVoting discontinuities\nYou can find discontinuities everywhere!"
+  },
+  {
+    "objectID": "class_11.html#example-cohort-size",
+    "href": "class_11.html#example-cohort-size",
+    "title": "Data Science for Business Applications",
+    "section": "Example: Cohort size",
+    "text": "Example: Cohort size\n\nMany people argue that smaller classes lead to better learning outcomes compared to large classes.\nBut why can’t we just compare test scores of students in small classes and students in large classes?\nAngrist & Levy (1999) studied this by taking advantage of a rule in Israeli schools, where cohorts of &gt;40 students are split into two smaller classes"
+  },
+  {
+    "objectID": "class_11.html#example-cohort-size-1",
+    "href": "class_11.html#example-cohort-size-1",
+    "title": "Data Science for Business Applications",
+    "section": "Example: Cohort size",
+    "text": "Example: Cohort size\nKey idea: Students in cohorts just below 40 students are essentially identical to students in cohorts just above 40, but the ones in the latter group will get a smaller class.\n\nlibrary(tidyverse)\nggplot(class_1999, aes(x = cohort.size, y = read, color = class_split)) + \n  geom_point() +\n  geom_vline(xintercept = 40, linetype = \"dashed\")\n\n\n\nIs there a difference in the reading score between larger and smaller classes?"
+  },
+  {
+    "objectID": "class_11.html#creating-the-rdd-model",
+    "href": "class_11.html#creating-the-rdd-model",
+    "title": "Data Science for Business Applications",
+    "section": "Creating the RDD model",
+    "text": "Creating the RDD model\n\nDefine a treatment variable: \\[\\begin{equation}\nT = \\begin{cases}\n1, \\quad \\text{split cohort},\\\\\n0, \\quad \\text{intact cohort}\n\\end{cases}\n\\end{equation}\\]\nRecenter the selection variable so the cutoff is at 0: \\[\\begin{equation}\nX = (\\texttt{cohort.size}) − 40\n\\end{equation}\\]\nThen fit a model predicting reading scores from both \\(X\\) and \\(T\\): \\[\\begin{equation}\n\\widehat{Y} = \\widehat{\\beta}_{0} + \\widehat{\\beta}_1 X + \\widehat{\\beta}_2 T\n\\end{equation}\\]\n\n\nThe coefficient \\(\\widehat{\\beta}_2\\) of \\(T\\) is the causal effect we’re looking for!"
+  },
+  {
+    "objectID": "class_11.html#rdd-model",
+    "href": "class_11.html#rdd-model",
+    "title": "Data Science for Business Applications",
+    "section": "RDD model",
+    "text": "RDD model\n\nclass_1999 = class_1999 %&gt;% \n  mutate(treatment=ifelse(cohort.size &gt; 40, 1, 0), \n         selection=(cohort.size - 40))\n\nrdd1 &lt;- lm(read ~ selection + treatment, data=class_1999) \nsummary(rdd1)\n\n\nCall:\nlm(formula = read ~ selection + treatment, data = class_1999)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-35.195  -5.572   1.537   6.617  17.269 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  69.7556     1.2697  54.939   &lt;2e-16 ***\nselection    -0.1195     0.2020  -0.592   0.5545    \ntreatment     4.0031     2.1511   1.861   0.0638 .  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 9.135 on 294 degrees of freedom\nMultiple R-squared:  0.02237,   Adjusted R-squared:  0.01572 \nF-statistic: 3.363 on 2 and 294 DF,  p-value: 0.03596\n\n\n\nThe effect of the treatment is an increase of \\(\\widehat{\\beta}_2 = 4\\) points in the reading score if the students."
+  },
+  {
+    "objectID": "class_11.html#pre-vs-post-comparison",
+    "href": "class_11.html#pre-vs-post-comparison",
+    "title": "Data Science for Business Applications",
+    "section": "Pre vs post comparison",
+    "text": "Pre vs post comparison\nOur first RDD model is forcing the two lines to have the same slope; that isn’t a great fit for the data:"
+  },
+  {
+    "objectID": "class_11.html#rdd-and-interactions",
+    "href": "class_11.html#rdd-and-interactions",
+    "title": "Data Science for Business Applications",
+    "section": "RDD and interactions",
+    "text": "RDD and interactions\n\nTo allow the two slopes to be different, we can add an interaction term to allow the slope of \\(X\\) to be different for \\(T = 0\\) (cohort kept intact) and \\(T = 1\\) (cohort split into smaller classes): \\[\\begin{equation}\n\\widehat{Y} = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 X + \\widehat{\\beta}_2 T + \\widehat{\\beta}_2 T\\cdot X\n\\end{equation}\\]\nAgain, the slope of \\(\\widehat{\\beta}_2\\) is our estimate of the causal effect of the treatment."
+  },
+  {
+    "objectID": "class_11.html#rdd-with-interactions",
+    "href": "class_11.html#rdd-with-interactions",
+    "title": "Data Science for Business Applications",
+    "section": "RDD with interactions",
+    "text": "RDD with interactions\n\nrdd2 &lt;- lm(read ~ selection*treatment, data=class_1999) \nsummary(rdd2)\n\n\nCall:\nlm(formula = read ~ selection * treatment, data = class_1999)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-33.618  -6.102   1.341   6.922  17.249 \n\nCoefficients:\n                    Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)          66.6294     1.8141  36.729   &lt;2e-16 ***\nselection            -0.8945     0.3806  -2.350   0.0194 *  \ntreatment             5.6641     2.2439   2.524   0.0121 *  \nselection:treatment   1.0720     0.4477   2.395   0.0173 *  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 9.063 on 293 degrees of freedom\nMultiple R-squared:  0.04113,   Adjusted R-squared:  0.03132 \nF-statistic:  4.19 on 3 and 293 DF,  p-value: 0.00634\n\n\n\nFrom our data we an conclude that smaller class sizes cause reading scores to increase by about 5.7 points."
+  },
+  {
+    "objectID": "class_11.html#rdd-with-interactions-1",
+    "href": "class_11.html#rdd-with-interactions-1",
+    "title": "Data Science for Business Applications",
+    "section": "RDD with interactions",
+    "text": "RDD with interactions\nMore flexibility with the interaction gives the model a better fit in relation to the data:"
+  },
+  {
+    "objectID": "class_11.html#conclusion",
+    "href": "class_11.html#conclusion",
+    "title": "Data Science for Business Applications",
+    "section": "Conclusion",
+    "text": "Conclusion\n\nRDD is usually great for internal validity, but there are lots of threats to external validity.\nWhy this statement holds?\nFor example, would this generalize to different grade levels? Schools outside of Israel?"
+  },
+  {
+    "objectID": "class_11.html#example-sales",
+    "href": "class_11.html#example-sales",
+    "title": "Data Science for Business Applications",
+    "section": "Example: Sales",
+    "text": "Example: Sales\n\nYou are managing a retail store and notice that sales are low in the mornings, so you want to improve those numbers.\nA store gives a 10% discount to the first 1,000 customers that arrive.\nIs this a good candidate for regression discontinuity?\nLet’s look at the data."
+  },
+  {
+    "objectID": "class_11.html#example-sales-1",
+    "href": "class_11.html#example-sales-1",
+    "title": "Data Science for Business Applications",
+    "section": "Example: Sales",
+    "text": "Example: Sales\n\n\nSales in relation to time since the opening of the store in minutes.\nThe store receives its 1,000th customer around 260 minutes after opening (around 4.3 hours)."
+  },
+  {
+    "objectID": "class_11.html#creating-the-rdd-model-1",
+    "href": "class_11.html#creating-the-rdd-model-1",
+    "title": "Data Science for Business Applications",
+    "section": "Creating the RDD model",
+    "text": "Creating the RDD model\n\nDefine a treatment variable: \\[\\begin{equation}\nT = \\begin{cases}\n1, \\quad \\text{promotion}\\\\\n0, \\quad \\text{no promotion}\n\\end{cases}\n\\end{equation}\\]\nRecenter the selection variable so the cutoff is at 0: \\[\\begin{equation}\nX = (\\texttt{time}) - 260\n\\end{equation}\\]\nThen fit a model predicting the sales of a customer from both \\(X\\) and \\(T\\): \\[\\begin{equation}\n\\widehat{Y} = \\widehat{\\beta}_{0} + \\widehat{\\beta}_1 X + \\widehat{\\beta}_2 T\n\\end{equation}\\]\n\n\nThe coefficient \\(\\widehat{\\beta}_2\\) is the causal effect we are looking for!"
+  },
+  {
+    "objectID": "class_11.html#rdd-model-1",
+    "href": "class_11.html#rdd-model-1",
+    "title": "Data Science for Business Applications",
+    "section": "RDD model",
+    "text": "RDD model\n\nsales = sales %&gt;% \n  mutate(selection=(time - 260))\n\nrdd_sales &lt;- lm(sales ~ selection + treat, data=sales) \nsummary(rdd_sales)\n\n\nCall:\nlm(formula = sales ~ selection + treat, data = sales)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-77.32 -14.62   0.14  14.56  68.95 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 165.61482    1.08422  152.75   &lt;2e-16 ***\nselection    -0.10294    0.00661  -15.57   &lt;2e-16 ***\ntreat        31.52628    1.95845   16.10   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 21.82 on 1997 degrees of freedom\nMultiple R-squared:  0.6539,    Adjusted R-squared:  0.6535 \nF-statistic:  1886 on 2 and 1997 DF,  p-value: &lt; 2.2e-16\n\n\n\nOn average, providing a 10% discount increases sales by $31.30 for the 1,000 customers, compared to not having a discount."
+  },
+  {
+    "objectID": "class_11.html#rdd-model-2",
+    "href": "class_11.html#rdd-model-2",
+    "title": "Data Science for Business Applications",
+    "section": "RDD model",
+    "text": "RDD model"
+  },
+  {
+    "objectID": "class_11.html#a-more-flexible-rdd-model",
+    "href": "class_11.html#a-more-flexible-rdd-model",
+    "title": "Data Science for Business Applications",
+    "section": "A more flexible RDD model",
+    "text": "A more flexible RDD model\n\nAs in the first example, we have that two lines of the RDD model have the same slope.\nWe can make this model more flexible by adding an interaction term.\nTo allow the two slopes to be different, we can add an interaction term to allow the slope of \\(X\\) to be different for \\(T = 0\\) (after 1,000th customer) and \\(T = 1\\) (first thousand customers):\n\n\\[\\begin{equation}\n\\widehat{Y} = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 \\, X + \\widehat{\\beta}_2 \\, T + \\widehat{\\beta}_3 \\, X\\cdot T\n\\end{equation}\\]"
+  },
+  {
+    "objectID": "class_11.html#rdd-with-interaction",
+    "href": "class_11.html#rdd-with-interaction",
+    "title": "Data Science for Business Applications",
+    "section": "RDD with interaction",
+    "text": "RDD with interaction\n\nrdd_sales_inter &lt;- lm(sales ~ selection*treat, data=sales) \nsummary(rdd_sales_inter)\n\n\nCall:\nlm(formula = sales ~ selection * treat, data = sales)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-65.738 -13.940   0.051  13.538  76.515 \n\nCoefficients:\n                  Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)     178.574245   1.297815  137.60   &lt;2e-16 ***\nselection        -0.205355   0.008882  -23.12   &lt;2e-16 ***\ntreat            31.399196   1.842316   17.04   &lt;2e-16 ***\nselection:treat   0.200845   0.012438   16.15   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 20.52 on 1996 degrees of freedom\nMultiple R-squared:  0.6939,    Adjusted R-squared:  0.6934 \nF-statistic:  1508 on 3 and 1996 DF,  p-value: &lt; 2.2e-16\n\n\n\nOn average, providing a 10% discount increases sales by $33.10 for the 1,000 customers, compared to not having a discount."
+  },
+  {
+    "objectID": "class_11.html#rdd-with-interaction-1",
+    "href": "class_11.html#rdd-with-interaction-1",
+    "title": "Data Science for Business Applications",
+    "section": "RDD with interaction",
+    "text": "RDD with interaction\n\nWe have different slopes, for before and after the treatment."
+  },
+  {
+    "objectID": "class_11.html#conclusion-1",
+    "href": "class_11.html#conclusion-1",
+    "title": "Data Science for Business Applications",
+    "section": "Conclusion",
+    "text": "Conclusion\n\nAgain, RDD is usually great for internal validity, but there are lots of threats to external validity.\nFor example, would this generalize to different types of products? Same store, but a different location?"
   }
 ]

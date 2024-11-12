@@ -12,4 +12,5 @@ title: "Teaching"
   - [class 07 - Logistic Regression](class_07.qmd)
   - [class 08 - Basic Causal Inference](class_08.qmd)
   - [class 09 - Randomized Control Trials](class_09.qmd)
-  - [class 10 - Natural Experiments](class_10.qmd)
+  - [class 10 - Natural Experiments - Diff-in-Diff](class_10.qmd)
+  - [class 11 - Natural Experiments -  RDD](class_11.qmd)

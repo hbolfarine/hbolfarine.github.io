@@ -1,0 +1,292 @@
+---
+title: "Data Science for Business Applications"
+author: "Class 11 - Observations Studies: RDD"
+title-slide-attributes:
+    data-background-image: image/background_sta235h.png
+format:
+  revealjs: 
+    theme: "my-styles.css"
+    logo: image/texas_logo2.png
+    incremental: true 
+    self-contained-math: true
+    slide-number: true
+    show-slide-number: print
+    
+---
+
+## Causal Inference 
+
+- Natural Experiments ([RCTs in the wild]{style="color:darkorange;"}).
+- Always check for balance! ([All things equal!]{style="color:darkorange;"})
+- [Difference-in-Differences]{style="color:darkorange;"} (Diff-in-Diff):
+- How we can use two wrong estimates to get a right one.
+- Assumptions behind DD ([Parallel changes]{style="color:darkorange;"}).
+
+## Regression Discontinuity Design
+
+- What will we learn today?
+- Regression Discontinuity Design (RDD)
+- How can we use [**discontinuities**]{style="color:darkorange;"} to recover [causal effects]{style="color:darkorchid"}?
+- [Assumptions]{style="color:darkorange;"} behind RDD designs.
+
+## Introduction
+
+- Arbitrary rules determine treatment assignment:
+
+- If you are above a [threshold]{style="color:darkorange;"}, you are [assigned to treatment]{style="color:darkorchid"}, and if your below, [you are not]{style="color:darkorchid"} (or vice versa)
+
+- [*Geographic discontinuities*]{style="color:darkorange;"}
+- [*Time discontinuities*]{style="color:darkorange;"} 
+- [*Voting discontinuities*]{style="color:darkorange;"}
+- You can find [discontinuities]{style="color:darkorchid"} everywhere!
+
+## Example: Cohort size
+
+- Many people argue that [smaller classes]{style="color:darkorange;"} lead to [better learning]{style="color:darkorange;"} outcomes compared to large classes.
+- But why can’t we just [compare test scores]{style="color:darkorchid;"} of students in [small classes]{style="color:darkorchid;"} and students in [large classes]{style="color:darkorchid;"}?
+- Angrist & Levy (1999) studied this by taking advantage of a rule in Israeli schools, where [cohorts of >40 students]{style="color:darkorange;"} are [split]{style="color:darkorange;"} into two smaller classes 
+
+## Example: Cohort size {.smaller}
+
+[**Key idea**]{style="color:darkorange;"}: Students in cohorts [just below]{style="color:darkorchid;"} 40 students are [essentially identical]{style="color:darkorchid;"} to students in cohorts [just above 40]{style="color:darkorchid;"}, but the ones in the latter group will get a smaller class.
+
+```{r}
+class_1999 = read.csv("script_class_11/class_1999.csv")
+```
+
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+library(tidyverse)
+ggplot(class_1999, aes(x = cohort.size, y = read, color = class_split)) + 
+  geom_point() +
+  geom_vline(xintercept = 40, linetype = "dashed")
+```
+- Is there a difference in the reading score between larger and smaller classes?
+
+## Creating the RDD model
+
+1. Define a [treatment variable]{style="color:darkorange;"}:
+\begin{equation}
+T = \begin{cases}
+1, \quad \text{split cohort},\\
+0, \quad \text{intact cohort}
+\end{cases}
+\end{equation}
+
+2. [Recenter]{style="color:darkorange;"} the selection variable so the [cutoff]{style="color:darkorange;"} is at 0: 
+\begin{equation}
+X = (\texttt{cohort.size}) − 40
+\end{equation}
+
+3. Then [fit a model]{style="color:darkorange;"} predicting reading scores from both $X$ and $T$:
+\begin{equation}
+\widehat{Y} = \widehat{\beta}_{0} + \widehat{\beta}_1 X + \widehat{\beta}_2 T
+\end{equation}
+
+- The coefficient $\widehat{\beta}_2$ of $T$ is the [causal effect]{style="color:darkorange;"} we’re looking for!
+
+## RDD model {.smaller}
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+
+class_1999 = class_1999 %>% 
+  mutate(treatment=ifelse(cohort.size > 40, 1, 0), 
+         selection=(cohort.size - 40))
+
+rdd1 <- lm(read ~ selection + treatment, data=class_1999) 
+summary(rdd1)
+
+```
+
+- The [effect of the treatment]{style="color:darkorange;"} is an increase of $\widehat{\beta}_2 = 4$ points in the reading score if the students.
+
+## Pre vs post comparison {.smaller}
+
+Our first RDD model is forcing the two lines to have the same slope; that isn’t a great fit for the data:
+ 
+```{r,fig.align = 'center'}
+class_1999 = class_1999 %>% 
+  mutate(pred=predict(rdd1))
+
+  ggplot(class_1999, aes(x=cohort.size, y=read, col=class_split)) + 
+      geom_vline(aes(xintercept=40), color = "gray", size = 1, linetype = 'dashed') + 
+      geom_line(aes(y=pred), lwd=1) +
+      geom_point() +
+      xlab("Cohort size") +
+      ylab("Reading score") +
+      labs(col="Treatment")
+``` 
+ 
+## RDD and interactions
+
+- To allow the two slopes to be different, we can add an interaction term to allow the slope of $X$ to be different for $T = 0$ (cohort kept intact) and $T = 1$ (cohort split into smaller classes):
+\begin{equation}
+\widehat{Y} = \widehat{\beta}_0 + \widehat{\beta}_1 X + \widehat{\beta}_2 T + \widehat{\beta}_2 T\cdot X
+\end{equation}
+
+- Again, the slope of $\widehat{\beta}_2$ is our [estimate of the causal effect]{style="color:darkorange;"} of the treatment.
+
+## RDD with interactions {.smaller}
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+#| 
+rdd2 <- lm(read ~ selection*treatment, data=class_1999) 
+summary(rdd2)
+```
+
+- From our data we an conclude that smaller class sizes cause reading scores [to increase]{style="color:darkorange;"} by about 5.7 points.
+
+## RDD with interactions {.smaller}
+
+More flexibility with the interaction gives the model a [better fit]{style="color:darkorange;"} in relation to the data:
+
+```{r,fig.align = 'center'}
+class_1999 = class_1999 %>% 
+  mutate(pred2=predict(rdd2))
+
+  ggplot(class_1999, aes(x=cohort.size, y=read, col=class_split)) + 
+      geom_vline(aes(xintercept=40), color = "gray", size = 1, linetype = 'dashed') + 
+      geom_line(aes(y=pred2), lwd=1) +
+      geom_point() +
+      xlab("Cohort size") +
+      ylab("Reading score") +
+      labs(col="Treatment")
+``` 
+
+## Conclusion
+
+- RDD is usually great for [internal validity]{style="color:darkorange;"}, but there are lots of [threats to external validity]{style="color:darkorange;"}.
+- Why this statement holds?
+- For example, would this generalize to different grade levels? Schools outside of Israel?
+
+```{r}
+sales = read.csv("script_class_11/sales.csv")
+```
+
+## Example: Sales
+
+- You are managing a retail store and notice that [sales are low in the mornings]{style="color:darkorchid;"}, so you want to improve those numbers.
+- A store gives a [10% discount]{style="color:darkorange;"} to the first 1,000 customers that arrive.
+- Is this a good candidate for [**regression discontinuity**]{style="color:darkorange;"}?
+- Let’s look at the data.
+
+## Example: Sales {.smaller}
+
+```{r,fig.align = 'center'}
+ggplot(sales, aes(x = time, y = sales, col = as.factor(treat))) + 
+  geom_point(shape = 1)
+```
+
+- Sales in relation to time since the opening of the store in minutes.
+- The store receives its 1,000th customer around 260 minutes after opening (around 4.3 hours).
+
+## Creating the RDD model {.smaller}
+
+1. Define a treatment variable:
+\begin{equation}
+T = \begin{cases}
+1, \quad \text{promotion}\\
+0, \quad \text{no promotion}
+\end{cases}
+\end{equation}
+
+2. Recenter the selection variable so the cutoff is at 0:
+\begin{equation}
+X = (\texttt{time}) - 260
+\end{equation}
+
+3. Then fit a model predicting the sales of a customer from both $X$ and $T$:
+\begin{equation}
+\widehat{Y} = \widehat{\beta}_{0} + \widehat{\beta}_1 X + \widehat{\beta}_2 T
+\end{equation}
+
+- The coefficient $\widehat{\beta}_2$ is the [causal effect]{style="color:darkorange;"} we are looking for!
+
+## RDD model {.smaller}
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+
+sales = sales %>% 
+  mutate(selection=(time - 260))
+
+rdd_sales <- lm(sales ~ selection + treat, data=sales) 
+summary(rdd_sales)
+
+```
+
+- On average, providing a 10% discount [increases sales]{style="color:darkorange;"} by $31.30 for the 1,000 customers, compared to not having a discount.
+
+## RDD model {.smaller}
+
+```{r,fig.align = 'center'}
+sales = sales %>% 
+  mutate(pred=predict(rdd_sales))
+
+  ggplot(sales, aes(x=time, y=sales, col=as.factor(treat))) + 
+      geom_vline(aes(xintercept=260), color = "gray", size = 1, linetype = 'dashed') + 
+      geom_line(aes(y=pred), lwd=1) +
+      geom_point(shape = 1) +
+      xlab("Sales") +
+      ylab("Time") +
+      labs(col="Treatment")
+``` 
+
+## A more flexible RDD model
+
+- As in the first example, we have that two lines of the RDD model have the [same slope]{style="color:darkorchid;"}.
+
+- We can make this model [more flexible]{style="color:darkorange;"} by adding an interaction term.
+
+- To allow the two slopes to be different, we can [add an interaction]{style="color:darkorange;"} term to allow the slope of $X$ to be different for $T = 0$ (after 1,000th customer) and $T = 1$ (first thousand customers):
+
+\begin{equation}
+\widehat{Y} = \widehat{\beta}_0 + \widehat{\beta}_1 \, X + \widehat{\beta}_2 \, T + \widehat{\beta}_3 \, X\cdot T
+\end{equation}
+
+## RDD with interaction {.smaller}
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+
+rdd_sales_inter <- lm(sales ~ selection*treat, data=sales) 
+summary(rdd_sales_inter)
+```
+
+- On average, providing a 10% discount [increases sales]{style="color:darkorange;"} by $33.10 for the 1,000 customers, compared to not having a discount.
+
+## RDD with interaction {.smaller}
+
+- We have different slopes, for before and after the treatment.
+
+```{r,fig.align = 'center'}
+
+sales = sales %>% 
+  mutate(pred2=predict(rdd_sales_inter))
+
+  ggplot(sales, aes(x=time, y=sales, col=as.factor(treat))) + 
+      geom_vline(aes(xintercept=260), color = "gray", size = 1, linetype = 'dashed') + 
+      geom_line(aes(y=pred2), lwd=1) +
+      geom_point(shape = 1) +
+      xlab("Sales") +
+      ylab("Time") +
+      labs(col="Treatment")
+```
+## Conclusion
+
+- Again, RDD is usually [great for internal validity]{style="color:darkorange;"}, but there are [lots of threats to external validity]{style="color:darkorange;"}.
+- For example, would this generalize to different types of products? Same store, but a different location?
+
