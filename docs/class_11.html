@@ -518,7 +518,7 @@ F-statistic: 3.363 on 2 and 294 DF,  p-value: 0.03596</code></pre>
 <h2>RDD and interactions</h2>
 <ul>
 <li class="fragment"><p>To allow the two slopes to be different, we can add an interaction term to allow the slope of <span class="math inline">\(X\)</span> to be different for <span class="math inline">\(T = 0\)</span> (cohort kept intact) and <span class="math inline">\(T = 1\)</span> (cohort split into smaller classes): <span class="math display">\[\begin{equation}
-\widehat{Y} = \widehat{\beta}_0 + \widehat{\beta}_1 X + \widehat{\beta}_2 T + \widehat{\beta}_2 T\cdot X
+\widehat{Y} = \widehat{\beta}_0 + \widehat{\beta}_1 X + \widehat{\beta}_2 T + \widehat{\beta}_3 T\cdot X
 \end{equation}\]</span></p></li>
 <li class="fragment"><p>Again, the slope of <span class="math inline">\(\widehat{\beta}_2\)</span> is our <span style="color:darkorange;">estimate of the causal effect</span> of the treatment.</p></li>
 </ul>

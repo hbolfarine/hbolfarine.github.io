@@ -2069,7 +2069,7 @@
     "href": "class_11.html#rdd-and-interactions",
     "title": "Data Science for Business Applications",
     "section": "RDD and interactions",
-    "text": "RDD and interactions\n\nTo allow the two slopes to be different, we can add an interaction term to allow the slope of \\(X\\) to be different for \\(T = 0\\) (cohort kept intact) and \\(T = 1\\) (cohort split into smaller classes): \\[\\begin{equation}\n\\widehat{Y} = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 X + \\widehat{\\beta}_2 T + \\widehat{\\beta}_2 T\\cdot X\n\\end{equation}\\]\nAgain, the slope of \\(\\widehat{\\beta}_2\\) is our estimate of the causal effect of the treatment."
+    "text": "RDD and interactions\n\nTo allow the two slopes to be different, we can add an interaction term to allow the slope of \\(X\\) to be different for \\(T = 0\\) (cohort kept intact) and \\(T = 1\\) (cohort split into smaller classes): \\[\\begin{equation}\n\\widehat{Y} = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 X + \\widehat{\\beta}_2 T + \\widehat{\\beta}_3 T\\cdot X\n\\end{equation}\\]\nAgain, the slope of \\(\\widehat{\\beta}_2\\) is our estimate of the causal effect of the treatment."
   },
   {
     "objectID": "class_11.html#rdd-with-interactions",
