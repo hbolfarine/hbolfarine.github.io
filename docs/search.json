@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Henrique Bolfarine",
     "section": "",
-    "text": "Henrique Bolfarine, Lecturer - Department of Information, Risk, and Operations Management"
+    "text": "Welcome to my homepage! I’m an Assistant Professor of Economics at Stanford Graduate School of Business (GSB), an Assistant Professor of Statistics (by courtesy), and a Faculty Fellow at Institute for Economic Policy Research (SIEPR). I obtained my Ph.D. in Statistics at UC Berkeley, advised by Professors Peter Bickel and Michael Jordan and worked as a postdoctoral researcher in the Statistics Department at Stanford University, advised by Professor Emmanuel Candès."
   },
   {
     "objectID": "about.html",
@@ -25,7 +25,7 @@
     "href": "index.html#about",
     "title": "Henrique Bolfarine",
     "section": "",
-    "text": "Henrique Bolfarine, Lecturer - Department of Information, Risk, and Operations Management"
+    "text": "Welcome to my homepage! I’m an Assistant Professor of Economics at Stanford Graduate School of Business (GSB), an Assistant Professor of Statistics (by courtesy), and a Faculty Fellow at Institute for Economic Policy Research (SIEPR). I obtained my Ph.D. in Statistics at UC Berkeley, advised by Professors Peter Bickel and Michael Jordan and worked as a postdoctoral researcher in the Statistics Department at Stanford University, advised by Professor Emmanuel Candès."
   },
   {
     "objectID": "teaching.html",
@@ -2154,5 +2154,12 @@
     "title": "Data Science for Business Applications",
     "section": "Conclusion",
     "text": "Conclusion\n\nAgain, RDD is usually great for internal validity, but there are lots of threats to external validity.\nFor example, would this generalize to different types of products? Same store, but a different location?"
+  },
+  {
+    "objectID": "index.html#contact",
+    "href": "index.html#contact",
+    "title": "Henrique Bolfarine",
+    "section": "Contact",
+    "text": "Contact\nEmail: henrique.bolfarfine@austin.utexas.edu Address: GSB 3.140A,McCombs School of Business, 2110 Speedway, Austin"
   }
 ]

@@ -15,7 +15,12 @@ about:
 
 ## About
 
-Henrique Bolfarine,
-Lecturer - Department of Information, Risk, and Operations Management
+Welcome to my homepage! I'm an Assistant Professor of Economics at Stanford Graduate School of Business (GSB), an Assistant Professor of Statistics (by courtesy), and a Faculty Fellow at Institute for Economic Policy Research (SIEPR). I obtained my Ph.D. in Statistics at UC Berkeley, advised by Professors Peter Bickel and Michael Jordan and worked as a postdoctoral researcher in the Statistics Department at Stanford University, advised by Professor Emmanuel Candès.
+
+## Contact
+
+Email: henrique.bolfarfine@austin.utexas.edu
+Address: GSB 3.140A,McCombs School of Business, 2110 Speedway, Austin
+
 ---
 
