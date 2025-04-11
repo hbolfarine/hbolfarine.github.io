@@ -4,16 +4,16 @@ title: "Research"
 
 ## Working papers
 
-- "Lower-dimensional posterior summaries for density and cluster estimates". H. Bolfarine, H.F. Lopes, & C.M. Carvalho. *Working Paper*
+- "Lower-dimensional posterior summaries for density and cluster estimates." H. Bolfarine, H.F. Lopes, & C.M. Carvalho. *Working Paper*
 
 ## Publications
 
-- "Decoupling Shrinkage and Selection in Gaussian Linear Factor Analysis". H. Bolfarine, C.M. Carvalho, H.F. Lopes, & J.S. Murray. *Bayesian Analysis (2024) 19, Number 1, pp. 181–203*
+- "Decoupling Shrinkage and Selection in Gaussian Linear Factor Analysis." H. Bolfarine, C.M. Carvalho, H.F. Lopes, & J.S. Murray. *Bayesian Analysis (2024) 19, Number 1, pp. 181–203*
 
-- "2021 International Statistical Institute Mahalanobis Award: A Tribute to Heleno Bolfarine". 
+- "2021 International Statistical Institute Mahalanobis Award: A Tribute to Heleno Bolfarine."
 F. Ruggeri, H. Bolfarine, J.L. Bazan, & C.M. Carvalho. *International Statistical Review (2021), 89, 3, 2021 International Statistical Institute.*
 
 ## Preprints
 
-- H. Bolfarine, L. Thomas, & A. Yambartsev. "Network reconstruction with local partial correlation: comparative evaluation" *Working Paper*
+- "Network reconstruction with local partial correlation: comparative evaluation." H. Bolfarine, L. Thomas, & A. Yambartsev. *Working Paper*
 
