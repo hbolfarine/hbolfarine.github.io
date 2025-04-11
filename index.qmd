@@ -30,5 +30,9 @@ Address: GSB 3.140A, McCombs School of Business, 2110 Speedway, Austin
 - Bayesian mixture models 
 - Nonparametric model
 
+## CV
+
+- [Henrique Bolfarine - CV](Henrique_Bolfarine_s_CV.pdf)
+
 ---
 
