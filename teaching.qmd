@@ -2,6 +2,8 @@
 title: "Teaching"
 ---
 
+- STA 235 - spring
+
 - STA 235 honors
   - [class 01 - Simple and Multiple Regression](class_01.qmd)
   - [class 02 - Categorical Variables and Interactions](class_02.qmd)
