@@ -32,7 +32,7 @@
     "href": "teaching.html",
     "title": "Teaching",
     "section": "",
-    "text": "STA 235 honors\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection\nclass 07 - Logistic Regression\nclass 08 - Basic Causal Inference\nclass 09 - Randomized Control Trials\nclass 10 - Natural Experiments - Diff-in-Diff\nclass 11 - Natural Experiments - RDD"
+    "text": "STA 235 Data Science for Business Applications - Spring 2025\nSTA 235 honors Data Science for Business Applications - Fall 20204\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection\nclass 07 - Logistic Regression\nclass 08 - Basic Causal Inference\nclass 09 - Randomized Control Trials\nclass 10 - Natural Experiments - Diff-in-Diff\nclass 11 - Natural Experiments - RDD"
   },
   {
     "objectID": "teaching.html#teaching",
@@ -2196,5 +2196,12 @@
     "title": "Henrique Bolfarine",
     "section": "CV",
     "text": "CV\n\nHenrique Bolfarine - CV"
+  },
+  {
+    "objectID": "teaching.html#university-of-texas-at-austin",
+    "href": "teaching.html#university-of-texas-at-austin",
+    "title": "Teaching",
+    "section": "",
+    "text": "STA 235 Data Science for Business Applications - Spring 2025\nSTA 235 honors Data Science for Business Applications - Fall 20204\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection\nclass 07 - Logistic Regression\nclass 08 - Basic Causal Inference\nclass 09 - Randomized Control Trials\nclass 10 - Natural Experiments - Diff-in-Diff\nclass 11 - Natural Experiments - RDD"
   }
 ]
