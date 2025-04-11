@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Henrique Bolfarine",
     "section": "",
-    "text": "Welcome to my homepage! I’m a lecturer of statistics and data science at the McCombs School of Business. I obtained my Ph.D. in Statistics at the Institute of Mathematics and Statistics of the University of São Paulo, advised by Professors Hedibert Lopes and Carlos Carvalho, and worked as a postdoctoral researcher at the McCombs School of Business, advised by Professor Carlos Carvalho."
+    "text": "Welcome to my homepage! I’m a lecturer of statistics and data science at the McCombs School of Business at the University of Texas at Austin. I obtained my Ph.D. in Statistics at the Institute of Mathematics and Statistics of the University of São Paulo, advised by Professors Hedibert Lopes and Carlos Carvalho, and worked as a postdoctoral researcher at the McCombs School of Business, advised by Professor Carlos Carvalho."
   },
   {
     "objectID": "about.html",
@@ -25,7 +25,7 @@
     "href": "index.html#about",
     "title": "Henrique Bolfarine",
     "section": "",
-    "text": "Welcome to my homepage! I’m a lecturer of statistics and data science at the McCombs School of Business. I obtained my Ph.D. in Statistics at the Institute of Mathematics and Statistics of the University of São Paulo, advised by Professors Hedibert Lopes and Carlos Carvalho, and worked as a postdoctoral researcher at the McCombs School of Business, advised by Professor Carlos Carvalho."
+    "text": "Welcome to my homepage! I’m a lecturer of statistics and data science at the McCombs School of Business at the University of Texas at Austin. I obtained my Ph.D. in Statistics at the Institute of Mathematics and Statistics of the University of São Paulo, advised by Professors Hedibert Lopes and Carlos Carvalho, and worked as a postdoctoral researcher at the McCombs School of Business, advised by Professor Carlos Carvalho."
   },
   {
     "objectID": "teaching.html",
@@ -2203,5 +2203,12 @@
     "title": "Teaching",
     "section": "",
     "text": "STA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 Honors - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection\nclass 07 - Logistic Regression\nclass 08 - Basic Causal Inference\nclass 09 - Randomized Control Trials\nclass 10 - Natural Experiments - Diff-in-Diff\nclass 11 - Natural Experiments - RDD\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Application\n\n\n\n\n\nSTA 235 - Data Science for Business Application"
+  },
+  {
+    "objectID": "index.html#cv---henrique-bolfarine---cv",
+    "href": "index.html#cv---henrique-bolfarine---cv",
+    "title": "Henrique Bolfarine",
+    "section": "CV - Henrique Bolfarine - CV",
+    "text": "CV - Henrique Bolfarine - CV"
   }
 ]

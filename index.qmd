@@ -15,7 +15,7 @@ about:
 
 ## About
 
-Welcome to my homepage! I'm a lecturer of statistics and data science at the McCombs School of Business. I obtained my Ph.D. in Statistics at the Institute of Mathematics and Statistics of the University of São Paulo, advised by Professors Hedibert Lopes and Carlos Carvalho, and worked as a postdoctoral researcher at the McCombs School of Business, advised by Professor Carlos Carvalho.
+Welcome to my homepage! I'm a lecturer of statistics and data science at the McCombs School of Business at the University of Texas at Austin. I obtained my Ph.D. in Statistics at the Institute of Mathematics and Statistics of the University of São Paulo, advised by Professors Hedibert Lopes and Carlos Carvalho, and worked as a postdoctoral researcher at the McCombs School of Business, advised by Professor Carlos Carvalho.
 
 ## Contact
 
@@ -31,9 +31,7 @@ Address: GSB 3.140A, McCombs School of Business, 2110 Speedway, Austin
 - Bayesian mixture models 
 - Nonparametric model
 
-## CV
-
-- [Henrique Bolfarine - CV](Henrique_Bolfarine_s_CV.pdf)
+## CV - [Henrique Bolfarine - CV](Henrique_Bolfarine_s_CV.pdf)
 
 ---
 
