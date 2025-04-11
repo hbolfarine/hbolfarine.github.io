@@ -19,8 +19,8 @@ Welcome to my homepage! I'm a lecturer of statistics and data science at the McC
 
 ## Contact
 
-Email: henrique.bolfarfine at austin.utexas.edu
-Address: GSB 3.140A, McCombs School of Business, 2110 Speedway, Austin
+- Email: henrique.bolfarfine at austin.utexas.edu
+- Address: GSB 3.140A, McCombs School of Business, 2110 Speedway, Austin
 
 ## Research Interests
 
