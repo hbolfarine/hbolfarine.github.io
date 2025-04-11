@@ -9,9 +9,9 @@
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "Research",
     "section": "",
-    "text": "About this site"
+    "text": "“Lower-dimensional posterior summaries for density and cluster estimates”"
   },
   {
     "objectID": "index.html#education",
@@ -2168,5 +2168,26 @@
     "title": "Henrique Bolfarine",
     "section": "Research Interests",
     "text": "Research Interests\n\nBayesian Statistics\nFactor Analysis\nModel Summarization\nBayesian mixture models\nNonparametric model"
+  },
+  {
+    "objectID": "about.html#working-papers",
+    "href": "about.html#working-papers",
+    "title": "Research",
+    "section": "",
+    "text": "“Lower-dimensional posterior summaries for density and cluster estimates”"
+  },
+  {
+    "objectID": "about.html#publications",
+    "href": "about.html#publications",
+    "title": "Research",
+    "section": "Publications",
+    "text": "Publications"
+  },
+  {
+    "objectID": "about.html#preprints",
+    "href": "about.html#preprints",
+    "title": "Research",
+    "section": "Preprints",
+    "text": "Preprints"
   }
 ]

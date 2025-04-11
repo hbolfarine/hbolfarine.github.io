@@ -1,7 +1,13 @@
 ---
-title: "About"
+title: "Research"
 ---
 
-About this site 
+## Working papers
+
+- "Lower-dimensional posterior summaries for density and cluster estimates"
+
+## Publications
+
+## Preprints
 
 
