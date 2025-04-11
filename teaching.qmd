@@ -4,9 +4,9 @@ title: "Teaching"
 
 ## University of Texas at Austin
 
-- STA 235 Data Science for Business Applications  - Spring 2025
+- STA 235 - Data Science for Business Applications - Spring 2025
 
-- STA 235 honors Data Science for Business Applications  -  Fall 20204
+- STA 235 Honors - Data Science for Business Applications  -  Fall 20204
   - [class 01 - Simple and Multiple Regression](class_01.qmd)
   - [class 02 - Categorical Variables and Interactions](class_02.qmd)
   - [class 03 - Regression assumptions and Outliers](class_03.qmd)
@@ -18,3 +18,23 @@ title: "Teaching"
   - [class 09 - Randomized Control Trials](class_09.qmd)
   - [class 10 - Natural Experiments - Diff-in-Diff](class_10.qmd)
   - [class 11 - Natural Experiments -  RDD](class_11.qmd)
+  
+- STA 235 - Data Science for Business Applications - Summer 2024
+
+- STA 235 - Data Science for Business Applications - Spring 2024
+
+- STA 301 - Introduction to Data Science - Spring 2024
+
+- STA 235 - Data Science for Business Applications - Fall 2024
+
+- STA 301 - Introduction to Data Science - Fall 2024
+
+- STA 235 - Data Science for Business Applications - Spring 2023
+
+- STA 301 - Introduction to Data Science - Spring 2023
+
+- STA 301 - Introduction to Data Science - Fall 2022
+
+- STA 235 - Data Science for Business Application - Summer 2022
+
+- STA 235 - Data Science for Business Application - Fall 2022
