@@ -4,13 +4,13 @@ title: "Research"
 
 ## Working papers
 
-- H. Bolfarine, H.F. Lopes, & C.M. Carvalho. "Lower-dimensional posterior summaries for density and cluster estimates". *Working Paper*
+- "Lower-dimensional posterior summaries for density and cluster estimates". H. Bolfarine, H.F. Lopes, & C.M. Carvalho. *Working Paper*
 
 ## Publications
 
-- H. Bolfarine, C.M. Carvalho, H.F. Lopes, & J.S. Murray. "Decoupling Shrinkage and Selection in Gaussian Linear Factor Analysis". *Working Paper*
+- "Decoupling Shrinkage and Selection in Gaussian Linear Factor Analysis". H. Bolfarine, C.M. Carvalho, H.F. Lopes, & J.S. Murray. *Working Paper*
 
-- F. Ruggeri, H. Bolfarine, J.L. Bazan, & C.M. Carvalho. "2021 International Statistical Institute Mahalanobis Award: A Tribute to Heleno Bolfarine". *Working Paper*
+- "2021 International Statistical Institute Mahalanobis Award: A Tribute to Heleno Bolfarine". F. Ruggeri, H. Bolfarine, J.L. Bazan, & C.M. Carvalho. *Working Paper*
 
 ## Preprints
 
