@@ -17,3 +17,7 @@ F. Ruggeri, H. Bolfarine, J.L. Bazan, & C.M. Carvalho. *International Statistica
 
 - "Network reconstruction with local partial correlation: comparative evaluation." H. Bolfarine, L. Thomas, & A. Yambartsev. *Working Paper*
 
+## Invited Reviewer
+
+- Bayesian Analysis
+
