@@ -29,7 +29,7 @@ Address: GSB 3.140A, McCombs School of Business, 2110 Speedway, Austin
 - Model Summarization
 - Factor Models
 - Bayesian mixture models 
-- Nonparametric model
+- Nonparametric models
 
 ## CV - [Henrique Bolfarine - CV](Henrique_Bolfarine_s_CV.pdf)
 
