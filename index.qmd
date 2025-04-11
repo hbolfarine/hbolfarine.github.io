@@ -7,7 +7,7 @@ about:
   image-width: 23em
   links:
     - text: Email
-      href: mailto:hbolfarine@gmail.com
+      href: mailto:henrique.bolfarfine@austin.utexas.edu
     - icon: github
       text: Github
       href: https://github.com/hbolfarine/
