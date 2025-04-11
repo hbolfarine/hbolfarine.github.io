@@ -25,8 +25,9 @@ Address: GSB 3.140A, McCombs School of Business, 2110 Speedway, Austin
 ## Research Interests
 
 - Bayesian Statistics
-- Factor Analysis
+- Latent Variable modelling
 - Model Summarization
+- Factor Models
 - Bayesian mixture models 
 - Nonparametric model
 
