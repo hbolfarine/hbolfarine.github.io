@@ -8,9 +8,9 @@ title: "Teaching"
 
 - STA 235 - Data Science for Business Applications
 
-### Spring 2025
+### Fall 2024
 
-- STA 235 Honors - Data Science for Business Applications  -  Fall 20204
+- STA 235 Honors - Data Science for Business Applications
   - [class 01 - Simple and Multiple Regression](class_01.qmd)
   - [class 02 - Categorical Variables and Interactions](class_02.qmd)
   - [class 03 - Regression assumptions and Outliers](class_03.qmd)
@@ -22,23 +22,37 @@ title: "Teaching"
   - [class 09 - Randomized Control Trials](class_09.qmd)
   - [class 10 - Natural Experiments - Diff-in-Diff](class_10.qmd)
   - [class 11 - Natural Experiments -  RDD](class_11.qmd)
-  
-- STA 235 - Data Science for Business Applications - Summer 2024
 
-- STA 235 - Data Science for Business Applications - Spring 2024
+### Summer 2024
 
-- STA 301 - Introduction to Data Science - Spring 2024
+- STA 235 - Data Science for Business Applications
 
-- STA 235 - Data Science for Business Applications - Fall 2024
+### Spring 2024
 
-- STA 301 - Introduction to Data Science - Fall 2024
+- STA 235 - Data Science for Business Applications
 
-- STA 235 - Data Science for Business Applications - Spring 2023
+- STA 301 - Introduction to Data Science
 
-- STA 301 - Introduction to Data Science - Spring 2023
+### Fall 2023
 
-- STA 301 - Introduction to Data Science - Fall 2022
+- STA 235 - Data Science for Business Applications
 
-- STA 235 - Data Science for Business Application - Summer 2022
+- STA 301 - Introduction to Data Science
 
-- STA 235 - Data Science for Business Application - Fall 2022
+### Spring 2023
+
+- STA 235 - Data Science for Business Applications
+
+- STA 301 - Introduction to Data Science
+
+### Fall 2022
+
+- STA 301 - Introduction to Data Science
+
+### Summer 2022
+
+- STA 235 - Data Science for Business Application
+
+### Fall 2022
+
+- STA 235 - Data Science for Business Application 
