@@ -4,7 +4,7 @@ title: "Research"
 
 ## Working papers
 
-- "Lower-dimensional posterior summaries for density and cluster estimates"
+- H. Bolfarine, H.F. Lopes, & C.M. Carvalho. "Lower-dimensional posterior summaries for density and cluster estimates."*Working Paper*
 
 ## Publications
 
