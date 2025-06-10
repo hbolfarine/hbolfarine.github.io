@@ -4,7 +4,7 @@ title: "Research"
 
 ## Working papers
 
-- "Lower-dimensional posterior summaries for density and cluster estimates." H. Bolfarine, H.F. Lopes, & C.M. Carvalho. *Working Paper*
+- "Lower-dimensional posterior density and cluster summaries for overparameterized Bayesian models." H. Bolfarine, H.F. Lopes, & C.M. Carvalho. *Working Paper*
 
 ## Publications
 
@@ -20,4 +20,5 @@ F. Ruggeri, H. Bolfarine, J.L. Bazan, & C.M. Carvalho. *International Statistica
 ## Invited Reviewer
 
 - Bayesian Analysis
+- Entropy
 
