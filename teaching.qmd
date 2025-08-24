@@ -4,6 +4,11 @@ title: "Teaching"
 
 ## University of Texas at Austin
 
+### Fall 2025
+
+- STA 235 - Data Science for Business Applications
+  - [class 01 - Simple and Multiple Regression](fall_sta235_2025/week_01/week_01.qmd)
+
 ### Spring 2025
 
 - STA 235 - Data Science for Business Applications

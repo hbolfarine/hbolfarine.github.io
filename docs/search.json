@@ -32,7 +32,7 @@
     "href": "teaching.html",
     "title": "Teaching",
     "section": "",
-    "text": "STA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 Honors - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection\nclass 07 - Logistic Regression\nclass 08 - Basic Causal Inference\nclass 09 - Randomized Control Trials\nclass 10 - Natural Experiments - Diff-in-Diff\nclass 11 - Natural Experiments - RDD\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Application\n\n\n\n\n\nSTA 235 - Data Science for Business Application"
+    "text": "STA 235 - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 Honors - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection\nclass 07 - Logistic Regression\nclass 08 - Basic Causal Inference\nclass 09 - Randomized Control Trials\nclass 10 - Natural Experiments - Diff-in-Diff\nclass 11 - Natural Experiments - RDD\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Application\n\n\n\n\n\nSTA 235 - Data Science for Business Application"
   },
   {
     "objectID": "teaching.html#teaching",
@@ -2202,7 +2202,7 @@
     "href": "teaching.html#university-of-texas-at-austin",
     "title": "Teaching",
     "section": "",
-    "text": "STA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 Honors - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection\nclass 07 - Logistic Regression\nclass 08 - Basic Causal Inference\nclass 09 - Randomized Control Trials\nclass 10 - Natural Experiments - Diff-in-Diff\nclass 11 - Natural Experiments - RDD\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Application\n\n\n\n\n\nSTA 235 - Data Science for Business Application"
+    "text": "STA 235 - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 Honors - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection\nclass 07 - Logistic Regression\nclass 08 - Basic Causal Inference\nclass 09 - Randomized Control Trials\nclass 10 - Natural Experiments - Diff-in-Diff\nclass 11 - Natural Experiments - RDD\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Application\n\n\n\n\n\nSTA 235 - Data Science for Business Application"
   },
   {
     "objectID": "index.html#cv---henrique-bolfarine---cv",
@@ -2224,5 +2224,348 @@
     "title": "Teaching",
     "section": "University of São Paulo",
     "text": "University of São Paulo\n\nSummer 2022\n\nIntroduction to Probability Theory"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html",
+    "href": "fall_sta235_2025/week_01/week_01.html",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "Use regression to build predictive models\nUnderstand the benefits and limitations of the models we build\nGiven a new business situation, select an appropriate model, build it, measure its effectiveness, and effectively communicate the results\nThis is a practical course!\n\n\n\n\n\n\n\n\n\n\n\n\nWhy bother learning this stuff when we can get ChatGPT to do data analysis for us?\nAI (and computing in general) is only useful when you have the expertise to be able to recognize the correctness (or not) of its output\nIn this class, you’ll develop that expertise!\n\n\n\n\n\nInstructor: Henrique Bolfarine, Ph.D.\n\nOffice hours: Mondays 1:00 PM - 2:00 PM (GSB 3.140 A)\nEmail: henrique.bolfarine@austin.utexas.edu\n\nCourse Assistants:\n\nLead Course Assistant (CA): Ezgi Durakoglugil\nOffice hours: Many TA/CA office hours every week (both in person and on Zoom) - This should be your first option!\nYou can ask any of the TAs/CAs about course content, but go to Ezgi for questions about logistics"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#course-goals",
+    "href": "fall_sta235_2025/week_01/week_01.html#course-goals",
+    "title": "Data Science for Business Applications",
+    "section": "Course Goals",
+    "text": "Course Goals\n\nUse regression to build predictive models\nUnderstand the benefits and limitations of the models we build\nGiven a new business situation, select an appropriate model, build it, measure its effectiveness, and effectively communicate the results\nThis is a practical course!"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#why-does-this-course-exist",
+    "href": "fall_sta235_2025/week_01/week_01.html#why-does-this-course-exist",
+    "title": "Data Science for Business Applications",
+    "section": "Why Does This Course Exist?",
+    "text": "Why Does This Course Exist?\n\nWhy bother learning this stuff when we can get ChatGPT to do data analysis for us?\nAI (and computing in general) is only useful when you have the expertise to be able to recognize the correctness (or not) of its output\nIn this class, you’ll develop that expertise!"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#about-the-course-staff",
+    "href": "fall_sta235_2025/week_01/week_01.html#about-the-course-staff",
+    "title": "Data Science for Business Applications",
+    "section": "About the Course Staff",
+    "text": "About the Course Staff\n\nInstructor: Henrique Bolfarine, Ph.D.\n\nOffice hours: Mondays 1:00 PM - 2:00 PM (GSB 3.140 A)\nEmail: henrique.bolfarine@austin.utexas.edu\n\nCourse Assistants:\n\nLead Course Assistant (CA): Ezgi Durakoglugil\nOffice hours: Many TA/CA office hours every week (both in person and on Zoom) - This should be your first option!\nYou can ask any of the TAs/CAs about course content, but go to Ezgi for questions about logistics"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#course-structure",
+    "href": "fall_sta235_2025/week_01/week_01.html#course-structure",
+    "title": "Data Science for Business Applications",
+    "section": "Course Structure",
+    "text": "Course Structure\n\nUnits\n\nUnit A: Fundamentals of regression modeling\nUnit B: Applications and extensions\n\nCanvas\n\nMake sure you can log in and are enrolled in STA 235 in Canvas\nCheck out the home page for the weekly schedule and to meet the course staff"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#statistical-computing",
+    "href": "fall_sta235_2025/week_01/week_01.html#statistical-computing",
+    "title": "Data Science for Business Applications",
+    "section": "Statistical Computing",
+    "text": "Statistical Computing\n\n\n\nWe will use R and RStudio for statistical analysis throughout the course\nMake sure both are installed on your laptop and bring it to every class\nIf you aren’t comfortable with R/RStudio from STA 301, don’t worry!"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#weekly-cadence-for-a-particular-topic",
+    "href": "fall_sta235_2025/week_01/week_01.html#weekly-cadence-for-a-particular-topic",
+    "title": "Data Science for Business Applications",
+    "section": "Weekly Cadence for a Particular Topic",
+    "text": "Weekly Cadence for a Particular Topic\n\nDue by the start of class on Monday/Tuesday: Perusall pre-class video/reading discussion covering the topic\nDuring class on Monday/Tuesday: Lecture, activities, practice topic\nDue by 11:59 PM the following Sunday/Monday: Homework covering the topic\nThe following Thursday at the beginning of class: Checkpoint Quiz on that topic"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#pre-class-work",
+    "href": "fall_sta235_2025/week_01/week_01.html#pre-class-work",
+    "title": "Data Science for Business Applications",
+    "section": "Pre-Class Work",
+    "text": "Pre-Class Work\n\nThis is a fast-paced course, so it’s essential that you think about the material before class.\nWe will use Perusall for pre-class video and reading assignments.\nUse Perusall to ask your classmates questions, and share your knowledge, thoughts, and opinions.\nThis helps you better understand the material and will help me gear class time to what topics you are having the most trouble with."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#pre-class-work-1",
+    "href": "fall_sta235_2025/week_01/week_01.html#pre-class-work-1",
+    "title": "Data Science for Business Applications",
+    "section": "Pre-Class Work",
+    "text": "Pre-Class Work\n\nPre-class assignments (typically videos) are due at the start of each class.\nAim to chime in with at least a few thoughtful questions, responses, or comments for each reading assignment.\nGrading is based on effort and thoughtfulness of your questions and comments and your engagement with classmates and the text.\nEach assignment is scored 0-3, but with a reasonable effort you will get a 3 on each one (so don’t worry about your grade)."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#homework",
+    "href": "fall_sta235_2025/week_01/week_01.html#homework",
+    "title": "Data Science for Business Applications",
+    "section": "Homework",
+    "text": "Homework\n\n\n\nWhy homework?\nHomework is due each week at 11:59 PM the night before class and submitted through Canvas.\nAutomatically graded; resubmit as many times as you want!\nOK to work together, but try the problems on your own first for maximum benefit."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#checkpoint-quizzes",
+    "href": "fall_sta235_2025/week_01/week_01.html#checkpoint-quizzes",
+    "title": "Data Science for Business Applications",
+    "section": "Checkpoint Quizzes",
+    "text": "Checkpoint Quizzes\n\nIt is critical in this course to stay on top of things and not fall behind.\nCheckpoint Quiz at the start of each class will help you ensure that you are really learning the material and give you an early heads-up if you aren’t.\nWe’ll drop your lowest quiz score from each unit (A and B).\nYou’ll have access to RStudio and a “cheat sheet” during quizzes (don’t spend time memorizing anything!)."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#mastery-exams",
+    "href": "fall_sta235_2025/week_01/week_01.html#mastery-exams",
+    "title": "Data Science for Business Applications",
+    "section": "Mastery Exams",
+    "text": "Mastery Exams\n\nEach unit concludes with a Mastery Exam:\n\nUnit A: October 9 or 10 at 7 PM\nUnit B: University-assigned final exam period\n\nYou’ll have access to RStudio and a “cheat sheet” during exams (don’t spend time memorizing anything!)."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#assessment-grading",
+    "href": "fall_sta235_2025/week_01/week_01.html#assessment-grading",
+    "title": "Data Science for Business Applications",
+    "section": "Assessment Grading",
+    "text": "Assessment Grading\n\nUnit A has 7 Checkpoint Quizzes and Unit B has 6.\nFor each unit, we will replace your lowest quiz score with your exam score for that unit (if that helps your overall grade)."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#grading",
+    "href": "fall_sta235_2025/week_01/week_01.html#grading",
+    "title": "Data Science for Business Applications",
+    "section": "Grading",
+    "text": "Grading\n\n\n\n\nComponent\nPoints\n\n\n\n\nPre-class work (Perusall)\n44\n\n\nClass Participation\n56\n\n\nHomework (13)\n195\n\n\nCheckpoint Quizze (13)\n325\n\n\nExam A\n190\n\n\nExam B\n190\n\n\nTotal\n1,000"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#getting-help",
+    "href": "fall_sta235_2025/week_01/week_01.html#getting-help",
+    "title": "Data Science for Business Applications",
+    "section": "Getting Help",
+    "text": "Getting Help\n\nMy office hours: Schedule on Canvas.\nTA/CA office hours: Schedule on Canvas.\nPost questions in videos in Perusall (for questions about the course material).\nPost questions in group chats in Perusall (for general questions about the course, or homework questions).\nWeekly optional TA/CA-led review session (TBD)."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#section",
+    "href": "fall_sta235_2025/week_01/week_01.html#section",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "What personal characteristics about an instructor do you think are predictive of the scores they receive on student evaluations?"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#hamermesh-parker-2005-data-set",
+    "href": "fall_sta235_2025/week_01/week_01.html#hamermesh-parker-2005-data-set",
+    "title": "Data Science for Business Applications",
+    "section": "Hamermesh & Parker (2005) Data Set",
+    "text": "Hamermesh & Parker (2005) Data Set\n\nStudent evaluations of \\(N=463\\) instructors at UT Austin, 2000-2002\nFor each instructor:\n\\(\\texttt{eval}\\): average student evaluation of teacher\n\\(\\texttt{beauty}\\): average beauty score from a six-student panel\n\\(\\texttt{gender}\\): male or female\n\\(\\texttt{credits}\\): single- or multi-credit course\n\\(\\texttt{age}\\): age of instructor\n\n(and more…)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#explore-the-data-texttteval",
+    "href": "fall_sta235_2025/week_01/week_01.html#explore-the-data-texttteval",
+    "title": "Data Science for Business Applications",
+    "section": "Explore the data: \\(\\texttt{eval}\\)",
+    "text": "Explore the data: \\(\\texttt{eval}\\)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#explore-the-data-textttbeauty",
+    "href": "fall_sta235_2025/week_01/week_01.html#explore-the-data-textttbeauty",
+    "title": "Data Science for Business Applications",
+    "section": "Explore the data: \\(\\texttt{beauty}\\)",
+    "text": "Explore the data: \\(\\texttt{beauty}\\)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#more-time-series-datasets",
+    "href": "fall_sta235_2025/week_01/week_01.html#more-time-series-datasets",
+    "title": "Data Science for Business Applications",
+    "section": "More time series datasets",
+    "text": "More time series datasets\nWhat are some common characteristics of these time series? How do they differ?"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#components-of-time-series",
+    "href": "fall_sta235_2025/week_01/week_01.html#components-of-time-series",
+    "title": "Data Science for Business Applications",
+    "section": "Components of time series",
+    "text": "Components of time series\nWe can think about a time series as having one or more components, or sources of variability:\n\n\nTrend+cyclic: Persistent, (usually) slow-moving long-run patterns\n\nLong run, Apple’s earnings go up over time\n\nSeasonal: Regular up-and-down movement around long-run trends\n\nApple’s earnings vary predictably each quarter around the long-run trend\n\nRandom or unpredictable variation\n\nCustomers are fickle creatures, so earnings aren’t perfectly predictable\n\nExternal factors, like shocks that interrupt or change previous dynamics\n\nIntroductions of the iPhone, supply chain shocks, …"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#modeling-time-series",
+    "href": "fall_sta235_2025/week_01/week_01.html#modeling-time-series",
+    "title": "Data Science for Business Applications",
+    "section": "Modeling time series",
+    "text": "Modeling time series\nWe can model many time series using our standard regression tools!\n\nTrend+cyclic:\n\nModel long-run trends with linear or nonlinear functions of time\nUse today’s outcome directly to predict tomorrow’s\n\nSeasonal:\n\nTreat the season (quarter, month, week, etc) as a categorical variable\n\nExternal factors:\n\nCreate new predictors from other time series or to reflect known events"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#time-series-data",
+    "href": "fall_sta235_2025/week_01/week_01.html#time-series-data",
+    "title": "Data Science for Business Applications",
+    "section": "Time series data",
+    "text": "Time series data\nSome notation:\n\\[\\begin{align*}\nt &= \\text{time }(1, 2, 3, \\ldots) \\\\\nY_t &= \\text{the value of the variable we are interested in, at time $t$}\n\\end{align*}\\]\nThe change from \\(Y_i\\) to \\(Y_t\\) reflects that each observation (row) corresponds to a time indexed by \\(t\\)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#structure-of-the-apple-earnings-data",
+    "href": "fall_sta235_2025/week_01/week_01.html#structure-of-the-apple-earnings-data",
+    "title": "Data Science for Business Applications",
+    "section": "Structure of the Apple earnings data",
+    "text": "Structure of the Apple earnings data\n\nhead(apple) # %&gt;% select(-Time))\n\n  Period    Time Year Quarter Revenue\n1      1 2011.50 2011      Q3   28.27\n2      2 2011.75 2011      Q4   46.33\n3      3 2012.00 2012      Q1   39.19\n4      4 2012.25 2012      Q2   35.02\n5      5 2012.50 2012      Q3   35.97\n6      6 2012.75 2012      Q4   54.51\n\n\n\n\\(Y_t\\) = \\(\\text{Revenue_t}\\)\n\\(\\text{Period}_t\\) = \\(t\\)\n\\(Time_t\\): Used for plots"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#trend-and-seasonality-in-the-apple-earnings-data",
+    "href": "fall_sta235_2025/week_01/week_01.html#trend-and-seasonality-in-the-apple-earnings-data",
+    "title": "Data Science for Business Applications",
+    "section": "Trend and Seasonality in the Apple earnings data",
+    "text": "Trend and Seasonality in the Apple earnings data\n\nApple’s earnings have a clear trend over time and seasonality by quarter."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#trend-and-seasonality-in-the-apple-earnings-data-1",
+    "href": "fall_sta235_2025/week_01/week_01.html#trend-and-seasonality-in-the-apple-earnings-data-1",
+    "title": "Data Science for Business Applications",
+    "section": "Trend and Seasonality in the Apple earnings data",
+    "text": "Trend and Seasonality in the Apple earnings data\n\napple_model1 &lt;- lm(Revenue ~ Period + Quarter, data = apple)\n\n...\n\nCoefficients:\n            Estimate Std. Error t value             Pr(&gt;|t|)    \n(Intercept)  29.4695     3.0511    9.66      0.0000000000068 ***\nPeriod        1.3046     0.0892   14.62 &lt; 0.0000000000000002 ***\nQuarterQ2    -8.3919     3.1939   -2.63                0.012 *  \nQuarterQ3    -5.0707     3.1977   -1.59                0.121    \nQuarterQ4    22.4692     3.1939    7.03      0.0000000191875 ***\n...\n\n\n\\[\n\\hat Y_t = 29.5 + 1.3\\text{Period}_t - 8.4\\text{Q2}_t\n- 5.1\\text{Q3}_t\n+ 22.5\\text{Q4}_t\n\\]"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#trend-seasonality-in-the-apple-earnings-data",
+    "href": "fall_sta235_2025/week_01/week_01.html#trend-seasonality-in-the-apple-earnings-data",
+    "title": "Data Science for Business Applications",
+    "section": "Trend + Seasonality in the Apple earnings data",
+    "text": "Trend + Seasonality in the Apple earnings data\n\\[\n\\hat Y_t = 29.5 + 1.3\\text{Period}_t - 8.4\\text{Q2}_t\n- 5.1\\text{Q3}_t\n+ 22.5\\text{Q4}_t\n\\]\n\nOn average, earnings in the same quarter increase \\(4\\times 1.3 = \\$5.2\\)b every year.\nAfter accounting for the trend, Q2 earnings are \\(\\$ 7.8\\)b lower than Q1 on average\nAfter accounting for the trend, Q3 earnings are ??? lower than Q1 on average\nAfter accounting for the trend, Q4 earnings are \\(\\$ 22.4\\)b higher than Q1 on average"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#checking-assumptions",
+    "href": "fall_sta235_2025/week_01/week_01.html#checking-assumptions",
+    "title": "Data Science for Business Applications",
+    "section": "Checking assumptions",
+    "text": "Checking assumptions\nLet’s check on our modeling assumptions…\n\nWhich are violated?\n\nLinearity and Equal variance! (Independence TBD)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#whats-going-on",
+    "href": "fall_sta235_2025/week_01/week_01.html#whats-going-on",
+    "title": "Data Science for Business Applications",
+    "section": "What’s going on?",
+    "text": "What’s going on?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNonlinearity + Increasing variance over time usually suggests taking log of \\(Y\\) to get a multiplicative model"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#a-multiplicative-model-is-more-appropriate",
+    "href": "fall_sta235_2025/week_01/week_01.html#a-multiplicative-model-is-more-appropriate",
+    "title": "Data Science for Business Applications",
+    "section": "A multiplicative model is more appropriate",
+    "text": "A multiplicative model is more appropriate\n\napple_model2 &lt;- lm(log(Revenue) ~ Period + Quarter, data = apple)\n\n...\n\nCoefficients:\n            Estimate Std. Error t value             Pr(&gt;|t|)    \n(Intercept)  3.55729    0.03877   91.75 &lt; 0.0000000000000002 ***\nPeriod       0.02134    0.00113   18.82 &lt; 0.0000000000000002 ***\nQuarterQ2   -0.15339    0.04059   -3.78              0.00053 ***\nQuarterQ3   -0.10239    0.04063   -2.52              0.01595 *  \nQuarterQ4    0.32398    0.04059    7.98          0.000000001 ***\n...\n\n\n\\[\n\\widehat {\\log(Y_t)} = 3.56 + 0.02\\text{Period}_t - 0.15\\text{Q2}_t\n- 0.1\\text{Q3}_t\n+ 0.32\\text{Q4}_t\n\\]\n\\[\n\\hat Y_t = e^{3.56 + 0.02\\text{Period}_t - 0.15\\text{Q2}_t\n- 0.1\\text{Q3}_t\n+ 0.32\\text{Q4}_t}\n\\]"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#interpreting-the-multiplicative-model",
+    "href": "fall_sta235_2025/week_01/week_01.html#interpreting-the-multiplicative-model",
+    "title": "Data Science for Business Applications",
+    "section": "Interpreting the multiplicative model",
+    "text": "Interpreting the multiplicative model\n\\[\n\\hat Y_t = e^{3.56 + 0.02\\text{Period}_t - 0.15\\text{Q2}_t\n- 0.1\\text{Q3}_t\n+ 0.32\\text{Q4}_t}\n\\]\n\nOn average, earnings in the same quarter increase by a factor of \\(\\exp(4\\times 0.02) = 1.083\\), or 8.3%, every year\nAfter accounting for the trend, on average Q2 earnings are lower than Q1 by a factor of \\(\\exp(-0.16) = 0.852\\), or \\(14.8\\%\\)\nAfter accounting for the trend, on average Q3 earnings are ??? than Q1 by a factor of ???, or ???%.\nAfter accounting for the trend, Q4 earnings are higher than Q1 by a factor of \\(\\exp(0.32) = 1.377\\), or \\(37.7\\%\\)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#interpreting-the-multiplicative-model-1",
+    "href": "fall_sta235_2025/week_01/week_01.html#interpreting-the-multiplicative-model-1",
+    "title": "Data Science for Business Applications",
+    "section": "Interpreting the multiplicative model",
+    "text": "Interpreting the multiplicative model\n\\[\n\\hat Y_t = e^{3.56 + 0.02\\text{Period}_t - 0.15\\text{Q2}_t\n- 0.1\\text{Q3}_t\n+ 0.32\\text{Q4}_t}\n\\]\nOn average, earnings in the same quarter increase by a factor of \\(\\exp(4\\times 0.02) = 1.083\\), or 8.3%, every year. Why?\n\nFor example: Q3 of 2019 (Period = 33): \\[\\hat Y_{32} = \\exp(3.56 + 0.02(33) + 0.1)\\]\n\n\nQ3 of 2020 (Period = 37): \\[\n\\begin{align}\n\\hat Y_{37} &= \\exp(3.56 + 0.02(37) + 0.1)\\\\\n&= \\exp(3.56 + 0.02(33 + 4)  + 0.1)\\\\\n&= \\color{darkred}{\\exp(3.56 + 0.02(33)  + 0.1)}\\times\\color{darkblue}{\\exp(0.02(4))}\\\\\n&= \\color{darkred}{\\hat Y_{32}} \\times \\color{darkblue}{1.083}\n\\end{align}\n\\]"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#much-better",
+    "href": "fall_sta235_2025/week_01/week_01.html#much-better",
+    "title": "Data Science for Business Applications",
+    "section": "Much better!",
+    "text": "Much better!\n\nautoplot(apple_model2)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#but-wait",
+    "href": "fall_sta235_2025/week_01/week_01.html#but-wait",
+    "title": "Data Science for Business Applications",
+    "section": "But wait…",
+    "text": "But wait…\nWe’re consistently under predicting recent quarters!\n\nIs there time dependence in our residuals?"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#checking-for-independence",
+    "href": "fall_sta235_2025/week_01/week_01.html#checking-for-independence",
+    "title": "Data Science for Business Applications",
+    "section": "Checking for independence",
+    "text": "Checking for independence\n\nPrediction errors for consecutive quarters are correlated!\n\\[\n\\mathrm{Cor}(\\text{residual}_t, \\text{residual}_{t-1}) = 0.64\n\\] (This is the lag 1 autocorrelation)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#checking-for-independence-acf",
+    "href": "fall_sta235_2025/week_01/week_01.html#checking-for-independence-acf",
+    "title": "Data Science for Business Applications",
+    "section": "Checking for independence (ACF)",
+    "text": "Checking for independence (ACF)\n\nacf(residuals(apple_model2))\n\n\n\\[\n\\color{darkred}{\n\\mathrm{Cor}(\\text{residual}_t, \\text{residual}_{t-1}) = 0.64\n}\n\\] (This is the lag 1 autocorrelation)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#checking-for-independence-acf-1",
+    "href": "fall_sta235_2025/week_01/week_01.html#checking-for-independence-acf-1",
+    "title": "Data Science for Business Applications",
+    "section": "Checking for independence (ACF)",
+    "text": "Checking for independence (ACF)\n\nacf(residuals(apple_model2))\n\n\n\\[\n\\color{darkorange}{\n\\mathrm{Cor}(\\text{residual}_t, \\text{residual}_{t-2}) = 0.26\n}\n\\]\n(This is the lag 2 autocorrelation)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#checking-for-independence-acf-2",
+    "href": "fall_sta235_2025/week_01/week_01.html#checking-for-independence-acf-2",
+    "title": "Data Science for Business Applications",
+    "section": "Checking for independence (ACF)",
+    "text": "Checking for independence (ACF)\nThe autocorrelation function (ACF) plot shows autocorrelation at many lags\n\nacf(residuals(apple_model2))\n\n\nUnder independence, about 95% of the time any given lag will be within the blue. Look out for large lag 1 values in particular!"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#improving-our-model",
+    "href": "fall_sta235_2025/week_01/week_01.html#improving-our-model",
+    "title": "Data Science for Business Applications",
+    "section": "Improving our model",
+    "text": "Improving our model\nLet’s try to address the bias in recent predictions first.\n\nWhat may have changed mid-late 2020?"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#modeling-external-shocks",
+    "href": "fall_sta235_2025/week_01/week_01.html#modeling-external-shocks",
+    "title": "Data Science for Business Applications",
+    "section": "Modeling external shocks",
+    "text": "Modeling external shocks\nAdding a COVID level-shift:\n\n# Define PostCOVID to be 1 on or after 2020 Q4\n# (i.e., if the year is 2021+ or if we are in 2020 Q4)\napple &lt;- apple %&gt;%\n  mutate(PostCOVID = ifelse(\n    Year &gt;= 2021 | (Year == 2020 & Quarter == \"Q4\"),\n    1, 0)\n  )\n\n\n\n...\n   Period Year Quarter Revenue PostCOVID\n35     35 2020      Q1   58.31         0\n36     36 2020      Q2   59.68         0\n37     37 2020      Q3   64.70         0\n38     38 2020      Q4  111.44         1\n39     39 2021      Q1   89.58         1\n40     40 2021      Q2   81.43         1\n41     41 2021      Q3   83.36         1\n..."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#modeling-external-shocks-1",
+    "href": "fall_sta235_2025/week_01/week_01.html#modeling-external-shocks-1",
+    "title": "Data Science for Business Applications",
+    "section": "Modeling external shocks",
+    "text": "Modeling external shocks\nAdding a COVID level-shift:\n\napple_model3 &lt;- lm(log(Revenue) ~ Period + Quarter\n  + PostCOVID, data = apple)\n\n...\n\nCoefficients:\n            Estimate Std. Error t value             Pr(&gt;|t|)    \n(Intercept)  3.59676    0.03500  102.77 &lt; 0.0000000000000002 ***\nPeriod       0.01830    0.00126   14.50 &lt; 0.0000000000000002 ***\nQuarterQ2   -0.15036    0.03500   -4.30              0.00012 ***\nQuarterQ3   -0.09328    0.03511   -2.66              0.01148 *  \nQuarterQ4    0.32094    0.03500    9.17       0.000000000036 ***\nPostCOVID    0.16701    0.04390    3.80              0.00050 ***\n...\n\n\n\nconfint(apple_model3)\n\n               2.5 %   97.5 %\n(Intercept)  3.52591  3.66762\nPeriod       0.01575  0.02086\nQuarterQ2   -0.22121 -0.07951\nQuarterQ3   -0.16436 -0.02219\nQuarterQ4    0.25009  0.39179\nPostCOVID    0.07813  0.25588"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#new-model-fit",
+    "href": "fall_sta235_2025/week_01/week_01.html#new-model-fit",
+    "title": "Data Science for Business Applications",
+    "section": "New model fit",
+    "text": "New model fit"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#new-models-residuals",
+    "href": "fall_sta235_2025/week_01/week_01.html#new-models-residuals",
+    "title": "Data Science for Business Applications",
+    "section": "New model’s residuals",
+    "text": "New model’s residuals\nThe last few quarters look better:\n\nBut is the time dependence gone?"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#nope",
+    "href": "fall_sta235_2025/week_01/week_01.html#nope",
+    "title": "Data Science for Business Applications",
+    "section": "Nope!",
+    "text": "Nope!\n\nacf(residuals(apple_model3))\n\n\nWe still have time dependence in our residuals!"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#adding-a-lag-autoregression",
+    "href": "fall_sta235_2025/week_01/week_01.html#adding-a-lag-autoregression",
+    "title": "Data Science for Business Applications",
+    "section": "Adding a lag (autoregression)",
+    "text": "Adding a lag (autoregression)\nLet’s create and add a lag 1 term (\\(\\log(Y_{t-1})\\), the log of last quarter’s earnings):\n\napple &lt;- apple %&gt;% mutate(lag1 = lag(Revenue))\napple_model4 &lt;- lm(log(Revenue) ~ Period + Quarter\n  + PostCOVID + log(lag1), data = apple)\n\n...\nCoefficients:\n            Estimate Std. Error t value      Pr(&gt;|t|)    \n(Intercept) 1.787927   0.484023    3.69       0.00073 ***\nPeriod      0.008745   0.002516    3.48       0.00135 ** \nQuarterQ2   0.000922   0.048638    0.02       0.98497    \nQuarterQ3   0.147878   0.065352    2.26       0.02978 *  \nQuarterQ4   0.521035   0.060089    8.67 0.00000000024 ***\nPostCOVID   0.118981   0.039507    3.01       0.00473 ** \nlog(lag1)   0.468291   0.123846    3.78       0.00057 ***\n..."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#independence-over-time-is-satisfied",
+    "href": "fall_sta235_2025/week_01/week_01.html#independence-over-time-is-satisfied",
+    "title": "Data Science for Business Applications",
+    "section": "Independence (over time) is satisfied!",
+    "text": "Independence (over time) is satisfied!\n\nacf(residuals(apple_model4))\n\n\nFor independence to hold:\n\nThe low-lag autocorrelations (1,2,3) should be within the blue, and we should see no clear patterns.\nOccasional values outside the blue (e.g. lags 5,11, etc here) are expected about 5% of the time even under independence"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#forecasting",
+    "href": "fall_sta235_2025/week_01/week_01.html#forecasting",
+    "title": "Data Science for Business Applications",
+    "section": "Forecasting",
+    "text": "Forecasting\nOur last observation is from Q2 2022; how can we forecast Q3 2022?\n\ntail(apple, 3)\n\n   Period Time Year Quarter Revenue PostCOVID   lag1\n42     42 2022 2021      Q4  123.94         1  83.36\n43     43 2022 2022      Q1   97.28         1 123.94\n44     44 2022 2022      Q2   82.96         1  97.28\n\n\nHow would the last row change?\n\n\nIncrement Period by 1 (43 -&gt; 44)\nChange Quarter from Q2 to Q3\nPostCOVID = 1 (still)\nlag1 = 82.96 (Revenue for Q2 2022)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#forecasting-1",
+    "href": "fall_sta235_2025/week_01/week_01.html#forecasting-1",
+    "title": "Data Science for Business Applications",
+    "section": "Forecasting",
+    "text": "Forecasting\n\nlogpred &lt;- predict(apple_model4,\n  newdata = list(Period = 44, Quarter = \"Q3\",\n    PostCOVID = 1, lag1 = 82.96),\n  interval = \"predict\")\nexp(logpred)\n\n   fit   lwr   upr\n1 90.8 78.26 105.3\n\n\nForecasting tips:\n\nDon’t forget to transform back if you took a log!\nA prediction interval is the right measure of uncertainty, since there will be only one Q3 of 2022"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#model-building-strategy",
+    "href": "fall_sta235_2025/week_01/week_01.html#model-building-strategy",
+    "title": "Data Science for Business Applications",
+    "section": "Model building strategy",
+    "text": "Model building strategy\n\nStart with a an additive or multiplicative model with trend and seasonal components. (Plot your data! If the seasonal variation increases or decreases over time you’ll want a multiplicative model.)\nExamine the usual diagnostic plots, and plot your residuals as a function of time. Do you need a (different) nonlinear time trend? A transformation of \\(Y\\)?\nCheck your residuals for time dependence If it’s present, is it explained by external factors you can model?\nIf time dependence in the residuals remains, add appropriate lag terms to your model, one at a time."
   }
 ]

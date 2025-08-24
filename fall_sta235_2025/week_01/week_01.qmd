@@ -1,0 +1,650 @@
+---
+title: "Data Science for Business Applications"
+author: "Class 01 - Linear Regression"
+title-slide-attributes:
+    data-background-image: week_01_docs/background_sta235h.png
+format: 
+  revealjs:
+    chalkboard: true
+    logo: week_01_docs/texas_logo2.png
+    toc: true
+    toc-title: "Presentation Outline"
+    toc-depth: 1
+editor: visual
+include-in-header:
+  - text: |
+      <style type="text/css">
+      ul li ul li {
+        font-size: 0.8em;
+      }
+      </style>
+---
+
+```{r init_setup, include=FALSE, cache=FALSE}
+# Include setup
+library(tidyverse)
+library(ggfortify)
+library(knitr)
+
+knitr::opts_chunk$set(
+  echo = FALSE, fig.align = "center"
+)
+
+hook_output <- knit_hooks$get("output")
+knit_hooks$set(output = function(x, options) {
+  lines <- options$output.lines
+  if (is.null(lines)) {
+    return(hook_output(x, options))  # pass to default hook
+  }
+  x <- unlist(strsplit(x, "\n"))
+  more <- "..."
+  if (length(lines) == 1) {        # first n lines
+    if (length(x) > lines) {
+      # truncate the output, but add ....
+      x <- c(head(x, lines), more)
+    }
+  } else {
+    x <- c(more, x[lines], more)
+  }
+  # paste these lines together
+  x <- paste(c(x, ""), collapse = "\n")
+  hook_output(x, options)
+})
+```
+
+```{r load_apple_data, include=FALSE, cache=FALSE}
+apple <- read.csv("week_01_docs/apple_short.csv")
+options(digits = 4)
+```
+
+```{r load_profs, include=FALSE, cache=FALSE}
+profs <- read.csv("week_01_docs/profs.csv")
+options(scipen = 999)
+```
+
+# Introduction
+
+## Course Goals
+
+-   Use regression to build predictive models
+-   Understand the benefits and limitations of the models we build
+-   Given a new business situation, select an appropriate model, build it, measure its effectiveness, and effectively communicate the results
+-   [**This is a practical course!**]{style="color: orange;"}
+
+<!-- ## What are time series? -->
+
+<!-- -   Data where the cases represent time: data collected every day, month, year, etc. -->
+
+<!-- -   Time series are important for both **explaining** how variables change over time and **forecasting** the future -->
+
+<!-- -   Examples of time series data: -->
+
+<!--     -   Google's closing daily stock price every day in 2020 -->
+
+<!--     -   Inventory levels of each item at a retail store at the end of every week in 2020 -->
+
+<!--     -   Apple's quarterly revenue since 2009 -->
+
+## Why Does This Course Exist?
+
+-   Why bother learning this stuff when we can get ChatGPT to do data analysis for us?
+-   AI (and computing in general) is only useful when you have the expertise to be able to recognize the correctness (or not) of its output
+-   In this class, you'll develop that expertise!
+
+## About the Course Staff
+
+-   **Instructor:** **Henrique Bolfarine, Ph.D.**
+    -   **Office hours:** Mondays 1:00 PM - 2:00 PM (GSB 3.140 A)
+    -   **Email:** [henrique.bolfarine\@austin.utexas.edu](mailto:henrique.bolfarine@austin.utexas.edu){.email}
+-   **Course Assistants:**
+    -   **Lead Course Assistant (CA):** Ezgi Durakoglugil
+    -   **Office hours:** Many TA/CA office hours every week (both in person and on Zoom) - **This should be your first option!**
+    -   You can ask any of the TAs/CAs about course content, but go to Ezgi for questions about logistics
+
+# Course logistics
+
+## Course Structure
+
+-   Units
+    -   **Unit A:** Fundamentals of regression modeling
+    -   **Unit B:** Applications and extensions
+-   Canvas
+    -   Make sure you can log in and are enrolled in STA 235 in Canvas
+
+    -   
+
+        ## Check out the home page for the weekly schedule and to meet the course staff
+
+## Statistical Computing
+
+::::: columns
+::: {.column width="60%"}
+-   We will use **R** and **RStudio** for statistical analysis throughout the course
+-   Make sure both are installed on your laptop and bring it to every class
+-   If you aren't comfortable with R/RStudio from STA 301, don't worry!
+:::
+
+::: {.column width="30%"}
+![](week_01_docs/R){width="100%"}
+:::
+:::::
+
+## Weekly Cadence for a Particular Topic
+
+-   **Due by the start of class on Monday/Tuesday:** Perusall pre-class video/reading discussion covering the topic
+-   **During class on Monday/Tuesday:** Lecture, activities, practice topic
+-   **Due by 11:59 PM the following Sunday/Monday:** Homework covering the topic
+-   **The following Thursday at the beginning of class:** Checkpoint Quiz on that topic
+
+## Pre-Class Work
+
+-   This is a fast-paced course, so it's essential that you think about the material before class.
+-   We will use **Perusall** for pre-class video and reading assignments.
+-   Use Perusall to ask your classmates questions, and share your knowledge, thoughts, and opinions.
+-   This helps you better understand the material and will help me gear class time to what topics you are having the most trouble with.
+
+## Pre-Class Work
+
+-   Pre-class assignments (typically videos) are due at the start of each class.
+-   Aim to chime in with at least a few thoughtful questions, responses, or comments for each reading assignment.
+-   Grading is based on effort and thoughtfulness of your questions and comments and your engagement with classmates and the text.
+-   Each assignment is scored 0-3, but with a reasonable effort you will get a 3 on each one (so don't worry about your grade).
+
+## Homework
+
+::::: columns
+::: {.column width="60%"}
+-   Why homework?
+-   Homework is due each week [**at 11:59 PM the night before class**]{style="color: red;"} and submitted through Canvas.
+-   Automatically graded; resubmit as many times as you want!
+-   OK to work together, but try the problems on your own first for maximum benefit.
+:::
+
+::: {.column width="30%"}
+![](week_01_docs/99problems.jpeg){width="100%"}
+:::
+:::::
+
+## Checkpoint Quizzes
+
+-   It is critical in this course to stay on top of things and not fall behind.
+-   Checkpoint Quiz at the [**start of each class**]{style="color: red;"} will help you ensure that you are really learning the material and give you an early heads-up if you aren't.
+-   We'll drop your lowest quiz score from each unit (A and B).
+-   You'll have access to RStudio and a "cheat sheet" during quizzes (don't spend time memorizing anything!).
+
+## Mastery Exams
+
+-   Each unit concludes with a Mastery Exam:
+    -   **Unit A:** October 9 or 10 at 7 PM
+    -   **Unit B:** University-assigned final exam period
+-   You'll have access to RStudio and a "cheat sheet" during exams (don't spend time memorizing anything!).
+
+------------------------------------------------------------------------
+
+## Assessment Grading
+
+-   Unit A has 7 Checkpoint Quizzes and Unit B has 6.
+-   For each unit, we will replace your lowest quiz score with your exam score for that unit (if that helps your overall grade).
+
+------------------------------------------------------------------------
+
+## Grading
+
+::: center.smaller-text
+| Component                 | **Points** |
+|---------------------------|------------|
+| Pre-class work (Perusall) | **44**     |
+| Class Participation       | **56**     |
+| Homework (13)             | **195**    |
+| Checkpoint Quizze (13)    | **325**    |
+| Exam A                    | **190**    |
+| Exam B                    | **190**    |
+| **Total**                 | **1,000**  |
+:::
+
+------------------------------------------------------------------------
+
+## Getting Help
+
+-   **My office hours:** Schedule on Canvas.
+-   **TA/CA office hours:** Schedule on Canvas.
+-   Post questions in videos in **Perusall** (for questions about the course material).
+-   Post questions in group chats in **Perusall** (for general questions about the course, or homework questions).
+-   Weekly optional TA/CA-led review session (TBD).
+
+# Let's do some statistics
+
+## 
+
+::: center
+-   What personal characteristics about an instructor do you think are predictive of the scores they receive on student evaluations?
+:::
+
+::: center
+![](hamermesh){width="100%"}
+:::
+
+## Hamermesh & Parker (2005) Data Set
+
+-   Student evaluations of $N=463$ instructors at UT Austin, 2000-2002
+-   For each instructor:
+-   $\texttt{eval}$: average student evaluation of teacher
+-   $\texttt{beauty}$: average beauty score from a six-student panel
+-   $\texttt{gender}$: male or female
+-   $\texttt{credits}$: single- or multi-credit course
+-   $\texttt{age}$: age of instructor
+    -   (and more...)
+
+## Explore the data: $\texttt{eval}$
+
+```{r plot1, echo=FALSE}
+ggplot(profs, aes(eval)) +
+geom_histogram(binwidth=0.2, col="black", fill="lightblue") +
+labs(x="Average student evaluation")
+```
+
+## Explore the data: $\texttt{beauty}$
+
+```{r plot2, echo=FALSE}
+ggplot(profs, aes(beauty)) +
+geom_histogram(binwidth=0.4, col="black", fill="lightblue") +
+labs(x="Beauty rating (0 is average)")
+```
+
+## More time series datasets
+
+What are some common characteristics of these time series? How do they differ?
+
+<!-- ![](time-series.png) -->
+
+## Components of time series {.smaller}
+
+We can think about a time series as having one or more **components**, or sources of variability:
+
+::: incremental
+-   **Trend+cyclic**: Persistent, (usually) slow-moving long-run patterns
+    -   Long run, Apple's earnings go up over time
+-   **Seasonal**: Regular up-and-down movement around long-run trends
+    -   Apple's earnings vary predictably each quarter around the long-run trend
+-   **Random or unpredictable** variation
+    -   Customers are fickle creatures, so earnings aren't perfectly predictable
+-   **External factors**, like shocks that interrupt or change previous dynamics
+    -   Introductions of the iPhone, supply chain shocks, ...
+:::
+
+## Modeling time series
+
+We can model many time series using our standard regression tools!
+
+-   **Trend+cyclic**:
+    -   Model long-run trends with linear or nonlinear functions of time
+    -   Use today's outcome directly to predict tomorrow's
+-   **Seasonal**:
+    -   Treat the season (quarter, month, week, etc) as a categorical variable
+-   **External factors**:
+    -   Create new predictors from other time series or to reflect known events
+
+## Time series data
+
+Some notation:
+
+\begin{align*}
+t &= \text{time }(1, 2, 3, \ldots) \\
+Y_t &= \text{the value of the variable we are interested in, at time $t$}
+\end{align*}
+
+The change from $Y_i$ to $Y_t$ reflects that each observation (row) corresponds to a time indexed by $t$
+
+## Structure of the Apple earnings data
+
+```{r, echo=2}
+options(digits = 10)
+head(apple) # %>% select(-Time))
+options(digits = 4)
+```
+
+-   $Y_t$ = $\text{Revenue_t}$
+-   $\text{Period}_t$ = $t$
+-   $Time_t$: Used for plots
+
+## Trend and Seasonality in the Apple earnings data
+
+```{r , echo=FALSE}
+ggplot(apple, aes(x = Time, y = Revenue)) +
+  geom_line() +
+  xlab("Year") + ylab("Revenue ($B)")
+```
+
+Apple's earnings have a clear trend over time and seasonality by quarter.
+
+## Trend and Seasonality in the Apple earnings data
+
+```{r, echo=1, output.lines=8:15}
+apple_model1 <- lm(Revenue ~ Period + Quarter, data = apple)
+summary(apple_model1)
+b <- abs(round(coef(apple_model1), 1))
+```
+
+$$
+\hat Y_t = `r b[1]` + `r b[2]`\text{Period}_t - `r b[3]`\text{Q2}_t
+- `r b[4]`\text{Q3}_t
++ `r b[5]`\text{Q4}_t
+$$
+
+## Trend + Seasonality in the Apple earnings data
+
+$$
+\hat Y_t = `r b[1]` + `r b[2]`\text{Period}_t - `r b[3]`\text{Q2}_t
+- `r b[4]`\text{Q3}_t
++ `r b[5]`\text{Q4}_t
+$$
+
+1.  On average, earnings in the same quarter increase $4\times 1.3 = \$`r 4*1.3`$b every year.
+2.  After accounting for the trend, Q2 earnings are $\$ 7.8$b lower than Q1 on average
+3.  After accounting for the trend, Q3 earnings are [???]{style="color:red;"} lower than Q1 on average
+4.  After accounting for the trend, Q4 earnings are $\$ 22.4$b higher than Q1 on average
+
+## Checking assumptions
+
+Let's check on our modeling assumptions...
+
+```{r , echo=FALSE, fig.width=6, fig.height=4, fig.align='center'}
+autoplot(apple_model1)
+```
+
+Which are violated?
+
+. . .
+
+Linearity and Equal variance! (Independence TBD)
+
+## What's going on?
+
+::::: columns
+::: {.column width="50%"}
+```{r, fig.width=4, fig.height=3, echo=FALSE}
+ggplot(apple, aes(x = Time, y = Revenue)) +
+  geom_line() +
+  xlab("Year") + ylab("Revenue ($B)")
+```
+:::
+
+::: {.column width="50%"}
+```{r, fig.width=4, fig.height=3, echo=FALSE}
+ggplot(apple, aes(x = Time, y = log(Revenue))) +
+  geom_line() +
+  xlab("Year") + ylab("log(Revenue) ($B)")
+```
+:::
+:::::
+
+Nonlinearity + Increasing variance over time usually suggests taking log of $Y$ to get a *multiplicative* model
+
+## A *multiplicative* model is more appropriate
+
+```{r, echo=1, output.lines=8:15}
+apple_model2 <- lm(log(Revenue) ~ Period + Quarter, data = apple)
+summary(apple_model2)
+b <- round(abs(coef(apple_model2)), 2)
+```
+
+$$
+\widehat {\log(Y_t)} = `r b[1]` + `r b[2]`\text{Period}_t - `r b[3]`\text{Q2}_t
+- `r b[4]`\text{Q3}_t
++ `r b[5]`\text{Q4}_t
+$$
+
+$$
+\hat Y_t = e^{`r b[1]` + `r b[2]`\text{Period}_t - `r b[3]`\text{Q2}_t
+- `r b[4]`\text{Q3}_t
++ `r b[5]`\text{Q4}_t}
+$$
+
+## Interpreting the multiplicative model
+
+$$
+\hat Y_t = e^{`r b[1]` + `r b[2]`\text{Period}_t - `r b[3]`\text{Q2}_t
+- `r b[4]`\text{Q3}_t
++ `r b[5]`\text{Q4}_t}
+$$
+
+1.  On average, earnings in the same quarter **increase** by a factor of $\exp(4\times 0.02) = `r round(exp(4*0.02),3)`$, or `r round(100*(exp(4*0.02)-1), 1)`%, every year
+2.  After accounting for the trend, on average Q2 earnings are **lower** than Q1 by a factor of $\exp(-0.16) = `r round(exp(-0.16),3)`$, or $`r round(-100*(exp(-0.16)-1), 1)`\%$
+3.  After accounting for the trend, on average Q3 earnings are ??? than Q1 by a factor of ???, or ???%.
+4.  After accounting for the trend, Q4 earnings are **higher** than Q1 by a factor of $\exp(0.32) = `r round(exp(0.32),3)`$, or $`r round(100*(exp(0.32)-1),1)`\%$
+
+## Interpreting the multiplicative model {.smaller}
+
+$$
+\hat Y_t = e^{`r b[1]` + `r b[2]`\text{Period}_t - `r b[3]`\text{Q2}_t
+- `r b[4]`\text{Q3}_t
++ `r b[5]`\text{Q4}_t}
+$$
+
+On average, earnings in the same quarter **increase** by a factor of $\exp(4\times 0.02) = `r round(exp(4*0.02),3)`$, or `r round(100*(exp(4*0.02)-1), 1)`%, every year. Why?
+
+. . .
+
+For example: Q3 of 2019 (Period = 33): $$\hat Y_{32} = \exp(`r b[1]` + `r b[2]`(33) + `r b[4]`)$$
+
+. . .
+
+Q3 of 2020 (Period = 37): $$
+\begin{align}
+\hat Y_{37} &= \exp(`r b[1]` + `r b[2]`(37) + `r b[4]`)\\
+ &= \exp(`r b[1]` + `r b[2]`(33 + 4)  + `r b[4]`)\\
+&= \color{darkred}{\exp(`r b[1]` + `r b[2]`(33)  + `r b[4]`)}\times\color{darkblue}{\exp(`r b[2]`(4))}\\
+&= \color{darkred}{\hat Y_{32}} \times \color{darkblue}{1.083}
+\end{align}
+$$
+
+## Much better!
+
+```{r, echo=1}
+autoplot(apple_model2)
+```
+
+## But wait...
+
+We're consistently under predicting recent quarters!
+
+```{r}
+ggplot(aes(y = resids, x = Time),
+  data = apple %>% mutate(resids = residuals(apple_model2))) +
+  geom_line() +
+  xlab("Residuals") +
+  geom_hline(yintercept = 0, linetype = "dashed")
+```
+
+Is there time dependence in our residuals?
+
+## Checking for independence {.smaller}
+
+```{r, echo=FALSE, fig.width=5, fig.height=4, fig.align='center'}
+ggplot(aes(x = lag(residuals(apple_model2)), y = residuals(apple_model2)),
+  data = apple) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  ylab("Current Quarter residual") +
+  xlab("Previous Quarter residual")
+```
+
+Prediction errors for consecutive quarters are correlated!
+
+$$
+\mathrm{Cor}(\text{residual}_t, \text{residual}_{t-1}) = `r round(cor(lag(residuals(apple_model2))[-1], (residuals(apple_model2))[-1]) , 2)`
+$$ (This is the *lag 1 autocorrelation*)
+
+## Checking for independence (ACF)
+
+```{r, echo=1, fig.width=6, fig.height=4, fig.align='center'}
+acf(residuals(apple_model2))
+points(1, 0.635, col = "darkred", cex = 3)
+```
+
+$$
+\color{darkred}{
+\mathrm{Cor}(\text{residual}_t, \text{residual}_{t-1}) = `r round(cor(lag(residuals(apple_model2))[-1], (residuals(apple_model2))[-1]) , 2)`
+}
+$$ (This is the *lag 1 autocorrelation*)
+
+## Checking for independence (ACF)
+
+```{r, echo=1, fig.width=6, fig.height=4, fig.align='center'}
+acf(residuals(apple_model2))
+points(2, 0.255, col = "darkorange", cex = 3)
+```
+
+$$
+\color{darkorange}{
+\mathrm{Cor}(\text{residual}_t, \text{residual}_{t-2}) = `r round(cor(lag(residuals(apple_model2),2)[-(1:2)], (residuals(apple_model2))[-(1:2)]) , 2)`
+}
+$$
+
+(This is the *lag 2 autocorrelation*)
+
+## Checking for independence (ACF)
+
+The autocorrelation function (ACF) plot shows autocorrelation at many lags
+
+```{r, echo=1, fig.width=6, fig.height=4, fig.align='center'}
+acf(residuals(apple_model2))
+```
+
+Under independence, about 95% of the time any given lag will be within the blue. Look out for large lag 1 values in particular!
+
+## Improving our model
+
+Let's try to address the bias in recent predictions first.
+
+```{r}
+ggplot(apple %>% mutate(predicted = exp(predict(apple_model2)))) +
+  geom_line(aes(x = Time, y = Revenue), col = "black") +
+  geom_line(aes(x = Time, y = predicted), col = "orange") +
+  xlab("Year") + ylab("Revenue ($B)")
+```
+
+What may have changed mid-late 2020?
+
+## Modeling external shocks
+
+Adding a COVID level-shift:
+
+```{r, echo=TRUE}
+# Define PostCOVID to be 1 on or after 2020 Q4
+# (i.e., if the year is 2021+ or if we are in 2020 Q4)
+apple <- apple %>%
+  mutate(PostCOVID = ifelse(
+    Year >= 2021 | (Year == 2020 & Quarter == "Q4"),
+    1, 0)
+  )
+```
+
+```{r, output.lines=c(1,36:42)}
+apple %>% select(-Time)
+```
+
+## Modeling external shocks
+
+Adding a COVID level-shift:
+
+```{r, echo=1, output.lines=8:16}
+apple_model3 <- lm(log(Revenue) ~ Period + Quarter
+  + PostCOVID, data = apple)
+summary(apple_model3)
+```
+
+```{r, echo=TRUE}
+confint(apple_model3)
+```
+
+## New model fit
+
+```{r}
+ggplot(apple %>% mutate(predicted = exp(predict(apple_model3)))) +
+  geom_line(aes(x = Time, y = Revenue), col = "black") +
+  geom_line(aes(x = Time, y = predicted), col = "orange") +
+  xlab("Year") + ylab("Revenue ($B)")
+```
+
+## New model's residuals
+
+The last few quarters look better:
+
+```{r}
+ggplot(aes(y = resids, x = Time),
+  data = apple %>% mutate(resids = residuals(apple_model3))) +
+  geom_line() +
+  geom_hline(yintercept = 0, linetype = "dashed")
+```
+
+But is the time dependence gone?
+
+## Nope!
+
+```{r, echo=1, output.lines=8:15}
+acf(residuals(apple_model3))
+```
+
+We still have time dependence in our residuals!
+
+## Adding a lag (autoregression)
+
+Let's create and add a lag 1 term ($\log(Y_{t-1})$, the log of *last* quarter's earnings):
+
+```{r, echo=c(1:2), output.lines=10:18}
+apple <- apple %>% mutate(lag1 = lag(Revenue))
+apple_model4 <- lm(log(Revenue) ~ Period + Quarter
+  + PostCOVID + log(lag1), data = apple)
+summary(apple_model4)
+```
+
+## Independence (over time) is satisfied! {.smaller}
+
+```{r, echo=1, fig.width=6, fig.height=3, fig.align='center'}
+acf(residuals(apple_model4))
+```
+
+For independence to hold:
+
+-   The low-lag autocorrelations (1,2,3) should be within the blue, and we should see no clear patterns.
+-   Occasional values outside the blue (e.g. lags 5,11, etc here) are expected about 5% of the time even under independence
+
+## Forecasting
+
+Our last observation is from Q2 2022; how can we forecast Q3 2022?
+
+```{r, echo=TRUE}
+tail(apple, 3)
+```
+
+How would the last row change?
+
+. . .
+
+1.  Increment Period by 1 (43 -\> 44)
+2.  Change Quarter from Q2 to Q3
+3.  PostCOVID = 1 (still)
+4.  lag1 = 82.96 (Revenue for Q2 2022)
+
+## Forecasting
+
+```{r, echo=TRUE}
+logpred <- predict(apple_model4,
+  newdata = list(Period = 44, Quarter = "Q3",
+    PostCOVID = 1, lag1 = 82.96),
+  interval = "predict")
+exp(logpred)
+```
+
+Forecasting tips:
+
+-   Don't forget to transform back if you took a log!
+-   A prediction interval is the right measure of uncertainty, since there will be only one Q3 of 2022
+
+## Model building strategy
+
+1.  Start with a an additive or multiplicative model with trend and seasonal components. (Plot your data! If the seasonal variation increases or decreases over time you'll want a multiplicative model.)
+2.  Examine the usual diagnostic plots, and plot your residuals as a function of time. Do you need a (different) nonlinear time trend? A transformation of $Y$?
+3.  Check your residuals for time dependence If it's present, is it explained by external factors you can model?
+4.  If time dependence in the residuals remains, add appropriate lag terms to your model, one at a time.
