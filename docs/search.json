@@ -2342,7 +2342,7 @@
     "href": "fall_sta235_2025/week_01/week_01.html#hamermesh-parker-2005-data-set",
     "title": "Data Science for Business Applications",
     "section": "Hamermesh & Parker (2005) Data Set",
-    "text": "Hamermesh & Parker (2005) Data Set\n\nStudent evaluations of \\(N=463\\) instructors at UT Austin, 2000-2002\nFor each instructor:\n\\(\\texttt{eval}\\): average student evaluation of teacher\n\\(\\texttt{beauty}\\): average beauty score from a six-student panel\n\\(\\texttt{gender}\\): male or female\n\\(\\texttt{credits}\\): single- or multi-credit course\n\\(\\texttt{age}\\): age of instructor\n\n(and more…)"
+    "text": "Hamermesh & Parker (2005) Data Set\n\n\nStudent evaluations of \\(N=463\\) instructors at UT Austin, 2000-2002\nFor each instructor:\neval: average student evaluation of teacher\nbeauty: average beauty score from a six-student panel\ngender: male or female\ncredits: single- or multi-credit course\nage: age of instructor\n(and more…)"
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_01.html#explore-the-data-texttteval",
@@ -2567,5 +2567,201 @@
     "title": "Data Science for Business Applications",
     "section": "Model building strategy",
     "text": "Model building strategy\n\nStart with a an additive or multiplicative model with trend and seasonal components. (Plot your data! If the seasonal variation increases or decreases over time you’ll want a multiplicative model.)\nExamine the usual diagnostic plots, and plot your residuals as a function of time. Do you need a (different) nonlinear time trend? A transformation of \\(Y\\)?\nCheck your residuals for time dependence If it’s present, is it explained by external factors you can model?\nIf time dependence in the residuals remains, add appropriate lag terms to your model, one at a time."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#explore-the-data",
+    "href": "fall_sta235_2025/week_01/week_01.html#explore-the-data",
+    "title": "Data Science for Business Applications",
+    "section": "Explore the data",
+    "text": "Explore the data"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#section-1",
+    "href": "fall_sta235_2025/week_01/week_01.html#section-1",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "The correlation \\(r\\) between two variables \\(X\\) and \\(Y\\) measures the strength of the linear relationship between them. Correlation ranges from \\(-1\\) (perfect negative relationship) to \\(0\\) (no relationship) to \\(1\\) (perfect positive relationship)."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#correlation",
+    "href": "fall_sta235_2025/week_01/week_01.html#correlation",
+    "title": "Data Science for Business Applications",
+    "section": "Correlation",
+    "text": "Correlation\n\nThe correlation \\(r\\) between two variables \\(X\\) and \\(Y\\) measures the strength of the linear relationship between them. Correlation ranges from \\(-1\\) (perfect negative relationship) to \\(0\\) (no relationship) to \\(1\\) (perfect positive relationship)."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#correlation-1",
+    "href": "fall_sta235_2025/week_01/week_01.html#correlation-1",
+    "title": "Data Science for Business Applications",
+    "section": "Correlation",
+    "text": "Correlation"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#correlation-2",
+    "href": "fall_sta235_2025/week_01/week_01.html#correlation-2",
+    "title": "Data Science for Business Applications",
+    "section": "Correlation",
+    "text": "Correlation\n\ncor(profs$eval, profs$beauty)\n\n[1] 0.1890391\n\n\n\nHow can we interpret this?\nThe $ sign accesses the variables in the data set profs.csv."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#lets-build-a-simple-regression-model",
+    "href": "fall_sta235_2025/week_01/week_01.html#lets-build-a-simple-regression-model",
+    "title": "Data Science for Business Applications",
+    "section": "Let’s Build a Simple Regression Model",
+    "text": "Let’s Build a Simple Regression Model\n\n\\[\n\\text{eval} = \\beta_0 + \\beta_1 \\cdot \\text{beauty} + \\epsilon\n\\]\n\n\\(\\beta_0\\) and \\(\\beta_1\\) are known as coefficients (standard notations)\n\\(\\beta_0\\) is the intercept\n\\(\\beta_1\\) is the slope associated with beauty\nThe term \\(\\epsilon\\) (epsilon) accounts for unobserved factors that are not included in this model"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#interpreting-the-model",
+    "href": "fall_sta235_2025/week_01/week_01.html#interpreting-the-model",
+    "title": "Data Science for Business Applications",
+    "section": "Interpreting the Model",
+    "text": "Interpreting the Model\n\neval is the response variable (\\(Y\\)); beauty is the predictor variable (\\(X\\)).\nSimple regression uses the best fit line to give us a linear equation to predict \\(Y\\) from \\(X\\):\n\\[\n\\widehat{\\text{eval}} = 3.998 + 0.133 \\cdot \\text{beauty}\n\\]\nWe can predict the evaluation score for someone based on their beauty score just by plugging into the equation.\nWhat do the coefficients mean?"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#interpretation",
+    "href": "fall_sta235_2025/week_01/week_01.html#interpretation",
+    "title": "Data Science for Business Applications",
+    "section": "Interpretation",
+    "text": "Interpretation\n\n\nIntercept\n\nWhen the beauty score is zero, the expected evaluation is 3.99 (almost 4).\n\nHere, beauty = 0 represents an “average beauty”.\nImportant, the intercept is evaluated always when the predictor variable is zero.\n\nSlope for Beauty\n\nFor every one-unit increase in the beauty score, there is a 0.133 increase in the professor’s expected evaluation.\n\nIn this context, “expected” refers to the average evaluation."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#statistical-significance-of-the-model",
+    "href": "fall_sta235_2025/week_01/week_01.html#statistical-significance-of-the-model",
+    "title": "Data Science for Business Applications",
+    "section": "Statistical Significance of the Model",
+    "text": "Statistical Significance of the Model\n\nThe population regression line (the best fit line in the population) is \\(Y = \\beta_0 + \\beta_1 X\\) (we can’t know this).\nOur regression equation is the best fit line in the sample, or \\(\\hat{Y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 X\\) (this is what we get from our sample data).\nThe sample intercept and slope \\(\\hat{\\beta}_0\\) and \\(\\hat{\\beta}_1\\) are our best estimates for the population intercept and slope \\(\\beta_0\\) and \\(\\beta_1\\).\nBut we need to get a sense of how close \\(\\hat{\\beta}_0\\) and \\(\\hat{\\beta}_1\\) are to \\(\\beta_0\\) and \\(\\beta_1\\)!"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#p-values",
+    "href": "fall_sta235_2025/week_01/week_01.html#p-values",
+    "title": "Data Science for Business Applications",
+    "section": "P-values",
+    "text": "P-values\n\n\nFor this model, the p-values associated with the coefficients, slope and intercept are close to zero:\n\n\n\n\n\nTerm\np-value - Pr(&gt;|t|)\nSignificance\n\n\n\n\nIntercept\n0.0000000000000002\n***\n\n\nBeauty\n0.0000425\n***\n\n\n\n\n\nIn this case, there’s evidence that beauty has an impact on a professor’s evaluation at a populational level.\nThus, we can conclude that the effect of beauty is statistically significant in relation to the professor’s evaluation."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#confidence-intervals",
+    "href": "fall_sta235_2025/week_01/week_01.html#confidence-intervals",
+    "title": "Data Science for Business Applications",
+    "section": "Confidence Intervals",
+    "text": "Confidence Intervals\n\nLet’s get confidence intervals for the slope and intercept to get a sense of the uncertainty in our estimates:\n\nconfint(model)\n\n                 2.5 %    97.5 %\n(Intercept) 3.94845765 4.0480866\nbeauty      0.06976869 0.1962342\n\n\n\nSlope: We are 95% confident that the incremental impact of each additional beauty point is between \\(0.07\\) and \\(0.20\\) student evaluation points.\nIntercept: We are 95% confident that the average student evaluation score for average-looking professors (beauty = 0) is between \\(3.95\\) and \\(4.05\\).\nRule of thumb: If zero is inside the CI, the effect is not statistically significant.\nP-values and confidence intervals (CIs) are connected. If the p-value is greater than 0.05, it is likely that zero will be included within the confidence interval."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#rule-of-thumb-for",
+    "href": "fall_sta235_2025/week_01/week_01.html#rule-of-thumb-for",
+    "title": "Data Science for Business Applications",
+    "section": "Rule of Thumb for",
+    "text": "Rule of Thumb for"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#rule-of-thumb-for-p-values",
+    "href": "fall_sta235_2025/week_01/week_01.html#rule-of-thumb-for-p-values",
+    "title": "Data Science for Business Applications",
+    "section": "Rule of Thumb for P-values",
+    "text": "Rule of Thumb for P-values\n\n\nIf the p-value is smaller than 0.05, we can conclude that the effect is statistically significant.\nOtherwise, if the p-value is greater than 0.05, we conclude that the effect from the predictor is not statistically significant."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#confidence-intervals-for-predictions",
+    "href": "fall_sta235_2025/week_01/week_01.html#confidence-intervals-for-predictions",
+    "title": "Data Science for Business Applications",
+    "section": "Confidence intervals for predictions",
+    "text": "Confidence intervals for predictions\n\n\nInterval for a single prediction:\n\nWe are 95% confident that a single professor with a beauty score of 1 will get rated between 3.06 and 5.21.\n\n\n\npredict(model, list(beauty=1), interval=\"prediction\")\n\n       fit      lwr      upr\n1 4.131274 3.056375 5.206172\n\n\n\nInterval for an average prediction:\n\nWe are 95% confident that the average rating of all professors with beauty scores of 1 will be between 4.05 and 4.21.\n\n\n\npredict(model, list(beauty=1), interval=\"confidence\")\n\n       fit      lwr      upr\n1 4.131274 4.050776 4.211771"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#confidence-intervals-for-predictions-1",
+    "href": "fall_sta235_2025/week_01/week_01.html#confidence-intervals-for-predictions-1",
+    "title": "Data Science for Business Applications",
+    "section": "Confidence intervals for predictions",
+    "text": "Confidence intervals for predictions\n\n\npredict(model, list(beauty=1), interval=\"confidence\")\n\n       fit      lwr      upr\n1 4.131274 4.050776 4.211771\n\n\n\nWe are 95% confident that the will be between 4.05 and 4.21."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#residuals-and-r-squared",
+    "href": "fall_sta235_2025/week_01/week_01.html#residuals-and-r-squared",
+    "title": "Data Science for Business Applications",
+    "section": "Residuals and R-squared",
+    "text": "Residuals and R-squared\n\n\nEach instructor has a residual: the difference between their actual and predicted scores (the prediction error)."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#residual-standard-error",
+    "href": "fall_sta235_2025/week_01/week_01.html#residual-standard-error",
+    "title": "Data Science for Business Applications",
+    "section": "Residual standard error",
+    "text": "Residual standard error\n\n\nThe residual standard error is in the same units as the response variable:\n\nIn this case the RSE is: Residual standard error: 0.5455\nAll predictions made by this model will, on average, differ from the true values by approximately 0.5455, which represents one standard deviation of the residuals.\n\nWe can even get the 95% prediction interval for a single (beauty = 1) prediction as\n\nlower bound: \\(3.998 + 0.133 \\cdot 1 - 2\\times \\text{RSE}\\)\nupper bound: \\(3.998 + 0.133 \\cdot 1 + 2\\times \\text{RSE}\\)\n\n\n\n# lower bound \n3.998 + 0.133 - 2*0.5455\n\n[1] 3.04\n\n# upper bound\n3.998 + 0.133 + 2*0.5455\n\n[1] 5.222"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#r-squared-r2",
+    "href": "fall_sta235_2025/week_01/week_01.html#r-squared-r2",
+    "title": "Data Science for Business Applications",
+    "section": "R-squared (\\(R^2\\))",
+    "text": "R-squared (\\(R^2\\))\n\n\nThe \\(R^2\\) provides an understanding of the “fit” of the model in relation to the data.\n\nIf the \\(R^2\\) is close to one, the model has a good fit.\nIf the \\(R^2\\) is close to zero, the model does not provide a good fit for the data.\nMultiple R-squared: 0.03574\nThis indicates not a great fit.\n\nImportant interpretation:\n\nThe \\(R^2\\) represents the percentage of variation in the response variable that can be explained by the predictor.\nFor this model, 3.6% of the variation in evaluation scores can be explained by the beauty variable alone, while the remaining 96.4% is attributed to other unobserved factors."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#adding-more-predictors",
+    "href": "fall_sta235_2025/week_01/week_01.html#adding-more-predictors",
+    "title": "Data Science for Business Applications",
+    "section": "Adding more predictors",
+    "text": "Adding more predictors\n\n\nIs the professor’s evaluation explained only by it’s beauty or there might be other factor affecting their evalution?\nLet’s check if the variable age might help us better explain the relationship between beauty and evaluation.\nWe update our model as:\n\n\\[\n\\widehat{\\text{eval}} = \\beta_0 + \\beta_1 \\cdot \\text{beauty} + \\beta_2 \\cdot \\text{age} + \\epsilon\n\\] - We now have a multiple regression model. - Both beauty and age are numerical variables. - The term \\(\\epsilon\\) (epsilon) accounts for unobserved factors that are not included in this model."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#multiple-regression-model",
+    "href": "fall_sta235_2025/week_01/week_01.html#multiple-regression-model",
+    "title": "Data Science for Business Applications",
+    "section": "Multiple regression model",
+    "text": "Multiple regression model\n\n\n# Build a simple regression model\nmodel &lt;- lm(eval ~ beauty + age, data = profs)\nsummary(model)\n\n\nCall:\nlm(formula = eval ~ beauty + age, data = profs)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.80242 -0.36514  0.07407  0.39913  1.10206 \n\nCoefficients:\n             Estimate Std. Error t value             Pr(&gt;|t|)    \n(Intercept) 3.9844013  0.1337296  29.794 &lt; 0.0000000000000002 ***\nbeauty      0.1340634  0.0337441   3.973            0.0000824 ***\nage         0.0002868  0.0027148   0.106                0.916    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.546 on 460 degrees of freedom\nMultiple R-squared:  0.03576,   Adjusted R-squared:  0.03157 \nF-statistic:  8.53 on 2 and 460 DF,  p-value: 0.0002305\n\n\n\nHow can we interpret this model?"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#interpretation-of-model-coefficients",
+    "href": "fall_sta235_2025/week_01/week_01.html#interpretation-of-model-coefficients",
+    "title": "Data Science for Business Applications",
+    "section": "Interpretation of Model Coefficients",
+    "text": "Interpretation of Model Coefficients\n\n\nIntercept\n\nWhen both the beauty score and age are zero, the expected evaluation is 3.98 (almost 4).\n\nHere, beauty = 0 represents an “average beauty,” and age = 0 is not meaningful in this context but is part of the model.\n\nImportant: The intercept is evaluated when all predictor variables (beauty and age) are zero.\n\nSlope for Beauty\n\nFor every one-unit increase in the beauty score, there is a 0.134 increase in the professor’s expected evaluation, holding age constant.\n\nSlope for Age\n\nFor every one-unit increase in age, there is a 0.0003 increase in the professor’s expected evaluation, holding beauty constant."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#statistical-significance",
+    "href": "fall_sta235_2025/week_01/week_01.html#statistical-significance",
+    "title": "Data Science for Business Applications",
+    "section": "Statistical significance",
+    "text": "Statistical significance\n\n\nFor this model, the p-values associated with the coefficients (intercept, beauty, and age) are as follows:\n\n\n\n\nTerm\np-value - Pr(&gt;|t|)\nSignificance\n\n\n\n\nIntercept\n&lt; 0.0000000000000002\n***\n\n\nBeauty\n0.0000824\n***\n\n\nAge\n0.916\n\n\n\n\n\nIn this model, there is strong evidence that beauty has an impact on a professor’s evaluation at the population level, as its p-value is very close to zero.\nHowever, the p-value for age (0.916 &gt; 0.05) indicates that there is no statistically significant relationship between age and a professor’s evaluation.\nThus, we can conclude that the effect of beauty is statistically significant in relation to a professor’s evaluation, while the effect of age is not statistically significant."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#rse-and-r2",
+    "href": "fall_sta235_2025/week_01/week_01.html#rse-and-r2",
+    "title": "Data Science for Business Applications",
+    "section": "RSE and \\(R^2\\)",
+    "text": "RSE and \\(R^2\\)\n\n\nThere are no significant changes in relation to the RSE and \\(R^2\\) in relation to the previous model.\nThis means that the quality of the fit and the accuracy of the predictions will be nearly identical to those of the previous model.\nFor this model, 3.6% of the variation in evaluation scores can be explained by the beauty and age variables alone, while the remaining 96.4% is attributed to other unobserved factors.\nWhat about predictions and confidence intervals?"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#whats-the-impact-of-gender-on-student-evaluations",
+    "href": "fall_sta235_2025/week_01/week_01.html#whats-the-impact-of-gender-on-student-evaluations",
+    "title": "Data Science for Business Applications",
+    "section": "What’s the Impact of Gender on Student Evaluations?",
+    "text": "What’s the Impact of Gender on Student Evaluations?\n\n\nDo you see a difference between men (blue) and women (red)?"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#for-for-the-weekend",
+    "href": "fall_sta235_2025/week_01/week_01.html#for-for-the-weekend",
+    "title": "Data Science for Business Applications",
+    "section": "For for the Weekend",
+    "text": "For for the Weekend\n\nRead the syllabus.\nDo the first homework assignment in Canvas (covering today’s material).\nDo the first pre-class assignment in Perusall (to prepare for next week’s class)."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#lets-build-a-simple-regression-model-in-rstudio",
+    "href": "fall_sta235_2025/week_01/week_01.html#lets-build-a-simple-regression-model-in-rstudio",
+    "title": "Data Science for Business Applications",
+    "section": "Let’s Build a Simple Regression Model in Rstudio",
+    "text": "Let’s Build a Simple Regression Model in Rstudio\n\n\n# Build a simple regression model\nmodel &lt;- lm(eval ~ beauty, data = profs)\nsummary(model)\n\n\nCall:\nlm(formula = eval ~ beauty, data = profs)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.80015 -0.36304  0.07254  0.40207  1.10373 \n\nCoefficients:\n            Estimate Std. Error t value             Pr(&gt;|t|)    \n(Intercept)  3.99827    0.02535 157.727 &lt; 0.0000000000000002 ***\nbeauty       0.13300    0.03218   4.133            0.0000425 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.5455 on 461 degrees of freedom\nMultiple R-squared:  0.03574,   Adjusted R-squared:  0.03364 \nF-statistic: 17.08 on 1 and 461 DF,  p-value: 0.00004247"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#explore-the-data-eval",
+    "href": "fall_sta235_2025/week_01/week_01.html#explore-the-data-eval",
+    "title": "Data Science for Business Applications",
+    "section": "Explore the data: eval",
+    "text": "Explore the data: eval"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_01.html#explore-the-data-beauty",
+    "href": "fall_sta235_2025/week_01/week_01.html#explore-the-data-beauty",
+    "title": "Data Science for Business Applications",
+    "section": "Explore the data: beauty",
+    "text": "Explore the data: beauty"
   }
 ]

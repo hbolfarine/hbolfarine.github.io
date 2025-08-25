@@ -215,9 +215,17 @@ Class 01 - Linear Regression
 <ul>
 <li><a href="#/introduction" id="/toc-introduction">Introduction</a></li>
 <li><a href="#/course-logistics" id="/toc-course-logistics">Course logistics</a></li>
-<li><a href="#/lets-do-some-statistics" id="/toc-lets-do-some-statistics">Let’s do some statistics</a></li>
+<li><a href="#/simple-regression" id="/toc-simple-regression">Simple Regression</a></li>
+<li><a href="#/multiple-regression" id="/toc-multiple-regression">Multiple Regression</a></li>
 </ul>
 </nav>
+</section>
+<section class="slide level2">
+
+<!-- # ```{r load_apple_data, include=FALSE, cache=FALSE} -->
+<!-- # apple <- read.csv("week_01_docs/apple_short.csv") -->
+<!-- # options(digits = 4) -->
+<!-- # ``` -->
 </section>
 <section>
 <section id="introduction" class="title-slide slide level1 center">
@@ -279,8 +287,8 @@ Class 01 - Linear Regression
 </ul></li>
 <li>Canvas
 <ul>
-<li><p>Make sure you can log in and are enrolled in STA 235 in Canvas</p></li>
-<li><h2 id="check-out-the-home-page-for-the-weekly-schedule-and-to-meet-the-course-staff">Check out the home page for the weekly schedule and to meet the course staff</h2></li>
+<li>Make sure you can log in and are enrolled in STA 235 in Canvas</li>
+<li>Check out the home page for the weekly schedule and to meet the course staff</li>
 </ul></li>
 </ul>
 </section>
@@ -419,8 +427,8 @@ Class 01 - Linear Regression
 </ul>
 </section></section>
 <section>
-<section id="lets-do-some-statistics" class="title-slide slide level1 center">
-<h1>Let’s do some statistics</h1>
+<section id="simple-regression" class="title-slide slide level1 center">
+<h1>Simple Regression</h1>
 
 </section>
 <section id="section" class="slide level2">
@@ -431,472 +439,454 @@ Class 01 - Linear Regression
 </ul>
 </div>
 <div class="center">
-<p><img data-src="hamermesh.png" style="width:100.0%"></p>
+<p><img data-src="week_01_docs/hamermesh.png" style="width:100.0%"></p>
 </div>
 </section>
 <section id="hamermesh-parker-2005-data-set" class="slide level2">
 <h2>Hamermesh &amp; Parker (2005) Data Set</h2>
+<div style="font-size: 0.8em;">
 <ul>
 <li>Student evaluations of <span class="math inline">\(N=463\)</span> instructors at UT Austin, 2000-2002</li>
 <li>For each instructor:</li>
-<li><span class="math inline">\(\texttt{eval}\)</span>: average student evaluation of teacher</li>
-<li><span class="math inline">\(\texttt{beauty}\)</span>: average beauty score from a six-student panel</li>
-<li><span class="math inline">\(\texttt{gender}\)</span>: male or female</li>
-<li><span class="math inline">\(\texttt{credits}\)</span>: single- or multi-credit course</li>
-<li><span class="math inline">\(\texttt{age}\)</span>: age of instructor
-<ul>
+<li><code>eval</code>: average student evaluation of teacher</li>
+<li><code>beauty</code>: average beauty score from a six-student panel</li>
+<li><code>gender</code>: male or female</li>
+<li><code>credits</code>: single- or multi-credit course</li>
+<li><code>age</code>: age of instructor</li>
 <li>(and more…)</li>
-</ul></li>
 </ul>
+</div>
 </section>
-<section id="explore-the-data-texttteval" class="slide level2">
-<h2>Explore the data: <span class="math inline">\(\texttt{eval}\)</span></h2>
+<section id="explore-the-data-eval" class="slide level2">
+<h2>Explore the data: <code>eval</code></h2>
 
 <img data-src="week_01_files/figure-revealjs/plot1-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="explore-the-data-textttbeauty" class="slide level2">
-<h2>Explore the data: <span class="math inline">\(\texttt{beauty}\)</span></h2>
+<section id="explore-the-data-beauty" class="slide level2">
+<h2>Explore the data: <code>beauty</code></h2>
 
 <img data-src="week_01_files/figure-revealjs/plot2-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="more-time-series-datasets" class="slide level2">
-<h2>More time series datasets</h2>
-<p>What are some common characteristics of these time series? How do they differ?</p>
-<!-- ![](time-series.png) -->
-</section>
-<section id="components-of-time-series" class="slide level2 smaller">
-<h2>Components of time series</h2>
-<p>We can think about a time series as having one or more <strong>components</strong>, or sources of variability:</p>
-<div>
-<ul>
-<li class="fragment"><strong>Trend+cyclic</strong>: Persistent, (usually) slow-moving long-run patterns
-<ul>
-<li class="fragment">Long run, Apple’s earnings go up over time</li>
-</ul></li>
-<li class="fragment"><strong>Seasonal</strong>: Regular up-and-down movement around long-run trends
-<ul>
-<li class="fragment">Apple’s earnings vary predictably each quarter around the long-run trend</li>
-</ul></li>
-<li class="fragment"><strong>Random or unpredictable</strong> variation
-<ul>
-<li class="fragment">Customers are fickle creatures, so earnings aren’t perfectly predictable</li>
-</ul></li>
-<li class="fragment"><strong>External factors</strong>, like shocks that interrupt or change previous dynamics
-<ul>
-<li class="fragment">Introductions of the iPhone, supply chain shocks, …</li>
-</ul></li>
-</ul>
-</div>
-</section>
-<section id="modeling-time-series" class="slide level2">
-<h2>Modeling time series</h2>
-<p>We can model many time series using our standard regression tools!</p>
-<ul>
-<li><strong>Trend+cyclic</strong>:
-<ul>
-<li>Model long-run trends with linear or nonlinear functions of time</li>
-<li>Use today’s outcome directly to predict tomorrow’s</li>
-</ul></li>
-<li><strong>Seasonal</strong>:
-<ul>
-<li>Treat the season (quarter, month, week, etc) as a categorical variable</li>
-</ul></li>
-<li><strong>External factors</strong>:
-<ul>
-<li>Create new predictors from other time series or to reflect known events</li>
-</ul></li>
-</ul>
-</section>
-<section id="time-series-data" class="slide level2">
-<h2>Time series data</h2>
-<p>Some notation:</p>
-<p><span class="math display">\[\begin{align*}
-t &amp;= \text{time }(1, 2, 3, \ldots) \\
-Y_t &amp;= \text{the value of the variable we are interested in, at time $t$}
-\end{align*}\]</span></p>
-<p>The change from <span class="math inline">\(Y_i\)</span> to <span class="math inline">\(Y_t\)</span> reflects that each observation (row) corresponds to a time indexed by <span class="math inline">\(t\)</span></p>
-</section>
-<section id="structure-of-the-apple-earnings-data" class="slide level2">
-<h2>Structure of the Apple earnings data</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">head</span>(apple) <span class="co"># %&gt;% select(-Time))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Period    Time Year Quarter Revenue
-1      1 2011.50 2011      Q3   28.27
-2      2 2011.75 2011      Q4   46.33
-3      3 2012.00 2012      Q1   39.19
-4      4 2012.25 2012      Q2   35.02
-5      5 2012.50 2012      Q3   35.97
-6      6 2012.75 2012      Q4   54.51</code></pre>
-</div>
-</div>
-<ul>
-<li><span class="math inline">\(Y_t\)</span> = <span class="math inline">\(\text{Revenue_t}\)</span></li>
-<li><span class="math inline">\(\text{Period}_t\)</span> = <span class="math inline">\(t\)</span></li>
-<li><span class="math inline">\(Time_t\)</span>: Used for plots</li>
-</ul>
-</section>
-<section id="trend-and-seasonality-in-the-apple-earnings-data" class="slide level2">
-<h2>Trend and Seasonality in the Apple earnings data</h2>
+<section id="explore-the-data" class="slide level2">
+<h2>Explore the data</h2>
 
-<img data-src="week_01_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p>Apple’s earnings have a clear trend over time and seasonality by quarter.</p>
+<img data-src="week_01_files/figure-revealjs/plot3-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="correlation" class="slide level2">
+<h2>Correlation</h2>
+<div class="center">
+<p>The <strong>correlation</strong> <span class="math inline">\(r\)</span> between two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> measures the strength of the linear relationship between them. Correlation ranges from <span class="math inline">\(-1\)</span> (perfect negative relationship) to <span class="math inline">\(0\)</span> (no relationship) to <span class="math inline">\(1\)</span> (perfect positive relationship).</p>
+</div>
 </section>
-<section id="trend-and-seasonality-in-the-apple-earnings-data-1" class="slide level2">
-<h2>Trend and Seasonality in the Apple earnings data</h2>
-<div class="cell" data-layout-align="center" data-output.lines="[8,9,10,11,12,13,14,15]">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>apple_model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Revenue <span class="sc">~</span> Period <span class="sc">+</span> Quarter, <span class="at">data =</span> apple)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="correlation-1" class="slide level2">
+<h2>Correlation</h2>
+
+<img data-src="week_01_files/figure-revealjs/plot4-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="correlation-2" class="slide level2">
+<h2>Correlation</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">cor</span>(profs<span class="sc">$</span>eval, profs<span class="sc">$</span>beauty)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>...
+<pre><code>[1] 0.1890391</code></pre>
+</div>
+</div>
+<ul>
+<li>How can we interpret this?</li>
+<li>The <code>$</code> sign accesses the variables in the data set <code>profs.csv</code>.</li>
+</ul>
+</section>
+<section id="lets-build-a-simple-regression-model" class="slide level2 smaller-text">
+<h2>Let’s Build a Simple Regression Model</h2>
+<div style="font-size: 0.8em;">
+<p><span class="math display">\[
+\text{eval} = \beta_0 + \beta_1 \cdot \text{beauty} + \epsilon
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are known as coefficients (standard notations)</li>
+<li><span class="math inline">\(\beta_0\)</span> is the intercept</li>
+<li><span class="math inline">\(\beta_1\)</span> is the slope associated with <code>beauty</code></li>
+<li>The term <span class="math inline">\(\epsilon\)</span> (epsilon) accounts for unobserved factors that are not included in this model</li>
+</ul>
+</div>
+</section>
+<section id="lets-build-a-simple-regression-model-in-rstudio" class="slide level2 smaller-text">
+<h2>Let’s Build a Simple Regression Model in Rstudio</h2>
+<div style="font-size: 0.8em;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># Build a simple regression model</span></span>
+<span id="cb3-2"><a></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(eval <span class="sc">~</span> beauty, <span class="at">data =</span> profs)</span>
+<span id="cb3-3"><a></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = eval ~ beauty, data = profs)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.80015 -0.36304  0.07254  0.40207  1.10373 
 
 Coefficients:
             Estimate Std. Error t value             Pr(&gt;|t|)    
-(Intercept)  29.4695     3.0511    9.66      0.0000000000068 ***
-Period        1.3046     0.0892   14.62 &lt; 0.0000000000000002 ***
-QuarterQ2    -8.3919     3.1939   -2.63                0.012 *  
-QuarterQ3    -5.0707     3.1977   -1.59                0.121    
-QuarterQ4    22.4692     3.1939    7.03      0.0000000191875 ***
-...</code></pre>
-</div>
-</div>
-<p><span class="math display">\[
-\hat Y_t = 29.5 + 1.3\text{Period}_t - 8.4\text{Q2}_t
-- 5.1\text{Q3}_t
-+ 22.5\text{Q4}_t
-\]</span></p>
-</section>
-<section id="trend-seasonality-in-the-apple-earnings-data" class="slide level2">
-<h2>Trend + Seasonality in the Apple earnings data</h2>
-<p><span class="math display">\[
-\hat Y_t = 29.5 + 1.3\text{Period}_t - 8.4\text{Q2}_t
-- 5.1\text{Q3}_t
-+ 22.5\text{Q4}_t
-\]</span></p>
-<ol type="1">
-<li>On average, earnings in the same quarter increase <span class="math inline">\(4\times 1.3 = \$5.2\)</span>b every year.</li>
-<li>After accounting for the trend, Q2 earnings are <span class="math inline">\(\$ 7.8\)</span>b lower than Q1 on average</li>
-<li>After accounting for the trend, Q3 earnings are <span style="color:red;">???</span> lower than Q1 on average</li>
-<li>After accounting for the trend, Q4 earnings are <span class="math inline">\(\$ 22.4\)</span>b higher than Q1 on average</li>
-</ol>
-</section>
-<section id="checking-assumptions" class="slide level2">
-<h2>Checking assumptions</h2>
-<p>Let’s check on our modeling assumptions…</p>
+(Intercept)  3.99827    0.02535 157.727 &lt; 0.0000000000000002 ***
+beauty       0.13300    0.03218   4.133            0.0000425 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-<img data-src="week_01_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center r-stretch" width="576"><p>Which are violated?</p>
-<div class="fragment">
-<p>Linearity and Equal variance! (Independence TBD)</p>
+Residual standard error: 0.5455 on 461 degrees of freedom
+Multiple R-squared:  0.03574,   Adjusted R-squared:  0.03364 
+F-statistic: 17.08 on 1 and 461 DF,  p-value: 0.00004247</code></pre>
+</div>
+</div>
 </div>
 </section>
-<section id="whats-going-on" class="slide level2">
-<h2>What’s going on?</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
+<section id="interpreting-the-model" class="slide level2">
+<h2>Interpreting the Model</h2>
+<ul>
+<li><p><code>eval</code> is the <strong>response</strong> variable (<span class="math inline">\(Y\)</span>); <code>beauty</code> is the <strong>predictor</strong> variable (<span class="math inline">\(X\)</span>).</p></li>
+<li><p>Simple regression uses the best fit line to give us a linear equation to predict <span class="math inline">\(Y\)</span> from <span class="math inline">\(X\)</span>:</p>
+<p><span class="math display">\[
+\widehat{\text{eval}} = 3.998 + 0.133 \cdot \text{beauty}
+\]</span></p></li>
+<li><p>We can predict the evaluation score for someone based on their beauty score just by plugging into the equation.</p></li>
+<li><p>What do the coefficients mean?</p></li>
+</ul>
+</section>
+<section id="interpretation" class="slide level2">
+<h2>Interpretation</h2>
+<div style="font-size: 0.8em;">
+<ul>
+<li><strong>Intercept</strong>
+<ul>
+<li>When the beauty score is zero, the expected evaluation is <code>3.99</code> (almost 4).<br>
+</li>
+<li>Here, <code>beauty = 0</code> represents an “average beauty”.</li>
+<li>Important, the intercept is evaluated always when the <strong>predictor</strong> variable is zero.</li>
+</ul></li>
+<li><strong>Slope for Beauty</strong>
+<ul>
+<li>For every one-unit increase in the beauty score, there is a <code>0.133</code> increase in the professor’s expected evaluation.<br>
+</li>
+<li>In this context, “expected” refers to the average evaluation.</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="statistical-significance-of-the-model" class="slide level2">
+<h2>Statistical Significance of the Model</h2>
+<ul>
+<li>The population regression line (the best fit line in the population) is <span class="math inline">\(Y = \beta_0 + \beta_1 X\)</span> (we can’t know this).</li>
+<li>Our regression equation is the best fit line in the sample, or <span class="math inline">\(\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X\)</span> (this is what we get from our sample data).</li>
+<li>The sample intercept and slope <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span> are our best estimates for the population intercept and slope <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.</li>
+<li>But we need to get a sense of how close <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span> are to <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>!</li>
+</ul>
+</section>
+<section id="p-values" class="slide level2">
+<h2>P-values</h2>
+<div style="font-size: 0.8em;">
+<ul>
+<li>For this model, the <strong>p-values</strong> associated with the coefficients, slope and intercept are close to zero:</li>
+</ul>
+<div class="center">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>p-value - <code>Pr(&gt;|t|)</code></th>
+<th>Significance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Intercept</td>
+<td>0.0000000000000002</td>
+<td>***</td>
+</tr>
+<tr class="even">
+<td>Beauty</td>
+<td>0.0000425</td>
+<td>***</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>In this case, there’s evidence that beauty has an impact on a professor’s evaluation at a populational level.</li>
+<li>Thus, we can conclude that the effect of beauty is statistically significant in relation to the professor’s evaluation.</li>
+</ul>
+</div>
+</section>
+<section id="rule-of-thumb-for-p-values" class="slide level2">
+<h2>Rule of Thumb for P-values</h2>
+<div class="center">
+<ul>
+<li>If the p-value is smaller than 0.05, we can conclude that the effect is statistically significant.</li>
+<li>Otherwise, if the p-value is greater than 0.05, we conclude that the effect from the predictor is not statistically significant.</li>
+</ul>
+</div>
+</section>
+<section id="confidence-intervals" class="slide level2">
+<h2>Confidence Intervals</h2>
+<div style="font-size: 0.7em;">
+<p>Let’s get confidence intervals for the slope and intercept to get a sense of the uncertainty in our estimates:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">confint</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 2.5 %    97.5 %
+(Intercept) 3.94845765 4.0480866
+beauty      0.06976869 0.1962342</code></pre>
+</div>
+</div>
+<ul>
+<li><strong>Slope</strong>: We are 95% confident that the incremental impact of each additional beauty point is between <span class="math inline">\(0.07\)</span> and <span class="math inline">\(0.20\)</span> student evaluation points.</li>
+<li><strong>Intercept</strong>: We are 95% confident that the average student evaluation score for average-looking professors (<code>beauty</code> = 0) is between <span class="math inline">\(3.95\)</span> and <span class="math inline">\(4.05\)</span>.</li>
+<li><strong>Rule of thumb</strong>: If zero is inside the CI, the effect is not statistically significant.</li>
+<li><strong>P-values</strong> and <strong>confidence intervals</strong> (CIs) are connected. If the p-value is greater than 0.05, it is likely that zero will be included within the confidence interval.</li>
+</ul>
+</div>
+</section>
+<section id="confidence-intervals-for-predictions" class="slide level2">
+<h2>Confidence intervals for predictions</h2>
+<div style="font-size: 0.8em;">
+<ul>
+<li>Interval for a single prediction:
+<ul>
+<li>We are 95% confident that a <strong>single</strong> professor with a beauty score of 1 will get rated between 3.06 and 5.21.</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">predict</span>(model, <span class="fu">list</span>(<span class="at">beauty=</span><span class="dv">1</span>), <span class="at">interval=</span><span class="st">"prediction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       fit      lwr      upr
+1 4.131274 3.056375 5.206172</code></pre>
+</div>
+</div>
+<ul>
+<li>Interval for an average prediction:
+<ul>
+<li>We are 95% confident that the <strong>average</strong> rating of all professors with beauty scores of 1 will be between 4.05 and 4.21.</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">predict</span>(model, <span class="fu">list</span>(<span class="at">beauty=</span><span class="dv">1</span>), <span class="at">interval=</span><span class="st">"confidence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       fit      lwr      upr
+1 4.131274 4.050776 4.211771</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="residuals-and-r-squared" class="slide level2">
+<h2>Residuals and R-squared</h2>
+<div style="font-size: 0.8em;">
+<ul>
+<li>Each instructor has a <strong>residual</strong>: the difference between their actual and predicted scores (the <strong>prediction error</strong>).</li>
+</ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="week_01_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center" width="384"></p>
+<p><img data-src="week_01_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
-</div><div class="column" style="width:50%;">
+</div>
+</section>
+<section id="residual-standard-error" class="slide level2">
+<h2>Residual standard error</h2>
+<div style="font-size: 0.8em;">
+<ul>
+<li>The residual standard error is in the same units as the response variable:
+<ul>
+<li>In this case the RSE is: <code>Residual standard error: 0.5455</code></li>
+<li>All predictions made by this model will, on average, differ from the true values by approximately 0.5455, which represents one standard deviation of the residuals.</li>
+</ul></li>
+<li>We can even get the 95% prediction interval for a single (beauty = 1) prediction as
+<ul>
+<li>lower bound: <span class="math inline">\(3.998 + 0.133 \cdot 1 - 2\times \text{RSE}\)</span></li>
+<li>upper bound: <span class="math inline">\(3.998 + 0.133 \cdot 1 + 2\times \text{RSE}\)</span></li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="co"># lower bound </span></span>
+<span id="cb11-2"><a></a><span class="fl">3.998</span> <span class="sc">+</span> <span class="fl">0.133</span> <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span><span class="fl">0.5455</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.04</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="co"># upper bound</span></span>
+<span id="cb13-2"><a></a><span class="fl">3.998</span> <span class="sc">+</span> <span class="fl">0.133</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span><span class="fl">0.5455</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.222</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="r-squared-r2" class="slide level2">
+<h2>R-squared (<span class="math inline">\(R^2\)</span>)</h2>
+<div style="font-size: 0.8em;">
+<ul>
+<li>The <span class="math inline">\(R^2\)</span> provides an understanding of the “fit” of the model in relation to the data.
+<ul>
+<li>If the <span class="math inline">\(R^2\)</span> is close to one, the model has a good fit.</li>
+<li>If the <span class="math inline">\(R^2\)</span> is close to zero, the model does not provide a good fit for the data.</li>
+<li><code>Multiple R-squared: 0.03574</code></li>
+<li>This indicates not a great fit.</li>
+</ul></li>
+<li><strong>Important interpretation:</strong>
+<ul>
+<li>The <span class="math inline">\(R^2\)</span> represents the percentage of variation in the response variable that can be explained by the predictor.</li>
+<li>For this model, 3.6% of the variation in evaluation scores can be explained by the beauty variable alone, while the remaining 96.4% is attributed to other unobserved factors.</li>
+</ul></li>
+</ul>
+</div>
+</section></section>
+<section>
+<section id="multiple-regression" class="title-slide slide level1 center">
+<h1>Multiple Regression</h1>
+
+</section>
+<section id="adding-more-predictors" class="slide level2">
+<h2>Adding more predictors</h2>
+<div style="font-size: 0.8em;">
+<ul>
+<li>Is the professor’s evaluation explained only by it’s beauty or there might be other factor affecting their evalution?</li>
+<li>Let’s check if the variable <code>age</code> might help us better explain the relationship between beauty and evaluation.</li>
+<li>We update our model as:</li>
+</ul>
+<p><span class="math display">\[
+\widehat{\text{eval}} = \beta_0 + \beta_1 \cdot \text{beauty} + \beta_2 \cdot \text{age} + \epsilon
+\]</span> - We now have a multiple regression model. - Both <code>beauty</code> and <code>age</code> are numerical variables. - The term <span class="math inline">\(\epsilon\)</span> (epsilon) accounts for unobserved factors that are not included in this model.</p>
+</div>
+</section>
+<section id="multiple-regression-model" class="slide level2">
+<h2>Multiple regression model</h2>
+<div style="font-size: 0.7em;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="co"># Build a simple regression model</span></span>
+<span id="cb15-2"><a></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(eval <span class="sc">~</span> beauty <span class="sc">+</span> age, <span class="at">data =</span> profs)</span>
+<span id="cb15-3"><a></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = eval ~ beauty + age, data = profs)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.80242 -0.36514  0.07407  0.39913  1.10206 
+
+Coefficients:
+             Estimate Std. Error t value             Pr(&gt;|t|)    
+(Intercept) 3.9844013  0.1337296  29.794 &lt; 0.0000000000000002 ***
+beauty      0.1340634  0.0337441   3.973            0.0000824 ***
+age         0.0002868  0.0027148   0.106                0.916    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.546 on 460 degrees of freedom
+Multiple R-squared:  0.03576,   Adjusted R-squared:  0.03157 
+F-statistic:  8.53 on 2 and 460 DF,  p-value: 0.0002305</code></pre>
+</div>
+</div>
+<ul>
+<li>How can we interpret this model?</li>
+</ul>
+</div>
+</section>
+<section id="interpretation-of-model-coefficients" class="slide level2">
+<h2>Interpretation of Model Coefficients</h2>
+<div style="font-size: 0.8em;">
+<ul>
+<li><strong>Intercept</strong>
+<ul>
+<li>When both the beauty score and age are zero, the expected evaluation is <code>3.98</code> (almost 4).<br>
+</li>
+<li>Here, <code>beauty = 0</code> represents an “average beauty,” and <code>age = 0</code> is not meaningful in this context but is part of the model.<br>
+</li>
+<li>Important: The intercept is evaluated when <strong>all predictor variables</strong> (beauty and age) are zero.</li>
+</ul></li>
+<li><strong>Slope for Beauty</strong>
+<ul>
+<li>For every one-unit increase in the beauty score, there is a <code>0.134</code> increase in the professor’s expected evaluation, <strong>holding age constant</strong>.</li>
+</ul></li>
+<li><strong>Slope for Age</strong>
+<ul>
+<li>For every one-unit increase in age, there is a <code>0.0003</code> increase in the professor’s expected evaluation, <strong>holding beauty constant</strong>.<br>
+</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="statistical-significance" class="slide level2">
+<h2>Statistical significance</h2>
+<div style="font-size: 0.7em;">
+<ul>
+<li>For this model, the <strong>p-values</strong> associated with the coefficients (intercept, beauty, and age) are as follows:</li>
+</ul>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>p-value - <code>Pr(&gt;|t|)</code></th>
+<th>Significance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Intercept</td>
+<td>&lt; 0.0000000000000002</td>
+<td>***</td>
+</tr>
+<tr class="even">
+<td>Beauty</td>
+<td>0.0000824</td>
+<td>***</td>
+</tr>
+<tr class="odd">
+<td>Age</td>
+<td>0.916</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>In this model, there is strong evidence that <code>beauty</code> has an impact on a professor’s evaluation at the population level, as its p-value is very close to zero.</li>
+<li>However, the p-value for <code>age</code> (<code>0.916</code> &gt; 0.05) indicates that there is no statistically significant relationship between age and a professor’s evaluation.</li>
+<li>Thus, we can conclude that the effect of <code>beauty</code> is statistically significant in relation to a professor’s evaluation, while the effect of <code>age</code> is not statistically significant.</li>
+</ul>
+</div>
+</section>
+<section id="rse-and-r2" class="slide level2">
+<h2>RSE and <span class="math inline">\(R^2\)</span></h2>
+<div style="font-size: 0.8em;">
+<ul>
+<li>There are no significant changes in relation to the RSE and <span class="math inline">\(R^2\)</span> in relation to the previous model.</li>
+<li>This means that the quality of the fit and the accuracy of the predictions will be nearly identical to those of the previous model.</li>
+<li>For this model, 3.6% of the variation in evaluation scores can be explained by the beauty and age variables alone, while the remaining 96.4% is attributed to other unobserved factors.</li>
+<li>What about predictions and confidence intervals?</li>
+</ul>
+</div>
+</section>
+<section id="whats-the-impact-of-gender-on-student-evaluations" class="slide level2">
+<h2>What’s the Impact of Gender on Student Evaluations?</h2>
+<div style="font-size: 0.8em;">
+<ul>
+<li>Do you see a difference between men (blue) and women (red)?</li>
+</ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="week_01_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center" width="384"></p>
+<p><img data-src="week_01_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
-</div></div>
-<p>Nonlinearity + Increasing variance over time usually suggests taking log of <span class="math inline">\(Y\)</span> to get a <em>multiplicative</em> model</p>
-</section>
-<section id="a-multiplicative-model-is-more-appropriate" class="slide level2">
-<h2>A <em>multiplicative</em> model is more appropriate</h2>
-<div class="cell" data-layout-align="center" data-output.lines="[8,9,10,11,12,13,14,15]">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>apple_model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(Revenue) <span class="sc">~</span> Period <span class="sc">+</span> Quarter, <span class="at">data =</span> apple)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>...
-
-Coefficients:
-            Estimate Std. Error t value             Pr(&gt;|t|)    
-(Intercept)  3.55729    0.03877   91.75 &lt; 0.0000000000000002 ***
-Period       0.02134    0.00113   18.82 &lt; 0.0000000000000002 ***
-QuarterQ2   -0.15339    0.04059   -3.78              0.00053 ***
-QuarterQ3   -0.10239    0.04063   -2.52              0.01595 *  
-QuarterQ4    0.32398    0.04059    7.98          0.000000001 ***
-...</code></pre>
-</div>
-</div>
-<p><span class="math display">\[
-\widehat {\log(Y_t)} = 3.56 + 0.02\text{Period}_t - 0.15\text{Q2}_t
-- 0.1\text{Q3}_t
-+ 0.32\text{Q4}_t
-\]</span></p>
-<p><span class="math display">\[
-\hat Y_t = e^{3.56 + 0.02\text{Period}_t - 0.15\text{Q2}_t
-- 0.1\text{Q3}_t
-+ 0.32\text{Q4}_t}
-\]</span></p>
-</section>
-<section id="interpreting-the-multiplicative-model" class="slide level2">
-<h2>Interpreting the multiplicative model</h2>
-<p><span class="math display">\[
-\hat Y_t = e^{3.56 + 0.02\text{Period}_t - 0.15\text{Q2}_t
-- 0.1\text{Q3}_t
-+ 0.32\text{Q4}_t}
-\]</span></p>
-<ol type="1">
-<li>On average, earnings in the same quarter <strong>increase</strong> by a factor of <span class="math inline">\(\exp(4\times 0.02) = 1.083\)</span>, or 8.3%, every year</li>
-<li>After accounting for the trend, on average Q2 earnings are <strong>lower</strong> than Q1 by a factor of <span class="math inline">\(\exp(-0.16) = 0.852\)</span>, or <span class="math inline">\(14.8\%\)</span></li>
-<li>After accounting for the trend, on average Q3 earnings are ??? than Q1 by a factor of ???, or ???%.</li>
-<li>After accounting for the trend, Q4 earnings are <strong>higher</strong> than Q1 by a factor of <span class="math inline">\(\exp(0.32) = 1.377\)</span>, or <span class="math inline">\(37.7\%\)</span></li>
-</ol>
-</section>
-<section id="interpreting-the-multiplicative-model-1" class="slide level2 smaller">
-<h2>Interpreting the multiplicative model</h2>
-<p><span class="math display">\[
-\hat Y_t = e^{3.56 + 0.02\text{Period}_t - 0.15\text{Q2}_t
-- 0.1\text{Q3}_t
-+ 0.32\text{Q4}_t}
-\]</span></p>
-<p>On average, earnings in the same quarter <strong>increase</strong> by a factor of <span class="math inline">\(\exp(4\times 0.02) = 1.083\)</span>, or 8.3%, every year. Why?</p>
-<div class="fragment">
-<p>For example: Q3 of 2019 (Period = 33): <span class="math display">\[\hat Y_{32} = \exp(3.56 + 0.02(33) + 0.1)\]</span></p>
-</div>
-<div class="fragment">
-<p>Q3 of 2020 (Period = 37): <span class="math display">\[
-\begin{align}
-\hat Y_{37} &amp;= \exp(3.56 + 0.02(37) + 0.1)\\
-&amp;= \exp(3.56 + 0.02(33 + 4)  + 0.1)\\
-&amp;= \color{darkred}{\exp(3.56 + 0.02(33)  + 0.1)}\times\color{darkblue}{\exp(0.02(4))}\\
-&amp;= \color{darkred}{\hat Y_{32}} \times \color{darkblue}{1.083}
-\end{align}
-\]</span></p>
 </div>
 </section>
-<section id="much-better" class="slide level2">
-<h2>Much better!</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">autoplot</span>(apple_model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="week_01_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="but-wait" class="slide level2">
-<h2>But wait…</h2>
-<p>We’re consistently under predicting recent quarters!</p>
-
-<img data-src="week_01_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p>Is there time dependence in our residuals?</p>
-</section>
-<section id="checking-for-independence" class="slide level2 smaller">
-<h2>Checking for independence</h2>
-
-<img data-src="week_01_files/figure-revealjs/unnamed-chunk-10-1.png" class="quarto-figure quarto-figure-center r-stretch" width="480"><p>Prediction errors for consecutive quarters are correlated!</p>
-<p><span class="math display">\[
-\mathrm{Cor}(\text{residual}_t, \text{residual}_{t-1}) = 0.64
-\]</span> (This is the <em>lag 1 autocorrelation</em>)</p>
-</section>
-<section id="checking-for-independence-acf" class="slide level2">
-<h2>Checking for independence (ACF)</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">acf</span>(<span class="fu">residuals</span>(apple_model2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="week_01_files/figure-revealjs/unnamed-chunk-11-1.png" class="quarto-figure quarto-figure-center r-stretch" width="576"><p><span class="math display">\[
-\color{darkred}{
-\mathrm{Cor}(\text{residual}_t, \text{residual}_{t-1}) = 0.64
-}
-\]</span> (This is the <em>lag 1 autocorrelation</em>)</p>
-</section>
-<section id="checking-for-independence-acf-1" class="slide level2">
-<h2>Checking for independence (ACF)</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">acf</span>(<span class="fu">residuals</span>(apple_model2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="week_01_files/figure-revealjs/unnamed-chunk-12-1.png" class="quarto-figure quarto-figure-center r-stretch" width="576"><p><span class="math display">\[
-\color{darkorange}{
-\mathrm{Cor}(\text{residual}_t, \text{residual}_{t-2}) = 0.26
-}
-\]</span></p>
-<p>(This is the <em>lag 2 autocorrelation</em>)</p>
-</section>
-<section id="checking-for-independence-acf-2" class="slide level2">
-<h2>Checking for independence (ACF)</h2>
-<p>The autocorrelation function (ACF) plot shows autocorrelation at many lags</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">acf</span>(<span class="fu">residuals</span>(apple_model2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="week_01_files/figure-revealjs/unnamed-chunk-13-1.png" class="quarto-figure quarto-figure-center r-stretch" width="576"><p>Under independence, about 95% of the time any given lag will be within the blue. Look out for large lag 1 values in particular!</p>
-</section>
-<section id="improving-our-model" class="slide level2">
-<h2>Improving our model</h2>
-<p>Let’s try to address the bias in recent predictions first.</p>
-
-<img data-src="week_01_files/figure-revealjs/unnamed-chunk-14-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p>What may have changed mid-late 2020?</p>
-</section>
-<section id="modeling-external-shocks" class="slide level2">
-<h2>Modeling external shocks</h2>
-<p>Adding a COVID level-shift:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="co"># Define PostCOVID to be 1 on or after 2020 Q4</span></span>
-<span id="cb11-2"><a></a><span class="co"># (i.e., if the year is 2021+ or if we are in 2020 Q4)</span></span>
-<span id="cb11-3"><a></a>apple <span class="ot">&lt;-</span> apple <span class="sc">%&gt;%</span></span>
-<span id="cb11-4"><a></a>  <span class="fu">mutate</span>(<span class="at">PostCOVID =</span> <span class="fu">ifelse</span>(</span>
-<span id="cb11-5"><a></a>    Year <span class="sc">&gt;=</span> <span class="dv">2021</span> <span class="sc">|</span> (Year <span class="sc">==</span> <span class="dv">2020</span> <span class="sc">&amp;</span> Quarter <span class="sc">==</span> <span class="st">"Q4"</span>),</span>
-<span id="cb11-6"><a></a>    <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb11-7"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-layout-align="center" data-output.lines="[1,36,37,38,39,40,41,42]">
-<div class="cell-output cell-output-stdout">
-<pre><code>...
-   Period Year Quarter Revenue PostCOVID
-35     35 2020      Q1   58.31         0
-36     36 2020      Q2   59.68         0
-37     37 2020      Q3   64.70         0
-38     38 2020      Q4  111.44         1
-39     39 2021      Q1   89.58         1
-40     40 2021      Q2   81.43         1
-41     41 2021      Q3   83.36         1
-...</code></pre>
-</div>
-</div>
-</section>
-<section id="modeling-external-shocks-1" class="slide level2">
-<h2>Modeling external shocks</h2>
-<p>Adding a COVID level-shift:</p>
-<div class="cell" data-layout-align="center" data-output.lines="[8,9,10,11,12,13,14,15,16]">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>apple_model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(Revenue) <span class="sc">~</span> Period <span class="sc">+</span> Quarter</span>
-<span id="cb13-2"><a></a>  <span class="sc">+</span> PostCOVID, <span class="at">data =</span> apple)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>...
-
-Coefficients:
-            Estimate Std. Error t value             Pr(&gt;|t|)    
-(Intercept)  3.59676    0.03500  102.77 &lt; 0.0000000000000002 ***
-Period       0.01830    0.00126   14.50 &lt; 0.0000000000000002 ***
-QuarterQ2   -0.15036    0.03500   -4.30              0.00012 ***
-QuarterQ3   -0.09328    0.03511   -2.66              0.01148 *  
-QuarterQ4    0.32094    0.03500    9.17       0.000000000036 ***
-PostCOVID    0.16701    0.04390    3.80              0.00050 ***
-...</code></pre>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">confint</span>(apple_model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>               2.5 %   97.5 %
-(Intercept)  3.52591  3.66762
-Period       0.01575  0.02086
-QuarterQ2   -0.22121 -0.07951
-QuarterQ3   -0.16436 -0.02219
-QuarterQ4    0.25009  0.39179
-PostCOVID    0.07813  0.25588</code></pre>
-</div>
-</div>
-</section>
-<section id="new-model-fit" class="slide level2">
-<h2>New model fit</h2>
-
-<img data-src="week_01_files/figure-revealjs/unnamed-chunk-19-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="new-models-residuals" class="slide level2">
-<h2>New model’s residuals</h2>
-<p>The last few quarters look better:</p>
-
-<img data-src="week_01_files/figure-revealjs/unnamed-chunk-20-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p>But is the time dependence gone?</p>
-</section>
-<section id="nope" class="slide level2">
-<h2>Nope!</h2>
-<div class="cell" data-layout-align="center" data-output.lines="[8,9,10,11,12,13,14,15]">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">acf</span>(<span class="fu">residuals</span>(apple_model3))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="week_01_files/figure-revealjs/unnamed-chunk-21-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p>We still have time dependence in our residuals!</p>
-</section>
-<section id="adding-a-lag-autoregression" class="slide level2">
-<h2>Adding a lag (autoregression)</h2>
-<p>Let’s create and add a lag 1 term (<span class="math inline">\(\log(Y_{t-1})\)</span>, the log of <em>last</em> quarter’s earnings):</p>
-<div class="cell" data-layout-align="center" data-output.lines="[10,11,12,13,14,15,16,17,18]">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>apple <span class="ot">&lt;-</span> apple <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">lag1 =</span> <span class="fu">lag</span>(Revenue))</span>
-<span id="cb18-2"><a></a>apple_model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(Revenue) <span class="sc">~</span> Period <span class="sc">+</span> Quarter</span>
-<span id="cb18-3"><a></a>  <span class="sc">+</span> PostCOVID <span class="sc">+</span> <span class="fu">log</span>(lag1), <span class="at">data =</span> apple)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>...
-Coefficients:
-            Estimate Std. Error t value      Pr(&gt;|t|)    
-(Intercept) 1.787927   0.484023    3.69       0.00073 ***
-Period      0.008745   0.002516    3.48       0.00135 ** 
-QuarterQ2   0.000922   0.048638    0.02       0.98497    
-QuarterQ3   0.147878   0.065352    2.26       0.02978 *  
-QuarterQ4   0.521035   0.060089    8.67 0.00000000024 ***
-PostCOVID   0.118981   0.039507    3.01       0.00473 ** 
-log(lag1)   0.468291   0.123846    3.78       0.00057 ***
-...</code></pre>
-</div>
-</div>
-</section>
-<section id="independence-over-time-is-satisfied" class="slide level2 smaller">
-<h2>Independence (over time) is satisfied!</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">acf</span>(<span class="fu">residuals</span>(apple_model4))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="week_01_files/figure-revealjs/unnamed-chunk-23-1.png" class="quarto-figure quarto-figure-center r-stretch" width="576"><p>For independence to hold:</p>
+<section id="for-for-the-weekend" class="slide level2">
+<h2>For for the Weekend</h2>
 <ul>
-<li>The low-lag autocorrelations (1,2,3) should be within the blue, and we should see no clear patterns.</li>
-<li>Occasional values outside the blue (e.g.&nbsp;lags 5,11, etc here) are expected about 5% of the time even under independence</li>
+<li>Read the syllabus.</li>
+<li>Do the first homework assignment in Canvas (covering today’s material).</li>
+<li>Do the first pre-class assignment in Perusall (to prepare for next week’s class).</li>
 </ul>
-</section>
-<section id="forecasting" class="slide level2">
-<h2>Forecasting</h2>
-<p>Our last observation is from Q2 2022; how can we forecast Q3 2022?</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">tail</span>(apple, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   Period Time Year Quarter Revenue PostCOVID   lag1
-42     42 2022 2021      Q4  123.94         1  83.36
-43     43 2022 2022      Q1   97.28         1 123.94
-44     44 2022 2022      Q2   82.96         1  97.28</code></pre>
-</div>
-</div>
-<p>How would the last row change?</p>
-<div class="fragment">
-<ol type="1">
-<li>Increment Period by 1 (43 -&gt; 44)</li>
-<li>Change Quarter from Q2 to Q3</li>
-<li>PostCOVID = 1 (still)</li>
-<li>lag1 = 82.96 (Revenue for Q2 2022)</li>
-</ol>
-</div>
-</section>
-<section id="forecasting-1" class="slide level2">
-<h2>Forecasting</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>logpred <span class="ot">&lt;-</span> <span class="fu">predict</span>(apple_model4,</span>
-<span id="cb23-2"><a></a>  <span class="at">newdata =</span> <span class="fu">list</span>(<span class="at">Period =</span> <span class="dv">44</span>, <span class="at">Quarter =</span> <span class="st">"Q3"</span>,</span>
-<span id="cb23-3"><a></a>    <span class="at">PostCOVID =</span> <span class="dv">1</span>, <span class="at">lag1 =</span> <span class="fl">82.96</span>),</span>
-<span id="cb23-4"><a></a>  <span class="at">interval =</span> <span class="st">"predict"</span>)</span>
-<span id="cb23-5"><a></a><span class="fu">exp</span>(logpred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   fit   lwr   upr
-1 90.8 78.26 105.3</code></pre>
-</div>
-</div>
-<p>Forecasting tips:</p>
-<ul>
-<li>Don’t forget to transform back if you took a log!</li>
-<li>A prediction interval is the right measure of uncertainty, since there will be only one Q3 of 2022</li>
-</ul>
-</section>
-<section id="model-building-strategy" class="slide level2">
-<h2>Model building strategy</h2>
-<ol type="1">
-<li>Start with a an additive or multiplicative model with trend and seasonal components. (Plot your data! If the seasonal variation increases or decreases over time you’ll want a multiplicative model.)</li>
-<li>Examine the usual diagnostic plots, and plot your residuals as a function of time. Do you need a (different) nonlinear time trend? A transformation of <span class="math inline">\(Y\)</span>?</li>
-<li>Check your residuals for time dependence If it’s present, is it explained by external factors you can model?</li>
-<li>If time dependence in the residuals remains, add appropriate lag terms to your model, one at a time.</li>
-</ol>
 
 
 </section></section>
