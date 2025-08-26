@@ -175,7 +175,7 @@ options(scipen = 999)
 ## Mastery Exams
 
 -   Each unit concludes with a Mastery Exam:
-    -   **Unit A:** October 9 or 10 at 7 PM
+    -   **Unit A:** October 22 or 23 at 7 to 9 PM
     -   **Unit B:** University-assigned final exam period
 -   You'll have access to RStudio and a "cheat sheet" during exams (don't spend time memorizing anything!).
 
@@ -341,7 +341,7 @@ summary(model)
 
 ## Interpretation
 
-::: {style="font-size: 0.8em;"}
+::: {style="font-size: 0.9em;"}
 -   **Intercept**
     -   When the beauty score is zero, the expected evaluation is `3.99` (almost 4).\
     -   Here, `beauty = 0` represents an "average beauty".
