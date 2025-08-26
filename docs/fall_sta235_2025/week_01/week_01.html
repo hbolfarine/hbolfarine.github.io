@@ -311,7 +311,7 @@ Class 01 - Linear Regression
 <li><strong>Due by the start of class on Monday/Tuesday:</strong> Perusall pre-class video/reading discussion covering the topic</li>
 <li><strong>During class on Monday/Tuesday:</strong> Lecture, activities, practice topic</li>
 <li><strong>Due by 11:59 PM the following Sunday/Monday:</strong> Homework covering the topic</li>
-<li><strong>The following Thursday at the beginning of class:</strong> Checkpoint Quiz on that topic</li>
+<li><strong>The following Monday/Tuesday: at the beginning of class:</strong> Checkpoint Quiz on that topic</li>
 </ul>
 </section>
 <section id="pre-class-work" class="slide level2">
@@ -645,10 +645,9 @@ beauty      0.06976869 0.1962342</code></pre>
 <h2>Confidence intervals for predictions</h2>
 <div style="font-size: 0.8em;">
 <ul>
-<li>Interval for a single prediction:
+<li><p>Interval for a single prediction:</p>
 <ul>
 <li>We are 95% confident that a <strong>single</strong> professor with a beauty score of 1 will get rated between 3.06 and 5.21.</li>
-</ul></li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">predict</span>(model, <span class="fu">list</span>(<span class="at">beauty=</span><span class="dv">1</span>), <span class="at">interval=</span><span class="st">"prediction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -656,12 +655,10 @@ beauty      0.06976869 0.1962342</code></pre>
 <pre><code>       fit      lwr      upr
 1 4.131274 3.056375 5.206172</code></pre>
 </div>
-</div>
-<ul>
-<li>Interval for an average prediction:
+</div></li>
+<li><p>Interval for an average prediction:</p>
 <ul>
 <li>We are 95% confident that the <strong>average</strong> rating of all professors with beauty scores of 1 will be between 4.05 and 4.21.</li>
-</ul></li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">predict</span>(model, <span class="fu">list</span>(<span class="at">beauty=</span><span class="dv">1</span>), <span class="at">interval=</span><span class="st">"confidence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -669,7 +666,8 @@ beauty      0.06976869 0.1962342</code></pre>
 <pre><code>       fit      lwr      upr
 1 4.131274 4.050776 4.211771</code></pre>
 </div>
-</div>
+</div></li>
+</ul>
 </div>
 </section>
 <section id="residuals-and-r-squared" class="slide level2">

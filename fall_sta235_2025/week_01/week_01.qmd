@@ -53,8 +53,11 @@ knit_hooks$set(output = function(x, options) {
 ```
 
 <!-- # ```{r load_apple_data, include=FALSE, cache=FALSE} -->
+
 <!-- # apple <- read.csv("week_01_docs/apple_short.csv") -->
+
 <!-- # options(digits = 4) -->
+
 <!-- # ``` -->
 
 ```{r load_profs, include=FALSE, cache=FALSE}
@@ -110,7 +113,7 @@ options(scipen = 999)
     -   **Unit B:** Applications and extensions
 -   Canvas
     -   Make sure you can log in and are enrolled in STA 235 in Canvas
-    -  Check out the home page for the weekly schedule and to meet the course staff
+    -   Check out the home page for the weekly schedule and to meet the course staff
 
 ## Statistical Computing
 
@@ -131,7 +134,7 @@ options(scipen = 999)
 -   **Due by the start of class on Monday/Tuesday:** Perusall pre-class video/reading discussion covering the topic
 -   **During class on Monday/Tuesday:** Lecture, activities, practice topic
 -   **Due by 11:59 PM the following Sunday/Monday:** Homework covering the topic
--   **The following Thursday at the beginning of class:** Checkpoint Quiz on that topic
+-   **The following Monday/Tuesday: at the beginning of class:** Checkpoint Quiz on that topic
 
 ## Pre-Class Work
 
@@ -265,7 +268,6 @@ labs(y="Average student evaluation", x="Beauty")
 The **correlation** $r$ between two variables $X$ and $Y$ measures the strength of the linear relationship between them. Correlation ranges from $-1$ (perfect negative relationship) to $0$ (no relationship) to $1$ (perfect positive relationship).
 :::
 
-
 ## Correlation
 
 ```{r plot4, echo=FALSE}
@@ -291,29 +293,30 @@ for (r in c(-1, -0.9, -0.8, -0.5, -0.2, NA, NA, 0, NA, NA, 0.2, 0.5, 0.8, 0.9, 1
 par(mfrow = c(1, 1), mai = c(1.02, 0.82, 0.22, 0.42))
 ```
 
-
 ## Correlation
 
 ```{r, echo = TRUE}
 cor(profs$eval, profs$beauty)
 ```
 
-- How can we interpret this?
-- The `$` sign accesses the variables in the data set `profs.csv`.
+-   How can we interpret this?
+-   The `$` sign accesses the variables in the data set `profs.csv`.
 
 ## Let's Build a Simple Regression Model {.smaller-text}
+
 ::: {style="font-size: 0.8em;"}
 $$
 \text{eval} = \beta_0 + \beta_1 \cdot \text{beauty} + \epsilon
 $$
 
-- $\beta_0$ and $\beta_1$ are known as coefficients (standard notations)
-- $\beta_0$ is the intercept
-- $\beta_1$ is the slope associated with `beauty`
-- The term $\epsilon$ (epsilon) accounts for unobserved factors that are not included in this model
+-   $\beta_0$ and $\beta_1$ are known as coefficients (standard notations)
+-   $\beta_0$ is the intercept
+-   $\beta_1$ is the slope associated with `beauty`
+-   The term $\epsilon$ (epsilon) accounts for unobserved factors that are not included in this model
 :::
 
 ## Let's Build a Simple Regression Model in Rstudio {.smaller-text}
+
 ::: {style="font-size: 0.8em;"}
 ```{r, echo = TRUE}
 # Build a simple regression model
@@ -324,58 +327,62 @@ summary(model)
 
 ## Interpreting the Model
 
-- `eval` is the **response** variable ($Y$); `beauty` is the **predictor** variable ($X$).
-- Simple regression uses the best fit line to give us a linear equation to predict $Y$ from $X$:
+-   `eval` is the **response** variable ($Y$); `beauty` is the **predictor** variable ($X$).
 
-  $$
-  \widehat{\text{eval}} = 3.998 + 0.133 \cdot \text{beauty}
-  $$
-- We can predict the evaluation score for someone based on their beauty score just by plugging into the equation.
-- What do the coefficients mean?
+-   Simple regression uses the best fit line to give us a linear equation to predict $Y$ from $X$:
+
+    $$
+    \widehat{\text{eval}} = 3.998 + 0.133 \cdot \text{beauty}
+    $$
+
+-   We can predict the evaluation score for someone based on their beauty score just by plugging into the equation.
+
+-   What do the coefficients mean?
 
 ## Interpretation
-::: {style="font-size: 0.8em;"}
-- **Intercept**  
-  - When the beauty score is zero, the expected evaluation is `3.99` (almost 4).  
-  - Here, `beauty = 0` represents an "average beauty".
-  - Important, the intercept is evaluated always when the **predictor** variable is zero.
 
-- **Slope for Beauty**  
-  - For every one-unit increase in the beauty score, there is a `0.133` increase in the professor's expected evaluation.  
-  - In this context, "expected" refers to the average evaluation.
+::: {style="font-size: 0.8em;"}
+-   **Intercept**
+    -   When the beauty score is zero, the expected evaluation is `3.99` (almost 4).\
+    -   Here, `beauty = 0` represents an "average beauty".
+    -   Important, the intercept is evaluated always when the **predictor** variable is zero.
+-   **Slope for Beauty**
+    -   For every one-unit increase in the beauty score, there is a `0.133` increase in the professor's expected evaluation.\
+    -   In this context, "expected" refers to the average evaluation.
 :::
 
 ## Statistical Significance of the Model
 
-- The population regression line (the best fit line in the population) is $Y = \beta_0 + \beta_1 X$ (we can't know this).
-- Our regression equation is the best fit line in the sample, or $\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X$ (this is what we get from our sample data).
-- The sample intercept and slope $\hat{\beta}_0$ and $\hat{\beta}_1$ are our best estimates for the population intercept and slope $\beta_0$ and $\beta_1$.
-- But we need to get a sense of how close $\hat{\beta}_0$ and $\hat{\beta}_1$ are to $\beta_0$ and $\beta_1$!
+-   The population regression line (the best fit line in the population) is $Y = \beta_0 + \beta_1 X$ (we can't know this).
+-   Our regression equation is the best fit line in the sample, or $\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X$ (this is what we get from our sample data).
+-   The sample intercept and slope $\hat{\beta}_0$ and $\hat{\beta}_1$ are our best estimates for the population intercept and slope $\beta_0$ and $\beta_1$.
+-   But we need to get a sense of how close $\hat{\beta}_0$ and $\hat{\beta}_1$ are to $\beta_0$ and $\beta_1$!
 
+## P-values
 
-## P-values 
-::: {style="font-size: 0.8em;"}
-- For this model, the **p-values** associated with the coefficients, slope and intercept are close to zero:
+:::: {style="font-size: 0.8em;"}
+-   For this model, the **p-values** associated with the coefficients, slope and intercept are close to zero:
 
-::: {.center}
-| Term       | p-value - ` Pr(>|t|)` | Significance |
-|------------|-----------------------|--------------|
-| Intercept  | 0.0000000000000002    | ***          |
-| Beauty     | 0.0000425             | ***          |
+::: center
+| Term      | p-value - `Pr(>|t|)` | Significance |
+|-----------|----------------------|--------------|
+| Intercept | 0.0000000000000002   | \*\*\*       |
+| Beauty    | 0.0000425            | \*\*\*       |
 :::
 
-- In this case, there's evidence that beauty has an impact on a professor's evaluation at a populational level.
-- Thus, we can conclude that the effect of beauty is statistically significant in relation to the professor's evaluation.
-:::
+-   In this case, there's evidence that beauty has an impact on a professor's evaluation at a populational level.
+-   Thus, we can conclude that the effect of beauty is statistically significant in relation to the professor's evaluation.
+::::
 
 ## Rule of Thumb for P-values
 
-::: {.center}
-- If the p-value is smaller than 0.05, we can conclude that the effect is statistically significant.
-- Otherwise, if the p-value is greater than 0.05, we conclude that the effect from the predictor is not statistically significant.
+::: center
+-   If the p-value is smaller than 0.05, we can conclude that the effect is statistically significant.
+-   Otherwise, if the p-value is greater than 0.05, we conclude that the effect from the predictor is not statistically significant.
 :::
-  
+
 ## Confidence Intervals
+
 ::: {style="font-size: 0.7em;"}
 Let's get confidence intervals for the slope and intercept to get a sense of the uncertainty in our estimates:
 
@@ -383,31 +390,36 @@ Let's get confidence intervals for the slope and intercept to get a sense of the
 confint(model)
 ```
 
-- **Slope**: We are 95% confident that the incremental impact of each additional beauty point is between $0.07$ and $0.20$ student evaluation points.
-- **Intercept**: We are 95% confident that the average student evaluation score for average-looking professors (`beauty` = 0) is between $3.95$ and $4.05$.
-- **Rule of thumb**: If zero is inside the CI, the effect is not statistically significant.
-- **P-values** and **confidence intervals** (CIs) are connected. If the p-value is greater than 0.05, it is likely that zero will be included within the confidence interval.
+-   **Slope**: We are 95% confident that the incremental impact of each additional beauty point is between $0.07$ and $0.20$ student evaluation points.
+-   **Intercept**: We are 95% confident that the average student evaluation score for average-looking professors (`beauty` = 0) is between $3.95$ and $4.05$.
+-   **Rule of thumb**: If zero is inside the CI, the effect is not statistically significant.
+-   **P-values** and **confidence intervals** (CIs) are connected. If the p-value is greater than 0.05, it is likely that zero will be included within the confidence interval.
 :::
 
 ## Confidence intervals for predictions
-::: {style="font-size: 0.8em;"}
-- Interval for a single prediction:
-  - We are 95\% confident that a **single** professor with a beauty score of 1 will get rated between 3.06 and 5.21.
-```{r, echo = TRUE}
-predict(model, list(beauty=1), interval="prediction")
-```
 
-- Interval for an average prediction:
-  - We are 95\% confident that the **average** rating of all professors with beauty scores of 1 will be between 4.05 and 4.21.
-```{r, echo = TRUE}
-predict(model, list(beauty=1), interval="confidence")
-```
+::: {style="font-size: 0.8em;"}
+-   Interval for a single prediction:
+
+    -   We are 95% confident that a **single** professor with a beauty score of 1 will get rated between 3.06 and 5.21.
+
+    ```{r, echo = TRUE}
+    predict(model, list(beauty=1), interval="prediction")
+    ```
+
+-   Interval for an average prediction:
+
+    -   We are 95% confident that the **average** rating of all professors with beauty scores of 1 will be between 4.05 and 4.21.
+
+    ```{r, echo = TRUE}
+    predict(model, list(beauty=1), interval="confidence")
+    ```
 :::
 
 ## Residuals and R-squared
 
 ::: {style="font-size: 0.8em;"}
-- Each instructor has a **residual**: the difference between their actual and predicted scores (the **prediction error**).
+-   Each instructor has a **residual**: the difference between their actual and predicted scores (the **prediction error**).
 
 ```{r}
 profs$fitted <- predict(model)
@@ -422,13 +434,12 @@ labs(y="Average student evaluation", x="Beauty")
 ## Residual standard error
 
 ::: {style="font-size: 0.8em;"}
-- The residual standard error is in the same units as the response variable:
-   - In this case the RSE is: `Residual standard error: 0.5455`
-   - All predictions made by this model will, on average, differ from the true values by approximately 0.5455, which represents one standard deviation of the residuals.
-   
-- We can even get the 95% prediction interval for a single (beauty = 1) prediction as 
-  - lower bound: $3.998 + 0.133 \cdot 1 - 2\times \text{RSE}$
-  - upper bound: $3.998 + 0.133 \cdot 1 + 2\times \text{RSE}$
+-   The residual standard error is in the same units as the response variable:
+    -   In this case the RSE is: `Residual standard error: 0.5455`
+    -   All predictions made by this model will, on average, differ from the true values by approximately 0.5455, which represents one standard deviation of the residuals.
+-   We can even get the 95% prediction interval for a single (beauty = 1) prediction as
+    -   lower bound: $3.998 + 0.133 \cdot 1 - 2\times \text{RSE}$
+    -   upper bound: $3.998 + 0.133 \cdot 1 + 2\times \text{RSE}$
 
 ```{r, echo = TRUE}
 # lower bound 
@@ -440,32 +451,30 @@ labs(y="Average student evaluation", x="Beauty")
 :::
 
 ## R-squared ($R^2$)
-::: {style="font-size: 0.8em;"}
-- The $R^2$ provides an understanding of the "fit" of the model in relation to the data.
-  - If the $R^2$ is close to one, the model has a good fit.
-  - If the $R^2$ is close to zero, the model does not provide a good fit for the data.
-  - `Multiple R-squared: 0.03574`
-  - This indicates not a great fit.
 
-- **Important interpretation:**
-  - The $R^2$ represents the percentage of variation in the response variable that can be explained by the predictor. 
-  - For this model, 3.6% of the variation in evaluation scores can be explained by the beauty variable alone, while the remaining 96.4% is attributed to other unobserved factors.
+::: {style="font-size: 0.8em;"}
+-   The $R^2$ provides an understanding of the "fit" of the model in relation to the data.
+    -   If the $R^2$ is close to one, the model has a good fit.
+    -   If the $R^2$ is close to zero, the model does not provide a good fit for the data.
+    -   `Multiple R-squared: 0.03574`
+    -   This indicates not a great fit.
+-   **Important interpretation:**
+    -   The $R^2$ represents the percentage of variation in the response variable that can be explained by the predictor.
+    -   For this model, 3.6% of the variation in evaluation scores can be explained by the beauty variable alone, while the remaining 96.4% is attributed to other unobserved factors.
 :::
 
-# Multiple Regression 
+# Multiple Regression
 
-## Adding more predictors 
+## Adding more predictors
+
 ::: {style="font-size: 0.8em;"}
-- Is the professor's evaluation explained only by it's beauty or there might be other factor affecting their evalution?
-- Let's check if the variable `age` might help us better explain the relationship between beauty and evaluation.
-- We update our model as:
+-   Is the professor's evaluation explained only by it's beauty or there might be other factor affecting their evalution?
+-   Let's check if the variable `age` might help us better explain the relationship between beauty and evaluation.
+-   We update our model as:
 
 $$
 \widehat{\text{eval}} = \beta_0 + \beta_1 \cdot \text{beauty} + \beta_2 \cdot \text{age} + \epsilon
-$$
-- We now have a multiple regression model.
-- Both `beauty` and `age` are numerical variables.
-- The term $\epsilon$ (epsilon) accounts for unobserved factors that are not included in this model.
+$$ - We now have a multiple regression model. - Both `beauty` and `age` are numerical variables. - The term $\epsilon$ (epsilon) accounts for unobserved factors that are not included in this model.
 :::
 
 ## Multiple regression model
@@ -476,51 +485,52 @@ $$
 model <- lm(eval ~ beauty + age, data = profs)
 summary(model)
 ```
- - How can we interpret this model?
+
+-   How can we interpret this model?
 :::
 
 ## Interpretation of Model Coefficients
 
 ::: {style="font-size: 0.8em;"}
-- **Intercept**  
-  - When both the beauty score and age are zero, the expected evaluation is `3.98` (almost 4).  
-  - Here, `beauty = 0` represents an "average beauty," and `age = 0` is not meaningful in this context but is part of the model.  
-  - Important: The intercept is evaluated when **all predictor variables** (beauty and age) are zero.
-
-- **Slope for Beauty**  
-  - For every one-unit increase in the beauty score, there is a `0.134` increase in the professor's expected evaluation, **holding age constant**.  
-
-- **Slope for Age**  
-  - For every one-unit increase in age, there is a `0.0003` increase in the professor's expected evaluation, **holding beauty constant**.  
+-   **Intercept**
+    -   When both the beauty score and age are zero, the expected evaluation is `3.98` (almost 4).\
+    -   Here, `beauty = 0` represents an "average beauty," and `age = 0` is not meaningful in this context but is part of the model.\
+    -   Important: The intercept is evaluated when **all predictor variables** (beauty and age) are zero.
+-   **Slope for Beauty**
+    -   For every one-unit increase in the beauty score, there is a `0.134` increase in the professor's expected evaluation, **holding age constant**.
+-   **Slope for Age**
+    -   For every one-unit increase in age, there is a `0.0003` increase in the professor's expected evaluation, **holding beauty constant**.\
 :::
 
-## Statistical significance 
+## Statistical significance
+
 ::: {style="font-size: 0.7em;"}
-- For this model, the **p-values** associated with the coefficients (intercept, beauty, and age) are as follows:
+-   For this model, the **p-values** associated with the coefficients (intercept, beauty, and age) are as follows:
 
-| Term       | p-value - `Pr(>|t|)`  | Significance |
-|------------|-----------------------|--------------|
-| Intercept  | < 0.0000000000000002  | ***          |
-| Beauty     | 0.0000824             | ***          |
-| Age        | 0.916                 |              |
+| Term      | p-value - `Pr(>|t|)`  | Significance |
+|-----------|-----------------------|--------------|
+| Intercept | \< 0.0000000000000002 | \*\*\*       |
+| Beauty    | 0.0000824             | \*\*\*       |
+| Age       | 0.916                 |              |
 
-- In this model, there is strong evidence that `beauty` has an impact on a professor's evaluation at the population level, as its p-value is very close to zero.
-- However, the p-value for `age` (`0.916` > 0.05) indicates that there is no statistically significant relationship between age and a professor's evaluation.
-- Thus, we can conclude that the effect of `beauty` is statistically significant in relation to a professor's evaluation, while the effect of `age` is not statistically significant.
+-   In this model, there is strong evidence that `beauty` has an impact on a professor's evaluation at the population level, as its p-value is very close to zero.
+-   However, the p-value for `age` (`0.916` \> 0.05) indicates that there is no statistically significant relationship between age and a professor's evaluation.
+-   Thus, we can conclude that the effect of `beauty` is statistically significant in relation to a professor's evaluation, while the effect of `age` is not statistically significant.
 :::
 
 ## RSE and $R^2$
 
 ::: {style="font-size: 0.8em;"}
-- There are no significant changes in relation to the RSE and $R^2$ in relation to the previous model.
-- This means that the quality of the fit and the accuracy of the predictions will be nearly identical to those of the previous model.
-- For this model, 3.6% of the variation in evaluation scores can be explained by the beauty and age variables alone, while the remaining 96.4% is attributed to other unobserved factors.
-- What about predictions and confidence intervals?
+-   There are no significant changes in relation to the RSE and $R^2$ in relation to the previous model.
+-   This means that the quality of the fit and the accuracy of the predictions will be nearly identical to those of the previous model.
+-   For this model, 3.6% of the variation in evaluation scores can be explained by the beauty and age variables alone, while the remaining 96.4% is attributed to other unobserved factors.
+-   What about predictions and confidence intervals?
 :::
 
 ## What's the Impact of Gender on Student Evaluations?
+
 ::: {style="font-size: 0.8em;"}
-- Do you see a difference between men (blue) and women (red)?
+-   Do you see a difference between men (blue) and women (red)?
 
 ```{r, echo=FALSE, message=FALSE}
 ggplot(profs, aes(x = beauty, y = eval, col = gender)) +
@@ -531,6 +541,6 @@ ggplot(profs, aes(x = beauty, y = eval, col = gender)) +
 
 ## For for the Weekend
 
-- Read the syllabus.
-- Do the first homework assignment in Canvas (covering today's material).
-- Do the first pre-class assignment in Perusall (to prepare for next week's class).
+-   Read the syllabus.
+-   Do the first homework assignment in Canvas (covering today's material).
+-   Do the first pre-class assignment in Perusall (to prepare for next week's class).

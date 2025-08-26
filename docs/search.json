@@ -2272,7 +2272,7 @@
     "href": "fall_sta235_2025/week_01/week_01.html#weekly-cadence-for-a-particular-topic",
     "title": "Data Science for Business Applications",
     "section": "Weekly Cadence for a Particular Topic",
-    "text": "Weekly Cadence for a Particular Topic\n\nDue by the start of class on Monday/Tuesday: Perusall pre-class video/reading discussion covering the topic\nDuring class on Monday/Tuesday: Lecture, activities, practice topic\nDue by 11:59 PM the following Sunday/Monday: Homework covering the topic\nThe following Thursday at the beginning of class: Checkpoint Quiz on that topic"
+    "text": "Weekly Cadence for a Particular Topic\n\nDue by the start of class on Monday/Tuesday: Perusall pre-class video/reading discussion covering the topic\nDuring class on Monday/Tuesday: Lecture, activities, practice topic\nDue by 11:59 PM the following Sunday/Monday: Homework covering the topic\nThe following Monday/Tuesday: at the beginning of class: Checkpoint Quiz on that topic"
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_01.html#pre-class-work",
@@ -2664,7 +2664,7 @@
     "href": "fall_sta235_2025/week_01/week_01.html#confidence-intervals-for-predictions",
     "title": "Data Science for Business Applications",
     "section": "Confidence intervals for predictions",
-    "text": "Confidence intervals for predictions\n\n\nInterval for a single prediction:\n\nWe are 95% confident that a single professor with a beauty score of 1 will get rated between 3.06 and 5.21.\n\n\n\npredict(model, list(beauty=1), interval=\"prediction\")\n\n       fit      lwr      upr\n1 4.131274 3.056375 5.206172\n\n\n\nInterval for an average prediction:\n\nWe are 95% confident that the average rating of all professors with beauty scores of 1 will be between 4.05 and 4.21.\n\n\n\npredict(model, list(beauty=1), interval=\"confidence\")\n\n       fit      lwr      upr\n1 4.131274 4.050776 4.211771"
+    "text": "Confidence intervals for predictions\n\n\nInterval for a single prediction:\n\nWe are 95% confident that a single professor with a beauty score of 1 will get rated between 3.06 and 5.21.\n\n\npredict(model, list(beauty=1), interval=\"prediction\")\n\n       fit      lwr      upr\n1 4.131274 3.056375 5.206172\n\n\nInterval for an average prediction:\n\nWe are 95% confident that the average rating of all professors with beauty scores of 1 will be between 4.05 and 4.21.\n\n\npredict(model, list(beauty=1), interval=\"confidence\")\n\n       fit      lwr      upr\n1 4.131274 4.050776 4.211771"
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_01.html#confidence-intervals-for-predictions-1",
