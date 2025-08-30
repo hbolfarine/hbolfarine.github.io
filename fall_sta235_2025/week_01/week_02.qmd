@@ -1,0 +1,165 @@
+---
+title: "Data Science for Business Applications"
+author: "Class 02 - Categorical Variables"
+title-slide-attributes:
+    data-background-image: week_02_docs/background_sta235h.png
+format: 
+  revealjs:
+    chalkboard: true
+    logo: week_02_docs/texas_logo2.png
+    toc: true
+    toc-title: "Presentation Outline"
+    toc-depth: 1
+editor: visual
+code-block-height: 500px
+include-in-header:
+  - text: |
+      <style type="text/css">
+      ul li ul li {
+        font-size: 0.8em;
+      }
+      </style>
+---
+
+```{r init_setup, include=FALSE, cache=FALSE}
+# Include setup
+library(tidyverse)
+library(ggfortify)
+library(knitr)
+
+knitr::opts_chunk$set(
+  echo = FALSE, fig.align = "center"
+)
+
+hook_output <- knit_hooks$get("output")
+knit_hooks$set(output = function(x, options) {
+  lines <- options$output.lines
+  if (is.null(lines)) {
+    return(hook_output(x, options))  # pass to default hook
+  }
+  x <- unlist(strsplit(x, "\n"))
+  more <- "..."
+  if (length(lines) == 1) {        # first n lines
+    if (length(x) > lines) {
+      # truncate the output, but add ....
+      x <- c(head(x, lines), more)
+    }
+  } else {
+    x <- c(more, x[lines], more)
+  }
+  # paste these lines together
+  x <- paste(c(x, ""), collapse = "\n")
+  hook_output(x, options)
+})
+```
+
+```{r load_profs, include=FALSE, cache=FALSE}
+profs <- read.csv("week_02_docs/profs.csv")
+options(scipen = 999)
+```
+
+# Categorical predictors with 2 categories
+
+## What's the impact of gender on student evaluations?
+
+```{r}
+ggplot(profs, aes(x = gender, y = eval)) +
+  geom_boxplot()
+```
+
+## Incorporating gender into the multiple regression model
+
+::: {style="font-size: 0.9em;"}
+The model is given by: $$
+\texttt{eval} = \beta_0 + \beta_1 \cdot \texttt{beauty} + \beta_2 \cdot \texttt{gender} + \epsilon
+$$ Where we have that:
+
+-   $\texttt{eval}$: is the response variable - (numerical)
+
+-   $\texttt{beauty}$: is a predictor - (numerical)
+
+-   $\texttt{gender}$: is a predictor - (categorical) - two groups:
+
+    -   `female`
+    -   `male`
+:::
+
+## Incorporating gender into the multiple regression model
+
+::: {style="font-size: 0.9em;"}
+-   Gender is a categorical variable (male or female in this data set) so we can't use it as-is as a predictor.
+-   Idea: Recode gender into the quantitative variable 1 = male, 0 = female.
+-   **R** does this for us!
+-   The ordering is totally arbitrary! If you put a categorical variable into a model, R will arbitrarily pick one category or the other as the "1" category, and make the other the "0" category.
+:::
+
+## Run the Regression Model
+
+::: {style="font-size: 0.7em;"}
+```{r, echo = TRUE}
+options(scipen = 999)
+model1 <- lm(eval ~ beauty + gender, data=profs)
+summary(model1)
+```
+:::
+
+## Regression a model using gender
+
+::: {style="font-size: 0.8em;"}
+A multiple regression predicting evaluation score from beauty and gender effectively fits two **parallel** regression lines:
+
+```{r}
+ggplot(profs %>% mutate(pred = predict(model1)), aes(x = beauty, y = eval, col = gender)) +
+  geom_point() + 
+  geom_line(aes(y = pred)) +
+  labs(y = "Average student evaluation", x = "Beauty")
+```
+:::
+
+# Categorical predictors with 3+ categories
+
+## Is there a generation gap?
+
+::: {style="font-size: 0.8em;"}
+-   The variable `generation` is either `silent` (born before 1945), `boomer` (born 1945-1964), or `genx` (born after 1965).
+-   Is generation a significant predictor of evaluations **above and beyond** `gender` and `beauty`?
+-   To answer this, we need a model that includes as predictors all of `gender`, `beauty`, and `generation`.
+-   But we can't just create a variable that is 0 for the silent generation, 1 for baby boomers, and 2 for gen X—why not?
+-   Solution is to pick a "reference category" and create dummy variables for the **other** categories.
+:::
+
+## OK boomer
+
+::: {style="font-size: 0.8em;"}
+Let's arbitrarily pick boomers as a reference category:
+
+| Category    | `genx` | `silent` |
+|-------------|--------|----------|
+| Boomers     | 0      | 0        |
+| Gen Xers    | 1      | 0        |
+| Silent Gens | 0      | 1        |
+
+------------------------------------------------------------------------
+
+R will do this automatically when you add a categorical variable with 3+ categories to a regression (it will arbitrarily pick a reference category)!
+:::
+
+## Run the Regression Model
+
+::: {style="font-size: 0.7em;"}
+```{r, echo = TRUE}
+model2 <- lm(eval ~ beauty + gender + generation, data=profs)
+summary(model2)
+```
+:::
+
+## Analysis
+
+::: {style="font-size: 0.8em;"}
+All else equal (i.e., among professors of the same gender and beauty):
+
+-   Gen X professors are predicted to get scores that are `r -1 * round(model2$coefficients["generationgenx"], 2)` points below those of boomers.
+-   Silent gen professors are predicted to get scores that are `r -1 * round(model2$coefficients["generationsilent"], 2)` points below those of boomers.
+-   Only the boomer/silent generation difference is statistically significant; Gen X professors are not significantly different than boomers.
+-   In other words: **age only seems to matter if you are really old**.
+:::
