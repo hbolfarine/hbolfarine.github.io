@@ -88,9 +88,9 @@ $$ Where we have that:
 
 ::: {style="font-size: 0.9em;"}
 -   Gender is a categorical variable (male or female in this data set) so we can't use it as-is as a predictor.
--   Idea: Recode gender into the quantitative variable 1 = male, 0 = female.
+-   Idea: Recode gender into the quantitative variable 1 = male, 0 = female. In practice this choice is arbitrary.
 -   **R** does this for us!
--   If you put a categorical variable into a model, R will alphabetically the category that will associated with "0" category, and then "1".
+-   If you put a categorical variable into a model, R will alphabetically select the group that will associated with "0", and the next to "1".
 :::
 
 ## Run the Regression Model

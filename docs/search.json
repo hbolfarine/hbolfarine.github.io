@@ -2783,7 +2783,7 @@
     "href": "fall_sta235_2025/week_01/week_02.html#incorporating-gender-into-the-multiple-regression-model-1",
     "title": "Data Science for Business Applications",
     "section": "Incorporating gender into the multiple regression model",
-    "text": "Incorporating gender into the multiple regression model\n\n\nGender is a categorical variable (male or female in this data set) so we can’t use it as-is as a predictor.\nIdea: Recode gender into the quantitative variable 1 = male, 0 = female.\nR does this for us!\nIf you put a categorical variable into a model, R will alphabetically the category that will associated with “0” category, and then “1”."
+    "text": "Incorporating gender into the multiple regression model\n\n\nGender is a categorical variable (male or female in this data set) so we can’t use it as-is as a predictor.\nIdea: Recode gender into the quantitative variable 1 = male, 0 = female. In practice this choice is arbitrary.\nR does this for us!\nIf you put a categorical variable into a model, R will alphabetically select the category that will associated with “0” category, and then “1”."
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_02.html#run-the-regression-model",
