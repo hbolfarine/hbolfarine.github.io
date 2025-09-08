@@ -2783,7 +2783,7 @@
     "href": "fall_sta235_2025/week_01/week_02.html#incorporating-gender-into-the-multiple-regression-model-1",
     "title": "Data Science for Business Applications",
     "section": "Incorporating gender into the multiple regression model",
-    "text": "Incorporating gender into the multiple regression model\n\n\nGender is a categorical variable (male or female in this data set) so we can’t use it as-is as a predictor.\nIdea: Recode gender into the quantitative variable 1 = male, 0 = female.\nR does this for us!\nThe ordering is totally arbitrary! If you put a categorical variable into a model, R will arbitrarily pick one category or the other as the “1” category, and make the other the “0” category."
+    "text": "Incorporating gender into the multiple regression model\n\n\nGender is a categorical variable (male or female in this data set) so we can’t use it as-is as a predictor.\nIdea: Recode gender into the quantitative variable 1 = male, 0 = female.\nR does this for us!\nIf you put a categorical variable into a model, R will alphabetically the category that will associated with “0” category, and then “1”."
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_02.html#run-the-regression-model",
@@ -2818,13 +2818,13 @@
     "href": "fall_sta235_2025/week_01/week_02.html#run-the-regression-model-1",
     "title": "Data Science for Business Applications",
     "section": "Run the Regression Model",
-    "text": "Run the Regression Model\n\n\nmodel2 &lt;- lm(eval ~ beauty + gender + generation, data=profs)\nsummary(model2)\n\n\nCall:\nlm(formula = eval ~ beauty + gender + generation, data = profs)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.91613 -0.36042  0.03609  0.42282  1.04398 \n\nCoefficients:\n                 Estimate Std. Error t value             Pr(&gt;|t|)    \n(Intercept)       3.89727    0.04403  88.521 &lt; 0.0000000000000002 ***\nbeauty            0.14021    0.03304   4.243            0.0000267 ***\ngendermale        0.22230    0.05345   4.159            0.0000382 ***\ngenerationgenx   -0.02831    0.06149  -0.460               0.6454    \ngenerationsilent -0.16292    0.07992  -2.039               0.0421 *  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.536 on 458 degrees of freedom\nMultiple R-squared:  0.07477,   Adjusted R-squared:  0.06669 \nF-statistic: 9.253 on 4 and 458 DF,  p-value: 0.0000003386"
+    "text": "Run the Regression Model\n\n\nmodel2 &lt;- lm(eval ~ beauty + generation, data=profs)\nsummary(model2)\n\n\nCall:\nlm(formula = eval ~ beauty + generation, data = profs)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.82584 -0.36581  0.06317  0.42027  1.07809 \n\nCoefficients:\n                 Estimate Std. Error t value             Pr(&gt;|t|)    \n(Intercept)       4.02537    0.03201 125.742 &lt; 0.0000000000000002 ***\nbeauty            0.13491    0.03360   4.015            0.0000694 ***\ngenerationgenx   -0.06807    0.06181  -1.101                0.271    \ngenerationsilent -0.08225    0.07889  -1.043                0.298    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.5455 on 459 degrees of freedom\nMultiple R-squared:  0.03983,   Adjusted R-squared:  0.03355 \nF-statistic: 6.346 on 3 and 459 DF,  p-value: 0.0003192"
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_02.html#analysis",
     "href": "fall_sta235_2025/week_01/week_02.html#analysis",
     "title": "Data Science for Business Applications",
     "section": "Analysis",
-    "text": "Analysis\n\nAll else equal (i.e., among professors of the same gender and beauty):\n\nGen X professors are predicted to get scores that are 0.03 points below those of boomers.\nSilent gen professors are predicted to get scores that are 0.16 points below those of boomers.\nOnly the boomer/silent generation difference is statistically significant; Gen X professors are not significantly different than boomers.\nIn other words: age only seems to matter if you are really old."
+    "text": "Analysis\n\nAll else equal (i.e., among professors of the same gender and beauty):\n\nGen X professors are predicted to get scores that are 0.07 points below those of boomers.\nSilent gen professors are predicted to get scores that are 0.08 points below those of boomers.\nOnly the boomer/silent generation difference is statistically significant; Gen X professors are not significantly different than boomers.\nIn other words: age only seems to matter if you are really old."
   }
 ]

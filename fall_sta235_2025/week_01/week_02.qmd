@@ -90,7 +90,7 @@ $$ Where we have that:
 -   Gender is a categorical variable (male or female in this data set) so we can't use it as-is as a predictor.
 -   Idea: Recode gender into the quantitative variable 1 = male, 0 = female.
 -   **R** does this for us!
--   The ordering is totally arbitrary! If you put a categorical variable into a model, R will arbitrarily pick one category or the other as the "1" category, and make the other the "0" category.
+-   If you put a categorical variable into a model, R will alphabetically the category that will associated with "0" category, and then "1".
 :::
 
 ## Run the Regression Model
@@ -148,7 +148,7 @@ R will do this automatically when you add a categorical variable with 3+ categor
 
 ::: {style="font-size: 0.7em;"}
 ```{r, echo = TRUE}
-model2 <- lm(eval ~ beauty + gender + generation, data=profs)
+model2 <- lm(eval ~ beauty + generation, data=profs)
 summary(model2)
 ```
 :::
