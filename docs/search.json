@@ -2909,7 +2909,7 @@
     "href": "fall_sta235_2025/week_01/week_03.html#interpretation-of-the-model-1",
     "title": "Data Science for Business Applications",
     "section": "Interpretation of the model",
-    "text": "Interpretation of the model\n\nWe also have the following interpretation:\nluxury = \\(\\text{\"yes\"}\\) = 0 \\[\n\\begin{align}\n\\text{price} &= 23,894 - 0.15\\times \\text{mileage} + 19,772 (0) - 0.16\\times \\text{mileage} (0) \\\\\n             &=  23,894 - 0.15\\times \\text{mileage}\n\\end{align}\n\\]\nluxury = \\(\\texttt{\"yes\"}\\) = 1 \\[\n\\begin{align}\n\\texttt{price} &= 23,894 - 0.15\\times \\texttt{mileage} + 19,772 (1) - 0.16\\times \\texttt{mileage} (1) \\\\\n             &=  (23,894 + 19,772) - (0.15 + 0.16) \\times \\texttt{mileage} \\\\\n             &=  43,666 - 0.31 \\times \\texttt{mileage} \\\\\n\\end{align}\n\\]\nWe have that not only the intercept change but also the slope."
+    "text": "Interpretation of the model\n\nWe also have the following interpretation:\nluxury = \\(\\text{\"yes\"}\\) = 0 \\[\n\\begin{align}\n\\text{price} &= 23,894 - 0.15\\times \\text{mileage} + 19,772 (0) - 0.16\\times \\text{mileage} (0) \\\\\n             &=  23,894 - 0.15\\times \\text{mileage}\n\\end{align}\n\\]\nluxury = \\(\\texttt{\"yes\"}\\) = 1 \\[\n\\begin{align}\n\\text{price} &= 23,894 - 0.15\\times \\text{mileage} + 19,772 (1) - 0.16\\times \\text{mileage} (1) \\\\\n             &=  (23,894 + 19,772) - (0.15 + 0.16) \\times \\text{mileage} \\\\\n             &=  43,666 - 0.31 \\times \\text{mileage} \\\\\n\\end{align}\n\\]\nWe have that not only the intercept change but also the slope."
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_03.html#section-2",
@@ -2930,7 +2930,7 @@
     "href": "fall_sta235_2025/week_01/week_03.html#interactions-neq-correlations-between-predictor-variables",
     "title": "Data Science for Business Applications",
     "section": "Interactions \\(\\neq\\) Correlations between predictor variables",
-    "text": "Interactions \\(\\neq\\) Correlations between predictor variables\n\nInstead, interactions let us model a situation where the relationship of one predictor variable and \\(Y\\) is different depending on the value of another \\(X\\) variable:\n\nHow much attractiveness matters for student evaluation scores depends on gender.\nHow much tenure matters for student evaluation scores depends on gender.\nHow much your 3-point shooting volume matters depends on how accurate your 3-point shooting is."
+    "text": "Interactions \\(\\neq\\) Correlations between predictor variables\n\nInstead, interactions let us model a situation where the relationship of one predictor variable and \\(Y\\) is different depending on the value of another \\(X\\) variable:\n\nHow much attractiveness matters for student evaluation scores depends on gender."
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_03.html#youll-experiment-with-this-in-the-lab",

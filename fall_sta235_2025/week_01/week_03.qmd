@@ -143,7 +143,7 @@ labs(y="Average student evaluation", x="Beauty")
 
 -   Is there a difference in the price of the car depending on what type of badge it holds?
 -   In other words, does the **effect** of one variable (i.e., its slope coefficient) depend on the value of another?
--   For this we will include a [interaction]{style="color:darkorange;"}.
+-   For this we will include a **interaction**.
 
 ## Interactions {.smaller}
 
@@ -203,9 +203,9 @@ summary(lm3)
 
 -   `luxury` = $\texttt{"yes"}$ = 1 $$
     \begin{align}
-    \texttt{price} &= 23,894 - 0.15\times \texttt{mileage} + 19,772 (1) - 0.16\times \texttt{mileage} (1) \\
-                 &=  (23,894 + 19,772) - (0.15 + 0.16) \times \texttt{mileage} \\
-                 &=  43,666 - 0.31 \times \texttt{mileage} \\
+    \text{price} &= 23,894 - 0.15\times \text{mileage} + 19,772 (1) - 0.16\times \text{mileage} (1) \\
+                 &=  (23,894 + 19,772) - (0.15 + 0.16) \times \text{mileage} \\
+                 &=  43,666 - 0.31 \times \text{mileage} \\
     \end{align}
     $$
 
@@ -237,8 +237,6 @@ summary(lm3)
 
 -   Instead, interactions let us model a situation where the *relationship* of one predictor variable and $Y$ is different depending on the *value* of another $X$ variable:
     -   How much attractiveness matters for student evaluation scores depends on gender.
-    -   How much tenure matters for student evaluation scores depends on gender.
-    -   How much your 3-point shooting volume matters depends on how accurate your 3-point shooting is.
 
 ## You'll experiment with this in the lab!
 

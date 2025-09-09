@@ -324,7 +324,7 @@ F-statistic: 11.97 on 3 and 459 DF,  p-value: 0.000000147</code></pre>
 <ul>
 <li>Is there a difference in the price of the car depending on what type of badge it holds?</li>
 <li>In other words, does the <strong>effect</strong> of one variable (i.e., its slope coefficient) depend on the value of another?</li>
-<li>For this we will include a <span style="color:darkorange;">interaction</span>.</li>
+<li>For this we will include a <strong>interaction</strong>.</li>
 </ul>
 </section>
 <section id="interactions-1" class="slide level2 smaller">
@@ -400,9 +400,9 @@ F-statistic: 390.8 on 3 and 2084 DF,  p-value: &lt; 0.00000000000000022</code></
 \]</span></p></li>
 <li><p><code>luxury</code> = <span class="math inline">\(\texttt{"yes"}\)</span> = 1 <span class="math display">\[
 \begin{align}
-\texttt{price} &amp;= 23,894 - 0.15\times \texttt{mileage} + 19,772 (1) - 0.16\times \texttt{mileage} (1) \\
-             &amp;=  (23,894 + 19,772) - (0.15 + 0.16) \times \texttt{mileage} \\
-             &amp;=  43,666 - 0.31 \times \texttt{mileage} \\
+\text{price} &amp;= 23,894 - 0.15\times \text{mileage} + 19,772 (1) - 0.16\times \text{mileage} (1) \\
+             &amp;=  (23,894 + 19,772) - (0.15 + 0.16) \times \text{mileage} \\
+             &amp;=  43,666 - 0.31 \times \text{mileage} \\
 \end{align}
 \]</span></p></li>
 <li><p>We have that not only the <strong>intercept</strong> change but also the <strong>slope</strong>.</p></li>
@@ -435,8 +435,6 @@ F-statistic: 390.8 on 3 and 2084 DF,  p-value: &lt; 0.00000000000000022</code></
 <li>Instead, interactions let us model a situation where the <em>relationship</em> of one predictor variable and <span class="math inline">\(Y\)</span> is different depending on the <em>value</em> of another <span class="math inline">\(X\)</span> variable:
 <ul>
 <li>How much attractiveness matters for student evaluation scores depends on gender.</li>
-<li>How much tenure matters for student evaluation scores depends on gender.</li>
-<li>How much your 3-point shooting volume matters depends on how accurate your 3-point shooting is.</li>
 </ul></li>
 </ul>
 </section>
