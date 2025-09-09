@@ -1,0 +1,246 @@
+---
+title: "Data Science for Business Applications"
+author: "Class 03 - Interactions"
+title-slide-attributes:
+    data-background-image: week_03_docs/background_sta235h.png
+format: 
+  revealjs:
+    chalkboard: true
+    logo: week_03_docs/texas_logo2.png
+    toc: true
+    toc-title: "Presentation Outline"
+    toc-depth: 1
+editor: visual
+code-block-height: 500px
+include-in-header:
+  - text: |
+      <style type="text/css">
+      ul li ul li {
+        font-size: 0.8em;
+      }
+      </style>
+---
+
+```{r init_setup, include=FALSE, cache=FALSE}
+# Include setup
+library(tidyverse)
+library(ggfortify)
+library(knitr)
+
+knitr::opts_chunk$set(
+  echo = FALSE, fig.align = "center"
+)
+
+hook_output <- knit_hooks$get("output")
+knit_hooks$set(output = function(x, options) {
+  lines <- options$output.lines
+  if (is.null(lines)) {
+    return(hook_output(x, options))  # pass to default hook
+  }
+  x <- unlist(strsplit(x, "\n"))
+  more <- "..."
+  if (length(lines) == 1) {        # first n lines
+    if (length(x) > lines) {
+      # truncate the output, but add ....
+      x <- c(head(x, lines), more)
+    }
+  } else {
+    x <- c(more, x[lines], more)
+  }
+  # paste these lines together
+  x <- paste(c(x, ""), collapse = "\n")
+  hook_output(x, options)
+})
+```
+
+```{r load_profs, include=FALSE, cache=FALSE}
+profs <- read.csv("week_03_docs/profs.csv")
+cars_luxury <- read.csv("week_03_docs/cars_luxury.csv")
+options(scipen = 999)
+```
+
+# Interactions
+
+##  {.smaller}
+
+-   Last week, we predicted evaluation score from beauty and gender, and the model forced the lines to be parallel:
+
+```{r}
+model0 <- lm(eval ~ beauty + gender, data=profs)
+ggplot(profs %>% mutate(pred=predict(model0)), aes(x=beauty, y=eval, col=gender)) +
+geom_point() + 
+geom_line(aes(y=pred)) +
+labs(y="Average student evaluation", x="Beauty")
+```
+
+-   What if we could build a more flexible model without forcing the lines to be parallel?
+
+## What is an interaction?
+
+-   An **interaction** is an additional term in a regression model that allows the **slope** of one variable to depend on the **value** of another.
+
+## Does beauty matter more for men, or for women?
+
+-   A categorical variable and a quantitative variable
+-   We found that for the same level of attractiveness, male professors tend to get higher evaluation scores than female professors
+-   But what if the effect of beauty **depends on** gender (is different for men vs women)?
+
+## Interactions: Beauty and Gender {.smaller}
+
+-   The idea is to add a new variable that is itself the product of the two variables:
+
+$$
+\hat Y = \hat\beta_0 + \hat\beta_1(\text{gender}) + \hat\beta_2(\text{beauty}) + \hat\beta_3(\text{gender})(\text{beauty})
+$$
+
+-   For female professors, male = 0, so the $\beta_1$ and $\beta_3$ terms cancel out:
+
+$$
+\hat Y = \hat\beta_0 + \hat\beta_2(\text{beauty})
+$$
+
+-   For male professors, male = 1, so we get both a different intercept and a different slope for `beauty`:
+
+$$
+\hat Y = (\hat\beta_0 + \hat\beta_1) + (\hat\beta_2+\hat\beta_3)(\text{beauty})
+$$
+
+## Interactions: Beauty and Gender
+
+::: {style="font-size: 0.7em;"}
+```{r, echo = TRUE}
+model1 <- lm(eval ~ beauty*gender, data=profs)
+summary(model1)
+```
+:::
+
+##  {.smaller}
+
+```{r}
+ggplot(profs, aes(x=beauty, y=eval, col=gender)) +
+geom_point() + 
+geom_line(aes(x = beauty, y = predict(model1))) +
+labs(y="Average student evaluation", x="Beauty")
+```
+
+-   Beauty seems to matter more for men than for women!
+-   The gender gap is largest for good-looking professors
+
+## Main effects and interaction effects
+
+-   In a model with an interaction term $X_1X_2$, you **must** also keep the **main effects**: the variables that are being interacted together.
+
+-   The main effect of $X_1$ represents the predicted increase in $Y$ for a 1-unit change in $X_1$, holding $X_2$ constant **at zero**.
+
+    -   The main effect `gendermale` (0.20) represents the predicted advantage, **but only for an average-looking professor** (`beauty = 0`).\
+    -   The main effect `beauty` (0.09) represents the predicted improvement in evaluation scores for each additional beauty point, **but only among women** (`gendermale = 0`).
+
+-   You can also include other variables in the model that are not being interacted!
+
+------------------------------------------------------------------------
+
+## Interactions - luxury cars
+
+-   Is there a difference in the price of the car depending on what type of badge it holds?
+-   In other words, does the **effect** of one variable (i.e., its slope coefficient) depend on the value of another?
+-   For this we will include a [interaction]{style="color:darkorange;"}.
+
+## Interactions {.smaller}
+
+-   The idea is to add a term that is the **product** of the two variables:
+
+$$
+\text{price} = \beta_0 + \beta_1\text{mileage} + \beta_2\text{luxury} + \beta_3 (\text{luxury} \times \text{mileage}) + e
+$$
+
+-   If we have a non-luxury car, then `luxury` = $\text{"no"} = 0$, so the $\beta_2$ and $\beta_3$ terms cancel out: $$
+    \text{price} = \beta_0 + \beta_1\text{mileage} + e
+    $$
+
+-   If we have a luxury car, then `luxury` = $\text{"yes"}  = 1$, so we get both a **different intercept** and a **different slope** for mileage: $$
+    \text{price} = (\beta_0 + \beta_2) + (\beta_1 + \beta_3) \text{mileage} + e
+    $$
+
+## Regression Model {.smaller}
+
+-   Let's run the regression model
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+#| 
+lm3 = lm(price ~ mileage*luxury, data = cars_luxury)
+summary(lm3)
+```
+
+## Interpretation of the model {.smaller}
+
+-   How do we interpret this model?
+
+-   `intercept` (baseline), `luxury` = $"no"$ = 0: For a **non-luxury** car with zero mileage, the average selling price is equal to US\$ 23,894.
+
+-   Now we have **two cases**:
+
+-   `luxury` = $"no"$ = 0:
+
+-   `mileage`: For each extra increase in mileage (in miles), there will be a decrease of US\$ 0.15 in the price of **non-luxury** cars.
+
+-   `luxury` = $"yes"$ = 1:
+
+-   `mileage`: For each extra increase in mileage (in miles), there will be a decrease of US\$ 0.16 in the price of **luxury** cars **on top** of the decrease of US\$ 0.15 of non-luxury cars.
+
+## Interpretation of the model {.smaller}
+
+-   We also have the following interpretation:
+
+-   `luxury` = $\text{"yes"}$ = 0 $$
+    \begin{align}
+    \text{price} &= 23,894 - 0.15\times \text{mileage} + 19,772 (0) - 0.16\times \text{mileage} (0) \\
+                 &=  23,894 - 0.15\times \text{mileage}
+    \end{align}
+    $$
+
+-   `luxury` = $\texttt{"yes"}$ = 1 $$
+    \begin{align}
+    \texttt{price} &= 23,894 - 0.15\times \texttt{mileage} + 19,772 (1) - 0.16\times \texttt{mileage} (1) \\
+                 &=  (23,894 + 19,772) - (0.15 + 0.16) \times \texttt{mileage} \\
+                 &=  43,666 - 0.31 \times \texttt{mileage} \\
+    \end{align}
+    $$
+
+-   We have that not only the **intercept** change but also the **slope**.
+
+------------------------------------------------------------------------
+
+##  {.smaller}
+
+::: nonincremental
+-   The lines are not parallel in this case which indicates a change in the slope due to the **intercation** term.
+:::
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+    ggplot(cars_luxury, aes(x = mileage, y = price, col = luxury)) +
+      geom_point() + 
+      geom_smooth(method = "lm", se = FALSE)
+```
+
+## When should you use interactions in a model?
+
+-   Interactions make a model more complex to analyze and explain, so it's only worth doing so when you get a substantial bump in $R^2$ by including the interaction.
+-   Choose interactions by thinking about what you are trying to model: if you suspect that the impact of one variable depends on the value of another, try an interaction term between them!
+
+## Interactions $\neq$ Correlations between predictor variables
+
+-   Instead, interactions let us model a situation where the *relationship* of one predictor variable and $Y$ is different depending on the *value* of another $X$ variable:
+    -   How much attractiveness matters for student evaluation scores depends on gender.
+    -   How much tenure matters for student evaluation scores depends on gender.
+    -   How much your 3-point shooting volume matters depends on how accurate your 3-point shooting is.
+
+## You'll experiment with this in the lab!
+
+-   Two categorical variables
+-   Two numerical variables

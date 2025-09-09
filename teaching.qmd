@@ -9,6 +9,7 @@ title: "Teaching"
 - STA 235 - Data Science for Business Applications
   - [class 01 - Simple and Multiple Regression](fall_sta235_2025/week_01/week_01.qmd)
   - [class 02 - Categorical Variables](fall_sta235_2025/week_01/week_02.qmd)
+  - [class 03 - Interactions](fall_sta235_2025/week_01/week_03.qmd)
 
 ### Spring 2025
 

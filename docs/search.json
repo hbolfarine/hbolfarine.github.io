@@ -32,7 +32,7 @@
     "href": "teaching.html",
     "title": "Teaching",
     "section": "",
-    "text": "STA 235 - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 Honors - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection\nclass 07 - Logistic Regression\nclass 08 - Basic Causal Inference\nclass 09 - Randomized Control Trials\nclass 10 - Natural Experiments - Diff-in-Diff\nclass 11 - Natural Experiments - RDD\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Application\n\n\n\n\n\nSTA 235 - Data Science for Business Application"
+    "text": "STA 235 - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables\nclass 03 - Interactions\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 Honors - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection\nclass 07 - Logistic Regression\nclass 08 - Basic Causal Inference\nclass 09 - Randomized Control Trials\nclass 10 - Natural Experiments - Diff-in-Diff\nclass 11 - Natural Experiments - RDD\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Application\n\n\n\n\n\nSTA 235 - Data Science for Business Application"
   },
   {
     "objectID": "teaching.html#teaching",
@@ -2202,7 +2202,7 @@
     "href": "teaching.html#university-of-texas-at-austin",
     "title": "Teaching",
     "section": "",
-    "text": "STA 235 - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 Honors - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection\nclass 07 - Logistic Regression\nclass 08 - Basic Causal Inference\nclass 09 - Randomized Control Trials\nclass 10 - Natural Experiments - Diff-in-Diff\nclass 11 - Natural Experiments - RDD\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Application\n\n\n\n\n\nSTA 235 - Data Science for Business Application"
+    "text": "STA 235 - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables\nclass 03 - Interactions\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 Honors - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection\nclass 07 - Logistic Regression\nclass 08 - Basic Causal Inference\nclass 09 - Randomized Control Trials\nclass 10 - Natural Experiments - Diff-in-Diff\nclass 11 - Natural Experiments - RDD\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Application\n\n\n\n\n\nSTA 235 - Data Science for Business Application"
   },
   {
     "objectID": "index.html#cv---henrique-bolfarine---cv",
@@ -2826,5 +2826,131 @@
     "title": "Data Science for Business Applications",
     "section": "Analysis",
     "text": "Analysis\n\nAll else equal (i.e., among professors of the same gender and beauty):\n\nGen X professors are predicted to get scores that are 0.07 points below those of boomers.\nSilent gen professors are predicted to get scores that are 0.08 points below those of boomers.\nOnly the boomer/silent generation difference is statistically significant; Gen X professors are not significantly different than boomers.\nIn other words: age only seems to matter if you are really old."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_03.html#section",
+    "href": "fall_sta235_2025/week_01/week_03.html#section",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "Last week, we predicted evaluation score from beauty and gender, and the model forced the lines to be parallel:\n\n\n\nWhat if we could build a more flexible model without forcing the lines to be parallel?"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_03.html#what-is-an-interaction",
+    "href": "fall_sta235_2025/week_01/week_03.html#what-is-an-interaction",
+    "title": "Data Science for Business Applications",
+    "section": "What is an interaction?",
+    "text": "What is an interaction?\n\nAn interaction is an additional term in a regression model that allows the slope of one variable to depend on the value of another."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_03.html#does-beauty-matter-more-for-men-or-for-women",
+    "href": "fall_sta235_2025/week_01/week_03.html#does-beauty-matter-more-for-men-or-for-women",
+    "title": "Data Science for Business Applications",
+    "section": "Does beauty matter more for men, or for women?",
+    "text": "Does beauty matter more for men, or for women?\n\nA categorical variable and a quantitative variable\nWe found that for the same level of attractiveness, male professors tend to get higher evaluation scores than female professors\nBut what if the effect of beauty depends on gender (is different for men vs women)?"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_03.html#interactions-beauty-and-gender",
+    "href": "fall_sta235_2025/week_01/week_03.html#interactions-beauty-and-gender",
+    "title": "Data Science for Business Applications",
+    "section": "Interactions: Beauty and Gender",
+    "text": "Interactions: Beauty and Gender\n\nThe idea is to add a new variable that is itself the product of the two variables:\n\n\\[\n\\hat Y = \\hat\\beta_0 + \\hat\\beta_1(\\text{gender}) + \\hat\\beta_2(\\text{beauty}) + \\hat\\beta_3(\\text{gender})(\\text{beauty})\n\\]\n\nFor female professors, male = 0, so the \\(\\beta_1\\) and \\(\\beta_3\\) terms cancel out:\n\n\\[\n\\hat Y = \\hat\\beta_0 + \\hat\\beta_2(\\text{beauty})\n\\]\n\nFor male professors, male = 1, so we get both a different intercept and a different slope for beauty:\n\n\\[\n\\hat Y = (\\hat\\beta_0 + \\hat\\beta_1) + (\\hat\\beta_2+\\hat\\beta_3)(\\text{beauty})\n\\]"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_03.html#interactions-beauty-and-gender-1",
+    "href": "fall_sta235_2025/week_01/week_03.html#interactions-beauty-and-gender-1",
+    "title": "Data Science for Business Applications",
+    "section": "Interactions: Beauty and Gender",
+    "text": "Interactions: Beauty and Gender\n\n\nmodel1 &lt;- lm(eval ~ beauty*gender, data=profs)\nsummary(model1)\n\n\nCall:\nlm(formula = eval ~ beauty * gender, data = profs)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.83820 -0.37387  0.04551  0.39876  1.06764 \n\nCoefficients:\n                  Estimate Std. Error t value             Pr(&gt;|t|)    \n(Intercept)        3.89085    0.03878 100.337 &lt; 0.0000000000000002 ***\nbeauty             0.08762    0.04706   1.862             0.063294 .  \ngendermale         0.19510    0.05089   3.834             0.000144 ***\nbeauty:gendermale  0.11266    0.06398   1.761             0.078910 .  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.5361 on 459 degrees of freedom\nMultiple R-squared:  0.07256,   Adjusted R-squared:  0.0665 \nF-statistic: 11.97 on 3 and 459 DF,  p-value: 0.000000147"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_03.html#section-1",
+    "href": "fall_sta235_2025/week_01/week_03.html#section-1",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "Beauty seems to matter more for men than for women!\nThe gender gap is largest for good-looking professors"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_03.html#main-effects-and-interaction-effects",
+    "href": "fall_sta235_2025/week_01/week_03.html#main-effects-and-interaction-effects",
+    "title": "Data Science for Business Applications",
+    "section": "Main effects and interaction effects",
+    "text": "Main effects and interaction effects\n\nIn a model with an interaction term \\(X_1X_2\\), you must also keep the main effects: the variables that are being interacted together.\nThe main effect of \\(X_1\\) represents the predicted increase in \\(Y\\) for a 1-unit change in \\(X_1\\), holding \\(X_2\\) constant at zero.\n\nThe main effect gendermale (0.20) represents the predicted advantage, but only for an average-looking professor (beauty = 0).\n\nThe main effect beauty (0.09) represents the predicted improvement in evaluation scores for each additional beauty point, but only among women (gendermale = 0).\n\nYou can also include other variables in the model that are not being interacted!"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_03.html#interactions-1",
+    "href": "fall_sta235_2025/week_01/week_03.html#interactions-1",
+    "title": "Data Science for Business Applications",
+    "section": "Interactions",
+    "text": "Interactions\n\nThe idea is to add a term that is the product of the two variables:\n\n\\[\n\\text{price} = \\beta_0 + \\beta_1\\text{mileage} + \\beta_2\\text{luxury} + \\beta_3 (\\text{luxury} \\times \\text{mileage}) + e\n\\]\n\nIf we have a non-luxury car, then luxury = \\(\\text{\"no\"} = 0\\), so the \\(\\beta_2\\) and \\(\\beta_3\\) terms cancel out: \\[\n\\text{price} = \\beta_0 + \\beta_1\\text{mileage} + e\n\\]\nIf we have a luxury car, then luxury = \\(\\text{\"yes\"}  = 1\\), so we get both a different intercept and a different slope for mileage: \\[\n\\text{price} = (\\beta_0 + \\beta_2) + (\\beta_1 + \\beta_3) \\text{mileage} + e\n\\]"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_03.html#interactions-2",
+    "href": "fall_sta235_2025/week_01/week_03.html#interactions-2",
+    "title": "Data Science for Business Applications",
+    "section": "Interactions",
+    "text": "Interactions\n\nThe idea is to add a term that is the product of the two variables:\n\n\\[\n\\text{price} = \\beta_0 + \\beta_1\\text{mileage} + \\beta_2\\text{luxury} + \\beta_3 (\\text{luxury} \\times \\text{mileage}) + e\n\\]\n\nIf we have a non-luxury car, then luxury = \\(\\text{\"no\"} = 0\\), so the \\(\\beta_2\\) and \\(\\beta_3\\) terms cancel out: \\[\n\\text{price} = \\beta_0 + \\beta_1\\text{mileage} + e\n\\]\nIf we have a luxury car, then luxury = \\(\\text{\"yes\"}  = 1\\), so we get both a different intercept and a different slope for mileage: \\[\n\\text{price} = (\\beta_0 + \\beta_2) + (\\beta_1 + \\beta_3) \\text{mileage} + e\n\\]"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_03.html#regression-model",
+    "href": "fall_sta235_2025/week_01/week_03.html#regression-model",
+    "title": "Data Science for Business Applications",
+    "section": "Regression Model",
+    "text": "Regression Model\n\nLet’s run the regression model\n\n\nlm3 = lm(price ~ mileage*luxury, data = cars_luxury)\nsummary(lm3)\n\n\nCall:\nlm(formula = price ~ mileage * luxury, data = cars_luxury)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-25662  -6055  -2066   3563  83626 \n\nCoefficients:\n                      Estimate   Std. Error t value             Pr(&gt;|t|)    \n(Intercept)       23893.601384   545.040269  43.838 &lt; 0.0000000000000002 ***\nmileage              -0.154697     0.009595 -16.122 &lt; 0.0000000000000002 ***\nluxuryyes         19772.433662  1092.529243  18.098 &lt; 0.0000000000000002 ***\nmileage:luxuryyes    -0.155457     0.021457  -7.245    0.000000000000606 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 10880 on 2084 degrees of freedom\nMultiple R-squared:   0.36, Adjusted R-squared:  0.3591 \nF-statistic: 390.8 on 3 and 2084 DF,  p-value: &lt; 0.00000000000000022"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_03.html#interpretation-of-the-model",
+    "href": "fall_sta235_2025/week_01/week_03.html#interpretation-of-the-model",
+    "title": "Data Science for Business Applications",
+    "section": "Interpretation of the model",
+    "text": "Interpretation of the model\n\nHow do we interpret this model?\nintercept (baseline), luxury = \\(\"no\"\\) = 0: For a non-luxury car with zero mileage, the average selling price is equal to US$ 23,894.\nNow we have two cases:\nluxury = \\(\"no\"\\) = 0:\nmileage: For each extra increase in mileage (in miles), there will be a decrease of US$ 0.15 in the price of non-luxury cars.\nluxury = \\(\"yes\"\\) = 1:\nmileage: For each extra increase in mileage (in miles), there will be a decrease of US$ 0.16 in the price of luxury cars on top of the decrease of US$ 0.15 of non-luxury cars."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_03.html#interpretation-of-the-model-1",
+    "href": "fall_sta235_2025/week_01/week_03.html#interpretation-of-the-model-1",
+    "title": "Data Science for Business Applications",
+    "section": "Interpretation of the model",
+    "text": "Interpretation of the model\n\nWe also have the following interpretation:\nluxury = \\(\\text{\"yes\"}\\) = 0 \\[\n\\begin{align}\n\\text{price} &= 23,894 - 0.15\\times \\text{mileage} + 19,772 (0) - 0.16\\times \\text{mileage} (0) \\\\\n             &=  23,894 - 0.15\\times \\text{mileage}\n\\end{align}\n\\]\nluxury = \\(\\texttt{\"yes\"}\\) = 1 \\[\n\\begin{align}\n\\texttt{price} &= 23,894 - 0.15\\times \\texttt{mileage} + 19,772 (1) - 0.16\\times \\texttt{mileage} (1) \\\\\n             &=  (23,894 + 19,772) - (0.15 + 0.16) \\times \\texttt{mileage} \\\\\n             &=  43,666 - 0.31 \\times \\texttt{mileage} \\\\\n\\end{align}\n\\]\nWe have that not only the intercept change but also the slope."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_03.html#section-2",
+    "href": "fall_sta235_2025/week_01/week_03.html#section-2",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "The lines are not parallel in this case which indicates a change in the slope due to the intercation term.\n\n\n\n    ggplot(cars_luxury, aes(x = mileage, y = price, col = luxury)) +\n      geom_point() + \n      geom_smooth(method = \"lm\", se = FALSE)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_03.html#when-should-you-use-interactions-in-a-model",
+    "href": "fall_sta235_2025/week_01/week_03.html#when-should-you-use-interactions-in-a-model",
+    "title": "Data Science for Business Applications",
+    "section": "When should you use interactions in a model?",
+    "text": "When should you use interactions in a model?\n\nInteractions make a model more complex to analyze and explain, so it’s only worth doing so when you get a substantial bump in \\(R^2\\) by including the interaction.\nChoose interactions by thinking about what you are trying to model: if you suspect that the impact of one variable depends on the value of another, try an interaction term between them!"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_03.html#interactions-neq-correlations-between-predictor-variables",
+    "href": "fall_sta235_2025/week_01/week_03.html#interactions-neq-correlations-between-predictor-variables",
+    "title": "Data Science for Business Applications",
+    "section": "Interactions \\(\\neq\\) Correlations between predictor variables",
+    "text": "Interactions \\(\\neq\\) Correlations between predictor variables\n\nInstead, interactions let us model a situation where the relationship of one predictor variable and \\(Y\\) is different depending on the value of another \\(X\\) variable:\n\nHow much attractiveness matters for student evaluation scores depends on gender.\nHow much tenure matters for student evaluation scores depends on gender.\nHow much your 3-point shooting volume matters depends on how accurate your 3-point shooting is."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_03.html#youll-experiment-with-this-in-the-lab",
+    "href": "fall_sta235_2025/week_01/week_03.html#youll-experiment-with-this-in-the-lab",
+    "title": "Data Science for Business Applications",
+    "section": "You’ll experiment with this in the lab!",
+    "text": "You’ll experiment with this in the lab!\n\nTwo categorical variables\nTwo numerical variables"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_03.html",
+    "href": "fall_sta235_2025/week_01/week_03.html",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "Last week, we predicted evaluation score from beauty and gender, and the model forced the lines to be parallel:\n\n\n\n\n\n\n\n\n\n\n\nWhat if we could build a more flexible model without forcing the lines to be parallel?\n\n\n\n\n\nAn interaction is an additional term in a regression model that allows the slope of one variable to depend on the value of another.\n\n\n\n\n\nA categorical variable and a quantitative variable\nWe found that for the same level of attractiveness, male professors tend to get higher evaluation scores than female professors\nBut what if the effect of beauty depends on gender (is different for men vs women)?\n\n\n\n\n\nThe idea is to add a new variable that is itself the product of the two variables:\n\n\\[\n\\hat Y = \\hat\\beta_0 + \\hat\\beta_1(\\text{gender}) + \\hat\\beta_2(\\text{beauty}) + \\hat\\beta_3(\\text{gender})(\\text{beauty})\n\\]\n\nFor female professors, male = 0, so the \\(\\beta_1\\) and \\(\\beta_3\\) terms cancel out:\n\n\\[\n\\hat Y = \\hat\\beta_0 + \\hat\\beta_2(\\text{beauty})\n\\]\n\nFor male professors, male = 1, so we get both a different intercept and a different slope for beauty:\n\n\\[\n\\hat Y = (\\hat\\beta_0 + \\hat\\beta_1) + (\\hat\\beta_2+\\hat\\beta_3)(\\text{beauty})\n\\]\n\n\n\n\n\nmodel1 &lt;- lm(eval ~ beauty*gender, data=profs)\nsummary(model1)\n\n\nCall:\nlm(formula = eval ~ beauty * gender, data = profs)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.83820 -0.37387  0.04551  0.39876  1.06764 \n\nCoefficients:\n                  Estimate Std. Error t value             Pr(&gt;|t|)    \n(Intercept)        3.89085    0.03878 100.337 &lt; 0.0000000000000002 ***\nbeauty             0.08762    0.04706   1.862             0.063294 .  \ngendermale         0.19510    0.05089   3.834             0.000144 ***\nbeauty:gendermale  0.11266    0.06398   1.761             0.078910 .  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.5361 on 459 degrees of freedom\nMultiple R-squared:  0.07256,   Adjusted R-squared:  0.0665 \nF-statistic: 11.97 on 3 and 459 DF,  p-value: 0.000000147\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBeauty seems to matter more for men than for women!\nThe gender gap is largest for good-looking professors\n\n\n\n\n\nIn a model with an interaction term \\(X_1X_2\\), you must also keep the main effects: the variables that are being interacted together.\nThe main effect of \\(X_1\\) represents the predicted increase in \\(Y\\) for a 1-unit change in \\(X_1\\), holding \\(X_2\\) constant at zero.\n\nThe main effect gendermale (0.20) represents the predicted advantage, but only for an average-looking professor (beauty = 0).\n\nThe main effect beauty (0.09) represents the predicted improvement in evaluation scores for each additional beauty point, but only among women (gendermale = 0).\n\nYou can also include other variables in the model that are not being interacted!\n\n\n\n\n\n\nWe observed that there was a significant difference between the price of luxury and non-luxury cars.\nIs there a difference in the price of the car depending on what type of badge it holds?\nIn other words, does the effect of one variable (i.e., its slope coefficient) depend on the value of another?\nFor this we will include a interaction.\n\n\n\n\n\nThe idea is to add a term that is the product of the two variables:\n\n\\[\n\\text{price} = \\beta_0 + \\beta_1\\text{mileage} + \\beta_2\\text{luxury} + \\beta_3 (\\text{luxury} \\times \\text{mileage}) + e\n\\]\n\nIf we have a non-luxury car, then luxury = \\(\\text{\"no\"} = 0\\), so the \\(\\beta_2\\) and \\(\\beta_3\\) terms cancel out: \\[\n\\text{price} = \\beta_0 + \\beta_1\\text{mileage} + e\n\\]\nIf we have a luxury car, then luxury = \\(\\text{\"yes\"}  = 1\\), so we get both a different intercept and a different slope for mileage: \\[\n\\text{price} = (\\beta_0 + \\beta_2) + (\\beta_1 + \\beta_3) \\text{mileage} + e\n\\]\n\n\n\n\n\nLet’s run the regression model\n\n\nlm3 = lm(price ~ mileage*luxury, data = cars_luxury)\nsummary(lm3)\n\n\nCall:\nlm(formula = price ~ mileage * luxury, data = cars_luxury)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-25662  -6055  -2066   3563  83626 \n\nCoefficients:\n                      Estimate   Std. Error t value             Pr(&gt;|t|)    \n(Intercept)       23893.601384   545.040269  43.838 &lt; 0.0000000000000002 ***\nmileage              -0.154697     0.009595 -16.122 &lt; 0.0000000000000002 ***\nluxuryyes         19772.433662  1092.529243  18.098 &lt; 0.0000000000000002 ***\nmileage:luxuryyes    -0.155457     0.021457  -7.245    0.000000000000606 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 10880 on 2084 degrees of freedom\nMultiple R-squared:   0.36, Adjusted R-squared:  0.3591 \nF-statistic: 390.8 on 3 and 2084 DF,  p-value: &lt; 0.00000000000000022\n\n\n\n\n\n\nHow do we interpret this model?\nintercept (baseline), luxury = \\(\"no\"\\) = 0: For a non-luxury car with zero mileage, the average selling price is equal to US$ 23,894.\nNow we have two cases:\nluxury = \\(\"no\"\\) = 0:\nmileage: For each extra increase in mileage (in miles), there will be a decrease of US$ 0.15 in the price of non-luxury cars.\nluxury = \\(\"yes\"\\) = 1:\nmileage: For each extra increase in mileage (in miles), there will be a decrease of US$ 0.16 in the price of luxury cars on top of the decrease of US$ 0.15 of non-luxury cars.\n\n\n\n\n\nWe also have the following interpretation:\nluxury = \\(\\text{\"yes\"}\\) = 0 \\[\n\\begin{align}\n\\text{price} &= 23,894 - 0.15\\times \\text{mileage} + 19,772 (0) - 0.16\\times \\text{mileage} (0) \\\\\n             &=  23,894 - 0.15\\times \\text{mileage}\n\\end{align}\n\\]\nluxury = \\(\\texttt{\"yes\"}\\) = 1 \\[\n\\begin{align}\n\\texttt{price} &= 23,894 - 0.15\\times \\texttt{mileage} + 19,772 (1) - 0.16\\times \\texttt{mileage} (1) \\\\\n             &=  (23,894 + 19,772) - (0.15 + 0.16) \\times \\texttt{mileage} \\\\\n             &=  43,666 - 0.31 \\times \\texttt{mileage} \\\\\n\\end{align}\n\\]\nWe have that not only the intercept change but also the slope.\n\n\n\n\n\n\n\nThe lines are not parallel in this case which indicates a change in the slope due to the intercation term.\n\n\n\n    ggplot(cars_luxury, aes(x = mileage, y = price, col = luxury)) +\n      geom_point() + \n      geom_smooth(method = \"lm\", se = FALSE)\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\n\n\n\n\n\nInteractions make a model more complex to analyze and explain, so it’s only worth doing so when you get a substantial bump in \\(R^2\\) by including the interaction.\nChoose interactions by thinking about what you are trying to model: if you suspect that the impact of one variable depends on the value of another, try an interaction term between them!\n\n\n\n\n\nInstead, interactions let us model a situation where the relationship of one predictor variable and \\(Y\\) is different depending on the value of another \\(X\\) variable:\n\nHow much attractiveness matters for student evaluation scores depends on gender.\nHow much tenure matters for student evaluation scores depends on gender.\nHow much your 3-point shooting volume matters depends on how accurate your 3-point shooting is.\n\n\n\n\n\n\nTwo categorical variables\nTwo numerical variables"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_03.html#interactions---luxury-cars",
+    "href": "fall_sta235_2025/week_01/week_03.html#interactions---luxury-cars",
+    "title": "Data Science for Business Applications",
+    "section": "Interactions - luxury cars",
+    "text": "Interactions - luxury cars\n\nIs there a difference in the price of the car depending on what type of badge it holds?\nIn other words, does the effect of one variable (i.e., its slope coefficient) depend on the value of another?\nFor this we will include a interaction."
   }
 ]
