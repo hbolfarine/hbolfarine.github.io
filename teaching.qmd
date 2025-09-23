@@ -10,8 +10,8 @@ title: "Teaching"
   - [class 01 - Simple and Multiple Regression](fall_sta235_2025/week_01/week_01.qmd)
   - [class 02 - Categorical Variables](fall_sta235_2025/week_01/week_02.qmd)
   - [class 03 - Interactions](fall_sta235_2025/week_01/week_03.qmd)
-  - [class 04 - Regression Assumptions](fall_sta235_2025/week_01/week_04.qmd)\
-  - [class 05 - Class 05 - Modeling nonlinear relationships](fall_sta235_2025/week_01/week_04.qmd)
+  - [class 04 - Regression Assumptions](fall_sta235_2025/week_01/week_04.qmd)
+  - [class 05 - Class 05 - Modeling nonlinear relationships](fall_sta235_2025/week_01/week_05.qmd)
 
 ### Spring 2025
 
