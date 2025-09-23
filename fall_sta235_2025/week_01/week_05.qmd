@@ -213,7 +213,8 @@ summary(lm7)
 #| eval: true
 #| echo: true
 #| output: true
-lm7 <- lm(dailyspend ~ poly(temp,7), data=utilities) 
+lm7 <- lm(dailyspend ~ temp + I(temp^2) + I(temp^3) + I(temp^4) +
+I(temp^5) + I(temp^6) + I(temp^7), data=utilities) 
 ggplot(utilities, aes(x = temp, y = dailyspend)) +
   geom_point() + 
   geom_line(aes(x = temp, y = predict(lm7)), col = "red") + 
@@ -338,7 +339,9 @@ Two interpretations of the slope coefficient:
 
 -   Every year, the [predicted log of transistors]{style="color:darkorange;"} goes up by 0.35
 
--   More useful: Every year, the predicted number of transistors goes up by 35%
+-   More useful: $\exp(0.35\cdot1)-\exp(0.35\cdot0) = \exp(0.35\cdot1)-1 =  0.419$
+
+-  We then have $0.419\times 100 = 41.9\%$ increase for each year.
 
 -   A [constant percentage increase]{style="color:darkorange;"} every year is exponential growth!
 
@@ -349,10 +352,10 @@ Two interpretations of the slope coefficient:
 -   When making predictions, we have to remember that our equation gives us predictions for $\log(\texttt{Transistors})$, not Transistors!
 
 Example: To make a prediction for the number of transistors in 2022: $$
-\log(\texttt{Transistors}) = −681.21 + 0.35(2022) = 26.49
-$$ But our prediction is not 26.49:
+\log(\texttt{Transistors}) = −681.21 + 0.35\cdot(2025) = 27.54
+$$ But our prediction is not 27.54:
 
-$e^{\log(\texttt{Transistors})} = e^{26.49} = 319,492,616,196$
+$e^{\log(\texttt{Transistors})} = \exp(27.54) = e^{27.54} = 912,998,431,886$
 
 ## Interpretation of the model {.smaller}
 
@@ -370,7 +373,7 @@ ggplot(moores, aes(x = Date.of.introduction, y = Transistor.count)) +
 | Model | Equation | Interpretation |
 |:---------------|:-----------------|:-------------------------------------|
 | Linear | $\widehat{Y} = \widehat{\beta}_0 + \widehat{\beta}_1 X$ | 1 unit increase in $X$ implies $\widehat{\beta}_1$ unit increase in $\widehat{Y}$ |
-| Log-linear | $\log(\widehat{Y}) = \widehat{\beta}_0 + \widehat{\beta}_1 X$ | 1 unit increase in $X$ implies ≈ $100 \cdot \widehat{\beta}_1 \%$ increase in $\widehat{Y}$ |
+| Log-linear | $\log(\widehat{Y}) = \widehat{\beta}_0 + \widehat{\beta}_1 X$ | 1 unit increase in $X$ implies ≈ $100 \cdot (\exp(\widehat{\beta}_1)-1) \%$ increase in $\widehat{Y}$ |
 | Linear-log | $\widehat{Y} = \widehat{\beta}_0 + \widehat{\beta}_1 \log(X)$ | 1% increase in $X$ implies ≈ $0.01 \cdot \widehat{\beta}_1$ unit increase in $\widehat{Y}$ |
 | Log-log | $\log(\widehat{Y}) = \widehat{\beta}_0 + \widehat{\beta}_1 \log(X)$ | 1% increase in $X$ implies ≈ $\widehat{\beta}_1 \%$ increase in $\widehat{Y}$ |
 

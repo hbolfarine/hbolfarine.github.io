@@ -412,11 +412,12 @@ I(temp^2)    0.0008440041  0.001651114</code></pre>
 <section id="polynomial-models-10" class="slide level2 smaller">
 <h2>Polynomial models</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>lm7 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> <span class="fu">poly</span>(temp,<span class="dv">7</span>), <span class="at">data=</span>utilities) </span>
-<span id="cb11-2"><a></a><span class="fu">ggplot</span>(utilities, <span class="fu">aes</span>(<span class="at">x =</span> temp, <span class="at">y =</span> dailyspend)) <span class="sc">+</span></span>
-<span id="cb11-3"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb11-4"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> temp, <span class="at">y =</span> <span class="fu">predict</span>(lm7)), <span class="at">col =</span> <span class="st">"red"</span>) <span class="sc">+</span> </span>
-<span id="cb11-5"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> temp, <span class="at">y =</span> <span class="fu">predict</span>(lm2)), <span class="at">col =</span> <span class="st">"orange"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>lm7 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> temp <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">3</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb11-2"><a></a><span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">5</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">6</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">7</span>), <span class="at">data=</span>utilities) </span>
+<span id="cb11-3"><a></a><span class="fu">ggplot</span>(utilities, <span class="fu">aes</span>(<span class="at">x =</span> temp, <span class="at">y =</span> dailyspend)) <span class="sc">+</span></span>
+<span id="cb11-4"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb11-5"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> temp, <span class="at">y =</span> <span class="fu">predict</span>(lm7)), <span class="at">col =</span> <span class="st">"red"</span>) <span class="sc">+</span> </span>
+<span id="cb11-6"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> temp, <span class="at">y =</span> <span class="fu">predict</span>(lm2)), <span class="at">col =</span> <span class="st">"orange"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="week_05_files/figure-revealjs/unnamed-chunk-10-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><ul>
@@ -546,7 +547,8 @@ F-statistic:  1914 on 1 and 99 DF,  p-value: &lt; 0.00000000000000022</code></pr
 <p>Two interpretations of the slope coefficient:</p>
 <ul>
 <li><p>Every year, the <span style="color:darkorange;">predicted log of transistors</span> goes up by 0.35</p></li>
-<li><p>More useful: Every year, the predicted number of transistors goes up by 35%</p></li>
+<li><p>More useful: <span class="math inline">\(\exp(0.35\cdot1)-\exp(0.35\cdot0) = \exp(0.35\cdot1)-1 =  0.419\)</span></p></li>
+<li><p>We then have <span class="math inline">\(0.419\times 100 = 41.9\%\)</span> increase for each year.</p></li>
 <li><p>A <span style="color:darkorange;">constant percentage increase</span> every year is exponential growth!</p></li>
 </ul>
 </section>
@@ -557,9 +559,9 @@ F-statistic:  1914 on 1 and 99 DF,  p-value: &lt; 0.00000000000000022</code></pr
 <li><p>When making predictions, we have to remember that our equation gives us predictions for <span class="math inline">\(\log(\texttt{Transistors})\)</span>, not Transistors!</p></li>
 </ul>
 <p>Example: To make a prediction for the number of transistors in 2022: <span class="math display">\[
-\log(\texttt{Transistors}) = −681.21 + 0.35(2022) = 26.49
-\]</span> But our prediction is not 26.49:</p>
-<p><span class="math inline">\(e^{\log(\texttt{Transistors})} = e^{26.49} = 319,492,616,196\)</span></p>
+\log(\texttt{Transistors}) = −681.21 + 0.35\cdot(2025) = 27.54
+\]</span> But our prediction is not 27.54:</p>
+<p><span class="math inline">\(e^{\log(\texttt{Transistors})} = \exp(27.54) = e^{27.54} = 912,998,431,886\)</span></p>
 </section>
 <section id="interpretation-of-the-model-2" class="slide level2 smaller">
 <h2>Interpretation of the model</h2>
@@ -594,7 +596,7 @@ F-statistic:  1914 on 1 and 99 DF,  p-value: &lt; 0.00000000000000022</code></pr
 <tr class="even">
 <td style="text-align: left;">Log-linear</td>
 <td style="text-align: left;"><span class="math inline">\(\log(\widehat{Y}) = \widehat{\beta}_0 + \widehat{\beta}_1 X\)</span></td>
-<td style="text-align: left;">1 unit increase in <span class="math inline">\(X\)</span> implies ≈ <span class="math inline">\(100 \cdot \widehat{\beta}_1 \%\)</span> increase in <span class="math inline">\(\widehat{Y}\)</span></td>
+<td style="text-align: left;">1 unit increase in <span class="math inline">\(X\)</span> implies ≈ <span class="math inline">\(100 \cdot (\exp(\widehat{\beta}_1)-1) \%\)</span> increase in <span class="math inline">\(\widehat{Y}\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Linear-log</td>

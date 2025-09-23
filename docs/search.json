@@ -3259,7 +3259,7 @@
     "href": "fall_sta235_2025/week_01/week_05.html#polynomial-models-10",
     "title": "Data Science for Business Applications",
     "section": "Polynomial models",
-    "text": "Polynomial models\n\nlm7 &lt;- lm(dailyspend ~ poly(temp,7), data=utilities) \nggplot(utilities, aes(x = temp, y = dailyspend)) +\n  geom_point() + \n  geom_line(aes(x = temp, y = predict(lm7)), col = \"red\") + \n  geom_line(aes(x = temp, y = predict(lm2)), col = \"orange\")\n\n\n\nToo high a degree creates dangers with extrapolation"
+    "text": "Polynomial models\n\nlm7 &lt;- lm(dailyspend ~ temp + I(temp^2) + I(temp^3) + I(temp^4) +\nI(temp^5) + I(temp^6) + I(temp^7), data=utilities) \nggplot(utilities, aes(x = temp, y = dailyspend)) +\n  geom_point() + \n  geom_line(aes(x = temp, y = predict(lm7)), col = \"red\") + \n  geom_line(aes(x = temp, y = predict(lm2)), col = \"orange\")\n\n\n\nToo high a degree creates dangers with extrapolation"
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_05.html#building-polynomial-models",
@@ -3336,14 +3336,14 @@
     "href": "fall_sta235_2025/week_01/week_05.html#interpretation-of-the-model",
     "title": "Data Science for Business Applications",
     "section": "Interpretation of the model",
-    "text": "Interpretation of the model\nOur model is \\[\\widehat{\\log(\\texttt{Transistors})} = −681.21 + 0.35 \\cdot \\texttt{Year}\\]\nTwo interpretations of the slope coefficient:\n\nEvery year, the predicted log of transistors goes up by 0.35\nMore useful: Every year, the predicted number of transistors goes up by 35%\nA constant percentage increase every year is exponential growth!"
+    "text": "Interpretation of the model\nOur model is \\[\\widehat{\\log(\\texttt{Transistors})} = −681.21 + 0.35 \\cdot \\texttt{Year}\\]\nTwo interpretations of the slope coefficient:\n\nEvery year, the predicted log of transistors goes up by 0.35\nMore useful: \\(\\exp(0.35\\cdot1)-\\exp(0.35\\cdot0) = \\exp(0.35\\cdot1)-1 =  0.419\\)\nWe then have \\(0.419\\times 100 = 41.9\\%\\) increase for each year.\nA constant percentage increase every year is exponential growth!"
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_05.html#interpretation-of-the-model-1",
     "href": "fall_sta235_2025/week_01/week_05.html#interpretation-of-the-model-1",
     "title": "Data Science for Business Applications",
     "section": "Interpretation of the model",
-    "text": "Interpretation of the model\n\nMaking predictions using the log-linear model\nWhen making predictions, we have to remember that our equation gives us predictions for \\(\\log(\\texttt{Transistors})\\), not Transistors!\n\nExample: To make a prediction for the number of transistors in 2022: \\[\n\\log(\\texttt{Transistors}) = −681.21 + 0.35(2022) = 26.49\n\\] But our prediction is not 26.49:\n\\(e^{\\log(\\texttt{Transistors})} = e^{26.49} = 319,492,616,196\\)"
+    "text": "Interpretation of the model\n\nMaking predictions using the log-linear model\nWhen making predictions, we have to remember that our equation gives us predictions for \\(\\log(\\texttt{Transistors})\\), not Transistors!\n\nExample: To make a prediction for the number of transistors in 2022: \\[\n\\log(\\texttt{Transistors}) = −681.21 + 0.35\\cdot(2025) = 27.54\n\\] But our prediction is not 27.54:\n\\(e^{\\log(\\texttt{Transistors})} = \\exp(27.54) = e^{27.54} = 912,998,431,886\\)"
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_05.html#interpretation-of-the-model-2",
@@ -3357,7 +3357,7 @@
     "href": "fall_sta235_2025/week_01/week_05.html#interpretation-of-the-model-3",
     "title": "Data Science for Business Applications",
     "section": "Interpretation of the model",
-    "text": "Interpretation of the model\n\n\n\n\n\n\n\n\nModel\nEquation\nInterpretation\n\n\n\n\nLinear\n\\(\\widehat{Y} = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 X\\)\n1 unit increase in \\(X\\) implies \\(\\widehat{\\beta}_1\\) unit increase in \\(\\widehat{Y}\\)\n\n\nLog-linear\n\\(\\log(\\widehat{Y}) = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 X\\)\n1 unit increase in \\(X\\) implies ≈ \\(100 \\cdot \\widehat{\\beta}_1 \\%\\) increase in \\(\\widehat{Y}\\)\n\n\nLinear-log\n\\(\\widehat{Y} = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 \\log(X)\\)\n1% increase in \\(X\\) implies ≈ \\(0.01 \\cdot \\widehat{\\beta}_1\\) unit increase in \\(\\widehat{Y}\\)\n\n\nLog-log\n\\(\\log(\\widehat{Y}) = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 \\log(X)\\)\n1% increase in \\(X\\) implies ≈ \\(\\widehat{\\beta}_1 \\%\\) increase in \\(\\widehat{Y}\\)"
+    "text": "Interpretation of the model\n\n\n\n\n\n\n\n\nModel\nEquation\nInterpretation\n\n\n\n\nLinear\n\\(\\widehat{Y} = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 X\\)\n1 unit increase in \\(X\\) implies \\(\\widehat{\\beta}_1\\) unit increase in \\(\\widehat{Y}\\)\n\n\nLog-linear\n\\(\\log(\\widehat{Y}) = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 X\\)\n1 unit increase in \\(X\\) implies ≈ \\(100 \\cdot (\\exp(\\widehat{\\beta}_1)-1) \\%\\) increase in \\(\\widehat{Y}\\)\n\n\nLinear-log\n\\(\\widehat{Y} = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 \\log(X)\\)\n1% increase in \\(X\\) implies ≈ \\(0.01 \\cdot \\widehat{\\beta}_1\\) unit increase in \\(\\widehat{Y}\\)\n\n\nLog-log\n\\(\\log(\\widehat{Y}) = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 \\log(X)\\)\n1% increase in \\(X\\) implies ≈ \\(\\widehat{\\beta}_1 \\%\\) increase in \\(\\widehat{Y}\\)"
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_05.html#conclusion",
