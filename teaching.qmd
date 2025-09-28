@@ -12,6 +12,7 @@ title: "Teaching"
   - [class 03 - Interactions](fall_sta235_2025/week_01/week_03.qmd)
   - [class 04 - Regression Assumptions](fall_sta235_2025/week_01/week_04.qmd)
   - [class 05 - Modeling nonlinear relationships](fall_sta235_2025/week_01/week_05.qmd)
+  - [class 06 - Time Series Decomposition and Autoregression](fall_sta235_2025/week_01/week_06.qmd)
 
 ### Spring 2025
 
