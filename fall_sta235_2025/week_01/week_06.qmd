@@ -107,7 +107,7 @@ Some notation:
 
 -   A [trend]{style="color:darkorange;"} is persistent [upwards]{style="color:darkorange;"} or [downwards]{style="color:darkorange;"} movement in the data ([not necessarily linear]{style="color:darkorange;"}).
 
-![](image/image_trend_time_series.png){fig-align="center" width="50%"}
+![](week_06_docs/image_trend_time_series.png){fig-align="center" width="50%"}
 
 ## Trend component
 
@@ -168,7 +168,7 @@ ggplot(data.frame(x=x, y=runif(length(x))), aes(x=x, y=y)) + geom_line() + xlab(
 
 -   Which [component(s)]{style="color:darkorange;"} you see in each of these time series?
 
-![](image/image_time_series.png){fig-align="center" width="50%"}
+![](week_06_docs/image_time_series.png){fig-align="center" width="50%"}
 
 ## Putting these together {.smaller}
 
