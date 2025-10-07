@@ -1,6 +1,6 @@
 ---
 title: "Data Science for Business Applications"
-author: "Class 06 - Time Series Decomposition and Autoregression"
+author: "Class 07 - Time Series Decomposition and Autoregression"
 title-slide-attributes:
     data-background-image: week_06_docs/background_sta235h.png
 format: 
