@@ -3834,5 +3834,201 @@
     "title": "Data Science for Business Applications",
     "section": "Isn’t there a faster way?",
     "text": "Isn’t there a faster way?\nIn practice, you don’t have to do this all manually! The tidymodels package makes it easy to do cross-validation even for larger \\(k\\).\n\nlibrary(tidymodels)\n\n# Randomly split the data into 5 folds\nfolds &lt;- vfold_cv(utilities, v=5)\n\n# Build a tidymodels \"workflow\" for a linear model\n# with the formula dailyspend ~ temp, using RMSE as the target metric\nworkflow() %&gt;% \n  add_model(linear_reg()) %&gt;%\n  add_formula(dailyspend ~ temp) %&gt;%\n  fit_resamples(folds, metrics=metric_set(rmse)) %&gt;%\n  collect_metrics()\n\n# A tibble: 1 × 6\n  .metric .estimator  mean     n std_err .config        \n  &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;          \n1 rmse    standard   0.871     5  0.0857 pre0_mod0_post0"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#how-should-we-evaluate-a-forecast",
+    "href": "fall_sta235_2025/week_01/week_07.html#how-should-we-evaluate-a-forecast",
+    "title": "Data Science for Business Applications",
+    "section": "How should we evaluate a forecast?",
+    "text": "How should we evaluate a forecast?"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#section",
+    "href": "fall_sta235_2025/week_01/week_07.html#section",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "apple &lt;- apple %&gt;% mutate(\n  COVID = ifelse(Period &gt;= 38 & Period &lt;= 45, 1, 0),\n  lag1 = lag(Revenue)\n)\nmodel4 &lt;- lm(log(Revenue) ~ Period + Quarter \n                  + COVID + log(lag1), data=apple)\nsummary(model4)\n\n\nCall:\nlm(formula = log(Revenue) ~ Period + Quarter + COVID + log(lag1), \n    data = apple)\n\nResiduals:\n      Min        1Q    Median        3Q       Max \n-0.164955 -0.047524 -0.006454  0.044278  0.149002 \n\nCoefficients:\n             Estimate Std. Error t value             Pr(&gt;|t|)    \n(Intercept)  2.472570   0.387615   6.379     0.00000007169178 ***\nPeriod       0.010331   0.002215   4.664     0.00002593255364 ***\nQuarterQ2   -0.471450   0.049927  -9.443     0.00000000000197 ***\nQuarterQ3   -0.487549   0.026755 -18.223 &lt; 0.0000000000000002 ***\nQuarterQ4   -0.352342   0.025851 -13.630 &lt; 0.0000000000000002 ***\nCOVID        0.109412   0.029754   3.677             0.000605 ***\nlog(lag1)    0.413292   0.111170   3.718             0.000535 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.06482 on 47 degrees of freedom\n  (1 observation deleted due to missingness)\nMultiple R-squared:  0.9716,    Adjusted R-squared:  0.968 \nF-statistic: 267.9 on 6 and 47 DF,  p-value: &lt; 0.00000000000000022"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#section-1",
+    "href": "fall_sta235_2025/week_01/week_07.html#section-1",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "If you were an analyst, how impressed would your boss be if you claimed to be able to predict the past? (Not very — they want you to be able to predict the future!)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#how-should-we-evaluate-a-forecast-1",
+    "href": "fall_sta235_2025/week_01/week_07.html#how-should-we-evaluate-a-forecast-1",
+    "title": "Data Science for Business Applications",
+    "section": "How should we evaluate a forecast?",
+    "text": "How should we evaluate a forecast?\n\n\\(R^2\\) and the residual standard error are optimistic measures of predictive performance.\nThey measure the quality of predictions using the same data used to fit the model.\nBut we’re interested in how the model predicts into the future, not how well it fits the past!"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#section-2",
+    "href": "fall_sta235_2025/week_01/week_07.html#section-2",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "We can mimic predicting on future data by holding back the most recent observations.\nFit the model to the “training” data only (blue) and test the model by forecast the most recent year of data (red)."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#fitting-the-model-to-the-training-set",
+    "href": "fall_sta235_2025/week_01/week_07.html#fitting-the-model-to-the-training-set",
+    "title": "Data Science for Business Applications",
+    "section": "Fitting the model to the training set",
+    "text": "Fitting the model to the training set\nWe want to split our data into a test set (last 4 quarters) and a training set (everything else).\n\ntraining &lt;- apple[1:51,]\ntest &lt;- apple[52:55,]\n\nThen we want to fit the model to the training data and test it on the test data.\n\nmodel4 &lt;- lm(log(Revenue) ~ Period + Quarter \n                  + COVID + log(lag1), data=training)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#testing-the-model-on-the-test-set",
+    "href": "fall_sta235_2025/week_01/week_07.html#testing-the-model-on-the-test-set",
+    "title": "Data Science for Business Applications",
+    "section": "Testing the model on the test set",
+    "text": "Testing the model on the test set\nNow we can see how well the model predicts the test set.\n\npredict(model4, test)\n\n      52       53       54       55 \n4.377099 4.502806 4.918158 4.558995 \n\n\n\nThese are predictions for log revenue, so we need to convert them back to revenue:\n\nexp(predict(model4, test))\n\n       52        53        54        55 \n 79.60673  90.27005 136.75045  95.48747 \n\n\n\n\nHow do we compare this to the actual revenues of the last 4 quarters?\n\ntest.Rev = test$Revenue"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#measuring-prediction-error",
+    "href": "fall_sta235_2025/week_01/week_07.html#measuring-prediction-error",
+    "title": "Data Science for Business Applications",
+    "section": "Measuring prediction error",
+    "text": "Measuring prediction error\nMean squared prediction error (MSE or MSPE) lets us compare all 4 predictions to the actual revenues at once:\n\\[\n  \\text{MSPE} = \\frac{1}{n} \\sum_{i=1}^n (Y_i - \\hat Y_i)^2\n\\]\n(\\(n\\) is the size of the test set; \\(n=4\\) this case)\nTake the square root to get an interpretable number (in the units of \\(Y\\)):\n\\[\n  \\text{RMSPE} = \\sqrt{\\text{MSPE}}\n\\]\nInterpret RMSPE just like residual standard error (smaller is better!)!"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#calculating-rmspe",
+    "href": "fall_sta235_2025/week_01/week_07.html#calculating-rmspe",
+    "title": "Data Science for Business Applications",
+    "section": "Calculating RMSPE",
+    "text": "Calculating RMSPE\n\n\n\n\n\n\n\n\n\n\n\\(i\\)\n\\(Y_i\\)\n\\(\\hat Y_i\\)\n\\(Y_i - \\hat Y_i\\)\n\\((Y_i - \\hat Y_i)^2\\)\n\n\n\n\n\\(1\\)\n\\(85.8\\)\n\\(79.61\\)\n\\(6.19\\)\n\\(38.36\\)\n\n\n\\(3\\)\n\\(124.3\\)\n\\(136.75\\)\n\\(-12.45\\)\n\\(155.01\\)\n\n\n\n\n\\[\n  \\text{RMSPE} = \\sqrt{\\frac{1}{4} \\sum_{i=1}^4 (Y_i - \\hat Y_i)^2} = 7.33\n\\]\n\n\nIn other words, we expect our model to be off by about\n\nround(sqrt(mean((test$Revenue - exp(predict(model4, test)))^2)), 2)\n\n[1] 7.33\n\n\nbillion dollars on average when forecasting the future."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#a-shortcut-for-calculating-rmspe",
+    "href": "fall_sta235_2025/week_01/week_07.html#a-shortcut-for-calculating-rmspe",
+    "title": "Data Science for Business Applications",
+    "section": "A shortcut for calculating RMSPE",
+    "text": "A shortcut for calculating RMSPE\n\n# exp here only because we're predicting log(Revenue) instead of Revenue\npredictions &lt;- exp(predict(model4, test))\nactuals &lt;- test$Revenue\nsqrt(mean((predictions - actuals)^2))\n\n[1] 7.328273"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#traintest-splits-to-measure-performance",
+    "href": "fall_sta235_2025/week_01/week_07.html#traintest-splits-to-measure-performance",
+    "title": "Data Science for Business Applications",
+    "section": "Train/test splits to measure performance",
+    "text": "Train/test splits to measure performance\n\n\n\n\n\nRandomly allocating observations makes training/testing sets representative of the full data set\n80/20% training/testing splits are common\nMore testing data \\(\\to\\) More accurate estimates of prediction error\nMore training data \\(\\to\\) Better representation of full-data fit"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#predicting-utility-expenditures",
+    "href": "fall_sta235_2025/week_01/week_07.html#predicting-utility-expenditures",
+    "title": "Data Science for Business Applications",
+    "section": "Predicting utility expenditures",
+    "text": "Predicting utility expenditures"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#creating-a-traintest-split",
+    "href": "fall_sta235_2025/week_01/week_07.html#creating-a-traintest-split",
+    "title": "Data Science for Business Applications",
+    "section": "Creating a train/test split",
+    "text": "Creating a train/test split\nLet’s do the same thing for the utilities data, but by randomly splitting the data into a training and test set.\n\nlibrary(tidyverse)\nset.seed(9529)\n\n# Ask R to shuffle all 117 observations\nrandomized &lt;- slice_sample(utilities, n = 117)\n\n# 24 is about 20% of 117, so we'll use the first 24 rows as our test set\nutilities_test &lt;- randomized[1:24,]\n\n# The rest are our training set\nutilities_train &lt;- randomized[25:117,]\n\nThe set.seed(9529) command ensures reproducible “random” splits. (I chose this number because it’s my EID number; use your EID number!)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#creating-a-traintest-split-1",
+    "href": "fall_sta235_2025/week_01/week_07.html#creating-a-traintest-split-1",
+    "title": "Data Science for Business Applications",
+    "section": "Creating a train/test split",
+    "text": "Creating a train/test split\nBlack = training data, Red = testing data\nRandom splitting is important! (What would happen if we trained on fall-spring and tested on summer?)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#using-trainingtest-splits-to-pick-between-competing-models",
+    "href": "fall_sta235_2025/week_01/week_07.html#using-trainingtest-splits-to-pick-between-competing-models",
+    "title": "Data Science for Business Applications",
+    "section": "Using training/test splits to pick between competing models",
+    "text": "Using training/test splits to pick between competing models\nWhen comparing models, we want to pick the one that minimizes prediction error on the test set — we want to avoid overfitting to the training data!\nWhen we fit to the entire data set, we might overfit to the training data and get an overly optimistic estimate of prediction error on new data."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#a-linear-1st-degree-polynomial-model",
+    "href": "fall_sta235_2025/week_01/week_07.html#a-linear-1st-degree-polynomial-model",
+    "title": "Data Science for Business Applications",
+    "section": "A linear (1st-degree) polynomial model",
+    "text": "A linear (1st-degree) polynomial model\n\n\n\nmodel1 &lt;- lm(dailyspend ~ temp, data=utilities)\n\n\nCall:\nlm(formula = dailyspend ~ temp, data = utilities)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-2.84674 -0.50361 -0.02397  0.51540  2.44843 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  7.347617   0.206446   35.59   &lt;2e-16 ***\ntemp        -0.096432   0.003911  -24.66   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.8663 on 115 degrees of freedom\nMultiple R-squared:  0.841, Adjusted R-squared:  0.8396 \nF-statistic: 608.1 on 1 and 115 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#a-quadratic-2nd-degree-polynomial-model",
+    "href": "fall_sta235_2025/week_01/week_07.html#a-quadratic-2nd-degree-polynomial-model",
+    "title": "Data Science for Business Applications",
+    "section": "A quadratic (2nd-degree) polynomial model",
+    "text": "A quadratic (2nd-degree) polynomial model\n\n\n\nmodel2 &lt;- lm(dailyspend ~ temp + I(temp^2), data=utilities)\n\n\nCall:\nlm(formula = dailyspend ~ temp + I(temp^2), data = utilities)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-2.87250 -0.28048 -0.03929  0.26391  2.19117 \n\nCoefficients:\n              Estimate Std. Error t value     Pr(&gt;|t|)    \n(Intercept)  9.4722885  0.3907892  24.239      &lt; 2e-16 ***\ntemp        -0.2115553  0.0191046 -11.074      &lt; 2e-16 ***\nI(temp^2)    0.0012476  0.0002037   6.124 0.0000000133 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.7547 on 114 degrees of freedom\nMultiple R-squared:  0.8803,    Adjusted R-squared:  0.8782 \nF-statistic: 419.3 on 2 and 114 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#a-9th-degree-polynomial-model",
+    "href": "fall_sta235_2025/week_01/week_07.html#a-9th-degree-polynomial-model",
+    "title": "Data Science for Business Applications",
+    "section": "A 9th-degree polynomial model",
+    "text": "A 9th-degree polynomial model\n\n\n\nmodel9 &lt;- lm(dailyspend ~ temp + I(temp^2) + I(temp^3) + I(temp^4) \n              + I(temp^5) + I(temp^6) + I(temp^7) + I(temp^8) + I(temp^9),\n              data=utilities)\n\n\nCall:\nlm(formula = dailyspend ~ temp + I(temp^2) + I(temp^3) + I(temp^4) + \n    I(temp^5) + I(temp^6) + I(temp^7) + I(temp^8) + I(temp^9), \n    data = utilities)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-2.66386 -0.24156 -0.01734  0.25996  2.48031 \n\nCoefficients:\n              Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept) -2.144e+01  4.599e+01  -0.466    0.642\ntemp         8.103e+00  1.460e+01   0.555    0.580\nI(temp^2)   -8.468e-01  1.905e+00  -0.445    0.658\nI(temp^3)    4.153e-02  1.349e-01   0.308    0.759\nI(temp^4)   -9.600e-04  5.764e-03  -0.167    0.868\nI(temp^5)    4.563e-06  1.551e-04   0.029    0.977\nI(temp^6)    2.603e-07  2.644e-06   0.098    0.922\nI(temp^7)   -5.943e-09  2.770e-08  -0.215    0.831\nI(temp^8)    5.173e-11  1.627e-10   0.318    0.751\nI(temp^9)   -1.676e-13  4.095e-13  -0.409    0.683\n\nResidual standard error: 0.7501 on 107 degrees of freedom\nMultiple R-squared:  0.889, Adjusted R-squared:  0.8797 \nF-statistic: 95.26 on 9 and 107 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#building-the-models",
+    "href": "fall_sta235_2025/week_01/week_07.html#building-the-models",
+    "title": "Data Science for Business Applications",
+    "section": "Building the models",
+    "text": "Building the models\nWe can avoid overfitting to the training data by fitting the models to the training data and then testing them on the test data.\nFit the models using the training set:\n\nmodel1 &lt;- lm(dailyspend ~ temp, data=utilities_train)\nmodel2 &lt;- lm(dailyspend ~ temp + I(temp^2), data=utilities_train)\nmodel9 &lt;- lm(dailyspend ~ temp + I(temp^2) + I(temp^3) + I(temp^4) \n              + I(temp^5) + I(temp^6) + I(temp^7) + I(temp^8) + I(temp^9),\n              data=utilities_train)\n\nGet their predictions on the test set:\n\nactuals &lt;- utilities_test$dailyspend\npredictions1 &lt;- predict(model1, utilities_test)\npredictions2 &lt;- predict(model2, utilities_test)\npredictions9 &lt;- predict(model9, utilities_test)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#measuring-performance",
+    "href": "fall_sta235_2025/week_01/week_07.html#measuring-performance",
+    "title": "Data Science for Business Applications",
+    "section": "Measuring performance",
+    "text": "Measuring performance\nNow let’s calculate RMSPE on the testing data:\n\nsqrt(mean((actuals - predictions1)^2))\n\n[1] 1.013597\n\nsqrt(mean((actuals - predictions2)^2))\n\n[1] 0.8534912\n\nsqrt(mean((actuals - predictions9)^2))\n\n[1] 0.9482653\n\n\n\n\n\n\n\n\n\n\n\nModel\nRSE (all data)\nRMSPE (training/test split)\n\n\n\n\nLinear\n\\(0.83\\)\n\\(1.01\\)\n\n\nQuadratic\n\\(0.73\\)\n\\(0.85\\)\n\n\n9th Degree\n\\(0.71\\)\n\\(0.95\\)\n\n\n\n\n\n\nThese are all worse than the predictions of the models fit to the entire data set!\nIt shows that the quadratic model is the best of the three for making predictions on new data"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#the-problem-with-this-approach",
+    "href": "fall_sta235_2025/week_01/week_07.html#the-problem-with-this-approach",
+    "title": "Data Science for Business Applications",
+    "section": "The problem with this approach",
+    "text": "The problem with this approach\n\nWe might get “unlucky,” and our train/test split might not give us a representative estimate of prediction error!"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#k-fold-cross-validation",
+    "href": "fall_sta235_2025/week_01/week_07.html#k-fold-cross-validation",
+    "title": "Data Science for Business Applications",
+    "section": "\\(k\\)-fold Cross-Validation",
+    "text": "\\(k\\)-fold Cross-Validation\n\n\n\n\nAverages results over \\(k\\) random train/test splits, to avoid getting bad results from possible bad luck of a single train/test split.\n\\(k=n\\) is called leave-one-out cross validation"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#lets-work-through-an-example-with-k3",
+    "href": "fall_sta235_2025/week_01/week_07.html#lets-work-through-an-example-with-k3",
+    "title": "Data Science for Business Applications",
+    "section": "Let’s work through an example with \\(k=3\\)",
+    "text": "Let’s work through an example with \\(k=3\\)\nFirst we need to split the data into 3 random groups of roughly the same size (\\(39\\times 3=117\\)):\n\nfold1 &lt;- randomized[1:39,]\nfold2 &lt;- randomized[40:78,]\nfold3 &lt;- randomized[79:117,]\n\n\nNow we need to build the model 3 times:\n\nModel A: test on fold1, train on fold2 and fold3\nModel B: test on fold2, train on fold1 and fold3\nModel C: test on fold3, train on fold1 and fold2"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#building-the-models-1",
+    "href": "fall_sta235_2025/week_01/week_07.html#building-the-models-1",
+    "title": "Data Science for Business Applications",
+    "section": "Building the models",
+    "text": "Building the models\n\nmodelA &lt;- lm(dailyspend ~ temp, data=rbind(fold2, fold3))\nmodelB &lt;- lm(dailyspend ~ temp, data=rbind(fold1, fold3))\nmodelC &lt;- lm(dailyspend ~ temp, data=rbind(fold1, fold2))"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#getting-the-predictions",
+    "href": "fall_sta235_2025/week_01/week_07.html#getting-the-predictions",
+    "title": "Data Science for Business Applications",
+    "section": "Getting the predictions",
+    "text": "Getting the predictions\n\npredictionsA &lt;- predict(modelA, fold1)\npredictionsB &lt;- predict(modelB, fold2)\npredictionsC &lt;- predict(modelC, fold3)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#calculating-rmspe-1",
+    "href": "fall_sta235_2025/week_01/week_07.html#calculating-rmspe-1",
+    "title": "Data Science for Business Applications",
+    "section": "Calculating RMSPE",
+    "text": "Calculating RMSPE\nWe now get 3 different RMSPE estimates:\n\nactualsA &lt;- fold1$dailyspend\nsqrt(mean((actualsA - predictionsA)^2))\n\n[1] 0.9898423\n\nactualsB &lt;- fold2$dailyspend\nsqrt(mean((actualsB - predictionsB)^2))\n\n[1] 0.745035\n\nactualsC &lt;- fold3$dailyspend\nsqrt(mean((actualsC - predictionsC)^2))\n\n[1] 0.8463284\n\n\nOur final estimate of RMSPE is the average of these 3 estimates:\n\\[\n  \\text{RMSPE} = \\frac{ 0.99 + 0.75 + 0.85 }{3} = 0.86\n\\]"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#re-doing-our-model-comparisons",
+    "href": "fall_sta235_2025/week_01/week_07.html#re-doing-our-model-comparisons",
+    "title": "Data Science for Business Applications",
+    "section": "Re-doing our model comparisons",
+    "text": "Re-doing our model comparisons\n\n\n\n\n\n\n\n\n\nModel\nRSE (all data)\nRMSPE (3 Fold CV)\nRMSPE (Single Train/Test Split)\n\n\n\n\nLinear\n\\(0.83\\)\n\\(0.86\\)\n\\(1.01\\)\n\n\nQuadratic\n\\(0.73\\)\n\\(0.77\\)\n\\(0.85\\)\n\n\n9th Degree\n\\(0.71\\)\n\\(0.91\\)\n\\(0.95\\)\n\n\n\n\nComparing RSE and CV:\n\nRSE misses overfitting\nFor every model, RSE is too optimistic about how well the model will perform on new data\n\nOur initial train/test split was unlucky! It over-estimated the RMSE"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_07.html#isnt-there-a-faster-way",
+    "href": "fall_sta235_2025/week_01/week_07.html#isnt-there-a-faster-way",
+    "title": "Data Science for Business Applications",
+    "section": "Isn’t there a faster way?",
+    "text": "Isn’t there a faster way?\nIn practice, you don’t have to do this all manually! The tidymodels package makes it easy to do cross-validation even for larger \\(k\\).\n\nlibrary(tidymodels)\n\n# Randomly split the data into 5 folds\nfolds &lt;- vfold_cv(utilities, v=5)\n\n# Build a tidymodels \"workflow\" for a linear model\n# with the formula dailyspend ~ temp, using RMSE as the target metric\nworkflow() %&gt;% \n  add_model(linear_reg()) %&gt;%\n  add_formula(dailyspend ~ temp) %&gt;%\n  fit_resamples(folds, metrics=metric_set(rmse)) %&gt;%\n  collect_metrics()\n\n# A tibble: 1 × 6\n  .metric .estimator  mean     n std_err .config        \n  &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;          \n1 rmse    standard   0.871     5  0.0857 pre0_mod0_post0"
   }
 ]
