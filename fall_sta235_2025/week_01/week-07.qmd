@@ -209,9 +209,9 @@ Interpret RMSPE just like residual standard error (smaller is better!)!
 ## Calculating RMSPE {.smaller}
 
 | $i$ | $Y_i$ | $\hat Y_i$ | $Y_i - \hat Y_i$ | $(Y_i - \hat Y_i)^2$ |
-|-------------|-------------|-------------|-----------------|-----------------|
-| $1$ | $`r test.Rev[1]`$ | $`r round(exp(predict(model4, test))[1], 2)`$ | $`r round(test.Rev[1] - exp(predict(model4, test))[1], 2)`$ | $`r round((test.Rev[1] - exp(predict(model4, test))[1])^2, 2)`$ | | $2$   | $`r test.Rev[2]`$ | $`r round(exp(predict(model4, test))[2], 2)`$ | $`r round(test.Rev[2] - exp(predict(model4, test))[2], 2)`$ | $`r round((test.Rev[2] - exp(predict(model4, test))[2])^2, 2)`$ |
-| $3$ | $`r test.Rev[3]`$ | $`r round(exp(predict(model4, test))[3], 2)`$ | $`r round(test.Rev[3] - exp(predict(model4, test))[3], 2)`$ | $`r round((test.Rev[3] - exp(predict(model4, test))[3])^2, 2)`$ | | $4$   | $`r test.Rev[4]`$ | $`r round(exp(predict(model4, test))[4], 2)`$ | $`r round(test.Rev[4] - exp(predict(model4, test))[4], 2)`$ | $`r round((test.Rev[4] - exp(predict(model4, test))[4])^2, 2)`$ |
+|---------------|---------------|---------------|---------------|---------------|
+| $1$ | $`r test.Rev[1]`$ | $`r round(exp(predict(model4, test))[1], 2)`$ | $`r round(test.Rev[1] - exp(predict(model4, test))[1], 2)`$ | $`r round((test.Rev[1] - exp(predict(model4, test))[1])^2, 2)`$ |
+| $3$ | $`r test.Rev[3]`$ | $`r round(exp(predict(model4, test))[3], 2)`$ | $`r round(test.Rev[3] - exp(predict(model4, test))[3], 2)`$ | $`r round((test.Rev[3] - exp(predict(model4, test))[3])^2, 2)`$ |
 
 . . .
 
@@ -221,10 +221,12 @@ $$
 
 . . .
 
-In other words, we expect our model to be off by about 
+In other words, we expect our model to be off by about
+
 ```{r echo=TRUE}
 round(sqrt(mean((test$Revenue - exp(predict(model4, test)))^2)), 2)
-``` 
+```
+
 billion dollars on average *when forecasting the future*.
 
 ## A shortcut for calculating RMSPE {.smaller}
@@ -402,7 +404,7 @@ sqrt(mean((actuals - predictions9)^2))
 . . .
 
 | Model | RSE (all data) | RMSPE (training/test split) |
-|--------------------------|-------------------|--------------------------|
+|--------------------------|--------------------|--------------------------|
 | Linear | $`r round(sigma(model1), 2)`$ | $`r round(sqrt(mean((actuals - predictions1)^2)), 2)`$ |
 | Quadratic | $`r round(sigma(model2), 2)`$ | $`r round(sqrt(mean((actuals - predictions2)^2)), 2)`$ |
 | 9th Degree | $`r round(sigma(model9), 2)`$ | $`r round(sqrt(mean((actuals - predictions9)^2)), 2)`$ |
@@ -530,7 +532,7 @@ rmse9 <- (sqrt(mean((actualsA - predictions9A)^2)) + sqrt(mean((actualsB - predi
 ```
 
 | Model | RSE (all data) | RMSPE (3 Fold CV) | RMSPE (Single Train/Test Split) |
-|--------------|-----------------------|--------------|----------------------|
+|----------------|---------------------|----------------|--------------------|
 | Linear | $`r round(sigma(model1), 2)`$ | $`r round(rmse1, 2)`$ | $`r round(sqrt(mean((actuals - predictions1)^2)), 2)`$ |
 | Quadratic | $`r round(sigma(model2), 2)`$ | $`r round(rmse2, 2)`$ | $`r round(sqrt(mean((actuals - predictions2)^2)), 2)`$ |
 | 9th Degree | $`r round(sigma(model9), 2)`$ | $`r round(rmse9, 2)`$ | $`r round(sqrt(mean((actuals - predictions9)^2)), 2)`$ |
