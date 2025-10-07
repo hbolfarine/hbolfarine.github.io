@@ -211,9 +211,9 @@ Interpret RMSPE just like residual standard error (smaller is better!)!
 | $i$ | $Y_i$ | $\hat Y_i$ | $Y_i - \hat Y_i$ | $(Y_i - \hat Y_i)^2$ |
 |---------------|---------------|---------------|---------------|---------------|
 | $1$ | $`r test.Rev[1]`$ | $`r round(exp(predict(model4, test))[1], 2)`$ | $`r round(test.Rev[1] - exp(predict(model4, test))[1], 2)`$ | $`r round((test.Rev[1] - exp(predict(model4, test))[1])^2, 2)`$ |
-| $2$ | $`r test.Rev[2]`$ | $`r round(exp(predict(model4, test))[1], 2)`$ | $`r round(test.Rev[2] - exp(predict(model4, test))[2], 2)`$ | $`r round((test.Rev[2] - exp(predict(model4, test))[2])^2, 2)`$ |
-| $3$ | $`r test.Rev[3]`$ | $`r round(exp(predict(model4, test))[3], 2)`$ | $`r round(test.Rev[3] - exp(predict(model4, test))[1], 2)`$ | $`r round((test.Rev[3] - exp(predict(model4, test))[1])^2, 2)`$ |
-| $4$ | $`r test.Rev[4]`$ | $`r round(exp(predict(model4, test))[4], 2)`$ | $`r round(test.Rev[4] - exp(predict(model4, test))[4], 2)`$ | $`r round((test.Rev[4] - exp(predict(model4, test))[4])^2, 2)`$ |
+| $2$ | $`r test.Rev[2]`$ | $`r round(exp(predict(model4, test))[2], 2)`$ | $`r round(test.Rev[2] - exp(predict(model4, test))[2], 2)`$ | $`r round((test.Rev[2] - exp(predict(model4, test))[2])^2, 2)`$ |
+| $3$ | $`r test.Rev[3]`$ | $`r round(exp(predict(model4, test))[3], 2)`$ | $`r round(test.Rev[3] - exp(predict(model4, test))[3], 2)`$ | $`r round((test.Rev[3] - exp(predict(model4, test))[3])^2, 2)`$ |
+| $4$ | $`r test.Rev[4]`$ | $`r round(exp(predict(model4, test))[4], 2)`$ | $`r round(test.Rev[4] - exp(predict(model4, test))[4], 2)`$ | $`r round((test.Rev[3] - exp(predict(model4, test))[4])^2, 2)`$ |
 
 . . .
 

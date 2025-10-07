@@ -3700,7 +3700,7 @@
     "href": "fall_sta235_2025/week_01/week-07.html#calculating-rmspe",
     "title": "Data Science for Business Applications",
     "section": "Calculating RMSPE",
-    "text": "Calculating RMSPE\n\n\n\n\n\n\n\n\n\n\n\\(i\\)\n\\(Y_i\\)\n\\(\\hat Y_i\\)\n\\(Y_i - \\hat Y_i\\)\n\\((Y_i - \\hat Y_i)^2\\)\n\n\n\n\n\\(1\\)\n\\(85.8\\)\n\\(79.61\\)\n\\(6.19\\)\n\\(38.36\\)\n\n\n\\(3\\)\n\\(124.3\\)\n\\(136.75\\)\n\\(-12.45\\)\n\\(155.01\\)\n\n\n\n\n\\[\n  \\text{RMSPE} = \\sqrt{\\frac{1}{4} \\sum_{i=1}^4 (Y_i - \\hat Y_i)^2} = 7.33\n\\]\n\n\nIn other words, we expect our model to be off by about\n\nround(sqrt(mean((test$Revenue - exp(predict(model4, test)))^2)), 2)\n\n[1] 7.33\n\n\nbillion dollars on average when forecasting the future."
+    "text": "Calculating RMSPE\n\n\n\n\n\n\n\n\n\n\n\\(i\\)\n\\(Y_i\\)\n\\(\\hat Y_i\\)\n\\(Y_i - \\hat Y_i\\)\n\\((Y_i - \\hat Y_i)^2\\)\n\n\n\n\n\\(1\\)\n\\(85.8\\)\n\\(79.61\\)\n\\(6.19\\)\n\\(38.36\\)\n\n\n\\(2\\)\n\\(94.9\\)\n\\(90.27\\)\n\\(4.63\\)\n\\(21.44\\)\n\n\n\\(3\\)\n\\(124.3\\)\n\\(136.75\\)\n\\(-12.45\\)\n\\(155.01\\)\n\n\n\\(4\\)\n\\(95.4\\)\n\\(95.49\\)\n\\(-0.09\\)\n\\(830.16\\)\n\n\n\n\n\\[\n  \\text{RMSPE} = \\sqrt{\\frac{1}{4} \\sum_{i=1}^4 (Y_i - \\hat Y_i)^2} = 7.33\n\\]\n\n\nIn other words, we expect our model to be off by about\n\nround(sqrt(mean((test$Revenue - exp(predict(model4, test)))^2)), 2)\n\n[1] 7.33\n\n\nbillion dollars on average when forecasting the future."
   },
   {
     "objectID": "fall_sta235_2025/week_01/week-07.html#a-shortcut-for-calculating-rmspe",
@@ -3896,7 +3896,7 @@
     "href": "fall_sta235_2025/week_01/week_07.html#calculating-rmspe",
     "title": "Data Science for Business Applications",
     "section": "Calculating RMSPE",
-    "text": "Calculating RMSPE\n\n\n\n\n\n\n\n\n\n\n\\(i\\)\n\\(Y_i\\)\n\\(\\hat Y_i\\)\n\\(Y_i - \\hat Y_i\\)\n\\((Y_i - \\hat Y_i)^2\\)\n\n\n\n\n\\(1\\)\n\\(85.8\\)\n\\(79.61\\)\n\\(6.19\\)\n\\(38.36\\)\n\n\n\\(3\\)\n\\(124.3\\)\n\\(136.75\\)\n\\(-12.45\\)\n\\(155.01\\)\n\n\n\n\n\\[\n  \\text{RMSPE} = \\sqrt{\\frac{1}{4} \\sum_{i=1}^4 (Y_i - \\hat Y_i)^2} = 7.33\n\\]\n\n\nIn other words, we expect our model to be off by about\n\nround(sqrt(mean((test$Revenue - exp(predict(model4, test)))^2)), 2)\n\n[1] 7.33\n\n\nbillion dollars on average when forecasting the future."
+    "text": "Calculating RMSPE\n\n\n\n\n\n\n\n\n\n\n\\(i\\)\n\\(Y_i\\)\n\\(\\hat Y_i\\)\n\\(Y_i - \\hat Y_i\\)\n\\((Y_i - \\hat Y_i)^2\\)\n\n\n\n\n\\(1\\)\n\\(85.8\\)\n\\(79.61\\)\n\\(6.19\\)\n\\(38.36\\)\n\n\n\\(2\\)\n\\(94.9\\)\n\\(79.61\\)\n\\(4.63\\)\n\\(21.44\\)\n\n\n\\(3\\)\n\\(124.3\\)\n\\(136.75\\)\n\\(44.69\\)\n\\(1997.49\\)\n\n\n\\(4\\)\n\\(95.4\\)\n\\(95.49\\)\n\\(-0.09\\)\n\\(0.01\\)\n\n\n\n\n\\[\n  \\text{RMSPE} = \\sqrt{\\frac{1}{4} \\sum_{i=1}^4 (Y_i - \\hat Y_i)^2} = 7.33\n\\]\n\n\nIn other words, we expect our model to be off by about\n\nround(sqrt(mean((test$Revenue - exp(predict(model4, test)))^2)), 2)\n\n[1] 7.33\n\n\nbillion dollars on average when forecasting the future."
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_07.html#a-shortcut-for-calculating-rmspe",
