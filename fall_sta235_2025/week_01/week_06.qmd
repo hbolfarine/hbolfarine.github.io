@@ -373,21 +373,6 @@ acf(ozone.model$residuals)
 
 -   We expect [5% of autocorrelations]{style="color:darkorange;"} to be significant just by chance, so having just 1 out of the 20 lags flagged as significant indicates we are OK on independence!
 
-## Making predictions in time series {.smaller}
-
-| Type | Model | Predicted $Y_t$ |
-|:------------------|:-----------------------------|-----------------------|
-| White noise | $Y_t = e_t$ | $0$ |
-| Random sample | $Y_t = \beta_0 + e_t$ | $\widehat{\beta}_0$ (or average $Y$) |
-| Random walk | $Y_t = \beta_0 + Y_{t-1} + e_t$ | $\widehat{\beta}_0 + Y_{t-1}$ |
-| General AR(1) | $Y_t = \beta_0 + \beta_1 Y_{t-1} + e_t$ | $\widehat{\beta}_0 + \widehat{\beta}_1 Y_{t-1}$ |
-
--   Unit root occurs when $\beta_1 = 1$. This means:
--   The series is a **random walk**.
--   There's **no mean reversion**, and any shocks will have a **permanent effect**.
--   When $\beta_1 = 1$, the model is non-stationary, meaning the series tends to "drift" without stabilizing around a fixed mean.
--   If $|\beta_1| < 1$, the series is **mean-reverting**, and shocks are **temporary**.
-
 ## Statistical Analysis
 
 ```{r}
