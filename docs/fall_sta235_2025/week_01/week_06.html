@@ -552,52 +552,6 @@ F-statistic: 23.26 on 1 and 120 DF,  p-value: 0.000004197</code></pre>
 <li>We expect <span style="color:darkorange;">5% of autocorrelations</span> to be significant just by chance, so having just 1 out of the 20 lags flagged as significant indicates we are OK on independence!</li>
 </ul>
 </section>
-<section id="making-predictions-in-time-series" class="slide level2 smaller">
-<h2>Making predictions in time series</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 26%">
-<col style="width: 41%">
-<col style="width: 31%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Type</th>
-<th style="text-align: left;">Model</th>
-<th>Predicted <span class="math inline">\(Y_t\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">White noise</td>
-<td style="text-align: left;"><span class="math inline">\(Y_t = e_t\)</span></td>
-<td><span class="math inline">\(0\)</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Random sample</td>
-<td style="text-align: left;"><span class="math inline">\(Y_t = \beta_0 + e_t\)</span></td>
-<td><span class="math inline">\(\widehat{\beta}_0\)</span> (or average <span class="math inline">\(Y\)</span>)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Random walk</td>
-<td style="text-align: left;"><span class="math inline">\(Y_t = \beta_0 + Y_{t-1} + e_t\)</span></td>
-<td><span class="math inline">\(\widehat{\beta}_0 + Y_{t-1}\)</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">General AR(1)</td>
-<td style="text-align: left;"><span class="math inline">\(Y_t = \beta_0 + \beta_1 Y_{t-1} + e_t\)</span></td>
-<td><span class="math inline">\(\widehat{\beta}_0 + \widehat{\beta}_1 Y_{t-1}\)</span></td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>Unit root occurs when <span class="math inline">\(\beta_1 = 1\)</span>. This means:</li>
-<li>The series is a <strong>random walk</strong>.</li>
-<li>There’s <strong>no mean reversion</strong>, and any shocks will have a <strong>permanent effect</strong>.</li>
-<li>When <span class="math inline">\(\beta_1 = 1\)</span>, the model is non-stationary, meaning the series tends to “drift” without stabilizing around a fixed mean.</li>
-<li>If <span class="math inline">\(|\beta_1| &lt; 1\)</span>, the series is <strong>mean-reverting</strong>, and shocks are <strong>temporary</strong>.</li>
-</ul>
-</section>
 <section id="statistical-analysis" class="slide level2">
 <h2>Statistical Analysis</h2>
 <div class="cell" data-layout-align="center">
