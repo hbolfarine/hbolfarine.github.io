@@ -4219,5 +4219,208 @@
     "title": "Data Science for Business Applications",
     "section": "Summary",
     "text": "Summary\nIn a logistic regression model, the response variable is binary, taking values of either zero or one.\n\nThe model estimates the log odds of the event associated with a response of one.\nThe model’s effects are interpreted in terms of odds.\nPredictions are expressed as probabilities.\nThe performance of the model is evaluated based on its prediction accuracy."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#decision-trees",
+    "href": "fall_sta235_2025/week_01/week_10.html#decision-trees",
+    "title": "Data Science for Business Applications",
+    "section": "Decision Trees",
+    "text": "Decision Trees\n\nAnother predictive model\nDecision Trees: Classification and Regression Trees (CART)\nTrees are:\n\nFlexible at capturing non-linearity and interactions\nDon’t require scaling of variables\nHandle categorical and numerical data\nFast\nInterpretable"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#the-idea-behind-decision-trees",
+    "href": "fall_sta235_2025/week_01/week_10.html#the-idea-behind-decision-trees",
+    "title": "Data Science for Business Applications",
+    "section": "The Idea Behind Decision Trees",
+    "text": "The Idea Behind Decision Trees\n\nCreate a flow chart for making decisions\n\nHow do we classify an individual?\n\nBut there are many decisions!\n\nHow many variables do we use?\nHow do we sort them? In what order do we place them?\nHow do we split them?\nHow deep do we go?"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#the-idea-behind-decision-trees-1",
+    "href": "fall_sta235_2025/week_01/week_10.html#the-idea-behind-decision-trees-1",
+    "title": "Data Science for Business Applications",
+    "section": "The Idea Behind Decision Trees",
+    "text": "The Idea Behind Decision Trees\n\n\n\nThe decision tree is always binary\nSplits the data in two parts given a decision rule\nStructure:\n\nRoot node (decision rule)\nInternal nodes (decision rule)\nLeaves (prediction)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#types-of-decision-tree",
+    "href": "fall_sta235_2025/week_01/week_10.html#types-of-decision-tree",
+    "title": "Data Science for Business Applications",
+    "section": "Types of Decision Tree",
+    "text": "Types of Decision Tree\n\nWe can use decision trees to perform:\n\nClassification tasks (target variable is categorical)\n\nSimilar to logistic regression\n\nRegression (target variable is numerical)\n\nWorks well on nonlinear data"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#creating-a-decision-tree",
+    "href": "fall_sta235_2025/week_01/week_10.html#creating-a-decision-tree",
+    "title": "Data Science for Business Applications",
+    "section": "Creating a Decision Tree",
+    "text": "Creating a Decision Tree\n\nDetermine which variable and criteria we can use to split the data into two groups (binary) so that the two parts of the data are as different as possible from each other\nWithin each group, repeat step 1\nStop this process when we run out of variables, or splitting no longer helps us make better predictions"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#creating-a-decision-tree-basically",
+    "href": "fall_sta235_2025/week_01/week_10.html#creating-a-decision-tree-basically",
+    "title": "Data Science for Business Applications",
+    "section": "Creating a Decision Tree (Basically)",
+    "text": "Creating a Decision Tree (Basically)\n\nStart at the root node\nSplit by a variable that provides the most differentiation\nStop splitting if you get pure leaves or pure enough (one class)\nRepeat for each node\nAssign the majority classification (or average outcome in regression)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#example---disney",
+    "href": "fall_sta235_2025/week_01/week_10.html#example---disney",
+    "title": "Data Science for Business Applications",
+    "section": "Example - Disney+",
+    "text": "Example - Disney+\n\nDisney+ data:\n\ncity: Whether the customer lives in a big city or not\nfemale: Whether the customer is female or not\nage: Customer’s age (in years)\nlogins: Number of logins to the platform in the past week\nmandalorian: Whether the person has watched the Mandalorian or not\nunsubscribe: Whether they canceled their subscription or not\n\nLet’s try to predict who will cancel their subscription"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#predicting-subscription",
+    "href": "fall_sta235_2025/week_01/week_10.html#predicting-subscription",
+    "title": "Data Science for Business Applications",
+    "section": "Predicting subscription",
+    "text": "Predicting subscription\n\nSince our outcome is binary, this is a classification task\nWe’ll start with two variables, city and mandalorian\nHere’s a frequency table:\n\n\nunsub_df = disney %&gt;%\n  filter(unsubscribe == \"unsubscribe\")\n\nxtabs(~mandalorian + city, data = unsub_df) %&gt;% \n  addmargins()\n\n           city\nmandalorian   no  yes  Sum\n        no    22  152  174\n        yes  183  995 1178\n        Sum  205 1147 1352\n\nstay_df = disney %&gt;%\n  filter(unsubscribe == \"stay\")\n\nxtabs(~mandalorian + city, data = stay_df) %&gt;% \n  addmargins()\n\n           city\nmandalorian   no  yes  Sum\n        no   190 1101 1291\n        yes  317 2040 2357\n        Sum  507 3141 3648"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#section",
+    "href": "fall_sta235_2025/week_01/week_10.html#section",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "For mandalorian:\n\n\n\n\nMandalorian\nSubscribers\nUnsubscribers\nTotal\n% Unsubscribed\n\n\n\n\nno\n1291\n174\n1465\n11.9%\n\n\nyes\n2357\n1178\n3535\n33.3%\n\n\n\n\nThere’s a big difference in unsubscribe rates between those who watched and didn’t watch The Mandalorian.\nThis suggests mandalorian is a strong predictor of unsubscribe.\nFor city:\n\n\n\n\nCity\nSubscribers\nUnsubscribers\nTotal\n% Unsubscribed\n\n\n\n\nno\n507\n205\n712\n28.8%\n\n\nyes\n3141\n1147\n4288\n26.7%\n\n\n\n\nThere’s also a difference, but it’s smaller than for mandalorian."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#section-1",
+    "href": "fall_sta235_2025/week_01/week_10.html#section-1",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "The variable that most reduces impurity, that makes each resulting group more “pure” in terms of unsubscribe/stay gets chosen for the first split in this case mandalorian.\n\n\n\n\nWe can then classify based on the majority percentage in each leaf node\nIn this case very intersting sincethe prediction will always be subscribe"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#adding-city",
+    "href": "fall_sta235_2025/week_01/week_10.html#adding-city",
+    "title": "Data Science for Business Applications",
+    "section": "Adding city",
+    "text": "Adding city\n\nLet’s add city in both nodes\n\n\n\n\nCity\nType\nMandalorian No\nMandalorian Yes\n\n\n\n\nNo\nUnsubscribers\n22\n183\n\n\nNo\nSubscribers\n190\n317\n\n\nYes\nUnsubscribers\n152\n995\n\n\nYes\nSubscribers\n1101\n2040"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#results-in-the-follwing-tree",
+    "href": "fall_sta235_2025/week_01/week_10.html#results-in-the-follwing-tree",
+    "title": "Data Science for Business Applications",
+    "section": "Results in the follwing tree",
+    "text": "Results in the follwing tree\n\n\nThis tree is not really good since it always predict subscription."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#example-with-data",
+    "href": "fall_sta235_2025/week_01/week_10.html#example-with-data",
+    "title": "Data Science for Business Applications",
+    "section": "Example with data",
+    "text": "Example with data\n\nCan We Build a Model to Predict Who Survived the Titanic?\nWe’ll make a classification tree to predict survival:\n\nadult: If the passenger was as or older than 18\n\nsex: passenger’s gender; male or female\npassengerClass: Class in which the passenger traveled: 1st, 2nd, 3rd\nsurvided: Indicates if the passenger survived or not: yes, no"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#build-the-tree",
+    "href": "fall_sta235_2025/week_01/week_10.html#build-the-tree",
+    "title": "Data Science for Business Applications",
+    "section": "Build the tree",
+    "text": "Build the tree\n\nBefore we can build the tree we should define the categorical variables as factors.\nThis is not necessary when the variables are binary or dummy (0 or 1)."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#build-the-tree-1",
+    "href": "fall_sta235_2025/week_01/week_10.html#build-the-tree-1",
+    "title": "Data Science for Business Applications",
+    "section": "Build the tree",
+    "text": "Build the tree\n\n# Create a decision tree model specification\ntree_spec &lt;- decision_tree(mode = \"classification\",engine = \"rpart\")\n\n# Fit the model to the training data\ntree_fit &lt;- tree_spec %&gt;%\n  fit(survived ~ adult + sex + passengerClass, data = titanic_age)\n\n### Model Results\n# Print out the logic the decision tree decided on\nrules &lt;- rpart.rules(tree_fit$fit)\nprint(rules)\n\n survived                                                  \n     0.21 when sex is   male                               \n     0.47 when sex is female & passengerClass is        3rd\n     0.93 when sex is female & passengerClass is 1st or 2nd\n\n\n\nThis decision tree shows us that:\n\n0.21, or 21%, of the men on the Titanic survived\n0.47, or 47%, of the females in the third class survived\n0.93, or 93%, of the females in the 1st or 2nd survived\n\nIn some ways the tree returns the probability of surviving given the conditions displayed on the decision rules."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#plot-the-decision-rules-and-classification",
+    "href": "fall_sta235_2025/week_01/week_10.html#plot-the-decision-rules-and-classification",
+    "title": "Data Science for Business Applications",
+    "section": "Plot the decision rules and classification",
+    "text": "Plot the decision rules and classification\n\n# Plot the decision tree\nrpart.plot(tree_fit$fit, type = 4, extra = 101, \n           under = TRUE, cex = 0.8, box.palette = \"auto\")"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#how-to-interpret-the-tree",
+    "href": "fall_sta235_2025/week_01/week_10.html#how-to-interpret-the-tree",
+    "title": "Data Science for Business Applications",
+    "section": "How to interpret the tree",
+    "text": "How to interpret the tree\n\nThe nodes indicates which group of the target variable is more common in the split. If it indicates no it means that there’s a higher chance of not surviving than surviving.\nSo in the top node we have no and it indicates that from a total of 1046 (100%), 619 survived, and 427 did not.\nWe then use the first decision rule that splits the data into gender. It indicates that 63% (658) of the passengers are male and 37% (388) female. From those who are male, 523 died and 135 survived; that is 135/658 = 0.21, or 21%. In this case 523/658 = 0.79, or 79%, died. That’s the reason the node is no on the node.\nFrom the 388 females, 152 were in the 3rd class, from which 80/152 = 0.53, or 53%, died, and 72/152 = 0.47, or 47%, survived. Of the female passengers in the 3rd class, 16/236 = 0.067, or 6.7%, died, and 220/236 = 0.93, or 93%, survived. In this case we can see that the node indicates an yes.\nOverall the female node indicates that 96/388 = 24% of the female passengers died and 292/388 = 75% survived."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#using-the-model-to-make-predictions",
+    "href": "fall_sta235_2025/week_01/week_10.html#using-the-model-to-make-predictions",
+    "title": "Data Science for Business Applications",
+    "section": "Using the model to make predictions",
+    "text": "Using the model to make predictions\n\n# Make predictions on the testing data\npredictions &lt;- tree_fit %&gt;%\n  predict(titanic_age) %&gt;%\n  pull(.pred_class)\n\ntitanic_age = titanic_age %&gt;% \n  mutate(pred.survival = predictions)\n\nxtabs(~pred.survival+survived,data=titanic_age) %&gt;% \n  addmargins()\n\n             survived\npred.survival   no  yes  Sum\n          no   603  207  810\n          yes   16  220  236\n          Sum  619  427 1046\n\n\n\nSince this is classification model we can measure the accuracy of the model\n\nTrue positives (TP) - 220\nTrue Negatives (TN) - 603\nFalse Positives (FP) - 16\nFalse Negatives (FN) - 207\n\nAccuracy is equal to (TP+TN)/Total = (220+603)/1046 = 0.78, or 78%"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#regression-trees",
+    "href": "fall_sta235_2025/week_01/week_10.html#regression-trees",
+    "title": "Data Science for Business Applications",
+    "section": "Regression Trees",
+    "text": "Regression Trees\n\nWe can also use decision trees for regression.\nWe’ll use our Boston data for predicting median home value (MEDV), measured in thousands of dollars, from a socioeconomic indicator LSTAT that was defined as the proportion of adults without some high school education and proportion of male workers classified as laborers). There are 506 observations in this data.\nIn this case, both the target variable and the predictor are numerical, and the nodes will show the average value of this variable (average of the median home value).\nThe decision on the node (rule) of the tree will now depend on a numerical cutoff determined by the data, which will split the predictor into areas from which a prediction will be made by obtaining the average of the response in this area."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#running-the-model",
+    "href": "fall_sta235_2025/week_01/week_10.html#running-the-model",
+    "title": "Data Science for Business Applications",
+    "section": "Running the model",
+    "text": "Running the model\n\n# Make predictions on the testing data\n# Create a decision tree model specification\ntree_spec &lt;- decision_tree(mode = \"regression\",engine = \"rpart\")\n\n# Fit the model to the training data\ntree_fit &lt;- tree_spec %&gt;%\n  fit(MEDV ~ LSTAT, data = tree_housing)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#regression-tree-plot",
+    "href": "fall_sta235_2025/week_01/week_10.html#regression-tree-plot",
+    "title": "Data Science for Business Applications",
+    "section": "Regression tree plot",
+    "text": "Regression tree plot\n\nrpart.plot(tree_fit$fit, type = 4, extra = 101, \n           under = TRUE, cex = 0.8, box.palette = \"auto\")"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#regression-tree-interpretation",
+    "href": "fall_sta235_2025/week_01/week_10.html#regression-tree-interpretation",
+    "title": "Data Science for Business Applications",
+    "section": "Regression tree interpretation",
+    "text": "Regression tree interpretation\n\nWe start at the top, or root node of the tree. At each interior node we have a rule that tells us which split to take, based on the value of our predictor variable and the cutoff.\nWe keep going until we reach the bottom, or leaf node.\nWithin each partition, the target values are averaged to give us the prediction within that partition. These are also the values seen at the leaf nodes on the left\nTo predict a new point, we can just “drop” an observation down the tree until we end up at a leaf node."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#regression-tree-model",
+    "href": "fall_sta235_2025/week_01/week_10.html#regression-tree-model",
+    "title": "Data Science for Business Applications",
+    "section": "Regression tree model",
+    "text": "Regression tree model\n\nWhat does the regression tree look like applied to the data?\nIt is basically a step function in which the splits are determined by the tree structure."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#how-we-evaluate-the-regression-tree",
+    "href": "fall_sta235_2025/week_01/week_10.html#how-we-evaluate-the-regression-tree",
+    "title": "Data Science for Business Applications",
+    "section": "How we evaluate the regression tree",
+    "text": "How we evaluate the regression tree\n\nWe can also split the data into testing and training, or use cross validation and obtain the RMSE.\nIn this case we’ll only obtain the RMSE and the R-squared of this model on the original data as\n\n\n# Make predictions on the testing data\npredictions &lt;- tree_fit %&gt;%\n  predict(tree_housing) %&gt;%\n  pull(.pred)\n\n# Calculate RMSE and R-squared\nmetrics &lt;- metric_set(rmse, rsq)\nmodel_performance &lt;- tree_housing %&gt;%\n  mutate(predictions = predictions) %&gt;%\n  metrics(truth = MEDV, estimate = predictions)\n\nprint(model_performance)\n\n# A tibble: 2 × 3\n  .metric .estimator .estimate\n  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;\n1 rmse    standard       5.07 \n2 rsq     standard       0.695"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#model-results",
+    "href": "fall_sta235_2025/week_01/week_10.html#model-results",
+    "title": "Data Science for Business Applications",
+    "section": "Model Results",
+    "text": "Model Results\n\nOur median home estimates will have a prediction error of +/- 5.071 thousand dollars.\nOur model captures 69.5% of the variation in age using the LSTAT variable."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#more-predictors-on-the-regression-tree",
+    "href": "fall_sta235_2025/week_01/week_10.html#more-predictors-on-the-regression-tree",
+    "title": "Data Science for Business Applications",
+    "section": "More predictors on the regression tree",
+    "text": "More predictors on the regression tree\n\nWhat if we had a tree with more than one explanatory variable?\nWe add distance to employment centers (DIS) to our model, and the tree can now use either LSTAT or DIS.\n\n\n# Make predictions on the testing data\n# Create a decision tree model specification\ntree_spec &lt;- decision_tree(mode = \"regression\",engine = \"rpart\")\n\n# Fit the model to the training data\ntree_fit &lt;- tree_spec %&gt;%\n  fit(MEDV ~ LSTAT + as.numeric(DIS), data = tree_housing)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#regression-tree-plot-1",
+    "href": "fall_sta235_2025/week_01/week_10.html#regression-tree-plot-1",
+    "title": "Data Science for Business Applications",
+    "section": "Regression tree plot",
+    "text": "Regression tree plot\n\nrpart.plot(tree_fit$fit, type = 4, extra = 101, \n           under = TRUE, cex = 0.8, box.palette = \"auto\")"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#model-performance",
+    "href": "fall_sta235_2025/week_01/week_10.html#model-performance",
+    "title": "Data Science for Business Applications",
+    "section": "Model performance",
+    "text": "Model performance\n\n# Make predictions on the testing data\npredictions &lt;- tree_fit %&gt;%\n  predict(tree_housing) %&gt;%\n  pull(.pred)\n\n# Calculate RMSE and R-squared\nmetrics &lt;- metric_set(rmse, rsq)\nmodel_performance &lt;- tree_housing %&gt;%\n  mutate(predictions = predictions) %&gt;%\n  metrics(truth = MEDV, estimate = predictions)\n\nprint(model_performance)\n\n# A tibble: 2 × 3\n  .metric .estimator .estimate\n  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;\n1 rmse    standard       4.85 \n2 rsq     standard       0.721\n\n\n\nIn this case there is a slight increase in the R-squared and an increase in the RMSE, indicating a better fit compared to the previous model."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_10.html#when-to-use-decision-trees",
+    "href": "fall_sta235_2025/week_01/week_10.html#when-to-use-decision-trees",
+    "title": "Data Science for Business Applications",
+    "section": "When to use decision trees?",
+    "text": "When to use decision trees?\n\nMain Advantages:\n\nEasy to interpret and explain (you can plot them!)\nMirrors human decision-making\nCan handle qualitative predictors (without need for dummies)\n\nMain disadvantages:\n\nAccuracy not as high as other methods\nVery sensitive to training data (e.g. overfitting)"
   }
 ]
