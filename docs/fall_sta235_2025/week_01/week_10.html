@@ -510,21 +510,31 @@ mandalorian   no  yes  Sum
 <li>Before we can build the tree we should define the categorical variables as factors.</li>
 <li>This is not necessary when the variables are binary or dummy (0 or 1).</li>
 </ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb5-2"><a></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb5-3"><a></a><span class="fu">library</span>(rpart.plot)</span>
+<span id="cb5-4"><a></a></span>
+<span id="cb5-5"><a></a>titanic_age<span class="sc">$</span>survived <span class="ot">=</span> <span class="fu">as.factor</span>(titanic_age<span class="sc">$</span>survived)</span>
+<span id="cb5-6"><a></a>titanic_age<span class="sc">$</span>sex <span class="ot">=</span> <span class="fu">as.factor</span>(titanic_age<span class="sc">$</span>sex)</span>
+<span id="cb5-7"><a></a>titanic_age<span class="sc">$</span>passengerClass <span class="ot">=</span> <span class="fu">as.factor</span>(titanic_age<span class="sc">$</span>passengerClass)</span>
+<span id="cb5-8"><a></a>titanic_age<span class="sc">$</span>adult <span class="ot">=</span> <span class="fu">as.factor</span>(titanic_age<span class="sc">$</span>adult)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="build-the-tree-1" class="slide level2 smaller">
 <h2>Build the tree</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="co"># Create a decision tree model specification</span></span>
-<span id="cb5-2"><a></a>tree_spec <span class="ot">&lt;-</span> <span class="fu">decision_tree</span>(<span class="at">mode =</span> <span class="st">"classification"</span>,<span class="at">engine =</span> <span class="st">"rpart"</span>)</span>
-<span id="cb5-3"><a></a></span>
-<span id="cb5-4"><a></a><span class="co"># Fit the model to the training data</span></span>
-<span id="cb5-5"><a></a>tree_fit <span class="ot">&lt;-</span> tree_spec <span class="sc">%&gt;%</span></span>
-<span id="cb5-6"><a></a>  <span class="fu">fit</span>(survived <span class="sc">~</span> adult <span class="sc">+</span> sex <span class="sc">+</span> passengerClass, <span class="at">data =</span> titanic_age)</span>
-<span id="cb5-7"><a></a></span>
-<span id="cb5-8"><a></a><span class="do">### Model Results</span></span>
-<span id="cb5-9"><a></a><span class="co"># Print out the logic the decision tree decided on</span></span>
-<span id="cb5-10"><a></a>rules <span class="ot">&lt;-</span> <span class="fu">rpart.rules</span>(tree_fit<span class="sc">$</span>fit)</span>
-<span id="cb5-11"><a></a><span class="fu">print</span>(rules)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="co"># Create a decision tree model specification</span></span>
+<span id="cb6-2"><a></a>tree_spec <span class="ot">&lt;-</span> <span class="fu">decision_tree</span>(<span class="at">mode =</span> <span class="st">"classification"</span>,<span class="at">engine =</span> <span class="st">"rpart"</span>)</span>
+<span id="cb6-3"><a></a></span>
+<span id="cb6-4"><a></a><span class="co"># Fit the model to the training data</span></span>
+<span id="cb6-5"><a></a>tree_fit <span class="ot">&lt;-</span> tree_spec <span class="sc">%&gt;%</span></span>
+<span id="cb6-6"><a></a>  <span class="fu">fit</span>(survived <span class="sc">~</span> adult <span class="sc">+</span> sex <span class="sc">+</span> passengerClass, <span class="at">data =</span> titanic_age)</span>
+<span id="cb6-7"><a></a></span>
+<span id="cb6-8"><a></a><span class="do">### Model Results</span></span>
+<span id="cb6-9"><a></a><span class="co"># Print out the logic the decision tree decided on</span></span>
+<span id="cb6-10"><a></a>rules <span class="ot">&lt;-</span> <span class="fu">rpart.rules</span>(tree_fit<span class="sc">$</span>fit)</span>
+<span id="cb6-11"><a></a><span class="fu">print</span>(rules)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> survived                                                  
      0.21 when sex is   male                               
@@ -545,9 +555,9 @@ mandalorian   no  yes  Sum
 <section id="plot-the-decision-rules-and-classification" class="slide level2 smaller">
 <h2>Plot the decision rules and classification</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="co"># Plot the decision tree</span></span>
-<span id="cb7-2"><a></a><span class="fu">rpart.plot</span>(tree_fit<span class="sc">$</span>fit, <span class="at">type =</span> <span class="dv">4</span>, <span class="at">extra =</span> <span class="dv">101</span>, </span>
-<span id="cb7-3"><a></a>           <span class="at">under =</span> <span class="cn">TRUE</span>, <span class="at">cex =</span> <span class="fl">0.8</span>, <span class="at">box.palette =</span> <span class="st">"auto"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co"># Plot the decision tree</span></span>
+<span id="cb8-2"><a></a><span class="fu">rpart.plot</span>(tree_fit<span class="sc">$</span>fit, <span class="at">type =</span> <span class="dv">4</span>, <span class="at">extra =</span> <span class="dv">101</span>, </span>
+<span id="cb8-3"><a></a>           <span class="at">under =</span> <span class="cn">TRUE</span>, <span class="at">cex =</span> <span class="fl">0.8</span>, <span class="at">box.palette =</span> <span class="st">"auto"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="week_10_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
@@ -564,16 +574,16 @@ mandalorian   no  yes  Sum
 <section id="using-the-model-to-make-predictions" class="slide level2 smaller">
 <h2>Using the model to make predictions</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co"># Make predictions on the testing data</span></span>
-<span id="cb8-2"><a></a>predictions <span class="ot">&lt;-</span> tree_fit <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a></a>  <span class="fu">predict</span>(titanic_age) <span class="sc">%&gt;%</span></span>
-<span id="cb8-4"><a></a>  <span class="fu">pull</span>(.pred_class)</span>
-<span id="cb8-5"><a></a></span>
-<span id="cb8-6"><a></a>titanic_age <span class="ot">=</span> titanic_age <span class="sc">%&gt;%</span> </span>
-<span id="cb8-7"><a></a>  <span class="fu">mutate</span>(<span class="at">pred.survival =</span> predictions)</span>
-<span id="cb8-8"><a></a></span>
-<span id="cb8-9"><a></a><span class="fu">xtabs</span>(<span class="sc">~</span>pred.survival<span class="sc">+</span>survived,<span class="at">data=</span>titanic_age) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-10"><a></a>  <span class="fu">addmargins</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># Make predictions on the testing data</span></span>
+<span id="cb9-2"><a></a>predictions <span class="ot">&lt;-</span> tree_fit <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a></a>  <span class="fu">predict</span>(titanic_age) <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a></a>  <span class="fu">pull</span>(.pred_class)</span>
+<span id="cb9-5"><a></a></span>
+<span id="cb9-6"><a></a>titanic_age <span class="ot">=</span> titanic_age <span class="sc">%&gt;%</span> </span>
+<span id="cb9-7"><a></a>  <span class="fu">mutate</span>(<span class="at">pred.survival =</span> predictions)</span>
+<span id="cb9-8"><a></a></span>
+<span id="cb9-9"><a></a><span class="fu">xtabs</span>(<span class="sc">~</span>pred.survival<span class="sc">+</span>survived,<span class="at">data=</span>titanic_age) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-10"><a></a>  <span class="fu">addmargins</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             survived
 pred.survival   no  yes  Sum
@@ -605,20 +615,20 @@ pred.survival   no  yes  Sum
 <section id="running-the-model" class="slide level2">
 <h2>Running the model</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="co"># Make predictions on the testing data</span></span>
-<span id="cb10-2"><a></a><span class="co"># Create a decision tree model specification</span></span>
-<span id="cb10-3"><a></a>tree_spec <span class="ot">&lt;-</span> <span class="fu">decision_tree</span>(<span class="at">mode =</span> <span class="st">"regression"</span>,<span class="at">engine =</span> <span class="st">"rpart"</span>)</span>
-<span id="cb10-4"><a></a></span>
-<span id="cb10-5"><a></a><span class="co"># Fit the model to the training data</span></span>
-<span id="cb10-6"><a></a>tree_fit <span class="ot">&lt;-</span> tree_spec <span class="sc">%&gt;%</span></span>
-<span id="cb10-7"><a></a>  <span class="fu">fit</span>(MEDV <span class="sc">~</span> LSTAT, <span class="at">data =</span> tree_housing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="co"># Make predictions on the testing data</span></span>
+<span id="cb11-2"><a></a><span class="co"># Create a decision tree model specification</span></span>
+<span id="cb11-3"><a></a>tree_spec <span class="ot">&lt;-</span> <span class="fu">decision_tree</span>(<span class="at">mode =</span> <span class="st">"regression"</span>,<span class="at">engine =</span> <span class="st">"rpart"</span>)</span>
+<span id="cb11-4"><a></a></span>
+<span id="cb11-5"><a></a><span class="co"># Fit the model to the training data</span></span>
+<span id="cb11-6"><a></a>tree_fit <span class="ot">&lt;-</span> tree_spec <span class="sc">%&gt;%</span></span>
+<span id="cb11-7"><a></a>  <span class="fu">fit</span>(MEDV <span class="sc">~</span> LSTAT, <span class="at">data =</span> tree_housing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="regression-tree-plot" class="slide level2 smaller">
 <h2>Regression tree plot</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">rpart.plot</span>(tree_fit<span class="sc">$</span>fit, <span class="at">type =</span> <span class="dv">4</span>, <span class="at">extra =</span> <span class="dv">101</span>, </span>
-<span id="cb11-2"><a></a>           <span class="at">under =</span> <span class="cn">TRUE</span>, <span class="at">cex =</span> <span class="fl">0.8</span>, <span class="at">box.palette =</span> <span class="st">"auto"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">rpart.plot</span>(tree_fit<span class="sc">$</span>fit, <span class="at">type =</span> <span class="dv">4</span>, <span class="at">extra =</span> <span class="dv">101</span>, </span>
+<span id="cb12-2"><a></a>           <span class="at">under =</span> <span class="cn">TRUE</span>, <span class="at">cex =</span> <span class="fl">0.8</span>, <span class="at">box.palette =</span> <span class="st">"auto"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="week_10_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
@@ -646,18 +656,18 @@ pred.survival   no  yes  Sum
 <li><p>In this case we’ll only obtain the RMSE and the R-squared of this model on the original data as</p></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="co"># Make predictions on the testing data</span></span>
-<span id="cb12-2"><a></a>predictions <span class="ot">&lt;-</span> tree_fit <span class="sc">%&gt;%</span></span>
-<span id="cb12-3"><a></a>  <span class="fu">predict</span>(tree_housing) <span class="sc">%&gt;%</span></span>
-<span id="cb12-4"><a></a>  <span class="fu">pull</span>(.pred)</span>
-<span id="cb12-5"><a></a></span>
-<span id="cb12-6"><a></a><span class="co"># Calculate RMSE and R-squared</span></span>
-<span id="cb12-7"><a></a>metrics <span class="ot">&lt;-</span> <span class="fu">metric_set</span>(rmse, rsq)</span>
-<span id="cb12-8"><a></a>model_performance <span class="ot">&lt;-</span> tree_housing <span class="sc">%&gt;%</span></span>
-<span id="cb12-9"><a></a>  <span class="fu">mutate</span>(<span class="at">predictions =</span> predictions) <span class="sc">%&gt;%</span></span>
-<span id="cb12-10"><a></a>  <span class="fu">metrics</span>(<span class="at">truth =</span> MEDV, <span class="at">estimate =</span> predictions)</span>
-<span id="cb12-11"><a></a></span>
-<span id="cb12-12"><a></a><span class="fu">print</span>(model_performance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="co"># Make predictions on the testing data</span></span>
+<span id="cb13-2"><a></a>predictions <span class="ot">&lt;-</span> tree_fit <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a></a>  <span class="fu">predict</span>(tree_housing) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a></a>  <span class="fu">pull</span>(.pred)</span>
+<span id="cb13-5"><a></a></span>
+<span id="cb13-6"><a></a><span class="co"># Calculate RMSE and R-squared</span></span>
+<span id="cb13-7"><a></a>metrics <span class="ot">&lt;-</span> <span class="fu">metric_set</span>(rmse, rsq)</span>
+<span id="cb13-8"><a></a>model_performance <span class="ot">&lt;-</span> tree_housing <span class="sc">%&gt;%</span></span>
+<span id="cb13-9"><a></a>  <span class="fu">mutate</span>(<span class="at">predictions =</span> predictions) <span class="sc">%&gt;%</span></span>
+<span id="cb13-10"><a></a>  <span class="fu">metrics</span>(<span class="at">truth =</span> MEDV, <span class="at">estimate =</span> predictions)</span>
+<span id="cb13-11"><a></a></span>
+<span id="cb13-12"><a></a><span class="fu">print</span>(model_performance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
   .metric .estimator .estimate
@@ -681,38 +691,38 @@ pred.survival   no  yes  Sum
 <li><p>We add distance to employment centers (<code>DIS</code>) to our model, and the tree can now use either <code>LSTAT</code> or <code>DIS</code>.</p></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="co"># Make predictions on the testing data</span></span>
-<span id="cb14-2"><a></a><span class="co"># Create a decision tree model specification</span></span>
-<span id="cb14-3"><a></a>tree_spec <span class="ot">&lt;-</span> <span class="fu">decision_tree</span>(<span class="at">mode =</span> <span class="st">"regression"</span>,<span class="at">engine =</span> <span class="st">"rpart"</span>)</span>
-<span id="cb14-4"><a></a></span>
-<span id="cb14-5"><a></a><span class="co"># Fit the model to the training data</span></span>
-<span id="cb14-6"><a></a>tree_fit <span class="ot">&lt;-</span> tree_spec <span class="sc">%&gt;%</span></span>
-<span id="cb14-7"><a></a>  <span class="fu">fit</span>(MEDV <span class="sc">~</span> LSTAT <span class="sc">+</span> <span class="fu">as.numeric</span>(DIS), <span class="at">data =</span> tree_housing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="co"># Make predictions on the testing data</span></span>
+<span id="cb15-2"><a></a><span class="co"># Create a decision tree model specification</span></span>
+<span id="cb15-3"><a></a>tree_spec <span class="ot">&lt;-</span> <span class="fu">decision_tree</span>(<span class="at">mode =</span> <span class="st">"regression"</span>,<span class="at">engine =</span> <span class="st">"rpart"</span>)</span>
+<span id="cb15-4"><a></a></span>
+<span id="cb15-5"><a></a><span class="co"># Fit the model to the training data</span></span>
+<span id="cb15-6"><a></a>tree_fit <span class="ot">&lt;-</span> tree_spec <span class="sc">%&gt;%</span></span>
+<span id="cb15-7"><a></a>  <span class="fu">fit</span>(MEDV <span class="sc">~</span> LSTAT <span class="sc">+</span> <span class="fu">as.numeric</span>(DIS), <span class="at">data =</span> tree_housing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="regression-tree-plot-1" class="slide level2 smaller">
 <h2>Regression tree plot</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">rpart.plot</span>(tree_fit<span class="sc">$</span>fit, <span class="at">type =</span> <span class="dv">4</span>, <span class="at">extra =</span> <span class="dv">101</span>, </span>
-<span id="cb15-2"><a></a>           <span class="at">under =</span> <span class="cn">TRUE</span>, <span class="at">cex =</span> <span class="fl">0.8</span>, <span class="at">box.palette =</span> <span class="st">"auto"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">rpart.plot</span>(tree_fit<span class="sc">$</span>fit, <span class="at">type =</span> <span class="dv">4</span>, <span class="at">extra =</span> <span class="dv">101</span>, </span>
+<span id="cb16-2"><a></a>           <span class="at">under =</span> <span class="cn">TRUE</span>, <span class="at">cex =</span> <span class="fl">0.8</span>, <span class="at">box.palette =</span> <span class="st">"auto"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="week_10_files/figure-revealjs/unnamed-chunk-11-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="model-performance" class="slide level2 smaller">
 <h2>Model performance</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co"># Make predictions on the testing data</span></span>
-<span id="cb16-2"><a></a>predictions <span class="ot">&lt;-</span> tree_fit <span class="sc">%&gt;%</span></span>
-<span id="cb16-3"><a></a>  <span class="fu">predict</span>(tree_housing) <span class="sc">%&gt;%</span></span>
-<span id="cb16-4"><a></a>  <span class="fu">pull</span>(.pred)</span>
-<span id="cb16-5"><a></a></span>
-<span id="cb16-6"><a></a><span class="co"># Calculate RMSE and R-squared</span></span>
-<span id="cb16-7"><a></a>metrics <span class="ot">&lt;-</span> <span class="fu">metric_set</span>(rmse, rsq)</span>
-<span id="cb16-8"><a></a>model_performance <span class="ot">&lt;-</span> tree_housing <span class="sc">%&gt;%</span></span>
-<span id="cb16-9"><a></a>  <span class="fu">mutate</span>(<span class="at">predictions =</span> predictions) <span class="sc">%&gt;%</span></span>
-<span id="cb16-10"><a></a>  <span class="fu">metrics</span>(<span class="at">truth =</span> MEDV, <span class="at">estimate =</span> predictions)</span>
-<span id="cb16-11"><a></a></span>
-<span id="cb16-12"><a></a><span class="fu">print</span>(model_performance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="co"># Make predictions on the testing data</span></span>
+<span id="cb17-2"><a></a>predictions <span class="ot">&lt;-</span> tree_fit <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a></a>  <span class="fu">predict</span>(tree_housing) <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a></a>  <span class="fu">pull</span>(.pred)</span>
+<span id="cb17-5"><a></a></span>
+<span id="cb17-6"><a></a><span class="co"># Calculate RMSE and R-squared</span></span>
+<span id="cb17-7"><a></a>metrics <span class="ot">&lt;-</span> <span class="fu">metric_set</span>(rmse, rsq)</span>
+<span id="cb17-8"><a></a>model_performance <span class="ot">&lt;-</span> tree_housing <span class="sc">%&gt;%</span></span>
+<span id="cb17-9"><a></a>  <span class="fu">mutate</span>(<span class="at">predictions =</span> predictions) <span class="sc">%&gt;%</span></span>
+<span id="cb17-10"><a></a>  <span class="fu">metrics</span>(<span class="at">truth =</span> MEDV, <span class="at">estimate =</span> predictions)</span>
+<span id="cb17-11"><a></a></span>
+<span id="cb17-12"><a></a><span class="fu">print</span>(model_performance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
   .metric .estimator .estimate

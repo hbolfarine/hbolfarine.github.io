@@ -4316,7 +4316,7 @@
     "href": "fall_sta235_2025/week_01/week_10.html#build-the-tree",
     "title": "Data Science for Business Applications",
     "section": "Build the tree",
-    "text": "Build the tree\n\nBefore we can build the tree we should define the categorical variables as factors.\nThis is not necessary when the variables are binary or dummy (0 or 1)."
+    "text": "Build the tree\n\nBefore we can build the tree we should define the categorical variables as factors.\nThis is not necessary when the variables are binary or dummy (0 or 1).\n\n\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(rpart.plot)\n\ntitanic_age$survived = as.factor(titanic_age$survived)\ntitanic_age$sex = as.factor(titanic_age$sex)\ntitanic_age$passengerClass = as.factor(titanic_age$passengerClass)\ntitanic_age$adult = as.factor(titanic_age$adult)"
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_10.html#build-the-tree-1",

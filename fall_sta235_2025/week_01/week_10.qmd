@@ -58,9 +58,6 @@ disney = read.csv("week_10_docs/disney.csv")
 titanic_age = read.csv("week_10_docs/titanic_age.csv")
 tree_housing = read.csv("week_10_docs/tree_housing.csv")
 options(scipen = 999)
-library(tidyverse)
-library(tidymodels)
-library(rpart.plot)
 ```
 
 ## Decision Trees
@@ -265,7 +262,11 @@ xtabs(~mandalorian + city, data = stay_df) %>%
 -   Before we can build the tree we should define the categorical variables as factors.
 -   This is not necessary when the variables are binary or dummy (0 or 1).
 
-```{r}
+```{r, echo = TRUE}
+library(tidyverse)
+library(tidymodels)
+library(rpart.plot)
+
 titanic_age$survived = as.factor(titanic_age$survived)
 titanic_age$sex = as.factor(titanic_age$sex)
 titanic_age$passengerClass = as.factor(titanic_age$passengerClass)
