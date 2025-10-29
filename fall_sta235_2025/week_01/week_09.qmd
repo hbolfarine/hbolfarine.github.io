@@ -1,0 +1,232 @@
+---
+title: "Data Science for Business Applications"
+author: "Class 09 - Logistic regression 2"
+title-slide-attributes:
+    data-background-image: week_09_docs/background_sta235h.png
+format: 
+  revealjs:
+    chalkboard: true
+    logo: week_09_docs/texas_logo2.png
+    toc: true
+    toc-title: "Presentation Outline"
+    toc-depth: 1
+editor: visual
+code-block-height: 500px
+include-in-header:
+  - text: |
+      <style type="text/css">
+      ul li ul li {
+        font-size: 0.8em;
+      }
+      </style>
+---
+
+```{r init_setup, include=FALSE, cache=FALSE}
+# Include setup
+library(tidyverse)
+library(ggfortify)
+library(knitr)
+
+knitr::opts_chunk$set(
+  echo = FALSE, fig.align = "center"
+)
+
+hook_output <- knit_hooks$get("output")
+knit_hooks$set(output = function(x, options) {
+  lines <- options$output.lines
+  if (is.null(lines)) {
+    return(hook_output(x, options))  # pass to default hook
+  }
+  x <- unlist(strsplit(x, "\n"))
+  more <- "..."
+  if (length(lines) == 1) {        # first n lines
+    if (length(x) > lines) {
+      # truncate the output, but add ....
+      x <- c(head(x, lines), more)
+    }
+  } else {
+    x <- c(more, x[lines], more)
+  }
+  # paste these lines together
+  x <- paste(c(x, ""), collapse = "\n")
+  hook_output(x, options)
+})
+```
+
+```{r, include=FALSE, cache=FALSE}
+banco = read.csv("week_09_docs/banco.csv")
+options(scipen = 999)
+library(tidyverse)
+```
+
+## Interactions in Logistic Regression Models {.smaller}
+
+A bank that extends lines of credit has a sample of 100 customers with information about whether each customer’s loan account is in good standing, along with information about each customer:
+
+-   **Status**: Good or Bad depending on whether the account is in good standing\
+-   `Age`: The age of the customer\
+-   **Dependents**: The number of children the customer has\
+-   **Sex**: The sex of the customer\
+-   **Job_Years**: How many years the customer has held their current job\
+-   **Home_Years**: How many years the customer has lived in their current home\
+-   `Other_Credit`: Whether the customer has any other lines of credit, (Yes,No)
+
+## Predicting bad status {.smaller}
+
+-   The bank is looking to build a model to predict **Status**, because they would like to be able to predict which future customers are most likely to later have accounts in bad standing (so they can avoid approving those customers for lines of credit!).
+
+-   Status is a categorical variable - transform it into a dummy variable by creating a new variable **Bad** that is 1 if Status is `Bad` and 0 if Status is `Good`.
+
+```{r, echo = TRUE}
+banco = banco %>% 
+  mutate(Bad = ifelse(Status== "Bad", 1, 0))
+```
+
+-   Why 1 for `Bad`? It doesn’t really matter, but does make sense here because the bank is looking to predict which customers will later have accounts in bad standing.
+
+## The logistic regression model {.smaller}
+
+-   We'll use two variables for predicting the status, `Age` and `Other_Credit`.
+-   The two variables are added as an interaction: $$
+    \log\left(\frac{p(\text{Bad})}{1-p(\text{Bad})}\right) = \beta_0 + \beta_1  \text{Age} + \beta_2 \text{Other_Credit} + \beta_3  \text{Age} \times \text{Other_Credit}
+    $$ where odds of having a `Bad` status is defined as $$
+    \text{odds}(\text{Bad}) = \frac{p(\text{Bad})}{1-p(\text{Bad})},
+    $$
+
+and where $p(\text{Bad})$ is probability of having a `Bad` status.
+
+## Run the model in `R` {.smaller}
+
+```{r, echo  = TRUE}
+glm1 = glm(Bad ~ Age*Other_Credit, data  = banco, family = "binomial")
+summary(glm1)
+```
+
+## Interpreting the model {.smaller}
+
+We have the following equation for predicting the log odds of having a `Bad` status:
+
+$$
+\log\left(\frac{p(\text{Bad})}{1-p(\text{Bad})}\right) = 18.16  -0.59 \cdot \text{Age} -12.1921\cdot \text{Other_Credit(Yes)} + \\ 0.4076 \cdot \text{Age} \times \text{Other_Credit(Yes)}
+$$ The odds model is given by $$
+\text{odds}(\text{Bad}) = \frac{p(\text{Bad})}{1-p(\text{Bad})} = \exp(18.16  -0.59 \cdot \text{Age} -12.19\cdot \text{Other_Credit(Yes)} + \\ 0.41 \cdot \text{Age} \times \text{Other_Credit(Yes)})
+$$ Next, we give the interpretation of these coefficients.
+
+##  {.smaller}
+
+-   **Intercept**: Setting `Age = 0`, and `Other_Credit(No) = 0` (baseline), results in $\log(\text{odds}) = 18.16$. Thus, the odds of having a bad status under these conditions are $\text{odds} = \exp(18.16) = 77,052,688$. This result has no practical meaning since we cannot have bank account holders with zero age.
+
+-   **Age**: To interpret the effect of `Age` alone, we have to set `Other_Credit(No) = 0`. Thus, for a one unit change in `Age` (for each year the account holder gets older), there will be a 44.56% decrease ($(\exp(-0.59)-1)\cdot 100 = -44.56$) in the odds of having a bad status when the account holder doesn't have other credit.
+
+-   **Other_Credit**: When `Age = 0`, the additional effect of having other credit, `Other_Credit(No) = 1`, compared to account members without other credit (baseline) is $(\exp(-12.19)-1)\cdot100 = -99$. Or a 99% decrease in the odds of having a bad status compared to account holders that have zero credit with zero `Age`.
+
+-   **Age**$\times$Other_Credit: For a unit increase in `Age` there will be an extra increase in the odds of having a `Bad` status among account members with other credit of about $(\exp(0.41)-1)\cot 100 = 50.68$, or 50.68%, compared to account members without other credit.
+
+##  {.smaller}
+
+-   In total, the effect for one unit increase in `Age` for account holders with other credit is given by $(\exp(-0.59+0.41)-1)\cdot100 = -16.47$, or a decrease of 16.43% on the odds of having a `Bad` credit compared to account holders without other credit.
+
+-   This, in turn, means that the rate of decrease in the odds of having bad credit with an increase in age is greater for account holders without other credit compared to those who do have other credit.
+
+-   As with the linear model we end up with two models. One odds model for account holders with other credit `Other_Credit(Yes)` = 1.
+
+$$
+\text{odds}(\text{Bad}) = \exp(5.97  -0.18 \cdot \text{Age})
+$$ and when `Other_Credit(Yes)` = 0 (no other credit) $$
+\text{odds}(\text{Bad}) = \exp(18.16  -0.59 \cdot \text{Age})
+$$
+
+## Visualizing the model {.smaller}
+
+```{r, echo=TRUE, fig.align="center"}
+ggplot(banco, aes(x = Age, y = Bad, col = Other_Credit)) +
+  geom_point() +
+  geom_line(aes(x = Age, y = predict(glm1, type = "response")))
+```
+
+## Making predictions {.smaller}
+
+-   Suppose we have a new account from which we don't know the status. The only information we have is the account member's age, `Age = 35`, and that this person has another credit. What are the predicted log odds, odds, and probability of this person having a bad status?
+
+-   Predicted log odds:
+
+$$
+\log\left(\text{odds}(\text{Bad})\right) = 5.97  -0.18 \cdot 35 = -0.33
+$$ - Using the predict function:
+
+```{r, echo = TRUE}
+predict(glm1, list(Age = 35, Other_Credit = "Yes"))
+```
+
+-   The difference in this case is due to the rounding on the coefficients of the equation.
+
+##  {.smaller}
+
+-   Predicted odds:
+
+$$
+\text{odds}(\text{Bad}) = \exp(5.97  -0.18 \cdot 35) = 0.72
+$$ - Using the predict function:
+
+```{r, echo = TRUE}
+exp(predict(glm1, list(Age = 35, Other_Credit = "Yes")))
+```
+
+-   In this case the odds are smaller than one, which indicates that the odds are not in favor of the group of interest (having a bad status) but on the base group, which is having a bad status. Thus, it is more likely that a person with this age and credit condition does not have a bad status compared to having good credit.
+
+##  {.smaller}
+
+-   Predicted Probabily of having a bad status: $$
+    p(\text{Bad}) = \frac{\exp(5.97  -0.18 \cdot 35)}{1+\exp(5.97  -0.18 \cdot 35)} = 0.42
+    $$
+
+```{r, echo = TRUE}
+predict(glm1, list(Age = 35, Other_Credit = "Yes"), type = "response")
+```
+
+-   The predicted the probability of account holder with 35 years of age having a `Bad` status is 0.42, or around 42%.
+
+-   How do we know if this model is effective at making predictions in this case, since we don't have access to common measures used for this goal, as the RSE, $R^2$, and the RMSE?
+
+## Measuring the model's Accuracy {.smaller}
+
+-   First we obtain the predictions (classification) given the predicted probabilities
+-   We'll use a threshold of 0.5 for the classification
+
+```{r, echo = TRUE}
+banco = banco %>% 
+  mutate(predict.Status = ifelse(predict(glm1, type = "response")>=0.5,"Bad","No"))
+```
+
+-   We next obtain the \`\`confusion Matrix'':
+
+```{r, echo = TRUE}
+xtabs(~predict.Status+Status, data = banco) %>% 
+  addmargins()
+```
+
+##  {.smaller}
+
+-   First we obtain the TP, TN, FP, and FN
+
+    -   (TP) True positives: 43
+    -   (TN) True negatives: 41
+    -   (FP) False positives: 9
+    -   (FN) False Negatives: 7
+
+-   The accuracy is given by: $$
+    \frac{\text{(TP+TN)}}{\text{Total}} = \frac{43+41}{100} = 0.86
+    $$
+
+-   We evaluate the accuracy from this model by comparing it's accuracy to the \`\`no brainer'' method:
+
+```{r, echo = TRUE}
+xtabs(~Status, data = banco) %>% 
+  prop.table()
+```
+
+##  {.smaller}
+
+-   There's an increase in the accuracy of 86% from the 50% from the group that is the most common on `Status`. In this case, either group is valid.
+
+-   To measure the model's accuracy on out sample data, methods we can use cross validation.

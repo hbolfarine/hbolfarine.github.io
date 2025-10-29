@@ -4422,5 +4422,103 @@
     "title": "Data Science for Business Applications",
     "section": "When to use decision trees?",
     "text": "When to use decision trees?\n\nMain Advantages:\n\nEasy to interpret and explain (you can plot them!)\nMirrors human decision-making\nCan handle qualitative predictors (without need for dummies)\n\nMain disadvantages:\n\nAccuracy not as high as other methods\nVery sensitive to training data (e.g. overfitting)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_09.html#interactions-in-logistic-regression-models",
+    "href": "fall_sta235_2025/week_01/week_09.html#interactions-in-logistic-regression-models",
+    "title": "Data Science for Business Applications",
+    "section": "Interactions in Logistic Regression Models",
+    "text": "Interactions in Logistic Regression Models\nA bank that extends lines of credit has a sample of 100 customers with information about whether each customer’s loan account is in good standing, along with information about each customer:\n\nStatus: Good or Bad depending on whether the account is in good standing\n\nAge: The age of the customer\n\nDependents: The number of children the customer has\n\nSex: The sex of the customer\n\nJob_Years: How many years the customer has held their current job\n\nHome_Years: How many years the customer has lived in their current home\n\nOther_Credit: Whether the customer has any other lines of credit, (Yes,No)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_09.html#predicting-bad-status",
+    "href": "fall_sta235_2025/week_01/week_09.html#predicting-bad-status",
+    "title": "Data Science for Business Applications",
+    "section": "Predicting bad status",
+    "text": "Predicting bad status\n\nThe bank is looking to build a model to predict Status, because they would like to be able to predict which future customers are most likely to later have accounts in bad standing (so they can avoid approving those customers for lines of credit!).\nStatus is a categorical variable - transform it into a dummy variable by creating a new variable Bad that is 1 if Status is Bad and 0 if Status is Good.\n\n\nbanco = banco %&gt;% \n  mutate(Bad = ifelse(Status== \"Bad\", 1, 0))\n\n\nWhy 1 for Bad? It doesn’t really matter, but does make sense here because the bank is looking to predict which customers will later have accounts in bad standing."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_09.html#the-logistic-regression-model",
+    "href": "fall_sta235_2025/week_01/week_09.html#the-logistic-regression-model",
+    "title": "Data Science for Business Applications",
+    "section": "The logistic regression model",
+    "text": "The logistic regression model\n\nWe’ll use two variables for predicting the status, Age and Other_Credit.\nThe two variables are added as an interaction: \\[\n\\log\\left(\\frac{p(\\text{Bad})}{1-p(\\text{Bad})}\\right) = \\beta_0 + \\beta_1  \\text{Age} + \\beta_2 \\text{Other_Credit} + \\beta_3  \\text{Age} \\times \\text{Other_Credit}\n\\] where odds of having a Bad status is defined as \\[\n\\text{odds}(\\text{Bad}) = \\frac{p(\\text{Bad})}{1-p(\\text{Bad})},\n\\]\n\nand where \\(p(\\text{Bad})\\) is probability of having a Bad status."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_09.html#run-the-model-in-r",
+    "href": "fall_sta235_2025/week_01/week_09.html#run-the-model-in-r",
+    "title": "Data Science for Business Applications",
+    "section": "Run the model in R",
+    "text": "Run the model in R\n\nglm1 = glm(Bad ~ Age*Other_Credit, data  = banco, family = \"binomial\")\nsummary(glm1)\n\n\nCall:\nglm(formula = Bad ~ Age * Other_Credit, family = \"binomial\", \n    data = banco)\n\nCoefficients:\n                    Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)          18.1579     4.8547   3.740 0.000184 ***\nAge                  -0.5871     0.1586  -3.701 0.000215 ***\nOther_CreditYes     -12.1921     5.2995  -2.301 0.021414 *  \nAge:Other_CreditYes   0.4076     0.1712   2.382 0.017241 *  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 138.63  on 99  degrees of freedom\nResidual deviance:  62.96  on 96  degrees of freedom\nAIC: 70.96\n\nNumber of Fisher Scoring iterations: 7"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_09.html#interpreting-the-model",
+    "href": "fall_sta235_2025/week_01/week_09.html#interpreting-the-model",
+    "title": "Data Science for Business Applications",
+    "section": "Interpreting the model",
+    "text": "Interpreting the model\nWe have the following equation for predicting the log odds of having a Bad status:\n\\[\n\\log\\left(\\frac{p(\\text{Bad})}{1-p(\\text{Bad})}\\right) = 18.16  -0.59 \\cdot \\text{Age} -12.1921\\cdot \\text{Other_Credit(Yes)} + \\\\ 0.4076 \\cdot \\text{Age} \\times \\text{Other_Credit(Yes)}\n\\] The odds model is given by \\[\n\\text{odds}(\\text{Bad}) = \\frac{p(\\text{Bad})}{1-p(\\text{Bad})} = \\exp(18.16  -0.59 \\cdot \\text{Age} -12.19\\cdot \\text{Other_Credit(Yes)} + \\\\ 0.41 \\cdot \\text{Age} \\times \\text{Other_Credit(Yes)})\n\\] Next, we give the interpretation of these coefficients."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_09.html#section",
+    "href": "fall_sta235_2025/week_01/week_09.html#section",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "Intercept: Setting Age = 0, and Other_Credit(No) = 0 (baseline), results in \\(\\log(\\text{odds}) = 18.16\\). Thus, the odds of having a bad status under these conditions are \\(\\text{odds} = \\exp(18.16) = 77,052,688\\). This result has no practical meaning since we cannot have bank account holders with zero age.\nAge: To interpret the effect of Age alone, we have to set Other_Credit(No) = 0. Thus, for a one unit change in Age (for each year the account holder gets older), there will be a 44.56% decrease (\\((\\exp(-0.59)-1)\\cdot 100 = -44.56\\)) in the odds of having a bad status when the account holder doesn’t have other credit.\nOther_Credit: When Age = 0, the additional effect of having other credit, Other_Credit(No) = 1, compared to account members without other credit (baseline) is \\((\\exp(-12.19)-1)\\cdot100 = -99\\). Or a 99% decrease in the odds of having a bad status compared to account holders that have zero credit with zero Age.\nAge\\(\\times\\)Other_Credit: For a unit increase in Age there will be an extra increase in the odds of having a Bad status among account members with other credit of about \\((\\exp(0.41)-1)\\cot 100 = 50.68\\), or 50.68%, compared to account members without other credit."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_09.html#section-1",
+    "href": "fall_sta235_2025/week_01/week_09.html#section-1",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "In total, the effect for one unit increase in Age for account holders with other credit is given by \\((\\exp(-0.59+0.41)-1)\\cdot100 = -16.47\\), or a decrease of 16.43% on the odds of having a Bad credit compared to account holders without other credit.\nThis, in turn, means that the rate of decrease in the odds of having bad credit with an increase in age is greater for account holders without other credit compared to those who do have other credit.\nAs with the linear model we end up with two models. One odds model for account holders with other credit Other_Credit(Yes) = 1.\n\n\\[\n\\text{odds}(\\text{Bad}) = \\exp(5.97  -0.18 \\cdot \\text{Age})\n\\] and when Other_Credit(Yes) = 0 (no other credit) \\[\n\\text{odds}(\\text{Bad}) = \\exp(18.16  -0.59 \\cdot \\text{Age})\n\\]"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_09.html#visualizing-the-model",
+    "href": "fall_sta235_2025/week_01/week_09.html#visualizing-the-model",
+    "title": "Data Science for Business Applications",
+    "section": "Visualizing the model",
+    "text": "Visualizing the model\n\nggplot(banco, aes(x = Age, y = Bad, col = Other_Credit)) +\n  geom_point() +\n  geom_line(aes(x = Age, y = predict(glm1, type = \"response\")))"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_09.html#making-predictions",
+    "href": "fall_sta235_2025/week_01/week_09.html#making-predictions",
+    "title": "Data Science for Business Applications",
+    "section": "Making predictions",
+    "text": "Making predictions\n\nSuppose we have a new account from which we don’t know the status. The only information we have is the account member’s age, Age = 35, and that this person has another credit. What are the predicted log odds, odds, and probability of this person having a bad status?\nPredicted log odds:\n\n\\[\n\\log\\left(\\text{odds}(\\text{Bad})\\right) = 5.97  -0.18 \\cdot 35 = -0.33\n\\] - Using the predict function:\n\npredict(glm1, list(Age = 35, Other_Credit = \"Yes\"))\n\n        1 \n-0.315811 \n\n\n\nThe difference in this case is due to the rounding on the coefficients of the equation."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_09.html#section-2",
+    "href": "fall_sta235_2025/week_01/week_09.html#section-2",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "Predicted odds:\n\n\\[\n\\text{odds}(\\text{Bad}) = \\exp(5.97  -0.18 \\cdot 35) = 0.72\n\\] - Using the predict function:\n\nexp(predict(glm1, list(Age = 35, Other_Credit = \"Yes\")))\n\n        1 \n0.7291973 \n\n\n\nIn this case the odds are smaller than one, which indicates that the odds are not in favor of the group of interest (having a bad status) but on the base group, which is having a bad status. Thus, it is more likely that a person with this age and credit condition does not have a bad status compared to having good credit."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_09.html#section-3",
+    "href": "fall_sta235_2025/week_01/week_09.html#section-3",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "Predicted Probabily of having a bad status: \\[\np(\\text{Bad}) = \\frac{\\exp(5.97  -0.18 \\cdot 35)}{1+\\exp(5.97  -0.18 \\cdot 35)} = 0.42\n\\]\n\n\npredict(glm1, list(Age = 35, Other_Credit = \"Yes\"), type = \"response\")\n\n       1 \n0.421697 \n\n\n\nThe predicted the probability of account holder with 35 years of age having a Bad status is 0.42, or around 42%.\nHow do we know if this model is effective at making predictions in this case, since we don’t have access to common measures used for this goal, as the RSE, \\(R^2\\), and the RMSE?"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_09.html#measuring-the-models-accuracy",
+    "href": "fall_sta235_2025/week_01/week_09.html#measuring-the-models-accuracy",
+    "title": "Data Science for Business Applications",
+    "section": "Measuring the model’s Accuracy",
+    "text": "Measuring the model’s Accuracy\n\nFirst we obtain the predictions (classification) given the predicted probabilities\nWe’ll use a threshold of 0.5 for the classification\n\n\nbanco = banco %&gt;% \n  mutate(predict.Status = ifelse(predict(glm1, type = \"response\")&gt;=0.5,\"Bad\",\"No\"))\n\n\nWe next obtain the ``confusion Matrix’’:\n\n\nxtabs(~predict.Status+Status, data = banco) %&gt;% \n  addmargins()\n\n              Status\npredict.Status Bad Good Sum\n           Bad  43    9  52\n           No    7   41  48\n           Sum  50   50 100"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_09.html#section-4",
+    "href": "fall_sta235_2025/week_01/week_09.html#section-4",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "First we obtain the TP, TN, FP, and FN\n\n(TP) True positives: 43\n(TN) True negatives: 41\n(FP) False positives: 9\n(FN) False Negatives: 7\n\nThe accuracy is given by: \\[\n\\frac{\\text{(TP+TN)}}{\\text{Total}} = \\frac{43+41}{100} = 0.86\n\\]\nWe evaluate the accuracy from this model by comparing it’s accuracy to the ``no brainer’’ method:\n\n\nxtabs(~Status, data = banco) %&gt;% \n  prop.table()\n\nStatus\n Bad Good \n 0.5  0.5"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_09.html#section-5",
+    "href": "fall_sta235_2025/week_01/week_09.html#section-5",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "There’s an increase in the accuracy of 86% from the 50% from the group that is the most common on Status. In this case, either group is valid.\nTo measure the model’s accuracy on out sample data, methods we can use cross validation."
   }
 ]
