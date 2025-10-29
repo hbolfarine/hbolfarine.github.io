@@ -14,7 +14,8 @@ title: "Teaching"
   - [class 05 - Modeling nonlinear relationships](fall_sta235_2025/week_01/week_05.qmd)
   - [class 06 - Time Series Decomposition and Autoregression](fall_sta235_2025/week_01/week_06.qmd)
   - [class 07 - Model building for prediction](fall_sta235_2025/week_01/week_07.qmd)
-  - [class 08 - Logistic Regression](fall_sta235_2025/week_01/week_08.qmd)
+  - [class 08 - Logistic Regression 1](fall_sta235_2025/week_01/week_08.qmd)
+  - [class 09 - Logistic Regression 2](fall_sta235_2025/week_01/week_09.qmd)
   - [class 10 - Decision Trees](fall_sta235_2025/week_01/week_10.qmd)
 
 ### Spring 2025
