@@ -9,7 +9,7 @@
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.7.32">
 
-  <meta name="author" content="Class 11 - Random Forests">
+  <meta name="author" content="Class 11 - Random Forest">
   <title>Henrique Bolfarine – Data Science for Business Applications</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -205,7 +205,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Class 11 - Random Forests 
+Class 11 - Random Forest 
 </div>
 </div>
 </div>
@@ -312,11 +312,11 @@ Call:
                      Number of trees: 500
 No. of variables tried at each split: 1
 
-        OOB estimate of  error rate: 20.94%
+        OOB estimate of  error rate: 20.55%
 Confusion matrix:
      no yes class.error
 no  580  39  0.06300485
-yes 180 247  0.42154567</code></pre>
+yes 176 251  0.41217799</code></pre>
 </div>
 </div>
 <ul>
@@ -352,9 +352,9 @@ yes 180 247  0.42154567</code></pre>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">importance</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               MeanDecreaseGini
-adult                  6.226661
-sex                   94.986407
-passengerClass        33.475260</code></pre>
+adult                  6.241061
+sex                   93.624871
+passengerClass        34.567394</code></pre>
 </div>
 </div>
 <ul>
@@ -390,8 +390,8 @@ Call:
                      Number of trees: 500
 No. of variables tried at each split: 1
 
-          Mean of squared residuals: 172.7933
-                    % Var explained: 16.75</code></pre>
+          Mean of squared residuals: 172.4933
+                    % Var explained: 16.89</code></pre>
 </div>
 </div>
 <ul>

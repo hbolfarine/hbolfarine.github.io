@@ -17,6 +17,7 @@ title: "Teaching"
   - [class 08 - Logistic Regression 1](fall_sta235_2025/week_01/week_08.qmd)
   - [class 09 - Logistic Regression 2](fall_sta235_2025/week_01/week_09.qmd)
   - [class 10 - Decision Trees](fall_sta235_2025/week_01/week_10.qmd)
+  - [class 11 - Random Forest](fall_sta235_2025/week_01/week_11.qmd)
 
 ### Spring 2025
 
