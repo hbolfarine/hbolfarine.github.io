@@ -204,41 +204,6 @@ xtabs(~mandalorian + city, data = stay_df) %>%
 | `Yes` | Unsubscribers |       152        |        995        |
 | `Yes` | Subscribers   |       1101       |       2040        |
 
-<!-- - `mandalorian` = no -->
-
-<!--   - Unsubscribers  -->
-
-<!--               city -->
-
-<!--   mandalorian   no  yes   -->
-
-<!--           no    22  152   -->
-
-<!--   - Subscribers  -->
-
-<!--            city -->
-
-<!--   mandalorian   no  yes   -->
-
-<!--           no   190 1101  -->
-
-<!-- - `mandalorian` = yes -->
-
-<!--   - Unsubscribers  -->
-
-<!--            city -->
-
-<!--   mandalorian   no  yes  -->
-
-<!--           yes  183  995  -->
-
-<!--   - Subscribers  -->
-
-<!--              city -->
-
-<!--     mandalorian   no  yes  -->
-
-<!--             yes  317 2040 -->
 
 ## Results in the follwing tree {.smaller}
 
