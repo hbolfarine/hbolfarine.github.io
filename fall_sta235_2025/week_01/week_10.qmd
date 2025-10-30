@@ -204,7 +204,6 @@ xtabs(~mandalorian + city, data = stay_df) %>%
 | `Yes` | Unsubscribers |       152        |        995        |
 | `Yes` | Subscribers   |       1101       |       2040        |
 
-
 ## Results in the follwing tree {.smaller}
 
 <img src="week_10_docs/grown_tree.png" width="70%" style="display:block; margin-left:auto; margin-right:auto;"/>

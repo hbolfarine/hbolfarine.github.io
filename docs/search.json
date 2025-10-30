@@ -4224,8 +4224,8 @@
     "objectID": "fall_sta235_2025/week_01/week_10.html#decision-trees",
     "href": "fall_sta235_2025/week_01/week_10.html#decision-trees",
     "title": "Data Science for Business Applications",
-    "section": "",
-    "text": "Another predictive model\nDecision Trees: Classification and Regression Trees (CART)\nTrees are:\n\nFlexible at capturing non-linearity and interactions\nDon’t require scaling of variables\nHandle categorical and numerical data\nFast\nInterpretable"
+    "section": "Decision Trees",
+    "text": "Decision Trees\n\nAnother predictive model\nDecision Trees: Classification and Regression Trees (CART)\nTrees are:\n\nFlexible at capturing non-linearity and interactions\nDon’t require scaling of variables\nHandle categorical and numerical data\nFast\nInterpretable"
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_10.html#the-idea-behind-decision-trees",
