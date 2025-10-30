@@ -1,0 +1,264 @@
+---
+title: "Data Science for Business Applications"
+author: "Class 11 - Random Forests"
+title-slide-attributes:
+    data-background-image: week_11_docs/background_sta235h.png
+format: 
+  revealjs:
+    chalkboard: true
+    logo: week_11_docs/texas_logo2.png
+    toc: true
+    toc-title: "Presentation Outline"
+    toc-depth: 1
+editor: visual
+code-block-height: 500px
+include-in-header:
+  - text: |
+      <style type="text/css">
+      ul li ul li {
+        font-size: 0.8em;
+      }
+      </style>
+---
+
+```{r init_setup, include=FALSE, cache=FALSE}
+# Include setup
+library(tidyverse)
+library(ggfortify)
+library(knitr)
+
+knitr::opts_chunk$set(
+  echo = FALSE, fig.align = "center"
+)
+
+hook_output <- knit_hooks$get("output")
+knit_hooks$set(output = function(x, options) {
+  lines <- options$output.lines
+  if (is.null(lines)) {
+    return(hook_output(x, options))  # pass to default hook
+  }
+  x <- unlist(strsplit(x, "\n"))
+  more <- "..."
+  if (length(lines) == 1) {        # first n lines
+    if (length(x) > lines) {
+      # truncate the output, but add ....
+      x <- c(head(x, lines), more)
+    }
+  } else {
+    x <- c(more, x[lines], more)
+  }
+  # paste these lines together
+  x <- paste(c(x, ""), collapse = "\n")
+  hook_output(x, options)
+})
+```
+
+```{r, include=FALSE, cache=FALSE}
+titanic_age = read.csv("week_11_docs/titanic_age.csv")
+options(scipen = 999)
+library(tidyverse)
+library(tidymodels)
+library(rpart.plot)
+```
+
+## Review on Decision Trees
+
+-   What kinds of models do we know how to make?
+-   Classification or Regression
+-   We can use decision trees for either kind of $Y$ variable.
+
+## Pros & Cons of Decision Trees
+
+-   **Main Advantages**:
+    -   Easy to interpret and explain (you can plot them!)
+    -   Mirrors human decision-making
+    -   Can handle qualitative predictors (without need for dummies)
+-   **Main disadvantages**:
+    -   Accuracy not as high as other methods
+    -   Very sensitive to training data (e.g. overfitting)
+    -   Biased toward dominant classes
+
+## What we can do to improve?
+
+-   Improve accuracy?
+
+-   Less sensitive to random changes in the data?
+
+-   More relevance for low-frequency classifications?
+
+-   `Solution`: **Bagging** - Bootstrap Aggregation
+
+    -   **Bootstrap** - quantify sampling variability by **resampling** from the sample.
+    -   In Bagginig we basically we use bootstrap on the data and then we aggregate the results.
+
+## Bootstrap & Resampling
+
+-   Sampling with replacement: each case selected for the sample is then replaced.
+
+-   Every bootstrapped sample may have its own pattern of ties and omissions.
+
+![](week_11_docs/boot_picture.png){fig-align="center" width="500"}
+
+## Bagging {.smaller}
+
+-   Aggregate the results from the method applied to each bootstrap sample.
+-   This is also known as an ensemble, or combining the results of multiple models.
+
+![](week_11_docs/bagging_pic.png){fig-align="center" width="500"}
+
+## Bagging & Ensembling {.smaller}
+
+-   You want to predict on new test data.
+-   For classification, take the majority vote!
+-   For regression, take the mean or mode!
+
+![](week_11_docs/ensemble_methods.png){fig-align="center" width="500"}
+
+## Random Forests
+
+-   Random sampling of my training data rows helps to reduce variation in my predictions that are due to randomness.
+
+-   We saw last week: sometimes the importance of individual variables can change from dataset to dataset, and therefore from model to model.
+
+-   What if we random sample the **columns** (variables) as well as the rows?
+
+## Random Forests
+
+-   Considering the Titanic data
+
+-   We again predict if the passenger survived (`yes`, `no`) - Categorical Variable
+
+-   Classification model
+
+-   Before, I had `sex` as the variable defining the first split.
+
+-   In my new trees, what if I only give the option for `passengerClass` and `adult`?
+
+```{r}
+library(tidyverse)
+library(tidymodels)
+library(rpart.plot)
+library(patchwork)
+
+titanic_age$survived = as.factor(titanic_age$survived)
+titanic_age$sex = as.factor(titanic_age$sex)
+titanic_age$passengerClass = as.factor(titanic_age$passengerClass)
+titanic_age$adult = as.factor(titanic_age$adult)
+
+tree_spec <- decision_tree(mode = "classification",engine = "rpart")
+
+tree_fit1 <- tree_spec %>%
+  fit(survived ~ adult + sex + passengerClass, data = titanic_age)
+
+tree_fit2 <- tree_spec %>%
+   fit(survived ~ adult + passengerClass, data = titanic_age)
+# 
+# plot1 = rpart.plot(tree_fit1$fit, type = 4, extra = 101, 
+#            under = TRUE, cex = 0.8, box.palette = "auto")
+# 
+# plot2 = rpart.plot(tree_fit2$fit, type = 4, extra = 101, 
+#            under = TRUE, cex = 0.8, box.palette = "auto")
+
+```
+
+## Random Forests
+
+```{r, echo = FALSE}
+par(mfrow = c(1, 2))  # 1 row, 2 columns
+rpart.plot(tree_fit1$fit, type = 4, extra = 101, 
+           under = TRUE, cex = 0.8, box.palette = "auto", main = "Model 1")
+
+rpart.plot(tree_fit2$fit, type = 4, extra = 101, 
+           under = TRUE, cex = 0.8, box.palette = "auto", main = "Model 2")
+par(mfrow = c(1, 1))
+```
+
+## Let’s build a Random Forest (RF) in R {.smaller}
+
+```{r, echo = TRUE}
+library(randomForest)
+# Run the model
+model1 = randomForest(survived ~ adult + sex + passengerClass, data = titanic_age)
+# Show details on the model
+print(model1)
+```
+
+-   In an instant, we built 500 trees.
+-   We only had 3 variables, so the RF only needed to try one at each split, and grow the tree.
+-   OOB (Out-of-Bag) error rate: 20.46%
+-   (580+252)/1046 = 0.795
+
+## Classification Error estimates {.smaller}
+
+```{r, echo = TRUE}
+plot(model1)
+```
+
+-   The plot shows how the error change given more trees are generated.
+    -   OOB (black line)
+    -   Among passengers who did not survive, the error in prediction (red line)
+    -   Among passengers who did survive, the error in prediction (green line)
+
+## Feature Importance {.smaller}
+
+-   Feature (or variable) importance is an output from random forests.
+-   In this case sex was by far most helpful as the first divide in the trees.
+-   Adult was the least important variable in terms of predicting survival.
+
+```{r, echo = TRUE}
+importance(model1)
+```
+
+-   The Mean Decrease in Gini: measures how much each variable contributes to reducing uncertainty when the trees are built in the random forest.
+
+-   A higher value means the variable is more important for making accurate classifications.
+
+## Feature Importance {.smaller}
+
+-   The importance of the variable on the split can also be displayed in a plot.
+
+```{r, echo = TRUE, warning = FALSE}
+varImpPlot(model1, sort = TRUE)
+```
+
+## Random Forest for Regression {.smaller}
+
+-   In this model we'll now predict the `Age` of the passengers given class, gender, if they survived or not.
+
+```{r, echo = TRUE}
+# Run the model
+model2 = randomForest(age ~ sex + passengerClass + survived, data = titanic_age)
+# Show details on the model
+print(model2)
+```
+
+-   The MSE is given by 173.036, or RMSE = $\sqrt{173.036}$ = 13.15
+-   Variation explained 16.63 (similar to the $R^2$)
+
+## Regression Error estimates {.smaller}
+
+-   The plot displays the MSE in relation to the number of trees generated.
+
+```{r, echo = TRUE}
+plot(model2)
+```
+
+## Random Forest for Regression {.smaller}
+
+-   Variance importance for this model
+
+```{r, echo = TRUE}
+varImpPlot(model2, sort = TRUE)
+```
+
+## Take aways of the Random Forests
+
+-   Improve accuracy on new data
+
+-   Less sensitive to random changes in the data.
+
+-   More relevance for low-frequency classifications.
+
+-   Random forests give me a lot of the benefit of decision
+
+-   trees with fewer downsides!

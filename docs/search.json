@@ -4527,5 +4527,124 @@
     "title": "Data Science for Business Applications",
     "section": "",
     "text": "Another predictive model\nDecision Trees: Classification and Regression Trees (CART)\nTrees are:\n\nFlexible at capturing non-linearity and interactions\nDon’t require scaling of variables\nHandle categorical and numerical data\nFast\nInterpretable"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_11.html#review-on-decision-trees",
+    "href": "fall_sta235_2025/week_01/week_11.html#review-on-decision-trees",
+    "title": "Data Science for Business Applications",
+    "section": "Review on Decision Trees",
+    "text": "Review on Decision Trees\n\nWhat kinds of models do we know how to make?\nClassification or Regression\nWe can use decision trees for either kind of \\(Y\\) variable."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_11.html#pros-cons-of-decision-trees",
+    "href": "fall_sta235_2025/week_01/week_11.html#pros-cons-of-decision-trees",
+    "title": "Data Science for Business Applications",
+    "section": "Pros & Cons of Decision Trees",
+    "text": "Pros & Cons of Decision Trees\n\nMain Advantages:\n\nEasy to interpret and explain (you can plot them!)\nMirrors human decision-making\nCan handle qualitative predictors (without need for dummies)\n\nMain disadvantages:\n\nAccuracy not as high as other methods\nVery sensitive to training data (e.g. overfitting)\nBiased toward dominant classes"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_11.html#what-we-can-do-to-improve",
+    "href": "fall_sta235_2025/week_01/week_11.html#what-we-can-do-to-improve",
+    "title": "Data Science for Business Applications",
+    "section": "What we can do to improve?",
+    "text": "What we can do to improve?\n\nImprove accuracy?\nLess sensitive to random changes in the data?\nMore relevance for low-frequency classifications?\nSolution: Bagging - Bootstrap Aggregation\n\nBootstrap - quantify sampling variability by resampling from the sample.\nIn Bagginig we basically we use bootstrap on the data and then we aggregate the results."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_11.html#bootstrap-resampling",
+    "href": "fall_sta235_2025/week_01/week_11.html#bootstrap-resampling",
+    "title": "Data Science for Business Applications",
+    "section": "Bootstrap & Resampling",
+    "text": "Bootstrap & Resampling\n\nSampling with replacement: each case selected for the sample is then replaced.\nEvery bootstrapped sample may have its own pattern of ties and omissions."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_11.html#bagging",
+    "href": "fall_sta235_2025/week_01/week_11.html#bagging",
+    "title": "Data Science for Business Applications",
+    "section": "Bagging",
+    "text": "Bagging\n\nAggregate the results from the method applied to each bootstrap sample.\nThis is also known as an ensemble, or combining the results of multiple models."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_11.html#bagging-ensembling",
+    "href": "fall_sta235_2025/week_01/week_11.html#bagging-ensembling",
+    "title": "Data Science for Business Applications",
+    "section": "Bagging & Ensembling",
+    "text": "Bagging & Ensembling\n\nYou want to predict on new test data.\nFor classification, take the majority vote!\nFor regression, take the mean or mode!"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_11.html#random-forests",
+    "href": "fall_sta235_2025/week_01/week_11.html#random-forests",
+    "title": "Data Science for Business Applications",
+    "section": "Random Forests",
+    "text": "Random Forests\n\nRandom sampling of my training data rows helps to reduce variation in my predictions that are due to randomness.\nWe saw last week: sometimes the importance of individual variables can change from dataset to dataset, and therefore from model to model.\nWhat if we random sample the columns (variables) as well as the rows?"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_11.html#random-forests-1",
+    "href": "fall_sta235_2025/week_01/week_11.html#random-forests-1",
+    "title": "Data Science for Business Applications",
+    "section": "Random Forests",
+    "text": "Random Forests\n\nConsidering the Titanic data\nWe again predict if the passenger survived (yes, no) - Categorical Variable\nClassification model\nBefore, I had sex as the variable defining the first split.\nIn my new trees, what if I only give the option for passengerClass and adult?"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_11.html#random-forests-2",
+    "href": "fall_sta235_2025/week_01/week_11.html#random-forests-2",
+    "title": "Data Science for Business Applications",
+    "section": "Random Forests",
+    "text": "Random Forests"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_11.html#lets-build-a-random-forest-rf-in-r",
+    "href": "fall_sta235_2025/week_01/week_11.html#lets-build-a-random-forest-rf-in-r",
+    "title": "Data Science for Business Applications",
+    "section": "Let’s build a Random Forest (RF) in R",
+    "text": "Let’s build a Random Forest (RF) in R\n\nlibrary(randomForest)\n# Run the model\nmodel1 = randomForest(survived ~ adult + sex + passengerClass, data = titanic_age)\n# Show details on the model\nprint(model1)\n\n\nCall:\n randomForest(formula = survived ~ adult + sex + passengerClass,      data = titanic_age) \n               Type of random forest: classification\n                     Number of trees: 500\nNo. of variables tried at each split: 1\n\n        OOB estimate of  error rate: 20.94%\nConfusion matrix:\n     no yes class.error\nno  580  39  0.06300485\nyes 180 247  0.42154567\n\n\n\nIn an instant, we built 500 trees.\nWe only had 3 variables, so the RF only needed to try one at each split, and grow the tree.\nOOB (Out-of-Bag) error rate: 20.46%\n(580+252)/1046 = 0.795"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_11.html#classification-error-estimates",
+    "href": "fall_sta235_2025/week_01/week_11.html#classification-error-estimates",
+    "title": "Data Science for Business Applications",
+    "section": "Classification Error estimates",
+    "text": "Classification Error estimates\n\nplot(model1)\n\n\n\nThe plot shows how the error change given more trees are generated.\n\nOOB (black line)\nAmong passengers who did not survive, the error in prediction (red line)\nAmong passengers who did survive, the error in prediction (green line)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_11.html#feature-importance",
+    "href": "fall_sta235_2025/week_01/week_11.html#feature-importance",
+    "title": "Data Science for Business Applications",
+    "section": "Feature Importance",
+    "text": "Feature Importance\n\nFeature (or variable) importance is an output from random forests.\nIn this case sex was by far most helpful as the first divide in the trees.\nAdult was the least important variable in terms of predicting survival.\n\n\nimportance(model1)\n\n               MeanDecreaseGini\nadult                  6.226661\nsex                   94.986407\npassengerClass        33.475260\n\n\n\nThe Mean Decrease in Gini: measures how much each variable contributes to reducing uncertainty when the trees are built in the random forest.\nA higher value means the variable is more important for making accurate classifications."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_11.html#feature-importance-1",
+    "href": "fall_sta235_2025/week_01/week_11.html#feature-importance-1",
+    "title": "Data Science for Business Applications",
+    "section": "Feature Importance",
+    "text": "Feature Importance\n\nThe importance of the variable on the split can also be displayed in a plot.\n\n\nvarImpPlot(model1, sort = TRUE)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_11.html#random-forest-for-regression",
+    "href": "fall_sta235_2025/week_01/week_11.html#random-forest-for-regression",
+    "title": "Data Science for Business Applications",
+    "section": "Random Forest for Regression",
+    "text": "Random Forest for Regression\n\nIn this model we’ll now predict the Age of the passengers given class, gender, if they survived or not.\n\n\n# Run the model\nmodel2 = randomForest(age ~ sex + passengerClass + survived, data = titanic_age)\n# Show details on the model\nprint(model2)\n\n\nCall:\n randomForest(formula = age ~ sex + passengerClass + survived,      data = titanic_age) \n               Type of random forest: regression\n                     Number of trees: 500\nNo. of variables tried at each split: 1\n\n          Mean of squared residuals: 172.7933\n                    % Var explained: 16.75\n\n\n\nThe MSE is given by 173.036, or RMSE = \\(\\sqrt{173.036}\\) = 13.15\nVariation explained 16.63 (similar to the \\(R^2\\))"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_11.html#regression-error-estimates",
+    "href": "fall_sta235_2025/week_01/week_11.html#regression-error-estimates",
+    "title": "Data Science for Business Applications",
+    "section": "Regression Error estimates",
+    "text": "Regression Error estimates\n\nThe plot displays the MSE in relation to the number of trees generated.\n\n\nplot(model2)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_11.html#random-forest-for-regression-1",
+    "href": "fall_sta235_2025/week_01/week_11.html#random-forest-for-regression-1",
+    "title": "Data Science for Business Applications",
+    "section": "Random Forest for Regression",
+    "text": "Random Forest for Regression\n\nVariance importance for this model\n\n\nvarImpPlot(model2, sort = TRUE)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_11.html#take-aways-of-the-random-forests",
+    "href": "fall_sta235_2025/week_01/week_11.html#take-aways-of-the-random-forests",
+    "title": "Data Science for Business Applications",
+    "section": "Take aways of the Random Forests",
+    "text": "Take aways of the Random Forests\n\nImprove accuracy on new data\nLess sensitive to random changes in the data.\nMore relevance for low-frequency classifications.\nRandom forests give me a lot of the benefit of decision\ntrees with fewer downsides!"
   }
 ]
