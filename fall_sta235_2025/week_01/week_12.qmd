@@ -1,0 +1,219 @@
+---
+title: "Data Science for Business Applications"
+author: "Class 12 - Building models for explanation"
+title-slide-attributes:
+    data-background-image: week_12_docs/background_sta235h.png
+format: 
+  revealjs:
+    chalkboard: true
+    logo: week_12_docs/texas_logo2.png
+    toc: true
+    toc-title: "Presentation Outline"
+    toc-depth: 1
+editor: visual
+code-block-height: 500px
+include-in-header:
+  - text: |
+      <style type="text/css">
+      ul li ul li {
+        font-size: 0.8em;
+      }
+      </style>
+---
+
+```{r init_setup, include=FALSE, cache=FALSE}
+# Include setup
+library(tidyverse)
+library(ggfortify)
+library(knitr)
+
+knitr::opts_chunk$set(
+  echo = FALSE, fig.align = "center"
+)
+
+hook_output <- knit_hooks$get("output")
+knit_hooks$set(output = function(x, options) {
+  lines <- options$output.lines
+  if (is.null(lines)) {
+    return(hook_output(x, options))  # pass to default hook
+  }
+  x <- unlist(strsplit(x, "\n"))
+  more <- "..."
+  if (length(lines) == 1) {        # first n lines
+    if (length(x) > lines) {
+      # truncate the output, but add ....
+      x <- c(head(x, lines), more)
+    }
+  } else {
+    x <- c(more, x[lines], more)
+  }
+  # paste these lines together
+  x <- paste(c(x, ""), collapse = "\n")
+  hook_output(x, options)
+})
+```
+
+```{r, include=FALSE, cache=FALSE}
+sleep = read.csv("week_12_docs/sleep.csv")
+colleges = read.csv("week_12_docs/colleges.csv")
+options(scipen = 999)
+library(tidyverse)
+library(tidymodels)
+library(car)
+```
+
+## Understanding vs predicting {.smaller}
+
+-   In a purely predictive model, we should include terms that reduce out-of-sample prediction error.\
+-   With lots of variables, many models will have essentially identical out-of-sample predictive error, and we can use any of them.\
+-   If we are trying to **understand** the relationships between a subset of the $X$ variables and $Y$, the model form is much more important.
+
+## 
+
+<img src="week_12_docs/pnas.png" width="90%" style="display:block; margin-left:auto; margin-right:auto;"/>
+
+## Variables in the study {.smaller}
+
+-   `total_sleep_time` (TST): Average daily sleep time, recorded early in the term.\
+-   `cumulative_gpa`: GPA at the **beginning** of the term.\
+-   `midterm`: Midterm grade, recorded midway through the term.\
+-   `term_gpa`: GPA at the **end** of the term.\
+-   `study`: Four studies using different cohorts at different universities:
+    -   Study 2, 3: “large public university”\
+    -   Study 4: “private Catholic university”\
+    -   Study 5: “private, STEM-focused university”\
+-   `race`: 1 if either parent from an under-represented group (non-White/Asian).\
+-   `first_gen`: 1 if neither parent attended any college.\
+-   `gender`: 1 if reported male, 0 otherwise.\
+-   `height`: height in inches.
+
+## Model 1: Predicting term GPA from total sleep time {.smaller}
+
+```{r, echo = TRUE}
+model1 = lm(term_gpa ~ total_sleep_time, data=sleep)
+summary(model1)
+confint(model1)
+```
+
+## Building a model for understanding
+
+-   We would like to be able to conclude that more sleep **causes** higher GPAs, but this model will not let us do that.\
+-   We can rule out potential *confounders* by adding them to the model (along with other predictive variables) and avoid causal language.\
+-   **How do we decide which variables to include?**
+
+## How do we decide which variables to include?
+
+-   Theory-driven, often “pre-registered” to avoid $p$-hacking.
+-   $p$-hacking: running statistical tests on a set of data until some statistically significant results arise.
+-   That can be done in a few different ways, for example: by stopping the collection of data once you get a $p$\<0.05, analyzing many outcomes, but only reporting those with $p$\<0.05, using covariates, excluding participants, etc.
+-   Data-driven, but be careful — we don’t want to overfit!
+
+## Variables to always include
+
+-   **Confounders** are variables that **causally** influence both total sleep time and term GPA
+    -   Because of their **collinearity** with sleep time, the sleep time coefficient will be different if omitted from the model.\
+    -   To ensure we are measuring the effect of sleep and not the confounder, they must be in the model!
+-   Variables that are **strongly predictive** of term GPA and are (nearly) uncorrelated with total sleep time.
+    -   By reducing the residual standard error, these variables reduce the size of confidence intervals for the regression coefficient of interest.
+
+## Variables you may want to include
+
+-   Variables that are **weakly predictive** of term GPA and (nearly) uncorrelated with total sleep time.
+    -   Is the more complex model worth the extra predictive power?
+-   Variables that someone might **think** are confounders, even if you don't agree (or they don't appear to be after seeing the data).
+    -   This lends your analysis some credibility.
+
+## Variables you should NEVER include
+
+-   Variables that are **causally** influenced by the outcome $Y$ (term GPA).
+    -   These variables can introduce bias, especially if they're also causally influenced by total sleep time (a **collider**).\
+    -   This can happen by accident when constructing the final dataset (e.g., if we excluded students who dropped out at the end of the term).
+-   Variables that are **causally** influenced by the $X$ variable of interest (total sleep time).
+    -   Adjusting for these variables removes a part of the effect we're interested in!
+
+## Report findings: {.smaller}
+
+-   Models with few or no other variables.\
+-   Models that adjust for theory-driven confounders and predictors.\
+-   Models that add data-driven confounders and predictors — specifically note these!\
+-   Models that add or remove subsets of potential confounders, to assess how **robust** the findings are.
+
+## So, what did we find? {.smaller}
+
+-   After adjusting for cohort, cumulative GPA, and demographic variables, each additional hour of sleep is associated with an increase in predicted GPA of about **0.05 points**, with a 95% CI of about **\[0.03, 0.11\]**.\
+-   The effect estimate is robust to the specific adjustment for demographic variables hypothesized to correlate with sleep patterns and academic performance — this strengthens our argument!\
+-   In each case, our findings are statistically significant, and the estimated effects (and their plausible values based on the CIs) are all positive.\
+-   In other words, you should probably get more sleep!
+
+## Multicollinearity {.smaller}
+
+Multicollinearity exists whenever 2+ *predictors* in a regression model are moderately or highly correlated.
+
+-   If two predictors $X_1$ and $X_2$ are highly correlated, it is hard to estimate the effect of changing $X_1$ while keeping $X_2$ constant.\
+-   This means the coefficients for $X_1$ and $X_2$ could be misleading: we will get wide confidence intervals for $X_1$ and/or $X_2$, and the coefficients won't be stable (adding new data or predictors to the model could drastically change them).\
+-   That's a problem if we're using the size of a coefficient to understand the relationship between $X_1$ (or $X_2$) and $Y$.
+
+Correlation between the response and the predictors is good, but correlation between the predictors is not!
+
+## Extreme examples
+
+-   Predicting your height based on the amount you weighed on one scale ($X_1$) and the amount you weighed on a second scale ($X_2$): very hard to disentangle the effects of $X_1$ and $X_2$.\
+-   Predicting your height based on your weight in pounds ($X_1$) and your weight in kilograms ($X_2$): perfect multicollinearity — impossible to disentangle the effects of $X_1$ vs $X_2$.
+
+## Example: Math SAT predicts graduation rate above and beyond acceptance rate {.smaller}
+
+```{r, echo = TRUE}
+model1 = lm(Graduation.rate ~ Average.math.SAT + Acceptance.rate, data = colleges)
+summary(model1)
+```
+
+## But not after adding verbal SAT?!? {.smaller}
+
+```{r, echo = TRUE}
+model2 = lm(Graduation.rate ~ Average.math.SAT + Average.verbal.SAT + Acceptance.rate, data = colleges)
+summary(model2)
+```
+
+## How can we detect multicollinearity? {.smaller}
+
+-   The VIF for variable $X_j$ is:
+
+$$\text{VIF}(\beta_j) = \frac{1}{1 - R_j^2},$$
+
+where $R_j^2$ is the $R^2$ in a regression predicting $X_j$ from the other $X$ variables.
+
+-   $\text{VIF}(\beta_j) = 1$ when $R_j^2 = 0$; i.e., the $j$th predictor variable is completely independent from the others.\
+-   Higher VIF for variable $X_j$ means that variable is more closely related to the other $X$ variables (more multicollinearity).
+
+## How can we detect multicollinearity? {.smaller}
+
+To calculate VIF for each predictor, you would have to run one regression for each predictor. But you don't have to run all of these regressions by hand!
+
+```{r, echo = TRUE}
+model = lm(Graduation.rate ~ Average.math.SAT + Average.verbal.SAT + Acceptance.rate, data = colleges)
+# install.packages("car")
+library(car)
+vif(model)
+```
+
+## Dealing with multicollinearity {.smaller}
+
+There are two general strategies for dealing with **multicollinearity**:
+
+-   Drop one of the variables with a high VIF factor, and rerun to see if VIFs have improved. (Just like we drop one of the dummy variables when putting a categorical variable in the model!)\
+-   Combine the variables that correlate into a composite variable. (Combined SAT score = Math + Verbal)
+
+## Dealing with multicollinearity
+
+When we combine math and verbal SAT into a single variable, VIFs are now close to 1.
+
+```{r, echo = TRUE}
+model = lm(Graduation.rate ~ Average.combined.SAT + Acceptance.rate, data = colleges)
+vif(model)
+```
+
+## When is multicollinearity not a problem?
+
+-   When there is high collinearity in $X$'s that are strictly for adjustment, not interpretation, and the coefficient we want to interpret corresponds to a variable with low multicollinearity.\
+-   When multicollinearity comes from how we construct $X$: e.g., adding polynomial terms (like last week!), turning categories into dummy variables, or adding interactions.\
+-   When we are just trying to predict using relatively few $X$'s, and only predicting at *“typical”* $X$ values.
