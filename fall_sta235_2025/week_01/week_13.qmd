@@ -1,0 +1,340 @@
+---
+title: "Data Science for Business Applications"
+author: "Class 13 - Basic Causal Inference"
+title-slide-attributes:
+    data-background-image: week_13_docs/background_sta235h.png
+format: 
+  revealjs:
+    chalkboard: true
+    logo: week_13_docs/texas_logo2.png
+    toc: true
+    toc-title: "Presentation Outline"
+    toc-depth: 1
+editor: visual
+code-block-height: 500px
+include-in-header:
+  - text: |
+      <style type="text/css">
+      ul li ul li {
+        font-size: 0.8em;
+      }
+      </style>
+---
+
+```{r init_setup, include=FALSE, cache=FALSE}
+# Include setup
+library(tidyverse)
+library(ggfortify)
+library(knitr)
+
+knitr::opts_chunk$set(
+  echo = FALSE, fig.align = "center"
+)
+
+hook_output <- knit_hooks$get("output")
+knit_hooks$set(output = function(x, options) {
+  lines <- options$output.lines
+  if (is.null(lines)) {
+    return(hook_output(x, options))  # pass to default hook
+  }
+  x <- unlist(strsplit(x, "\n"))
+  more <- "..."
+  if (length(lines) == 1) {        # first n lines
+    if (length(x) > lines) {
+      # truncate the output, but add ....
+      x <- c(head(x, lines), more)
+    }
+  } else {
+    x <- c(more, x[lines], more)
+  }
+  # paste these lines together
+  x <- paste(c(x, ""), collapse = "\n")
+  hook_output(x, options)
+})
+```
+
+```{r, include=FALSE, cache=FALSE}
+# sleep = read.csv("week_12_docs/sleep.csv")
+# colleges = read.csv("week_12_docs/colleges.csv")
+options(scipen = 999)
+library(tidyverse)
+library(tidymodels)
+library(car)
+```
+
+## Causal Conclusion {.smaller}
+
+If we run a regression predicting $Y$ from $X$ and find that $X$ is a significant predictor of $Y$, we would like to conclude that $X$ causes $Y$. But it might be the case that:
+
+-   $Y$ actually causes $X$.
+
+-   $X$ and $Y$ are not actually related in the population; they happen to be correlated in the sample just by chance.
+
+-   A common variable $Z$ (a confounder) causes both $X$ and $Y$.
+
+-   A common variable $W$ (a collider) is caused by both $X$ and $Y$.
+
+## Confounders and Colliders {.smaller}
+
+-   A **confounder** is a third variable that causes both $X$ and $Y$ and explains the observed correlation between X and Y.
+
+-   A **collider** is a third variable that is caused by both $X$ and $Y$.
+
+## Randomization {.smaller}
+
+One way to make sure the causal conclusion holds is to do it by **design**:
+
+-   **Randomize the assignment of the treatment** $Z$
+
+-   i.e. Some units will **randomly be chosen** to be in the **treatment group** and others to be in the **control group**.
+
+-   What does randomization buy us?
+
+-   Control for **unforeseen factors** (confounders)
+
+## Confounders {.smaller}
+
+-   **Confounder** is a variable that affects both the **treatment** and the outcome
+
+![](week_13_docs/confounders_class_09.png){fig-align="center" width="500"}
+
+## Randomization {.smaller}
+
+-   Due to **randomization**, we know that the treatment is **not affected** by a confounder
+
+![](week_13_docs/randomization_class_09.png){fig-align="center" width="500"}
+
+-   This would be the causal effect of the treatment
+
+## Randomized controlled trials (RCTs)
+
+-   Often called the **gold standard** for establishing causality.
+
+-   **Randomly** assign the $X$, **treatment**, to participants
+
+-   Now, any observed relationship between $X$ and $Y$ must be due to $X$, since the only reason an individual had a particular value of $X$ was the random assignment.
+
+## Randomized controlled trials (RCTs)
+
+![](week_13_docs/image_dice_random.png){fig-align="center" width="500"}
+
+## RCT - Steps
+
+1.  Randomize
+
+2.  Check for balance - (balance between the treated and untreated)
+
+3.  Calculate difference in sample means between **treatment** and **control group**
+
+## Problem with causal inference {.smaller}
+
+-   Suppose you have a headache, and you take an asprin. Then you don’t have a headache. Did the asprin work?
+
+::: {style="text-align:center;"}
+| Person | Took aspirin | Didn’t take aspirin |
+|:------:|:------------:|:-------------------:|
+|   1    | no headache  |          ?          |
+|   2    | no headache  |          ?          |
+|   3    | no headache  |          ?          |
+|   4    | no headache  |          ?          |
+|   5    |      ?       |     no headache     |
+|   6    |      ?       |      headache       |
+|   7    |      ?       |      headache       |
+|   8    |      ?       |      headache       |
+:::
+
+-   For any given person, we can only observe one outcome or the other, depending on whether the person took an asprin or not:
+
+## Problem with causal inference {.smaller}
+
+-   The best we can do is compute an **average treatment effect** (ATE): the difference in the proportion of the treatment vs control group $$
+    \begin{aligned}
+    \text{ATE}
+    &= (\% \text{ headache among aspirin–takers}) \\
+    &\;\;-\; (\% \text{ headache among non–aspirin–takers}) \\
+    &= \frac{0}{4} - \frac{3}{4} \\
+    &= -0.75
+    \end{aligned}
+    $$
+
+-   Headaches decreased in 75% among those who took aspirin compared to those who didn't take aspirin.
+
+-   We can only make this conclusion if the treatment was randomly assigned.
+
+## Example 1: Vaccine Trial {.smaller}
+
+-   Phase 3 Clinical Trial for the Moderna COVID-19 vaccine
+
+-   $X$ = *got the vaccine*, $Y$ = *got COVID-19*
+
+-   Randomly assign study participants to get either the vaccine (an treatment group of 14,134 people) or a placebo (a control group of 14,073 people)
+
+-   11 vaccine recipients got COVID; 185 of placebo recipients got COVID
+
+## Issues with RCT
+
+-   **Internal validity** is the ability of an experiment to establish cause-and-effect of the treatment within the sample studied.
+-   Examples of threats to **internal validity**:
+    -   **Failure to randomize**.
+    -   Failure to follow the **treatment protocol/attrition**.
+    -   Small sample sizes
+
+## Issues with RCT
+
+-   **External validity** is the ability of an experimental result to generalize to a larger context or population.
+-   Examples of threats to **external validity**:
+    -   Non representative samples.
+    -   Non representative protocol/policy.
+
+## Blocking {.smaller}
+
+-   Randomization works **on average** but we only get one opportunity at creating treatment and control groups, and there might be **imbalances** in **nuisance** variables that could affect the outcome.
+
+-   For example, what will happen if the treatment group for the Moderna trial happens to get younger people in it than the control group?
+
+-   We can solve this by **blocking** or **stratifying**: randomly assigning to treatment/control within groups.
+
+## Blocking {.smaller}
+
+-   **Unbalanced** sample - Males and Females
+
+![](week_13_docs/block_01.png){fig-align="center" width="700"}
+
+## Blocking {.smaller}
+
+-   **Blocking or stratification** sample
+
+![](week_13_docs/block_02.png){fig-align="center" width="700"}
+
+## Blocking in vaccine trial
+
+-   In the Moderna vaccine trial, they identified two possible variables that could impact COVID outcomes:
+
+-   Age (65+ vs under 65)
+
+-   Underlying health condition
+
+## Blocking in vaccine trial
+
+![](week_13_docs/block_03.png){fig-align="center" width="800"}
+
+## Experiments using regression {.smaller}
+
+-   Non-blocked design: use a simple regression $$
+    \widehat{Y} = \widehat{\beta}_0 + \widehat{\beta}_1 T,
+    $$
+
+-   where $T$ is a **dummy variable** that is $$
+    T = 
+    \begin{cases}
+      1, & \text{for the treatment group}, \\
+      0, & \text{for the control group}
+    \end{cases}
+    $$
+
+-   $\widehat{\beta}_1$ represents the **estimated average treatment effect**. The regression needs to be logistic if $Y$ is categorical!
+
+## Experiments using regression {.smaller}
+
+-   **Blocked design**: use a regression that controls for the blocking variable $B$:
+
+$$
+\widehat{Y} = \widehat{\beta}_0 + \widehat{\beta}_1 T + \widehat{\beta}_2 B,
+$$ where $B$ is the fixed effect of each strata, that are interactions between categories.
+
+-   *Important*: the regression needs to be logistic if $Y$ is categorical.
+
+## Get Out The Vote (GOTV) {.smaller}
+
+-   In 2002, researchers at Temple and Yale conducted a large phone banking experiment to see calling voters helps:
+
+-   From among about 381,062 phone numbers of voters in Iowa and Michigan they randomly contacted about 12000 voters
+
+-   The outcome Y of interest is whether each voter actually voted.
+
+```{r}
+GOTV = read.csv("week_13_docs/GOTV.csv")
+```
+
+## No blocking {.smaller}
+
+Estimating the average treatment effect with *logistic regression*:
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+glm = glm(vote02 ~ treatment,data = GOTV, family = "binomial")
+summary(glm)
+```
+
+-   The coefficients are in log odds.
+
+## No blocking {.smaller}
+
+-   The [average treatment effect]{style="color:darkorange;"} will be of approximately 19%
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+(exp(0.17)-1)*100
+confint(glm)
+```
+
+-   Receiving a phone call increases the likelihood of voting by 19% compared to those who did not receive a call.
+
+-   Confidence interval for the treatment
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+confint(glm)
+```
+
+## Blocking {.smaller}
+
+-   The researchers actually used a blocking design with two variables that they thought could impact voting rates (separately from the phone calls):
+
+-   The state of the voter (Iowa or Michigan)
+
+-   Whether the voter was in a “competitive” district (one where there was likely to be a close election)
+
+## Blocking {.smaller}
+
+![](image/block_04.png){fig-align="center" width="800"}
+
+## Blocking {.smaller}
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+GOTV = GOTV %>%
+       mutate(block = interaction(state, competiv))
+glm_vote = glm(vote02 ~ treatment + block, data = GOTV, family = 'binomial')
+summary(glm_vote)
+```
+
+## Blocking {.smaller}
+
+-   The effect of the treatment is not significant.
+
+-   What if some callers didn’t stick to the script?
+
+-   Many people didn’t answer the phone!
+
+-   What about voters outside of the Midwest?
+
+## The limitations of RCTs {.smaller}
+
+-   Although powerful for inferring causation, RCTs are difficult to apply.
+
+-   They can be incredibly expensive.
+
+-   Compliance with the treatment protocol isn’t perfect (e.g., mask-wearing, picking up the phone)
+
+-   It can be hard to generalize beyond the participants involved in the study.
+
+-   They can be impractical or (e.g., effect of education on performance) or unethical to conduct (e.g., seatbelts, parachutes, even medical trials)
