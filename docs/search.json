@@ -4784,8 +4784,8 @@
     "objectID": "fall_sta235_2025/week_01/week_13.html#causal-conclusion",
     "href": "fall_sta235_2025/week_01/week_13.html#causal-conclusion",
     "title": "Data Science for Business Applications",
-    "section": "",
-    "text": "If we run a regression predicting \\(Y\\) from \\(X\\) and find that \\(X\\) is a significant predictor of \\(Y\\), we would like to conclude that \\(X\\) causes \\(Y\\). But it might be the case that:\n\n\\(Y\\) actually causes \\(X\\).\n\\(X\\) and \\(Y\\) are not actually related in the population; they happen to be correlated in the sample just by chance.\nA common variable \\(Z\\) (a confounder) causes both \\(X\\) and \\(Y\\).\nA common variable \\(W\\) (a collider) is caused by both \\(X\\) and \\(Y\\)."
+    "section": "Causal Conclusion",
+    "text": "Causal Conclusion\nIf we run a regression predicting \\(Y\\) from \\(X\\) and find that \\(X\\) is a significant predictor of \\(Y\\), we would like to conclude that \\(X\\) causes \\(Y\\). But it might be the case that:\n\n\\(Y\\) actually causes \\(X\\).\n\\(X\\) and \\(Y\\) are not actually related in the population; they happen to be correlated in the sample just by chance.\nA common variable \\(Z\\) (a confounder) causes both \\(X\\) and \\(Y\\).\nA common variable \\(W\\) (a collider) is caused by both \\(X\\) and \\(Y\\)."
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_13.html#confounders-and-colliders",
@@ -4813,7 +4813,7 @@
     "href": "fall_sta235_2025/week_01/week_13.html#randomization-1",
     "title": "Data Science for Business Applications",
     "section": "Randomization",
-    "text": "Randomization\n\nDue to randomization, we know that the treatment is not affected by a confounder\n\n\n\n\n\n\n\nThis would be the causal effect of the treatment"
+    "text": "Randomization\n\nDue to randomization, we know that the treatment is not affected by a confounder\n\n\n\nThis would be the causal effect of the treatment"
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_13.html#randomized-controlled-trials-rcts",
@@ -5136,5 +5136,12 @@
     "title": "Data Science for Business Applications",
     "section": "",
     "text": "If we run a regression predicting \\(Y\\) from \\(X\\) and find that \\(X\\) is a significant predictor of \\(Y\\), we would like to conclude that \\(X\\) causes \\(Y\\). But it might be the case that:\n\n\\(Y\\) actually causes \\(X\\).\n\\(X\\) and \\(Y\\) are not actually related in the population; they happen to be correlated in the sample just by chance.\nA common variable \\(Z\\) (a confounder) causes both \\(X\\) and \\(Y\\).\nA common variable \\(W\\) (a collider) is caused by both \\(X\\) and \\(Y\\)."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html",
+    "href": "fall_sta235_2025/week_01/week_14.html",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "Although they are powerful for inferring causation, RCTs are hard to pull off:\n\nThey can be incredibly expensive (e.g., Phase 3 clinical trial)\nCompliance with the treatment protocol isn’t perfect (e.g., low-calorie diet, picking up the phone)\nIt can be hard to generalize beyond the participants involved in the study if they aren’t representative (e.g., psychology experiments conducted on college students)\nThey can be impractical (e.g., effect of education on later earnings) or even unethical (e.g., seatbelts, parachutes, medical trials)"
   }
 ]

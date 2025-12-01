@@ -20,7 +20,7 @@ title: "Teaching"
   - [class 11 - Random Forest](fall_sta235_2025/week_01/week_11.qmd)
   - [class 12 - Building models for explanation](fall_sta235_2025/week_01/week_12.qmd)
   - [class 13 - Basic Causal Inference](fall_sta235_2025/week_01/week_13.qmd)
-  - [class 14 - Natural experiments and RDD](fall_sta235_2025/week_01/week_13.qmd)
+  - [class 14 - Natural experiments and RDD](fall_sta235_2025/week_01/week_14.qmd)
 
 ### Spring 2025
 
