@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.32">
+
+  <meta name="author" content="Class 14 - Natural experiments and RDD">
+  <title>Henrique Bolfarine – Data Science for Business Applications</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-f563837468303362081e247dddd440d0.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <style type="text/css">
+  ul li ul li {
+    font-size: 0.8em;
+  }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" data-background-image="week_14_docs/background_sta235h.png" class="quarto-title-block center">
+  <h1 class="title">Data Science for Business Applications</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Class 14 - Natural experiments and RDD 
+</div>
+</div>
+</div>
+
+</section>
+<section id="the-limitations-of-randomized-controlled-trials-rcts" class="slide level2 smaller">
+<h2>The limitations of Randomized Controlled Trials (RCTs)</h2>
+<p>Although they are powerful for inferring causation, RCTs are hard to pull off:</p>
+<ul>
+<li>They can be incredibly expensive (e.g., Phase 3 clinical trial)</li>
+<li>Compliance with the treatment protocol isn’t perfect (e.g., low-calorie diet, picking up the phone)</li>
+<li>It can be hard to generalize beyond the participants involved in the study if they aren’t representative (e.g., psychology experiments conducted on college students)</li>
+<li>They can be impractical (e.g., effect of education on later earnings) or even unethical (e.g., seatbelts, parachutes, medical trials)</li>
+</ul>
+</section>
+<section id="faking-randomization" class="slide level2">
+<h2>“Faking” randomization</h2>
+<div class="center">
+<p><strong>Key idea:</strong> Find a comparison group that is effectively “the same as” the treatment group to create a: <strong>quasi-experiment</strong> or <strong>natural experiment</strong>.</p>
+</div>
+</section>
+<section id="does-serving-in-the-military-affect-long-term-earnings" class="slide level2 smaller">
+<h2>Does serving in the military affect long-term earnings?</h2>
+<ul>
+<li><p>Does serving in the military have an impact upon your long-term earnings after discharge?</p></li>
+<li><p><strong>Why this won’t work:</strong> Compare the wages of people who served in the US military in Afghanistan or Iraq, 10 years after discharge, to the wages of the general public.</p></li>
+</ul>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+
+<img data-src="week_14_docs/atlantic.png" class="quarto-figure quarto-figure-center r-stretch" width="500"></section>
+<section id="a-natural-experiment-on-the-effect-of-military-service-on-earnings" class="slide level2 smaller">
+<h2>A natural experiment on the effect of military service on earnings</h2>
+<ul>
+<li>Angrist (1990) wanted to determine what effect military service had on future earnings<br>
+</li>
+<li><strong>“Treatment” group:</strong> men selected by lottery to serve in Vietnam<br>
+<strong>“Control” group:</strong> men eligible to be drafted but not selected to serve<br>
+</li>
+<li>We effectively have (almost) random assignment<br>
+</li>
+<li>This is called a <strong>natural experiment</strong> because we have <em>discovered</em> something close to an RCT “in the wild”<br>
+</li>
+<li>For white men, earnings in the 1980s were <strong>15% lower</strong> in the treatment group; military service in Vietnam causally reduced long-term earning power</li>
+</ul>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+
+<img data-src="week_14_docs/nature.png" class="quarto-figure quarto-figure-center r-stretch" width="500"></section>
+<section id="quasi-experiments-natural-experiments" class="slide level2 smaller">
+<h2>Quasi-experiments / Natural experiments</h2>
+<ul>
+<li>These are called <strong>quasi-experiments</strong> or <strong>natural experiments</strong> because participants are not randomly assigned to treatment and control groups,<br>
+but groups are selected in such a way that the assignment can be thought of as effectively random.</li>
+</ul>
+</section>
+<section id="a-natural-experiment-of-the-minimum-wage" class="slide level2 smaller">
+<h2>A natural experiment of the minimum wage</h2>
+<ul>
+<li><p>Why can’t we just compare the unemployment rate in places with a low minimum wage (e.g., Texas) to places with a high minimum wage (e.g., California)?</p></li>
+<li><p>Why can’t we just do a randomized controlled trial to study the impact of raising the minimum wage?</p></li>
+</ul>
+</section>
+<section id="a-natural-experiment-of-the-minimum-wage-1" class="slide level2 smaller">
+<h2>A natural experiment of the minimum wage</h2>
+<ul>
+<li><p>In 1992, New Jersey’s minimum wage went from $4.25 to $5.05</p></li>
+<li><p>The minimum wage in Pennsylvania remained at $4.25</p></li>
+<li><p>Researchers measured employment at 410 fast food restaurants in NJ and PA both before and after the change</p></li>
+<li><p>This is a <strong>natural experiment</strong> because the two groups arose naturally (rather than being assigned by the researchers)</p></li>
+</ul>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+
+<img data-src="week_14_docs/pa-nj.png" class="quarto-figure quarto-figure-center r-stretch" width="500"></section>
+<section id="nj-vs-pa-comparison" class="slide level2">
+<h2>NJ vs PA comparison</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Pennsylvania</td>
+<td>21.17</td>
+</tr>
+<tr class="even">
+<td>New Jersey</td>
+<td>21.03</td>
+</tr>
+<tr class="odd">
+<td>Difference</td>
+<td>-0.14</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>After the policy change, employment was 0.14 employees per store less in NJ than in PA. Can we interpret this as a causal effect?</p></li>
+<li><p>No! We cannot distinguish the effect of the minimum wage increase from other differences between PA and NJ.</p></li>
+</ul>
+</section>
+<section id="difference-in-differences" class="slide level2">
+<h2>Difference-in-differences</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th>Before</th>
+<th>After</th>
+<th>Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Pennsylvania</td>
+<td>23.33</td>
+<td>21.17</td>
+<td>-2.16</td>
+</tr>
+<tr class="even">
+<td>New Jersey</td>
+<td>20.44</td>
+<td>21.03</td>
+<td>0.59</td>
+</tr>
+<tr class="odd">
+<td>Difference</td>
+<td>-2.89</td>
+<td>-0.14</td>
+<td>2.76</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The difference of the differences (-0.14-(-2.89) or 0.59-(-2.16)) gives us the causal effect of the policy change.</li>
+</ul>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+
+<img data-src="week_14_docs/diff_diff_2025.png" class="quarto-figure quarto-figure-center r-stretch" width="500"></section>
+<section id="ways-to-create-natural-experiments" class="slide level2">
+<h2>Ways to create natural experiments</h2>
+<ul>
+<li>Geographic boundaries (e.g., NJ vs PA minimum wage example)<br>
+</li>
+<li>Policy changes (e.g., financial aid policy change example)<br>
+</li>
+<li>Lotteries (e.g., Vietnam draft lottery example)<br>
+</li>
+<li>Arbitrary cutoffs</li>
+</ul>
+</section>
+<section id="do-flagship-state-university-grads-earn-more-money" class="slide level2">
+<h2>Do flagship state university grads earn more money?</h2>
+<ul>
+<li><p>Why can’t we answer this question by comparing average income or wealth of (say) Texas Exes to non-Texas Exes?</p></li>
+<li><p>Why can’t we do a Randomized Controlled Trial?</p></li>
+</ul>
+</section>
+<section id="regression-discontinuity-designs" class="slide level2">
+<h2>Regression discontinuity designs</h2>
+<ul>
+<li>Hoekstra (2009) studied admission to a state flagship university with an SAT cutoff for admission<br>
+</li>
+<li><strong>Key idea:</strong> Compare earnings 15 years after graduation for students that just made the admissions cutoff (and were accepted)<br>
+to those that just missed it (and were rejected)</li>
+</ul>
+</section>
+<section id="regression-discontinuity-design-example" class="slide level2 smaller">
+<h2>Regression discontinuity design example</h2>
+<ul>
+<li>Build two regressions predicting <strong>Y</strong> = earnings measure from <strong>X</strong> = SAT score: one for students below the cutoff and one for students above<br>
+</li>
+<li>The length of the red line between the curves is the causal effect of admission</li>
+</ul>
+<div class="center">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="week_14_docs/rdd.png" class="quarto-figure quarto-figure-center" width="500"></p>
+</figure>
+</div>
+</div>
+</section>
+<section id="is-there-a-benefit-to-small-class-sizes" class="slide level2 smaller">
+<h2>Is there a benefit to small class sizes?</h2>
+<ul>
+<li>Many people argue that smaller classes lead to better learning outcomes compared to large classes<br>
+</li>
+<li>But why can’t we just compare test scores of students in small classes and students in large classes?<br>
+</li>
+<li>Angrist &amp; Levy (1999) studied this by taking advantage of a rule in Israeli schools, where cohorts of &gt;40 students are split into two smaller classes</li>
+</ul>
+</section>
+<section id="is-there-a-benefit-to-small-class-sizes-1" class="slide level2 smaller">
+<h2>Is there a benefit to small class sizes?</h2>
+<p><strong>Key idea:</strong> Students in cohorts just below 40 students are essentially identical to students in cohorts just above 40,<br>
+but the ones in the latter group will get a smaller class.</p>
+
+<img data-src="week_14_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="creating-the-rdd-model" class="slide level2 smaller">
+<h2>Creating the RDD model</h2>
+<ol type="1">
+<li><p>Define a treatment variable:</p>
+<p><span class="math display">\[
+T =
+\begin{cases}
+  1, &amp; \text{if the cohort is split into two classes} \\
+  0, &amp; \text{if the cohort is kept intact in one class}
+\end{cases}
+\]</span></p></li>
+<li><p>Recenter the selection variable so the cutoff is at 0:</p>
+<p><span class="math display">\[
+X = (\text{Cohort size}) - 40
+\]</span></p></li>
+<li><p>Fit a model predicting reading scores from both (X) and (T):</p>
+<p><span class="math display">\[
+\hat{Y} = \hat\beta_0 + \hat\beta_1 X + \hat\beta_2 T
+\]</span></p></li>
+</ol>
+<p>The coefficient ( _2 ) is the causal effect we’re looking for!</p>
+</section>
+<section id="rdd-model-in-r" class="slide level2 smaller">
+<h2>RDD model in R</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>israel <span class="ot">&lt;-</span> israel <span class="sc">%&gt;%</span> </span>
+<span id="cb1-2"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-3"><a></a>    <span class="at">treatment =</span> <span class="fu">ifelse</span>(cohort.size <span class="sc">&gt;</span> <span class="dv">40</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb1-4"><a></a>    <span class="at">selection =</span> cohort.size <span class="sc">-</span> <span class="dv">40</span></span>
+<span id="cb1-5"><a></a>  )</span>
+<span id="cb1-6"><a></a></span>
+<span id="cb1-7"><a></a>rdd1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(read <span class="sc">~</span> selection <span class="sc">+</span> treatment, <span class="at">data =</span> israel)</span>
+<span id="cb1-8"><a></a><span class="fu">summary</span>(rdd1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = read ~ selection + treatment, data = israel)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-35.195  -5.572   1.537   6.617  17.269 
+
+Coefficients:
+            Estimate Std. Error t value            Pr(&gt;|t|)    
+(Intercept)  69.7556     1.2697  54.939 &lt;0.0000000000000002 ***
+selection    -0.1195     0.2020  -0.592              0.5545    
+treatment     4.0031     2.1511   1.861              0.0638 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 9.135 on 294 degrees of freedom
+Multiple R-squared:  0.02237,   Adjusted R-squared:  0.01572 
+F-statistic: 3.363 on 2 and 294 DF,  p-value: 0.03596</code></pre>
+</div>
+</div>
+</section>
+<section id="but-wait" class="slide level2 smaller">
+<h2>But wait!</h2>
+<p>Our first RDD model is forcing the two lines to have the same slope; that isn’t a great fit for the data:</p>
+
+<img data-src="week_14_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="but-wait-1" class="slide level2">
+<h2>But wait!</h2>
+<ul>
+<li>To allow the two slopes to differ, we can add an interaction term so that the slope of (X) is different for (T=0) (cohort kept intact) and (T=1) (cohort split into smaller classes):</li>
+</ul>
+<p><span class="math display">\[
+\hat{Y} = \hat\beta_0 + \hat\beta_1 X + \hat\beta_2 T + \hat\beta_3 (T X)
+\]</span></p>
+<ul>
+<li>The coefficient on (T) ((_2)) is our estimate of the causal effect of the treatment.</li>
+</ul>
+</section>
+<section id="regression-summary" class="slide level2 smaller">
+<h2>Regression Summary</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">summary</span>(<span class="fu">lm</span>(read <span class="sc">~</span> selection <span class="sc">*</span> treatment, <span class="at">data =</span> israel))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = read ~ selection * treatment, data = israel)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-33.618  -6.102   1.341   6.922  17.249 
+
+Coefficients:
+                    Estimate Std. Error t value            Pr(&gt;|t|)    
+(Intercept)          66.6294     1.8141  36.729 &lt;0.0000000000000002 ***
+selection            -0.8945     0.3806  -2.350              0.0194 *  
+treatment             5.6641     2.2439   2.524              0.0121 *  
+selection:treatment   1.0720     0.4477   2.395              0.0173 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 9.063 on 293 degrees of freedom
+Multiple R-squared:  0.04113,   Adjusted R-squared:  0.03132 
+F-statistic:  4.19 on 3 and 293 DF,  p-value: 0.00634</code></pre>
+</div>
+</div>
+</section>
+<section id="a-better-rdd-model" class="slide level2 smaller">
+<h2>A better RDD model</h2>
+
+<img data-src="week_14_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="conclusion" class="slide level2">
+<h2>Conclusion</h2>
+<ul>
+<li><p>From our data we can conclude that smaller class sizes <em>cause</em> reading scores to increase by about 5.7 points.</p></li>
+<li><p>RDD is usually great for internal validity, but there are <strong>many threats to external validity</strong>: e.g., would this generalize to different grade levels? Schools outside of Israel?</p></li>
+</ul>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="week_14_docs/texas_logo2.png" class="slide-logo"></p>
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

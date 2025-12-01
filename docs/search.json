@@ -32,7 +32,7 @@
     "href": "teaching.html",
     "title": "Teaching",
     "section": "",
-    "text": "STA 235 - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables\nclass 03 - Interactions\nclass 04 - Regression Assumptions\nclass 05 - Modeling nonlinear relationships\nclass 06 - Time Series Decomposition and Autoregression\nclass 07 - Model building for prediction\nclass 08 - Logistic Regression 1\nclass 09 - Logistic Regression 2\nclass 10 - Decision Trees\nclass 11 - Random Forest\nclass 12 - Building models for explanation\nclass 13 - Basic Causal Inference\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 Honors - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection\nclass 07 - Logistic Regression\nclass 08 - Basic Causal Inference\nclass 09 - Randomized Control Trials\nclass 10 - Natural Experiments - Diff-in-Diff\nclass 11 - Natural Experiments - RDD\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Application\n\n\n\n\n\nSTA 235 - Data Science for Business Application"
+    "text": "STA 235 - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables\nclass 03 - Interactions\nclass 04 - Regression Assumptions\nclass 05 - Modeling nonlinear relationships\nclass 06 - Time Series Decomposition and Autoregression\nclass 07 - Model building for prediction\nclass 08 - Logistic Regression 1\nclass 09 - Logistic Regression 2\nclass 10 - Decision Trees\nclass 11 - Random Forest\nclass 12 - Building models for explanation\nclass 13 - Basic Causal Inference\nclass 14 - Natural experiments and RDD\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 Honors - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection\nclass 07 - Logistic Regression\nclass 08 - Basic Causal Inference\nclass 09 - Randomized Control Trials\nclass 10 - Natural Experiments - Diff-in-Diff\nclass 11 - Natural Experiments - RDD\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Application\n\n\n\n\n\nSTA 235 - Data Science for Business Application"
   },
   {
     "objectID": "teaching.html#teaching",
@@ -2202,7 +2202,7 @@
     "href": "teaching.html#university-of-texas-at-austin",
     "title": "Teaching",
     "section": "",
-    "text": "STA 235 - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables\nclass 03 - Interactions\nclass 04 - Regression Assumptions\nclass 05 - Modeling nonlinear relationships\nclass 06 - Time Series Decomposition and Autoregression\nclass 07 - Model building for prediction\nclass 08 - Logistic Regression 1\nclass 09 - Logistic Regression 2\nclass 10 - Decision Trees\nclass 11 - Random Forest\nclass 12 - Building models for explanation\nclass 13 - Basic Causal Inference\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 Honors - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection\nclass 07 - Logistic Regression\nclass 08 - Basic Causal Inference\nclass 09 - Randomized Control Trials\nclass 10 - Natural Experiments - Diff-in-Diff\nclass 11 - Natural Experiments - RDD\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Application\n\n\n\n\n\nSTA 235 - Data Science for Business Application"
+    "text": "STA 235 - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables\nclass 03 - Interactions\nclass 04 - Regression Assumptions\nclass 05 - Modeling nonlinear relationships\nclass 06 - Time Series Decomposition and Autoregression\nclass 07 - Model building for prediction\nclass 08 - Logistic Regression 1\nclass 09 - Logistic Regression 2\nclass 10 - Decision Trees\nclass 11 - Random Forest\nclass 12 - Building models for explanation\nclass 13 - Basic Causal Inference\nclass 14 - Natural experiments and RDD\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 Honors - Data Science for Business Applications\n\nclass 01 - Simple and Multiple Regression\nclass 02 - Categorical Variables and Interactions\nclass 03 - Regression assumptions and Outliers\nclass 04 - Modeling nonlinear relationships\nclass 05 - Time Series Decomposition and Autoregression\nclass 06 - Model Selection\nclass 07 - Logistic Regression\nclass 08 - Basic Causal Inference\nclass 09 - Randomized Control Trials\nclass 10 - Natural Experiments - Diff-in-Diff\nclass 11 - Natural Experiments - RDD\n\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Applications\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 301 - Introduction to Data Science\n\n\n\n\n\nSTA 235 - Data Science for Business Application\n\n\n\n\n\nSTA 235 - Data Science for Business Application"
   },
   {
     "objectID": "index.html#cv---henrique-bolfarine---cv",
@@ -4784,8 +4784,8 @@
     "objectID": "fall_sta235_2025/week_01/week_13.html#causal-conclusion",
     "href": "fall_sta235_2025/week_01/week_13.html#causal-conclusion",
     "title": "Data Science for Business Applications",
-    "section": "Causal Conclusion",
-    "text": "Causal Conclusion\nIf we run a regression predicting \\(Y\\) from \\(X\\) and find that \\(X\\) is a significant predictor of \\(Y\\), we would like to conclude that \\(X\\) causes \\(Y\\). But it might be the case that:\n\n\\(Y\\) actually causes \\(X\\).\n\\(X\\) and \\(Y\\) are not actually related in the population; they happen to be correlated in the sample just by chance.\nA common variable \\(Z\\) (a confounder) causes both \\(X\\) and \\(Y\\).\nA common variable \\(W\\) (a collider) is caused by both \\(X\\) and \\(Y\\)."
+    "section": "",
+    "text": "If we run a regression predicting \\(Y\\) from \\(X\\) and find that \\(X\\) is a significant predictor of \\(Y\\), we would like to conclude that \\(X\\) causes \\(Y\\). But it might be the case that:\n\n\\(Y\\) actually causes \\(X\\).\n\\(X\\) and \\(Y\\) are not actually related in the population; they happen to be correlated in the sample just by chance.\nA common variable \\(Z\\) (a confounder) causes both \\(X\\) and \\(Y\\).\nA common variable \\(W\\) (a collider) is caused by both \\(X\\) and \\(Y\\)."
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_13.html#confounders-and-colliders",
@@ -4813,7 +4813,7 @@
     "href": "fall_sta235_2025/week_01/week_13.html#randomization-1",
     "title": "Data Science for Business Applications",
     "section": "Randomization",
-    "text": "Randomization\n\nDue to randomization, we know that the treatment is not affected by a confounder\n\n\n\nThis would be the causal effect of the treatment"
+    "text": "Randomization\n\nDue to randomization, we know that the treatment is not affected by a confounder\n\n\n\n\n\n\n\nThis would be the causal effect of the treatment"
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_13.html#randomized-controlled-trials-rcts",
@@ -4975,5 +4975,166 @@
     "title": "Data Science for Business Applications",
     "section": "The limitations of RCTs",
     "text": "The limitations of RCTs\n\nAlthough powerful for inferring causation, RCTs are difficult to apply.\nThey can be incredibly expensive.\nCompliance with the treatment protocol isn’t perfect (e.g., mask-wearing, picking up the phone)\nIt can be hard to generalize beyond the participants involved in the study.\nThey can be impractical or (e.g., effect of education on performance) or unethical to conduct (e.g., seatbelts, parachutes, even medical trials)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#the-limitations-of-randomized-controlled-trials-rcts",
+    "href": "fall_sta235_2025/week_01/week_14.html#the-limitations-of-randomized-controlled-trials-rcts",
+    "title": "Data Science for Business Applications",
+    "section": "The limitations of Randomized Controlled Trials (RCTs)",
+    "text": "The limitations of Randomized Controlled Trials (RCTs)\nAlthough they are powerful for inferring causation, RCTs are hard to pull off:\n\nThey can be incredibly expensive (e.g., Phase 3 clinical trial)\nCompliance with the treatment protocol isn’t perfect (e.g., low-calorie diet, picking up the phone)\nIt can be hard to generalize beyond the participants involved in the study if they aren’t representative (e.g., psychology experiments conducted on college students)\nThey can be impractical (e.g., effect of education on later earnings) or even unethical (e.g., seatbelts, parachutes, medical trials)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#faking-randomization",
+    "href": "fall_sta235_2025/week_01/week_14.html#faking-randomization",
+    "title": "Data Science for Business Applications",
+    "section": "“Faking” randomization",
+    "text": "“Faking” randomization\n\nKey idea: Find a comparison group that is effectively “the same as” the treatment group to create a: quasi-experiment or natural experiment."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#does-serving-in-the-military-affect-long-term-earnings",
+    "href": "fall_sta235_2025/week_01/week_14.html#does-serving-in-the-military-affect-long-term-earnings",
+    "title": "Data Science for Business Applications",
+    "section": "Does serving in the military affect long-term earnings?",
+    "text": "Does serving in the military affect long-term earnings?\n\nDoes serving in the military have an impact upon your long-term earnings after discharge?\nWhy this won’t work: Compare the wages of people who served in the US military in Afghanistan or Iraq, 10 years after discharge, to the wages of the general public."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#a-natural-experiment-on-the-effect-of-military-service-on-earnings",
+    "href": "fall_sta235_2025/week_01/week_14.html#a-natural-experiment-on-the-effect-of-military-service-on-earnings",
+    "title": "Data Science for Business Applications",
+    "section": "A natural experiment on the effect of military service on earnings",
+    "text": "A natural experiment on the effect of military service on earnings\n\nAngrist (1990) wanted to determine what effect military service had on future earnings\n\n“Treatment” group: men selected by lottery to serve in Vietnam\n“Control” group: men eligible to be drafted but not selected to serve\n\nWe effectively have (almost) random assignment\n\nThis is called a natural experiment because we have discovered something close to an RCT “in the wild”\n\nFor white men, earnings in the 1980s were 15% lower in the treatment group; military service in Vietnam causally reduced long-term earning power"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#quasi-experiments-natural-experiments",
+    "href": "fall_sta235_2025/week_01/week_14.html#quasi-experiments-natural-experiments",
+    "title": "Data Science for Business Applications",
+    "section": "Quasi-experiments / Natural experiments",
+    "text": "Quasi-experiments / Natural experiments\n\nThese are called quasi-experiments or natural experiments because participants are not randomly assigned to treatment and control groups,\nbut groups are selected in such a way that the assignment can be thought of as effectively random."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#a-natural-experiment-of-the-minimum-wage",
+    "href": "fall_sta235_2025/week_01/week_14.html#a-natural-experiment-of-the-minimum-wage",
+    "title": "Data Science for Business Applications",
+    "section": "A natural experiment of the minimum wage",
+    "text": "A natural experiment of the minimum wage\n\nWhy can’t we just compare the unemployment rate in places with a low minimum wage (e.g., Texas) to places with a high minimum wage (e.g., California)?\nWhy can’t we just do a randomized controlled trial to study the impact of raising the minimum wage?"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#a-natural-experiment-of-the-minimum-wage-1",
+    "href": "fall_sta235_2025/week_01/week_14.html#a-natural-experiment-of-the-minimum-wage-1",
+    "title": "Data Science for Business Applications",
+    "section": "A natural experiment of the minimum wage",
+    "text": "A natural experiment of the minimum wage\n\nIn 1992, New Jersey’s minimum wage went from $4.25 to $5.05\nThe minimum wage in Pennsylvania remained at $4.25\nResearchers measured employment at 410 fast food restaurants in NJ and PA both before and after the change\nThis is a natural experiment because the two groups arose naturally (rather than being assigned by the researchers)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#nj-vs-pa-comparison",
+    "href": "fall_sta235_2025/week_01/week_14.html#nj-vs-pa-comparison",
+    "title": "Data Science for Business Applications",
+    "section": "NJ vs PA comparison",
+    "text": "NJ vs PA comparison\n\n\n\n\nAfter\n\n\n\n\nPennsylvania\n21.17\n\n\nNew Jersey\n21.03\n\n\nDifference\n-0.14\n\n\n\n\nAfter the policy change, employment was 0.14 employees per store less in NJ than in PA. Can we interpret this as a causal effect?\nNo! We cannot distinguish the effect of the minimum wage increase from other differences between PA and NJ."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#difference-in-differences",
+    "href": "fall_sta235_2025/week_01/week_14.html#difference-in-differences",
+    "title": "Data Science for Business Applications",
+    "section": "Difference-in-differences",
+    "text": "Difference-in-differences\n\n\n\n\nBefore\nAfter\nDifference\n\n\n\n\nPennsylvania\n23.33\n21.17\n-2.16\n\n\nNew Jersey\n20.44\n21.03\n0.59\n\n\nDifference\n-2.89\n-0.14\n2.76\n\n\n\n\nThe difference of the differences (-0.14-(-2.89) or 0.59-(-2.16)) gives us the causal effect of the policy change."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#ways-to-create-natural-experiments",
+    "href": "fall_sta235_2025/week_01/week_14.html#ways-to-create-natural-experiments",
+    "title": "Data Science for Business Applications",
+    "section": "Ways to create natural experiments",
+    "text": "Ways to create natural experiments\n\nGeographic boundaries (e.g., NJ vs PA minimum wage example)\n\nPolicy changes (e.g., financial aid policy change example)\n\nLotteries (e.g., Vietnam draft lottery example)\n\nArbitrary cutoffs"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#do-flagship-state-university-grads-earn-more-money",
+    "href": "fall_sta235_2025/week_01/week_14.html#do-flagship-state-university-grads-earn-more-money",
+    "title": "Data Science for Business Applications",
+    "section": "Do flagship state university grads earn more money?",
+    "text": "Do flagship state university grads earn more money?\n\nWhy can’t we answer this question by comparing average income or wealth of (say) Texas Exes to non-Texas Exes?\nWhy can’t we do a Randomized Controlled Trial?"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#regression-discontinuity-designs",
+    "href": "fall_sta235_2025/week_01/week_14.html#regression-discontinuity-designs",
+    "title": "Data Science for Business Applications",
+    "section": "Regression discontinuity designs",
+    "text": "Regression discontinuity designs\n\nHoekstra (2009) studied admission to a state flagship university with an SAT cutoff for admission\n\nKey idea: Compare earnings 15 years after graduation for students that just made the admissions cutoff (and were accepted)\nto those that just missed it (and were rejected)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#regression-discontinuity-design-example",
+    "href": "fall_sta235_2025/week_01/week_14.html#regression-discontinuity-design-example",
+    "title": "Data Science for Business Applications",
+    "section": "Regression discontinuity design example",
+    "text": "Regression discontinuity design example\n\nBuild two regressions predicting Y = earnings measure from X = SAT score: one for students below the cutoff and one for students above\n\nThe length of the red line between the curves is the causal effect of admission"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#is-there-a-benefit-to-small-class-sizes",
+    "href": "fall_sta235_2025/week_01/week_14.html#is-there-a-benefit-to-small-class-sizes",
+    "title": "Data Science for Business Applications",
+    "section": "Is there a benefit to small class sizes?",
+    "text": "Is there a benefit to small class sizes?\n\nMany people argue that smaller classes lead to better learning outcomes compared to large classes\n\nBut why can’t we just compare test scores of students in small classes and students in large classes?\n\nAngrist & Levy (1999) studied this by taking advantage of a rule in Israeli schools, where cohorts of &gt;40 students are split into two smaller classes"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#is-there-a-benefit-to-small-class-sizes-1",
+    "href": "fall_sta235_2025/week_01/week_14.html#is-there-a-benefit-to-small-class-sizes-1",
+    "title": "Data Science for Business Applications",
+    "section": "Is there a benefit to small class sizes?",
+    "text": "Is there a benefit to small class sizes?\nKey idea: Students in cohorts just below 40 students are essentially identical to students in cohorts just above 40,\nbut the ones in the latter group will get a smaller class."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#creating-the-rdd-model",
+    "href": "fall_sta235_2025/week_01/week_14.html#creating-the-rdd-model",
+    "title": "Data Science for Business Applications",
+    "section": "Creating the RDD model",
+    "text": "Creating the RDD model\n\nDefine a treatment variable:\n\\[\nT =\n\\begin{cases}\n  1, & \\text{if the cohort is split into two classes} \\\\\n  0, & \\text{if the cohort is kept intact in one class}\n\\end{cases}\n\\]\nRecenter the selection variable so the cutoff is at 0:\n\\[\nX = (\\text{Cohort size}) - 40\n\\]\nFit a model predicting reading scores from both (X) and (T):\n\\[\n\\hat{Y} = \\hat\\beta_0 + \\hat\\beta_1 X + \\hat\\beta_2 T\n\\]\n\nThe coefficient ( _2 ) is the causal effect we’re looking for!"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#rdd-model-in-r",
+    "href": "fall_sta235_2025/week_01/week_14.html#rdd-model-in-r",
+    "title": "Data Science for Business Applications",
+    "section": "RDD model in R",
+    "text": "RDD model in R\n\nisrael &lt;- israel %&gt;% \n  mutate(\n    treatment = ifelse(cohort.size &gt; 40, 1, 0),\n    selection = cohort.size - 40\n  )\n\nrdd1 &lt;- lm(read ~ selection + treatment, data = israel)\nsummary(rdd1)\n\n\nCall:\nlm(formula = read ~ selection + treatment, data = israel)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-35.195  -5.572   1.537   6.617  17.269 \n\nCoefficients:\n            Estimate Std. Error t value            Pr(&gt;|t|)    \n(Intercept)  69.7556     1.2697  54.939 &lt;0.0000000000000002 ***\nselection    -0.1195     0.2020  -0.592              0.5545    \ntreatment     4.0031     2.1511   1.861              0.0638 .  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 9.135 on 294 degrees of freedom\nMultiple R-squared:  0.02237,   Adjusted R-squared:  0.01572 \nF-statistic: 3.363 on 2 and 294 DF,  p-value: 0.03596"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#but-wait",
+    "href": "fall_sta235_2025/week_01/week_14.html#but-wait",
+    "title": "Data Science for Business Applications",
+    "section": "But wait!",
+    "text": "But wait!\nOur first RDD model is forcing the two lines to have the same slope; that isn’t a great fit for the data:"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#but-wait-1",
+    "href": "fall_sta235_2025/week_01/week_14.html#but-wait-1",
+    "title": "Data Science for Business Applications",
+    "section": "But wait!",
+    "text": "But wait!\n\nTo allow the two slopes to differ, we can add an interaction term so that the slope of (X) is different for (T=0) (cohort kept intact) and (T=1) (cohort split into smaller classes):\n\n\\[\n\\hat{Y} = \\hat\\beta_0 + \\hat\\beta_1 X + \\hat\\beta_2 T + \\hat\\beta_3 (T X)\n\\]\n\nThe coefficient on (T) ((_2)) is our estimate of the causal effect of the treatment."
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#regression-summary",
+    "href": "fall_sta235_2025/week_01/week_14.html#regression-summary",
+    "title": "Data Science for Business Applications",
+    "section": "Regression Summary",
+    "text": "Regression Summary\n\nsummary(lm(read ~ selection * treatment, data = israel))\n\n\nCall:\nlm(formula = read ~ selection * treatment, data = israel)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-33.618  -6.102   1.341   6.922  17.249 \n\nCoefficients:\n                    Estimate Std. Error t value            Pr(&gt;|t|)    \n(Intercept)          66.6294     1.8141  36.729 &lt;0.0000000000000002 ***\nselection            -0.8945     0.3806  -2.350              0.0194 *  \ntreatment             5.6641     2.2439   2.524              0.0121 *  \nselection:treatment   1.0720     0.4477   2.395              0.0173 *  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 9.063 on 293 degrees of freedom\nMultiple R-squared:  0.04113,   Adjusted R-squared:  0.03132 \nF-statistic:  4.19 on 3 and 293 DF,  p-value: 0.00634"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#a-better-rdd-model",
+    "href": "fall_sta235_2025/week_01/week_14.html#a-better-rdd-model",
+    "title": "Data Science for Business Applications",
+    "section": "A better RDD model",
+    "text": "A better RDD model"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#conclusion",
+    "href": "fall_sta235_2025/week_01/week_14.html#conclusion",
+    "title": "Data Science for Business Applications",
+    "section": "Conclusion",
+    "text": "Conclusion\n\nFrom our data we can conclude that smaller class sizes cause reading scores to increase by about 5.7 points.\nRDD is usually great for internal validity, but there are many threats to external validity: e.g., would this generalize to different grade levels? Schools outside of Israel?"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_13.html",
+    "href": "fall_sta235_2025/week_01/week_13.html",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "If we run a regression predicting \\(Y\\) from \\(X\\) and find that \\(X\\) is a significant predictor of \\(Y\\), we would like to conclude that \\(X\\) causes \\(Y\\). But it might be the case that:\n\n\\(Y\\) actually causes \\(X\\).\n\\(X\\) and \\(Y\\) are not actually related in the population; they happen to be correlated in the sample just by chance.\nA common variable \\(Z\\) (a confounder) causes both \\(X\\) and \\(Y\\).\nA common variable \\(W\\) (a collider) is caused by both \\(X\\) and \\(Y\\)."
   }
 ]

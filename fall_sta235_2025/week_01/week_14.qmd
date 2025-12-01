@@ -1,0 +1,300 @@
+---
+title: "Data Science for Business Applications"
+author: "Class 14 - Natural experiments and RDD"
+title-slide-attributes:
+    data-background-image: week_14_docs/background_sta235h.png
+format: 
+  revealjs:
+    chalkboard: true
+    logo: week_14_docs/texas_logo2.png
+    toc: true
+    toc-title: "Presentation Outline"
+    toc-depth: 1
+editor: visual
+code-block-height: 500px
+include-in-header:
+  - text: |
+      <style type="text/css">
+      ul li ul li {
+        font-size: 0.8em;
+      }
+      </style>
+---
+
+```{r init_setup, include=FALSE, cache=FALSE}
+# Include setup
+library(tidyverse)
+library(ggfortify)
+library(knitr)
+
+knitr::opts_chunk$set(
+  echo = FALSE, fig.align = "center"
+)
+
+hook_output <- knit_hooks$get("output")
+knit_hooks$set(output = function(x, options) {
+  lines <- options$output.lines
+  if (is.null(lines)) {
+    return(hook_output(x, options))  # pass to default hook
+  }
+  x <- unlist(strsplit(x, "\n"))
+  more <- "..."
+  if (length(lines) == 1) {        # first n lines
+    if (length(x) > lines) {
+      # truncate the output, but add ....
+      x <- c(head(x, lines), more)
+    }
+  } else {
+    x <- c(more, x[lines], more)
+  }
+  # paste these lines together
+  x <- paste(c(x, ""), collapse = "\n")
+  hook_output(x, options)
+})
+```
+
+```{r, include=FALSE, cache=FALSE}
+# sleep = read.csv("week_12_docs/sleep.csv")
+israel = read.csv("week_14_docs/israel.csv")
+sales = read.csv("week_14_docs/sales.csv")
+options(scipen = 999)
+library(tidyverse)
+library(tidymodels)
+```
+
+## The limitations of Randomized Controlled Trials (RCTs) {.smaller}
+
+Although they are powerful for inferring causation, RCTs are hard to pull off:
+
+-   They can be incredibly expensive (e.g., Phase 3 clinical trial)
+-   Compliance with the treatment protocol isn't perfect (e.g., low-calorie diet, picking up the phone)
+-   It can be hard to generalize beyond the participants involved in the study if they aren't representative (e.g., psychology experiments conducted on college students)
+-   They can be impractical (e.g., effect of education on later earnings) or even unethical (e.g., seatbelts, parachutes, medical trials)
+
+## “Faking” randomization
+
+::: center
+**Key idea:** Find a comparison group that is effectively “the same as” the treatment group to create a: **quasi-experiment** or **natural experiment**.
+:::
+
+## Does serving in the military affect long-term earnings? {.smaller}
+
+-   Does serving in the military have an impact upon your long-term earnings after discharge?
+
+-   **Why this won’t work:** Compare the wages of people who served in the US military in Afghanistan or Iraq, 10 years after discharge, to the wages of the general public.
+
+## 
+
+![](week_14_docs/atlantic.png){fig-align="center" width="500"}
+
+## A natural experiment on the effect of military service on earnings {.smaller}
+
+-   Angrist (1990) wanted to determine what effect military service had on future earnings\
+-   **“Treatment” group:** men selected by lottery to serve in Vietnam\
+    **“Control” group:** men eligible to be drafted but not selected to serve\
+-   We effectively have (almost) random assignment\
+-   This is called a **natural experiment** because we have *discovered* something close to an RCT “in the wild”\
+-   For white men, earnings in the 1980s were **15% lower** in the treatment group; military service in Vietnam causally reduced long-term earning power
+
+## 
+
+![](week_14_docs/nature.png){fig-align="center" width="500"}
+
+## Quasi-experiments / Natural experiments {.smaller}
+
+-   These are called **quasi-experiments** or **natural experiments** because participants are not randomly assigned to treatment and control groups,\
+    but groups are selected in such a way that the assignment can be thought of as effectively random.
+
+## A natural experiment of the minimum wage {.smaller}
+
+-   Why can't we just compare the unemployment rate in places with a low minimum wage (e.g., Texas) to places with a high minimum wage (e.g., California)?
+
+-   Why can't we just do a randomized controlled trial to study the impact of raising the minimum wage?
+
+## A natural experiment of the minimum wage {.smaller}
+
+-   In 1992, New Jersey's minimum wage went from \$4.25 to \$5.05
+
+-   The minimum wage in Pennsylvania remained at \$4.25
+
+-   Researchers measured employment at 410 fast food restaurants in NJ and PA both before and after the change
+
+-   This is a **natural experiment** because the two groups arose naturally (rather than being assigned by the researchers)
+
+## 
+
+![](week_14_docs/pa-nj.png){fig-align="center" width="500"}
+
+## NJ vs PA comparison
+
+|              | After |
+|--------------|-------|
+| Pennsylvania | 21.17 |
+| New Jersey   | 21.03 |
+| Difference   | -0.14 |
+
+-   After the policy change, employment was 0.14 employees per store less in NJ than in PA. Can we interpret this as a causal effect?
+
+-   No! We cannot distinguish the effect of the minimum wage increase from other differences between PA and NJ.
+
+## Difference-in-differences
+
+|              | Before | After | Difference |
+|--------------|--------|-------|------------|
+| Pennsylvania | 23.33  | 21.17 | -2.16      |
+| New Jersey   | 20.44  | 21.03 | 0.59       |
+| Difference   | -2.89  | -0.14 | 2.76       |
+
+-   The difference of the differences (-0.14-(-2.89) or 0.59-(-2.16)) gives us the causal effect of the policy change.
+
+## 
+
+![](week_14_docs/diff_diff_2025.png){fig-align="center" width="500"}
+
+## Ways to create natural experiments
+
+-   Geographic boundaries (e.g., NJ vs PA minimum wage example)\
+-   Policy changes (e.g., financial aid policy change example)\
+-   Lotteries (e.g., Vietnam draft lottery example)\
+-   Arbitrary cutoffs
+
+## Do flagship state university grads earn more money?
+
+-   Why can't we answer this question by comparing average income or wealth of (say) Texas Exes to non-Texas Exes?
+
+-   Why can't we do a Randomized Controlled Trial?
+
+## Regression discontinuity designs
+
+-   Hoekstra (2009) studied admission to a state flagship university with an SAT cutoff for admission\
+-   **Key idea:** Compare earnings 15 years after graduation for students that just made the admissions cutoff (and were accepted)\
+    to those that just missed it (and were rejected)
+
+## Regression discontinuity design example {.smaller}
+
+-   Build two regressions predicting **Y** = earnings measure from **X** = SAT score: one for students below the cutoff and one for students above\
+-   The length of the red line between the curves is the causal effect of admission
+
+::: center
+![](week_14_docs/rdd.png){fig-align="center" width="500"}
+:::
+
+## Is there a benefit to small class sizes? {.smaller}
+
+-   Many people argue that smaller classes lead to better learning outcomes compared to large classes\
+-   But why can't we just compare test scores of students in small classes and students in large classes?\
+-   Angrist & Levy (1999) studied this by taking advantage of a rule in Israeli schools, where cohorts of \>40 students are split into two smaller classes
+
+## Is there a benefit to small class sizes? {.smaller}
+
+**Key idea:** Students in cohorts just below 40 students are essentially identical to students in cohorts just above 40,\
+but the ones in the latter group will get a smaller class.
+
+```{r, echo=FALSE, fig.height = 5, warning=FALSE, message=FALSE}
+library(ggplot2)
+ggplot(israel, aes(x=cohort.size, y=read, col=ifelse(cohort.size <= 40, 
+                                                     "Class kept intact", 
+                                                     "Class split into two"))) + 
+  geom_vline(aes(xintercept=40), color = "gray", size = 1, linetype = 'dashed') + 
+  geom_point() +
+  xlab("Cohort size") +
+  ylab("Reading score") +
+  labs(col="Treatment")
+```
+
+## Creating the RDD model {.smaller}
+
+1.  Define a treatment variable:
+
+    $$
+    T = 
+    \begin{cases}
+      1, & \text{if the cohort is split into two classes} \\
+      0, & \text{if the cohort is kept intact in one class}
+    \end{cases}
+    $$
+
+2.  Recenter the selection variable so the cutoff is at 0:
+
+    $$
+    X = (\text{Cohort size}) - 40
+    $$
+
+3.  Fit a model predicting reading scores from both (X) and (T):
+
+    $$
+    \hat{Y} = \hat\beta_0 + \hat\beta_1 X + \hat\beta_2 T
+    $$
+
+The coefficient ( \hat\beta\_2 ) is the causal effect we’re looking for!
+
+## RDD model in R {.smaller}
+
+```{r, echo = TRUE}
+israel <- israel %>% 
+  mutate(
+    treatment = ifelse(cohort.size > 40, 1, 0),
+    selection = cohort.size - 40
+  )
+
+rdd1 <- lm(read ~ selection + treatment, data = israel)
+summary(rdd1)
+```
+
+## But wait! {.smaller}
+
+Our first RDD model is forcing the two lines to have the same slope; that isn't a great fit for the data:
+
+```{r, echo=FALSE, fig.height = 5, warning=FALSE, message=FALSE}
+ggplot(israel %>% mutate(pred = predict(rdd1)),
+       aes(x = cohort.size, y = read,
+           col = ifelse(cohort.size <= 40, 
+                        "Class kept intact", 
+                        "Class split into two"))) + 
+  geom_vline(aes(xintercept = 40), 
+             color = "gray", size = 1, linetype = "dashed") + 
+  geom_line(aes(y = pred), linewidth = 1) +
+  geom_point() +
+  xlab("Cohort size") +
+  ylab("Reading score") +
+  labs(col = "Treatment")
+```
+
+## But wait!
+
+-   To allow the two slopes to differ, we can add an interaction term so that the slope of (X) is different for (T=0) (cohort kept intact) and (T=1) (cohort split into smaller classes):
+
+$$
+\hat{Y} = \hat\beta_0 + \hat\beta_1 X + \hat\beta_2 T + \hat\beta_3 (T X)
+$$
+
+-   The coefficient on (T) ((\hat\beta\_2)) is our estimate of the causal effect of the treatment.
+
+## Regression Summary {.smaller}
+
+```{r, echo = TRUE}
+summary(lm(read ~ selection * treatment, data = israel))
+```
+
+## A better RDD model {.smaller}
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+ggplot(israel, aes(
+  x = cohort.size,
+  y = read,
+  col = ifelse(cohort.size <= 40, "Class kept intact", "Class split into two")
+)) +
+  geom_vline(aes(xintercept = 40),
+             color = "gray", size = 1, linetype = "dashed") +
+  geom_smooth(method = "lm", se = FALSE) +
+  geom_point() +
+  xlab("Cohort size") +
+  ylab("Reading score") +
+  labs(col = "Treatment")
+```
+
+## Conclusion
+
+-   From our data we can conclude that smaller class sizes *cause* reading scores to increase by about 5.7 points.
+
+-   RDD is usually great for internal validity, but there are **many threats to external validity**: e.g., would this generalize to different grade levels? Schools outside of Israel?
