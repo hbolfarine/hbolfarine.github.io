@@ -241,16 +241,12 @@ Class 14 - Natural experiments and RDD
 <section id="a-natural-experiment-on-the-effect-of-military-service-on-earnings" class="slide level2 smaller">
 <h2>A natural experiment on the effect of military service on earnings</h2>
 <ul>
-<li>Angrist (1990) wanted to determine what effect military service had on future earnings<br>
-</li>
-<li><strong>“Treatment” group:</strong> men selected by lottery to serve in Vietnam<br>
-<strong>“Control” group:</strong> men eligible to be drafted but not selected to serve<br>
-</li>
-<li>We effectively have (almost) random assignment<br>
-</li>
-<li>This is called a <strong>natural experiment</strong> because we have <em>discovered</em> something close to an RCT “in the wild”<br>
-</li>
-<li>For white men, earnings in the 1980s were <strong>15% lower</strong> in the treatment group; military service in Vietnam causally reduced long-term earning power</li>
+<li><p>Angrist (1990) wanted to determine what effect military service had on future earnings</p></li>
+<li><p><strong>“Treatment” group:</strong> men selected by lottery to serve in Vietnam</p></li>
+<li><p><strong>“Control” group:</strong> men eligible to be drafted but not selected to serve</p></li>
+<li><p>We effectively have (almost) random assignment</p></li>
+<li><p>This is called a <strong>natural experiment</strong> because we have <em>discovered</em> something close to an RCT “in the wild”</p></li>
+<li><p>For white men, earnings in the 1980s were <strong>15% lower</strong> in the treatment group; military service in Vietnam causally reduced long-term earning power</p></li>
 </ul>
 </section>
 <section id="section-1" class="slide level2">
@@ -260,8 +256,7 @@ Class 14 - Natural experiments and RDD
 <section id="quasi-experiments-natural-experiments" class="slide level2 smaller">
 <h2>Quasi-experiments / Natural experiments</h2>
 <ul>
-<li>These are called <strong>quasi-experiments</strong> or <strong>natural experiments</strong> because participants are not randomly assigned to treatment and control groups,<br>
-but groups are selected in such a way that the assignment can be thought of as effectively random.</li>
+<li>These are called <strong>quasi-experiments</strong> or <strong>natural experiments</strong> because participants are not randomly assigned to treatment and control groups, but groups are selected in such a way that the assignment can be thought of as effectively random.</li>
 </ul>
 </section>
 <section id="a-natural-experiment-of-the-minimum-wage" class="slide level2 smaller">
@@ -284,6 +279,33 @@ but groups are selected in such a way that the assignment can be thought of as e
 <h2></h2>
 
 <img data-src="week_14_docs/pa-nj.png" class="quarto-figure quarto-figure-center r-stretch" width="500"></section>
+<section id="pre-vs-post-comparison" class="slide level2">
+<h2>Pre vs post comparison</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th>Before</th>
+<th>After</th>
+<th>Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>New Jersey</td>
+<td>20.44</td>
+<td>21.03</td>
+<td>0.59</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>Employment went up by 0.59 employees per store in NJ. Can we interpret this as a causal effect?</p>
+<p><br></p>
+<ul>
+<li>No! We cannot distinguish the effect of the minimum wage increase from other things that changed in NJ at the same time.</li>
+</ul>
+</section>
 <section id="nj-vs-pa-comparison" class="slide level2">
 <h2>NJ vs PA comparison</h2>
 <table class="caption-top">
@@ -356,13 +378,10 @@ but groups are selected in such a way that the assignment can be thought of as e
 <section id="ways-to-create-natural-experiments" class="slide level2">
 <h2>Ways to create natural experiments</h2>
 <ul>
-<li>Geographic boundaries (e.g., NJ vs PA minimum wage example)<br>
-</li>
-<li>Policy changes (e.g., financial aid policy change example)<br>
-</li>
-<li>Lotteries (e.g., Vietnam draft lottery example)<br>
-</li>
-<li>Arbitrary cutoffs</li>
+<li><p>Geographic boundaries (e.g., NJ vs PA minimum wage example)</p></li>
+<li><p>Policy changes (e.g., financial aid policy change example)</p></li>
+<li><p>Lotteries (e.g., Vietnam draft lottery example)</p></li>
+<li><p>Arbitrary cutoffs</p></li>
 </ul>
 </section>
 <section id="do-flagship-state-university-grads-earn-more-money" class="slide level2">
@@ -375,18 +394,16 @@ but groups are selected in such a way that the assignment can be thought of as e
 <section id="regression-discontinuity-designs" class="slide level2">
 <h2>Regression discontinuity designs</h2>
 <ul>
-<li>Hoekstra (2009) studied admission to a state flagship university with an SAT cutoff for admission<br>
-</li>
-<li><strong>Key idea:</strong> Compare earnings 15 years after graduation for students that just made the admissions cutoff (and were accepted)<br>
-to those that just missed it (and were rejected)</li>
+<li><p>Hoekstra (2009) studied admission to a state flagship university with an SAT cutoff for admission</p></li>
+<li><p><strong>Key idea:</strong> Compare earnings 15 years after graduation for students that just made the admissions cutoff (and were accepted)<br>
+to those that just missed it (and were rejected)</p></li>
 </ul>
 </section>
 <section id="regression-discontinuity-design-example" class="slide level2 smaller">
 <h2>Regression discontinuity design example</h2>
 <ul>
-<li>Build two regressions predicting <strong>Y</strong> = earnings measure from <strong>X</strong> = SAT score: one for students below the cutoff and one for students above<br>
-</li>
-<li>The length of the red line between the curves is the causal effect of admission</li>
+<li><p>Build two regressions predicting <strong>Y</strong> = earnings measure from <strong>X</strong> = SAT score: one for students below the cutoff and one for students above</p></li>
+<li><p>The length of the red line between the curves is the causal effect of admission</p></li>
 </ul>
 <div class="center">
 <div class="quarto-figure quarto-figure-center">
@@ -399,10 +416,8 @@ to those that just missed it (and were rejected)</li>
 <section id="is-there-a-benefit-to-small-class-sizes" class="slide level2 smaller">
 <h2>Is there a benefit to small class sizes?</h2>
 <ul>
-<li>Many people argue that smaller classes lead to better learning outcomes compared to large classes<br>
-</li>
-<li>But why can’t we just compare test scores of students in small classes and students in large classes?<br>
-</li>
+<li>Many people argue that smaller classes lead to better learning outcomes compared to large classes</li>
+<li>But why can’t we just compare test scores of students in small classes and students in large classes?</li>
 <li>Angrist &amp; Levy (1999) studied this by taking advantage of a rule in Israeli schools, where cohorts of &gt;40 students are split into two smaller classes</li>
 </ul>
 </section>
@@ -437,18 +452,18 @@ X = (\text{Cohort size}) - 40
 <section id="rdd-model-in-r" class="slide level2 smaller">
 <h2>RDD model in R</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>israel <span class="ot">&lt;-</span> israel <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>school <span class="ot">&lt;-</span> school <span class="sc">%&gt;%</span> </span>
 <span id="cb1-2"><a></a>  <span class="fu">mutate</span>(</span>
 <span id="cb1-3"><a></a>    <span class="at">treatment =</span> <span class="fu">ifelse</span>(cohort.size <span class="sc">&gt;</span> <span class="dv">40</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
 <span id="cb1-4"><a></a>    <span class="at">selection =</span> cohort.size <span class="sc">-</span> <span class="dv">40</span></span>
 <span id="cb1-5"><a></a>  )</span>
 <span id="cb1-6"><a></a></span>
-<span id="cb1-7"><a></a>rdd1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(read <span class="sc">~</span> selection <span class="sc">+</span> treatment, <span class="at">data =</span> israel)</span>
+<span id="cb1-7"><a></a>rdd1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(read <span class="sc">~</span> selection <span class="sc">+</span> treatment, <span class="at">data =</span> school)</span>
 <span id="cb1-8"><a></a><span class="fu">summary</span>(rdd1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = read ~ selection + treatment, data = israel)
+lm(formula = read ~ selection + treatment, data = school)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
@@ -476,23 +491,23 @@ F-statistic: 3.363 on 2 and 294 DF,  p-value: 0.03596</code></pre>
 <section id="but-wait-1" class="slide level2">
 <h2>But wait!</h2>
 <ul>
-<li>To allow the two slopes to differ, we can add an interaction term so that the slope of (X) is different for (T=0) (cohort kept intact) and (T=1) (cohort split into smaller classes):</li>
+<li>To allow the two slopes to differ, we can add an interaction term so that the slope of (<span class="math inline">\(X\)</span>) is different for (<span class="math inline">\(T=0\)</span>) (cohort kept intact) and (<span class="math inline">\(T=1\)</span>) (cohort split into smaller classes):</li>
 </ul>
 <p><span class="math display">\[
 \hat{Y} = \hat\beta_0 + \hat\beta_1 X + \hat\beta_2 T + \hat\beta_3 (T X)
 \]</span></p>
 <ul>
-<li>The coefficient on (T) ((_2)) is our estimate of the causal effect of the treatment.</li>
+<li>The coefficient on (<span class="math inline">\(T\)</span>) (<span class="math inline">\(\hat\beta_2\)</span>) is our estimate of the causal effect of the treatment.</li>
 </ul>
 </section>
 <section id="regression-summary" class="slide level2 smaller">
 <h2>Regression Summary</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">summary</span>(<span class="fu">lm</span>(read <span class="sc">~</span> selection <span class="sc">*</span> treatment, <span class="at">data =</span> israel))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">summary</span>(<span class="fu">lm</span>(read <span class="sc">~</span> selection <span class="sc">*</span> treatment, <span class="at">data =</span> school))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = read ~ selection * treatment, data = israel)
+lm(formula = read ~ selection * treatment, data = school)
 
 Residuals:
     Min      1Q  Median      3Q     Max 

@@ -5002,14 +5002,14 @@
     "href": "fall_sta235_2025/week_01/week_14.html#a-natural-experiment-on-the-effect-of-military-service-on-earnings",
     "title": "Data Science for Business Applications",
     "section": "A natural experiment on the effect of military service on earnings",
-    "text": "A natural experiment on the effect of military service on earnings\n\nAngrist (1990) wanted to determine what effect military service had on future earnings\n\n“Treatment” group: men selected by lottery to serve in Vietnam\n“Control” group: men eligible to be drafted but not selected to serve\n\nWe effectively have (almost) random assignment\n\nThis is called a natural experiment because we have discovered something close to an RCT “in the wild”\n\nFor white men, earnings in the 1980s were 15% lower in the treatment group; military service in Vietnam causally reduced long-term earning power"
+    "text": "A natural experiment on the effect of military service on earnings\n\nAngrist (1990) wanted to determine what effect military service had on future earnings\n“Treatment” group: men selected by lottery to serve in Vietnam\n“Control” group: men eligible to be drafted but not selected to serve\nWe effectively have (almost) random assignment\nThis is called a natural experiment because we have discovered something close to an RCT “in the wild”\nFor white men, earnings in the 1980s were 15% lower in the treatment group; military service in Vietnam causally reduced long-term earning power"
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_14.html#quasi-experiments-natural-experiments",
     "href": "fall_sta235_2025/week_01/week_14.html#quasi-experiments-natural-experiments",
     "title": "Data Science for Business Applications",
     "section": "Quasi-experiments / Natural experiments",
-    "text": "Quasi-experiments / Natural experiments\n\nThese are called quasi-experiments or natural experiments because participants are not randomly assigned to treatment and control groups,\nbut groups are selected in such a way that the assignment can be thought of as effectively random."
+    "text": "Quasi-experiments / Natural experiments\n\nThese are called quasi-experiments or natural experiments because participants are not randomly assigned to treatment and control groups, but groups are selected in such a way that the assignment can be thought of as effectively random."
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_14.html#a-natural-experiment-of-the-minimum-wage",
@@ -5044,7 +5044,7 @@
     "href": "fall_sta235_2025/week_01/week_14.html#ways-to-create-natural-experiments",
     "title": "Data Science for Business Applications",
     "section": "Ways to create natural experiments",
-    "text": "Ways to create natural experiments\n\nGeographic boundaries (e.g., NJ vs PA minimum wage example)\n\nPolicy changes (e.g., financial aid policy change example)\n\nLotteries (e.g., Vietnam draft lottery example)\n\nArbitrary cutoffs"
+    "text": "Ways to create natural experiments\n\nGeographic boundaries (e.g., NJ vs PA minimum wage example)\nPolicy changes (e.g., financial aid policy change example)\nLotteries (e.g., Vietnam draft lottery example)\nArbitrary cutoffs"
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_14.html#do-flagship-state-university-grads-earn-more-money",
@@ -5058,21 +5058,21 @@
     "href": "fall_sta235_2025/week_01/week_14.html#regression-discontinuity-designs",
     "title": "Data Science for Business Applications",
     "section": "Regression discontinuity designs",
-    "text": "Regression discontinuity designs\n\nHoekstra (2009) studied admission to a state flagship university with an SAT cutoff for admission\n\nKey idea: Compare earnings 15 years after graduation for students that just made the admissions cutoff (and were accepted)\nto those that just missed it (and were rejected)"
+    "text": "Regression discontinuity designs\n\nHoekstra (2009) studied admission to a state flagship university with an SAT cutoff for admission\nKey idea: Compare earnings 15 years after graduation for students that just made the admissions cutoff (and were accepted)\nto those that just missed it (and were rejected)"
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_14.html#regression-discontinuity-design-example",
     "href": "fall_sta235_2025/week_01/week_14.html#regression-discontinuity-design-example",
     "title": "Data Science for Business Applications",
     "section": "Regression discontinuity design example",
-    "text": "Regression discontinuity design example\n\nBuild two regressions predicting Y = earnings measure from X = SAT score: one for students below the cutoff and one for students above\n\nThe length of the red line between the curves is the causal effect of admission"
+    "text": "Regression discontinuity design example\n\nBuild two regressions predicting Y = earnings measure from X = SAT score: one for students below the cutoff and one for students above\nThe length of the red line between the curves is the causal effect of admission"
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_14.html#is-there-a-benefit-to-small-class-sizes",
     "href": "fall_sta235_2025/week_01/week_14.html#is-there-a-benefit-to-small-class-sizes",
     "title": "Data Science for Business Applications",
     "section": "Is there a benefit to small class sizes?",
-    "text": "Is there a benefit to small class sizes?\n\nMany people argue that smaller classes lead to better learning outcomes compared to large classes\n\nBut why can’t we just compare test scores of students in small classes and students in large classes?\n\nAngrist & Levy (1999) studied this by taking advantage of a rule in Israeli schools, where cohorts of &gt;40 students are split into two smaller classes"
+    "text": "Is there a benefit to small class sizes?\n\nMany people argue that smaller classes lead to better learning outcomes compared to large classes\nBut why can’t we just compare test scores of students in small classes and students in large classes?\nAngrist & Levy (1999) studied this by taking advantage of a rule in Israeli schools, where cohorts of &gt;40 students are split into two smaller classes"
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_14.html#is-there-a-benefit-to-small-class-sizes-1",
@@ -5093,7 +5093,7 @@
     "href": "fall_sta235_2025/week_01/week_14.html#rdd-model-in-r",
     "title": "Data Science for Business Applications",
     "section": "RDD model in R",
-    "text": "RDD model in R\n\nisrael &lt;- israel %&gt;% \n  mutate(\n    treatment = ifelse(cohort.size &gt; 40, 1, 0),\n    selection = cohort.size - 40\n  )\n\nrdd1 &lt;- lm(read ~ selection + treatment, data = israel)\nsummary(rdd1)\n\n\nCall:\nlm(formula = read ~ selection + treatment, data = israel)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-35.195  -5.572   1.537   6.617  17.269 \n\nCoefficients:\n            Estimate Std. Error t value            Pr(&gt;|t|)    \n(Intercept)  69.7556     1.2697  54.939 &lt;0.0000000000000002 ***\nselection    -0.1195     0.2020  -0.592              0.5545    \ntreatment     4.0031     2.1511   1.861              0.0638 .  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 9.135 on 294 degrees of freedom\nMultiple R-squared:  0.02237,   Adjusted R-squared:  0.01572 \nF-statistic: 3.363 on 2 and 294 DF,  p-value: 0.03596"
+    "text": "RDD model in R\n\nschool &lt;- school %&gt;% \n  mutate(\n    treatment = ifelse(cohort.size &gt; 40, 1, 0),\n    selection = cohort.size - 40\n  )\n\nrdd1 &lt;- lm(read ~ selection + treatment, data = school)\nsummary(rdd1)\n\n\nCall:\nlm(formula = read ~ selection + treatment, data = school)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-35.195  -5.572   1.537   6.617  17.269 \n\nCoefficients:\n            Estimate Std. Error t value            Pr(&gt;|t|)    \n(Intercept)  69.7556     1.2697  54.939 &lt;0.0000000000000002 ***\nselection    -0.1195     0.2020  -0.592              0.5545    \ntreatment     4.0031     2.1511   1.861              0.0638 .  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 9.135 on 294 degrees of freedom\nMultiple R-squared:  0.02237,   Adjusted R-squared:  0.01572 \nF-statistic: 3.363 on 2 and 294 DF,  p-value: 0.03596"
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_14.html#but-wait",
@@ -5107,14 +5107,14 @@
     "href": "fall_sta235_2025/week_01/week_14.html#but-wait-1",
     "title": "Data Science for Business Applications",
     "section": "But wait!",
-    "text": "But wait!\n\nTo allow the two slopes to differ, we can add an interaction term so that the slope of (X) is different for (T=0) (cohort kept intact) and (T=1) (cohort split into smaller classes):\n\n\\[\n\\hat{Y} = \\hat\\beta_0 + \\hat\\beta_1 X + \\hat\\beta_2 T + \\hat\\beta_3 (T X)\n\\]\n\nThe coefficient on (T) ((_2)) is our estimate of the causal effect of the treatment."
+    "text": "But wait!\n\nTo allow the two slopes to differ, we can add an interaction term so that the slope of (\\(X\\)) is different for (\\(T=0\\)) (cohort kept intact) and (\\(T=1\\)) (cohort split into smaller classes):\n\n\\[\n\\hat{Y} = \\hat\\beta_0 + \\hat\\beta_1 X + \\hat\\beta_2 T + \\hat\\beta_3 (T X)\n\\]\n\nThe coefficient on (\\(T\\)) (\\(\\hat\\beta_2\\)) is our estimate of the causal effect of the treatment."
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_14.html#regression-summary",
     "href": "fall_sta235_2025/week_01/week_14.html#regression-summary",
     "title": "Data Science for Business Applications",
     "section": "Regression Summary",
-    "text": "Regression Summary\n\nsummary(lm(read ~ selection * treatment, data = israel))\n\n\nCall:\nlm(formula = read ~ selection * treatment, data = israel)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-33.618  -6.102   1.341   6.922  17.249 \n\nCoefficients:\n                    Estimate Std. Error t value            Pr(&gt;|t|)    \n(Intercept)          66.6294     1.8141  36.729 &lt;0.0000000000000002 ***\nselection            -0.8945     0.3806  -2.350              0.0194 *  \ntreatment             5.6641     2.2439   2.524              0.0121 *  \nselection:treatment   1.0720     0.4477   2.395              0.0173 *  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 9.063 on 293 degrees of freedom\nMultiple R-squared:  0.04113,   Adjusted R-squared:  0.03132 \nF-statistic:  4.19 on 3 and 293 DF,  p-value: 0.00634"
+    "text": "Regression Summary\n\nsummary(lm(read ~ selection * treatment, data = school))\n\n\nCall:\nlm(formula = read ~ selection * treatment, data = school)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-33.618  -6.102   1.341   6.922  17.249 \n\nCoefficients:\n                    Estimate Std. Error t value            Pr(&gt;|t|)    \n(Intercept)          66.6294     1.8141  36.729 &lt;0.0000000000000002 ***\nselection            -0.8945     0.3806  -2.350              0.0194 *  \ntreatment             5.6641     2.2439   2.524              0.0121 *  \nselection:treatment   1.0720     0.4477   2.395              0.0173 *  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 9.063 on 293 degrees of freedom\nMultiple R-squared:  0.04113,   Adjusted R-squared:  0.03132 \nF-statistic:  4.19 on 3 and 293 DF,  p-value: 0.00634"
   },
   {
     "objectID": "fall_sta235_2025/week_01/week_14.html#a-better-rdd-model",
@@ -5143,5 +5143,12 @@
     "title": "Data Science for Business Applications",
     "section": "",
     "text": "Although they are powerful for inferring causation, RCTs are hard to pull off:\n\nThey can be incredibly expensive (e.g., Phase 3 clinical trial)\nCompliance with the treatment protocol isn’t perfect (e.g., low-calorie diet, picking up the phone)\nIt can be hard to generalize beyond the participants involved in the study if they aren’t representative (e.g., psychology experiments conducted on college students)\nThey can be impractical (e.g., effect of education on later earnings) or even unethical (e.g., seatbelts, parachutes, medical trials)"
+  },
+  {
+    "objectID": "fall_sta235_2025/week_01/week_14.html#pre-vs-post-comparison",
+    "href": "fall_sta235_2025/week_01/week_14.html#pre-vs-post-comparison",
+    "title": "Data Science for Business Applications",
+    "section": "Pre vs post comparison",
+    "text": "Pre vs post comparison\n\n\n\n\nBefore\nAfter\nDifference\n\n\n\n\nNew Jersey\n20.44\n21.03\n0.59\n\n\n\n\nEmployment went up by 0.59 employees per store in NJ. Can we interpret this as a causal effect?\n\n\nNo! We cannot distinguish the effect of the minimum wage increase from other things that changed in NJ at the same time."
   }
 ]

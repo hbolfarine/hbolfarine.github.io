@@ -55,7 +55,7 @@ knit_hooks$set(output = function(x, options) {
 
 ```{r, include=FALSE, cache=FALSE}
 # sleep = read.csv("week_12_docs/sleep.csv")
-israel = read.csv("week_14_docs/israel.csv")
+school = read.csv("week_14_docs/school.csv")
 sales = read.csv("week_14_docs/sales.csv")
 options(scipen = 999)
 library(tidyverse)
@@ -89,11 +89,16 @@ Although they are powerful for inferring causation, RCTs are hard to pull off:
 
 ## A natural experiment on the effect of military service on earnings {.smaller}
 
--   Angrist (1990) wanted to determine what effect military service had on future earnings\
--   **“Treatment” group:** men selected by lottery to serve in Vietnam\
-    **“Control” group:** men eligible to be drafted but not selected to serve\
--   We effectively have (almost) random assignment\
--   This is called a **natural experiment** because we have *discovered* something close to an RCT “in the wild”\
+-   Angrist (1990) wanted to determine what effect military service had on future earnings
+
+-   **“Treatment” group:** men selected by lottery to serve in Vietnam
+
+-   **“Control” group:** men eligible to be drafted but not selected to serve
+
+-   We effectively have (almost) random assignment
+
+-   This is called a **natural experiment** because we have *discovered* something close to an RCT “in the wild”
+
 -   For white men, earnings in the 1980s were **15% lower** in the treatment group; military service in Vietnam causally reduced long-term earning power
 
 ## 
@@ -102,8 +107,7 @@ Although they are powerful for inferring causation, RCTs are hard to pull off:
 
 ## Quasi-experiments / Natural experiments {.smaller}
 
--   These are called **quasi-experiments** or **natural experiments** because participants are not randomly assigned to treatment and control groups,\
-    but groups are selected in such a way that the assignment can be thought of as effectively random.
+-   These are called **quasi-experiments** or **natural experiments** because participants are not randomly assigned to treatment and control groups, but groups are selected in such a way that the assignment can be thought of as effectively random.
 
 ## A natural experiment of the minimum wage {.smaller}
 
@@ -124,6 +128,22 @@ Although they are powerful for inferring causation, RCTs are hard to pull off:
 ## 
 
 ![](week_14_docs/pa-nj.png){fig-align="center" width="500"}
+
+
+## Pre vs post comparison
+
+| | Before | After | Difference |
+|---------|--------|-------|------------|
+| New Jersey | 20.44 | 21.03 | 0.59 |
+
+<br>
+
+Employment went up by 0.59 employees per store in NJ. Can we interpret this as a causal effect?
+
+<br>
+
+- No! We cannot distinguish the effect of the minimum wage increase from other things that changed in NJ at the same time.
+
 
 ## NJ vs PA comparison
 
@@ -153,9 +173,12 @@ Although they are powerful for inferring causation, RCTs are hard to pull off:
 
 ## Ways to create natural experiments
 
--   Geographic boundaries (e.g., NJ vs PA minimum wage example)\
--   Policy changes (e.g., financial aid policy change example)\
--   Lotteries (e.g., Vietnam draft lottery example)\
+-   Geographic boundaries (e.g., NJ vs PA minimum wage example)
+
+-   Policy changes (e.g., financial aid policy change example)
+
+-   Lotteries (e.g., Vietnam draft lottery example)
+
 -   Arbitrary cutoffs
 
 ## Do flagship state university grads earn more money?
@@ -166,13 +189,15 @@ Although they are powerful for inferring causation, RCTs are hard to pull off:
 
 ## Regression discontinuity designs
 
--   Hoekstra (2009) studied admission to a state flagship university with an SAT cutoff for admission\
+-   Hoekstra (2009) studied admission to a state flagship university with an SAT cutoff for admission
+
 -   **Key idea:** Compare earnings 15 years after graduation for students that just made the admissions cutoff (and were accepted)\
     to those that just missed it (and were rejected)
 
 ## Regression discontinuity design example {.smaller}
 
--   Build two regressions predicting **Y** = earnings measure from **X** = SAT score: one for students below the cutoff and one for students above\
+-   Build two regressions predicting **Y** = earnings measure from **X** = SAT score: one for students below the cutoff and one for students above
+
 -   The length of the red line between the curves is the causal effect of admission
 
 ::: center
@@ -181,9 +206,9 @@ Although they are powerful for inferring causation, RCTs are hard to pull off:
 
 ## Is there a benefit to small class sizes? {.smaller}
 
--   Many people argue that smaller classes lead to better learning outcomes compared to large classes\
--   But why can't we just compare test scores of students in small classes and students in large classes?\
--   Angrist & Levy (1999) studied this by taking advantage of a rule in Israeli schools, where cohorts of \>40 students are split into two smaller classes
+-   Many people argue that smaller classes lead to better learning outcomes compared to large classes
+-   But why can't we just compare test scores of students in small classes and students in large classes?
+-   Angrist & Levy (1999) studied this by taking advantage of a rule in Israeli schools, where cohorts of >40 students are split into two smaller classes
 
 ## Is there a benefit to small class sizes? {.smaller}
 
@@ -192,7 +217,7 @@ but the ones in the latter group will get a smaller class.
 
 ```{r, echo=FALSE, fig.height = 5, warning=FALSE, message=FALSE}
 library(ggplot2)
-ggplot(israel, aes(x=cohort.size, y=read, col=ifelse(cohort.size <= 40, 
+ggplot(school, aes(x=cohort.size, y=read, col=ifelse(cohort.size <= 40, 
                                                      "Class kept intact", 
                                                      "Class split into two"))) + 
   geom_vline(aes(xintercept=40), color = "gray", size = 1, linetype = 'dashed') + 
@@ -231,13 +256,13 @@ The coefficient ( \hat\beta\_2 ) is the causal effect we’re looking for!
 ## RDD model in R {.smaller}
 
 ```{r, echo = TRUE}
-israel <- israel %>% 
+school <- school %>% 
   mutate(
     treatment = ifelse(cohort.size > 40, 1, 0),
     selection = cohort.size - 40
   )
 
-rdd1 <- lm(read ~ selection + treatment, data = israel)
+rdd1 <- lm(read ~ selection + treatment, data = school)
 summary(rdd1)
 ```
 
@@ -246,7 +271,7 @@ summary(rdd1)
 Our first RDD model is forcing the two lines to have the same slope; that isn't a great fit for the data:
 
 ```{r, echo=FALSE, fig.height = 5, warning=FALSE, message=FALSE}
-ggplot(israel %>% mutate(pred = predict(rdd1)),
+ggplot(school %>% mutate(pred = predict(rdd1)),
        aes(x = cohort.size, y = read,
            col = ifelse(cohort.size <= 40, 
                         "Class kept intact", 
@@ -262,24 +287,24 @@ ggplot(israel %>% mutate(pred = predict(rdd1)),
 
 ## But wait!
 
--   To allow the two slopes to differ, we can add an interaction term so that the slope of (X) is different for (T=0) (cohort kept intact) and (T=1) (cohort split into smaller classes):
+-   To allow the two slopes to differ, we can add an interaction term so that the slope of ($X$) is different for ($T=0$) (cohort kept intact) and ($T=1$) (cohort split into smaller classes):
 
 $$
 \hat{Y} = \hat\beta_0 + \hat\beta_1 X + \hat\beta_2 T + \hat\beta_3 (T X)
 $$
 
--   The coefficient on (T) ((\hat\beta\_2)) is our estimate of the causal effect of the treatment.
+-   The coefficient on ($T$) ($\hat\beta_2$) is our estimate of the causal effect of the treatment.
 
 ## Regression Summary {.smaller}
 
 ```{r, echo = TRUE}
-summary(lm(read ~ selection * treatment, data = israel))
+summary(lm(read ~ selection * treatment, data = school))
 ```
 
 ## A better RDD model {.smaller}
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
-ggplot(israel, aes(
+ggplot(school, aes(
   x = cohort.size,
   y = read,
   col = ifelse(cohort.size <= 40, "Class kept intact", "Class split into two")
