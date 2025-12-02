@@ -129,12 +129,11 @@ Although they are powerful for inferring causation, RCTs are hard to pull off:
 
 ![](week_14_docs/pa-nj.png){fig-align="center" width="500"}
 
-
 ## Pre vs post comparison
 
-| | Before | After | Difference |
-|---------|--------|-------|------------|
-| New Jersey | 20.44 | 21.03 | 0.59 |
+|            | Before | After | Difference |
+|------------|--------|-------|------------|
+| New Jersey | 20.44  | 21.03 | 0.59       |
 
 <br>
 
@@ -142,8 +141,7 @@ Employment went up by 0.59 employees per store in NJ. Can we interpret this as a
 
 <br>
 
-- No! We cannot distinguish the effect of the minimum wage increase from other things that changed in NJ at the same time.
-
+-   No! We cannot distinguish the effect of the minimum wage increase from other things that changed in NJ at the same time.
 
 ## NJ vs PA comparison
 
@@ -208,7 +206,7 @@ Employment went up by 0.59 employees per store in NJ. Can we interpret this as a
 
 -   Many people argue that smaller classes lead to better learning outcomes compared to large classes
 -   But why can't we just compare test scores of students in small classes and students in large classes?
--   Angrist & Levy (1999) studied this by taking advantage of a rule in Israeli schools, where cohorts of >40 students are split into two smaller classes
+-   Angrist & Levy (1999) studied this by taking advantage of a rule in Israeli schools, where cohorts of \>40 students are split into two smaller classes
 
 ## Is there a benefit to small class sizes? {.smaller}
 
