@@ -177,11 +177,11 @@ options(scipen = 999)
 | Component                 | **Points** |
 |---------------------------|------------|
 | Pre-class work (Perusall) | **44**     |
-| Class Participation       | **56**     |
+| Class Participation       | **86**     |
 | Homework (13)             | **195**    |
-| Checkpoint Quizze (13)    | **325**    |
-| Exam A                    | **190**    |
-| Exam B                    | **190**    |
+| Checkpoint Quizze (13)    | **275**    |
+| Exam A                    | **200**    |
+| Exam B                    | **200**    |
 | **Total**                 | **1,000**  |
 :::
 
