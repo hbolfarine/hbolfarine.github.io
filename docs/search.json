@@ -5317,14 +5317,14 @@
     "href": "sp_sta235_2026/week_01.html#correlation",
     "title": "Data Science for Business Applications",
     "section": "Correlation",
-    "text": "Correlation\n\n\n[1] 0.189\n\n\n\nHow can we interpret this?\nThe $ sign accesses the variables in the data set profs.csv."
+    "text": "Correlation\n\ncor(profs$eval, profs$beauty)\n\n[1] 0.189\n\n\n\nHow can we interpret this?\nThe $ sign accesses the variables in the data set profs.csv."
   },
   {
     "objectID": "sp_sta235_2026/week_01.html#the-simple-regression-fit",
     "href": "sp_sta235_2026/week_01.html#the-simple-regression-fit",
     "title": "Data Science for Business Applications",
     "section": "The simple regression fit",
-    "text": "The simple regression fit\n\n\n\nCall:\nlm(formula = eval ~ beauty, data = profs)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-1.8002 -0.3630  0.0725  0.4021  1.1037 \n\nCoefficients:\n            Estimate Std. Error t value             Pr(&gt;|t|)    \n(Intercept)   3.9983     0.0253  157.73 &lt; 0.0000000000000002 ***\nbeauty        0.1330     0.0322    4.13             0.000042 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.545 on 461 degrees of freedom\nMultiple R-squared:  0.0357,    Adjusted R-squared:  0.0336 \nF-statistic: 17.1 on 1 and 461 DF,  p-value: 0.0000425"
+    "text": "The simple regression fit\n\nmodel_simple &lt;- lm(eval ~ beauty, data = profs)\nsummary(model_simple)\n\n\nCall:\nlm(formula = eval ~ beauty, data = profs)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-1.8002 -0.3630  0.0725  0.4021  1.1037 \n\nCoefficients:\n            Estimate Std. Error t value             Pr(&gt;|t|)    \n(Intercept)   3.9983     0.0253  157.73 &lt; 0.0000000000000002 ***\nbeauty        0.1330     0.0322    4.13             0.000042 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.545 on 461 degrees of freedom\nMultiple R-squared:  0.0357,    Adjusted R-squared:  0.0336 \nF-statistic: 17.1 on 1 and 461 DF,  p-value: 0.0000425\n\nbprof = coef(model_simple)"
   },
   {
     "objectID": "sp_sta235_2026/week_01.html#interpreting-the-coefficients",
@@ -5352,7 +5352,7 @@
     "href": "sp_sta235_2026/week_01.html#multiple-regression-eval-on-beauty-and-age",
     "title": "Data Science for Business Applications",
     "section": "Multiple regression: eval on beauty and age",
-    "text": "Multiple regression: eval on beauty and age\n\n\n\nCall:\nlm(formula = eval ~ beauty + age, data = profs)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-1.8024 -0.3651  0.0741  0.3991  1.1021 \n\nCoefficients:\n            Estimate Std. Error t value             Pr(&gt;|t|)    \n(Intercept) 3.984401   0.133730   29.79 &lt; 0.0000000000000002 ***\nbeauty      0.134063   0.033744    3.97             0.000082 ***\nage         0.000287   0.002715    0.11                 0.92    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.546 on 460 degrees of freedom\nMultiple R-squared:  0.0358,    Adjusted R-squared:  0.0316 \nF-statistic: 8.53 on 2 and 460 DF,  p-value: 0.00023"
+    "text": "Multiple regression: eval on beauty and age\n\nmodel_beauty_age &lt;- lm(eval ~ beauty + age, data = profs)\nsummary(model_beauty_age)\n\n\nCall:\nlm(formula = eval ~ beauty + age, data = profs)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-1.8024 -0.3651  0.0741  0.3991  1.1021 \n\nCoefficients:\n            Estimate Std. Error t value             Pr(&gt;|t|)    \n(Intercept) 3.984401   0.133730   29.79 &lt; 0.0000000000000002 ***\nbeauty      0.134063   0.033744    3.97             0.000082 ***\nage         0.000287   0.002715    0.11                 0.92    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.546 on 460 degrees of freedom\nMultiple R-squared:  0.0358,    Adjusted R-squared:  0.0316 \nF-statistic: 8.53 on 2 and 460 DF,  p-value: 0.00023"
   },
   {
     "objectID": "sp_sta235_2026/week_01.html#interpreting-the-coefficients-1",

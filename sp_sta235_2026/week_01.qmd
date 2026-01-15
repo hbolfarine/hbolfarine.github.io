@@ -279,6 +279,9 @@ par(mfrow = c(1, 1), mai = c(1.02, 0.82, 0.22, 0.42))
 ## Correlation
 
 ```{r}
+#| eval: true
+#| echo: true
+#| output: true
 cor(profs$eval, profs$beauty)
 ```
 
@@ -288,7 +291,9 @@ cor(profs$eval, profs$beauty)
 ## The simple regression fit
 
 ```{r}
-# linear regression of eval on beauty
+#| eval: true
+#| echo: true
+#| output: true
 model_simple <- lm(eval ~ beauty, data = profs)
 summary(model_simple)
 bprof = coef(model_simple)
@@ -324,7 +329,9 @@ ggplot(profs, aes(x = age, y = beauty)) +
 ## Multiple regression: eval on beauty and age {.smaller}
 
 ```{r}
-#linear regression of eval on beauty and age
+#| eval: true
+#| echo: true
+#| output: true
 model_beauty_age <- lm(eval ~ beauty + age, data = profs)
 summary(model_beauty_age)
 ```
