@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+/*-- scss:defaults --*/
+$presentation-heading-font: "Josefin Sans", sans-serif;
+$font-family-sans-serif: "Lato", sans-serif;
+$font-family-monospace: "Space Mono", monospace;
+
+$presentation-font-size-root: 36px;
+$presentation-h1-font-size: 70px;
+$presentation-h2-font-size: 50px;
+$code-block-font-size: 0.7em;
+
+/*-- scss:rules --*/
+
+.reveal .slides section.smaller h2,
+.reveal .slides section .smaller h2 {
+  font-size: $presentation-h2-font-size; /* Replace with your desired fixed size or $presentation-h2-font-size */
+}
+.text-smaller {
+  font-size: 0.7em; /* Adjust this value as needed */
+}

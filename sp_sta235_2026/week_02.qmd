@@ -1,0 +1,1284 @@
+---
+title: "Error, Uncertainty and the Linear Model"
+comment-directive: "#"
+filters: 
+    - hide-comment
+    - line-highlight
+code-tools: true
+format:
+  revealjs:
+    theme: [default, styles.scss]
+    chalkboard: true
+    slide-number: true
+    transition: none
+    html-math-method: mathjax
+---
+
+```{r}
+#| label: setup
+#| message: false
+
+library(tidyverse)
+library(ggplot2)
+library(patchwork)
+theme_set(theme_minimal())
+
+options(scipen = 9999, digits=8)
+
+# Load and clean data
+houses <- read_csv("week_02_docs/data/houses.csv")
+```
+
+# Measuring prediction error
+
+# Data description:
+
+- Subset of single family home sales in 3 Austin zipcodes
+
+- Variables include location, size, number of bedrooms, number of bathrooms, and many more
+
+- Focus on relationship between price, number of bedrooms, and living area (square feet) as a first example
+
+## Predicting price from area
+
+```{r, echo=FALSE}
+# Plot 1: Scatterplot of price vs area with fitted regression line
+
+ggplot(houses, aes(x = area, y = price)) +
+  geom_point(alpha = 0.4, color = "gray30") +
+  geom_smooth(method = "lm", se = FALSE, color = "#0072B2", linewidth = 1.2) +  # Colorblind-safe blue
+  scale_y_continuous(labels = scales::comma_format()) +
+  scale_x_continuous(labels = scales::comma_format()) +
+  labs(
+    x = "Living Area (sq ft)",
+    y = "Sale Price ($)",
+    title = "Home Sale Price vs Living Area"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10)
+  )
+```
+
+## Residuals and fitted values
+- The **fitted value** ("y hat") for observation $i$ is the predicted value from the regression line:
+$$
+\widehat{y}_i = \widehat{\beta_0} + \widehat{\beta_1} \times \text{area}_i
+$$
+- The **residual** is the corresponding prediction error: 
+$$e_i = y_i - \widehat{y}_i = \text{observed price} - \text{predicted price}$$
+- When a linear model fits well,
+    - The fitted line tells us about the part of price **predictable** from area
+    - The residuals tell us about the part of price **not predictable** from area
+
+## Visualizing residuals and fitted values
+
+```{r, fig.width=7, fig.height=5}
+# Plot 2: Static scatterplot showing selected residuals
+
+# Set text size for annotations
+label_size <- 3.5
+
+# Fit the model
+fit <- lm(price ~ area, data = houses)
+b0 <- coef(fit)[1]
+b1 <- coef(fit)[2]
+
+# Add fitted values and residuals to data
+houses_with_resid <- houses %>%
+  mutate(
+    fitted = predict(fit),
+    residual = price - fitted
+  )
+
+# Select 6-8 examples spread across area range with mix of positive/negative residuals
+# Sort by residual size and pick good examples
+houses_sorted <- houses_with_resid %>%
+  arrange(residual)
+
+# Pick 2 examples: positive residual ~1500 sqft, negative residual ~2800 sqft
+# But where the larger house still has higher price than smaller house
+set.seed(456)
+example_pos <- houses_with_resid %>% 
+  filter(residual > 0, area >= 1400, area <= 1600) %>% 
+  slice_max(residual, n = 1)
+
+example_neg <- houses_with_resid %>% 
+  filter(residual < 0, area >= 2700, area <= 2900, price > example_pos$price) %>% 
+  slice_min(residual, n = 1)
+
+examples <- bind_rows(example_pos, example_neg)
+
+# Create the plot
+ggplot(houses, aes(x = area, y = price)) +
+  geom_point(alpha = 0.2, color = "gray60", size = 1.5) +
+  geom_smooth(method = "lm", se = FALSE, color = "#0072B2", linewidth = 1) +
+  # Add segments for selected points
+  geom_segment(data = examples,
+               aes(x = area, xend = area, y = price, yend = fitted,
+                   color = ifelse(residual > 0, "Positive", "Negative")),
+               linewidth = 0.8) +
+  # Highlight the selected points
+  geom_point(data = examples, aes(color = ifelse(residual > 0, "Positive", "Negative")),
+             size = 3) +
+  # Add points on the line for fitted values
+  geom_point(data = examples, aes(x = area, y = fitted),
+             color = "#0072B2", size = 3) +
+  # Add residual labels with explicit formula
+  geom_label(data = examples,
+             aes(x = area + 80, 
+                 y = (price + fitted) / 2,
+                 label = paste0("e = y - ŷ = $", scales::comma(round(residual, 0))),
+                 color = ifelse(residual > 0, "Positive", "Negative")),
+             hjust = 0, size = label_size, fontface = "bold", 
+             fill = "white", label.padding = unit(0.25, "lines")) +
+  # Label actual values (observed points)
+  geom_label(data = examples,
+             aes(x = area - 80, y = price,
+                 label = paste0("y = $", scales::comma(round(price, 0)))),
+             hjust = 1, size = label_size - 0.5, color = "black",
+             fill = "white", label.padding = unit(0.25, "lines")) +
+  # Label fitted values
+  geom_label(data = examples,
+             aes(x = area - 80, y = fitted,
+                 label = paste0("ŷ = $", scales::comma(round(fitted, 0)))),
+             hjust = 1, size = label_size - 0.5, color = "black",
+             fill = "white", label.padding = unit(0.25, "lines")) +
+  scale_color_manual(values = c("Positive" = "#009E73", "Negative" = "#D55E00"),
+                     name = "Residual") +
+  scale_y_continuous(labels = scales::comma_format()) +
+  scale_x_continuous(labels = scales::comma_format()) +
+  labs(
+    x = "Living Area (sq ft)",
+    y = "Sale Price ($)",
+    title = "Residuals: Deviations from the Fitted Line"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10),
+    legend.position = "none"
+  )
+```
+
+## What does a residual tell us?
+
+
+```{r, fig.width=7, fig.height=5}
+# Plot 9: Comparing two specific houses using residuals
+
+# Define the two specific houses from our analysis
+house_a <- data.frame(
+  streetAddress = "4710 Rue St",
+  area = 1703,
+  price = 835000,
+  zipcode = "78731",
+  label = "House A"
+)
+
+house_b <- data.frame(
+  streetAddress = "3905 Petra Path",
+  area = 3670,
+  price = 749000,
+  zipcode = "78731",
+  label = "House B"
+)
+
+# Add fitted values and residuals for these specific houses
+house_a$fitted <- b0 + b1 * house_a$area
+house_a$residual <- house_a$price - house_a$fitted
+
+house_b$fitted <- b0 + b1 * house_b$area
+house_b$residual <- house_b$price - house_b$fitted
+
+comparison_houses <- rbind(house_a, house_b)
+
+ggplot(houses, aes(x = area, y = price)) +
+  geom_point(alpha = 0.15, color = "gray70", size = 1.5) +
+  geom_smooth(method = "lm", se = FALSE, color = "#0072B2", linewidth = 1) +
+  # Segments showing residuals
+  geom_segment(data = comparison_houses,
+               aes(x = area, xend = area, y = price, yend = fitted,
+                   color = label),
+               linewidth = 1.2) +
+  # Observed points
+  geom_point(data = comparison_houses,
+             aes(color = label),
+             size = 4) +
+  # Fitted points on the line
+  geom_point(data = comparison_houses,
+             aes(x = area, y = fitted, color = label),
+             size = 3, shape = 1, stroke = 1.5) +
+  # Labels for House A
+  annotate("label", x = house_a$area - 100, y = house_a$price + 50000,
+           label = paste0("House A\n", house_a$area, " sq ft\n$", 
+                         scales::comma(house_a$price), "\nResidual: +$",
+                         scales::comma(round(house_a$residual, 0))),
+           hjust = 1, color = "#009E73", fontface = "bold",
+           fill = "white", size = 3.5) +
+  annotate("text", x = house_a$area + 300, y = (house_a$price + house_a$fitted)/2+100000,
+           label = "Sold for MORE\nthan expected",
+           hjust = 0, color = "#009E73", fontface = "italic", size = 3) +
+  # Labels for House B
+  annotate("label", x = house_b$area - 500, y = house_b$price - 200000,
+           label = paste0("House B\n", house_b$area, " sq ft\n$", 
+                         scales::comma(house_b$price), "\nResidual: $",
+                         scales::comma(round(house_b$residual, 0))),
+           hjust = 0, color = "#D55E00", fontface = "bold",
+           fill = "white", size = 3.5) +
+  annotate("text", x = house_b$area - 300, y = (house_b$price + house_b$fitted)/2-120000,
+           label = "Sold for LESS\nthan expected",
+           hjust = 1, color = "#D55E00", fontface = "italic", size = 3) +
+  scale_color_manual(values = c("House A" = "#009E73", "House B" = "#D55E00"),
+                     name = NULL) +
+  scale_y_continuous(labels = scales::comma_format()) +
+  scale_x_continuous(labels = scales::comma_format()) +
+  labs(
+    x = "Living Area (sq ft)",
+    y = "Sale Price ($)",
+    title = ""
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10),
+    legend.position = "none"
+  )
+```
+
+## What is a "typical" residual?
+
+- The residual tells us the prediction error for a given point
+- The **standard deviation of the residuals** tells us the typical **size** of these prediction errors (in absolute value)
+- It's a measure of how **variable our prediction errors are**
+    - Low variability: our predictions are usually close to actual values
+    - High variability: our predictions are often far off from actual values
+- In R, this is called the **Residual Standard Error (RSE)**
+
+##
+
+```{r, echo=TRUE}
+#| class-output: "highlight numberLines"
+#| output-line-numbers: "16"
+summary(fit)
+```
+
+From line 16: RSE = $155,630
+
+## 
+
+```{r}
+houses_both <- houses %>%
+  mutate(
+    null_resid = price - mean(price),
+    fitted = predict(fit),
+    resid = price - fitted
+  )
+
+
+# Select the same examples for both models
+set.seed(12443)
+examples_both <- houses_both %>%
+  mutate(price_bin = cut(resid, breaks = 5)) %>%
+  group_by(price_bin) %>%
+  slice_sample(n = 1) %>%
+  ungroup() %>%
+  slice_head(n = 5)
+
+# Assign colors to examples
+example_colors <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#CC79A7")
+examples_both <- examples_both %>%
+  mutate(color = example_colors[1:n()])
+
+# Calculate shared x-axis limits for histograms
+hist_xlim <- range(c(houses_both$null_resid, houses_both$resid))
+
+
+# Panel C: Regression model scatterplot
+panel_c <- ggplot(houses_both, aes(x = area, y = price)) +
+  geom_point(alpha = 0.15, color = "gray70", size = 1.5) +
+  geom_smooth(method = "lm", se = FALSE, color = "#0072B2", linewidth = 1.2) +
+  geom_segment(data = examples_both,
+               aes(x = area, xend = area, y = price, yend = fitted, color = color),
+               linewidth = 1, show.legend = FALSE) +
+  geom_point(data = examples_both, aes(color = color), size = 3, show.legend = FALSE) +
+  geom_point(data = examples_both, aes(x = area, y = fitted),
+             color = "#0072B2", size = 2.5) +
+  scale_color_identity() +
+  scale_y_continuous(labels = scales::comma_format()) +
+  scale_x_continuous(labels = scales::comma_format()) +
+  labs(
+    x = "Living Area (sq ft)",
+    y = "Sale Price ($)",
+    title = "Regression fit + example residuals"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 10, face = "bold"),
+    axis.title = element_text(size = 9),
+    axis.text = element_text(size = 8)
+  )
+
+# Panel D: Regression model histogram
+sigma_hat <- round(summary(fit)$sigma, -1)
+y_loc = 25
+panel_d <- 
+  ggplot(houses_both, aes(x = resid)) +
+  geom_histogram(bins = 40, fill = "gray70", color = "white", alpha = 0.7) +
+  geom_segment(data = examples_both,
+               aes(x = resid, xend = resid, y = 0, yend = -2, color = color),
+               linewidth = 1.5, show.legend = FALSE) +
+  scale_color_identity() +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5) +
+
+  annotate("label", x = hist_xlim[2] * 0.7, y = 60,
+           label = paste0("bold(RSE == '$", format(round(sigma_hat, 0), big.mark = ","), "')"),
+           parse = TRUE,
+           color = "#009E73", fontface = "bold", fill = "white", size = 3) +
+
+  geom_segment(aes(x=-2*sigma_hat, xend=2*sigma_hat, y=y_loc, yend=y_loc), color="#009E73")+
+
+  annotate("label", x = 2*sigma_hat + 100000, y = y_loc+3,
+          label = paste0("bold('$", format(2*round(sigma_hat, 0), big.mark = ","), "')"),
+          parse = TRUE,
+          color = "#009E73", fontface = "bold", fill = "white", size = 3) +
+  annotate("label", x = -2*sigma_hat-100000, y = y_loc+3,
+        label = paste0("bold('-$", format(2*round(sigma_hat, 0), big.mark = ","), "')"),
+        parse = TRUE,
+        color = "#009E73", fontface = "bold", fill = "white", size = 3) +
+  
+  geom_segment(aes(x=-sigma_hat, xend=sigma_hat, y=y_loc+10, yend=y_loc+10), color="#009E73")+
+  annotate("label", x = sigma_hat + 100000, y = y_loc+13,
+          label = paste0("bold('$", format(round(sigma_hat, 0), big.mark = ","), "')"),
+          parse = TRUE,
+          color = "#009E73", fontface = "bold", fill = "white", size = 3) +
+  annotate("label", x = -sigma_hat-100000, y = y_loc+13,
+        label = paste0("bold('-$", format(round(sigma_hat, 0), big.mark = ","), "')"),
+        parse = TRUE,
+        color = "#009E73", fontface = "bold", fill = "white", size = 3) +
+
+  scale_x_continuous(labels = scales::comma_format(), limits = hist_xlim) +
+  labs(
+    x = "Residual: y - ŷ ($)",
+    y = "Count",
+    title = "Residuals from the regression fit"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 10, face = "bold"),
+    axis.title = element_text(size = 9),
+    axis.text = element_text(size = 8)
+  )
+
+# Make a histogram of absolute residuas from the simple regression fit
+panel_e = ggplot(houses_both, aes(x = abs(resid))) +
+  geom_histogram(bins = 40, fill = "gray70", color = "white", alpha = 0.7) +
+  geom_segment(data = examples_both,
+               aes(x = abs(resid), xend = abs(resid), y = 0, yend = -2, color = color),
+               linewidth = 1.5, show.legend = FALSE) +
+  scale_color_identity() +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5) +
+  geom_vline(xintercept = sigma_hat, linetype = "dashed", color = "#009E73", linewidth = 0.5) +
+  annotate("label", x = 2.2*sigma_hat, y = 50,
+           label = paste0("bold(RSE == '$", format(round(sigma_hat, 0), big.mark = ","), "')"),
+           parse = TRUE,
+           color = "#009E73", fontface = "bold", fill = "white", size = 3) +
+  scale_x_continuous(labels = scales::comma_format(), limits = c(-10000,hist_xlim[2])) +
+  labs(
+    x = "Residual size: |y - ŷ| ($)",
+    y = "Count",
+    title = "Absolute value (size) of residuals"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 10, face = "bold"),
+    axis.title = element_text(size = 9),
+    axis.text = element_text(size = 8)
+  )
+
+# Combine panels in 2x2 layout
+(panel_c + panel_d + panel_e) +
+  plot_annotation(
+    title = "",
+    theme = theme(plot.title = element_text(hjust = 0.5, size = 13, face = "bold"))
+  )
+```
+
+## $R^2$ (R-squared)
+
+$R^2$ is a measure of the **strength of the linear relationship** between the  $Y$ and all $X$'s in the linear regression
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+- $R^2$ ranges from 0 to 1
+  - 0 = no linear realtaionship 
+  - 1 = perfect linear relationship
+- Related to *correlation*
+:::
+
+::: {.column width="60%"}
+$Cor(X,Y)$ measures linear association between two variables
+
+  - Between -1 and 1
+  - Sign indicates direction of linear relationship
+  - Magnitude indicates strength of linear relationship (0=none, $\pm 1$=perfect)
+:::
+
+::::
+
+## Correlation 
+
+```{r, fig.width=10, fig.height=3}
+# Plot 3: Scatterplots with different correlations
+# generate a row of 5 scatterplots of simulated data with correlation -0.8, -0.4, 0, 0.4, 0.8
+set.seed(123)
+cor_values <- c(-0.8, -0.4, 0, 0.4, 0.8)
+plot_list <- lapply(cor_values, function(cor_val) {
+  n <- 600
+  x <- rnorm(n)
+  y <- cor_val * x + sqrt(1 - cor_val^2) * rnorm(n)
+  data <- data.frame(x = x, y = y)
+  
+  ggplot(data, aes(x = x, y = y)) +
+    geom_point(alpha = 0.6, color = "gray40") +
+    labs(
+      title = paste0("Correlation: ", cor_val)
+    ) +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(hjust = 0.5, size = 10, face = "bold"),
+      axis.title = element_blank(),
+      axis.text = element_blank(),
+      axis.ticks = element_blank()
+    )
+})
+# Combine plots into a single row
+library(patchwork)
+wrap_plots(plotlist = plot_list, nrow = 1) +
+  plot_annotation(
+    theme = theme(plot.title = element_text(hjust = 0.5, size = 13, face = "bold"))
+  )
+
+```
+
+
+
+## Defining $R^2$ (R-squared)
+
+$R^2$ has two equivalent definitions:
+
+1. The squared correlation between observed and fitted values from the regression model
+2. The proportion of variance in the outcome $Y$ "explained" by the regression model
+
+## Finding $R^2${.smaller}
+
+```{r, echo=TRUE}
+#| class-output: "highlight numberLines"
+summary(fit)
+```
+
+Line 17 (Multiple R-squared): $R^2 = 0.601$ (we'll cover adjusted $R^2$ later)
+
+## $R^2 = Cor(Y, Ŷ)^2$
+
+```{r}
+# Draw a scatterplot of fitted values on x and predicted values on y from the house simple regression
+ggplot(aes(x=fitted, y=price), data=houses_both) + 
+  geom_point() + 
+  labs(
+    x = "Fitted values (ŷ)",
+    y = "Observed values (y)",
+    title = "Fitted vs Observed Values for price~area Model"
+  ) +
+    # add an annotation with the correlation and correlation squared
+  annotate("label", x = max(houses_both$fitted)*0.7, y = min(houses_both$price)*1.1,
+           label = paste0("bold(Cor(y, ŷ) == ", round(cor(houses_both$price, houses_both$fitted), 3), ")~~bold(R^2 == ", 
+                          round(cor(houses_both$price, houses_both$fitted)^2, 3), ")"),
+           parse = TRUE,
+           color = "black", fontface = "bold", fill = "white", size = 5)
+
+
+# # Draw the same plot, but using a multiple regression with area and beds
+# fit_multi <- lm(price ~ area + beds, data = houses)
+# houses_both_multi <- houses %>%
+#   mutate(
+#     fitted = predict(fit_multi),
+#     resid = price - fitted
+#   )
+# ggplot(aes(x=fitted, y=price), data=houses_both_multi) +
+#   geom_point() + 
+#   labs(
+#     x = "Fitted values (ŷ)",
+#     y = "Observed values (y)",
+#     title = "Fitted vs Observed Values for price~area+beds+baths Model"
+#   ) +
+#     # add an annotation with the correlation and correlation squared
+#   annotate("label", x = max(houses_both_multi$fitted)*0.7, y = min(houses_both_multi$price)*1.1,
+#            label = paste0("bold(Cor(y, ŷ) == ", round(cor(houses_both_multi$price, houses_both_multi$fitted), 3), ")~~bold(R^2 == ", 
+#                           round(cor(houses_both_multi$price, houses_both_multi$fitted)^2, 3), ")"),
+#            parse = TRUE,
+#            color = "black", fontface = "bold", fill = "white", size = 5)
+
+
+```
+
+## $R^2$ as generalized correlation
+
+- $R^2$ tells us **how closely the predicted values track actual values**
+- In a simple linear model, it's the same as $Cor(X,Y)^2$
+- So you can think of $R^2$ as a generalization of correlation to multiple X's
+
+## $R^2$ as generalized correlation
+It inherits the same limitations as correlation:
+
+- Low $R^2$ does **not** imply
+  - No "meaningful" linear relationship
+  - No strong *nonlinear* relationship
+
+## $R^2$ as generalized correlation
+- High $R^2$ does **not** imply
+  - A *causal* relationship
+  - A true *linear* relationship
+  - Prediction errors are small enough to be useful
+  - The model will predict will for *future* data
+
+## $R^2$ as proportion of variance "explained"
+
+- If $R^2$ is high then our predictions track the observed values closely
+- $R^2$ measures how much unpredictability (variance) in the outcome "goes away" when we ues X to predict
+
+## $R^2$ as proportion of variance "explained"
+
+
+$$
+R^2 = \frac{\overbrace{\text{variance of Y} - \text{variance of residuals}}^{\text{variance ``explained''}}}{\text{variance of Y}}
+$$
+
+- Common phrasing: "$R^2$ is the proportion of variance in $Y$ explained by the model"
+
+## $R^2$ as proportion of variance "explained"
+- The variance of $Y$ is also the variance of the residuals under a simple regression model where we force $\hat\beta_1=0$ 
+- So we can think about $R^2$ as the reduction in variance (average size) of our residuals when using X to predict Y compared to not using X at all
+- If we force $\hat\beta_1=0$, all of our predictions will be $\bar y$ (the average $Y$ value)
+
+
+##
+
+```{r}
+# Plot 8: Four-panel comparison of null model vs regression model
+
+library(patchwork)
+
+# Calculate mean and residuals from null model
+mean_price <- mean(houses$price)
+houses_both <- houses %>%
+  mutate(
+    null_resid = price - mean_price,
+    fitted = predict(fit),
+    resid = price - fitted
+  )
+
+# Select the same examples for both models
+set.seed(78910)
+examples_both <- houses_both %>%
+  mutate(price_bin = cut(price, breaks = 5)) %>%
+  group_by(price_bin) %>%
+  slice_sample(n = 1) %>%
+  ungroup() %>%
+  slice_head(n = 5)
+
+# Assign colors to examples
+example_colors <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#CC79A7")
+examples_both <- examples_both %>%
+  mutate(color = example_colors[1:n()])
+
+# Calculate shared x-axis limits for histograms
+hist_xlim <- range(c(houses_both$null_resid, houses_both$resid))
+
+# Panel A: Predictions without 
+panel_a <- ggplot(houses_both, aes(x = area, y = price)) +
+  geom_point(alpha = 0.15, color = "gray70", size = 1.5) +
+  geom_hline(yintercept = mean_price, color = "#0072B2", linewidth = 1.2) +
+  geom_segment(data = examples_both,
+               aes(x = area, xend = area, y = price, yend = mean_price, color = color),
+               linewidth = 1, show.legend = FALSE) +
+  geom_point(data = examples_both, aes(color = color), size = 3, show.legend = FALSE) +
+  scale_color_identity() +
+  scale_y_continuous(labels = scales::comma_format()) +
+  scale_x_continuous(labels = scales::comma_format()) +
+  labs(
+    x = "Living Area (sq ft)",
+    y = "Sale Price ($)",
+    title = "Predicting Y without X"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 10, face = "bold"),
+    axis.title = element_text(size = 9),
+    axis.text = element_text(size = 8)
+  )
+
+# Panel B: Null model histogram
+sd_y <- sd(houses$price)
+panel_b <- ggplot(houses_both, aes(x = null_resid)) +
+  geom_histogram(bins = 40, fill = "gray70", color = "white", alpha = 0.7) +
+  geom_segment(data = examples_both,
+               aes(x = null_resid, xend = null_resid, y = 0, yend = -2, color = color),
+               linewidth = 1.5, show.legend = FALSE) +
+  scale_color_identity() +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5) +
+  annotate("label", x = hist_xlim[2] * 0.7, y = 20,
+           label = paste0("SD = $", scales::comma(round(sd_y, 0))),
+           color = "#D55E00", fontface = "bold", fill = "white", size = 3) +
+  scale_x_continuous(labels = scales::comma_format(), limits = hist_xlim) +
+  labs(
+    x = "Residual: y - ȳ ($)",
+    y = "Count",
+    title = "Residuals = y[i] - (average y)"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 10, face = "bold"),
+    axis.title = element_text(size = 9),
+    axis.text = element_text(size = 8)
+  )
+
+# Panel C: Regression model scatterplot
+panel_c <- ggplot(houses_both, aes(x = area, y = price)) +
+  geom_point(alpha = 0.15, color = "gray70", size = 1.5) +
+  geom_smooth(method = "lm", se = FALSE, color = "#0072B2", linewidth = 1.2) +
+  geom_segment(data = examples_both,
+               aes(x = area, xend = area, y = price, yend = fitted, color = color),
+               linewidth = 1, show.legend = FALSE) +
+  geom_point(data = examples_both, aes(color = color), size = 3, show.legend = FALSE) +
+  geom_point(data = examples_both, aes(x = area, y = fitted),
+             color = "#0072B2", size = 2.5) +
+  scale_color_identity() +
+  scale_y_continuous(labels = scales::comma_format()) +
+  scale_x_continuous(labels = scales::comma_format()) +
+  labs(
+    x = "Living Area (sq ft)",
+    y = "Sale Price ($)",
+    title = "Regression Model: Predict Y from X"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 10, face = "bold"),
+    axis.title = element_text(size = 9),
+    axis.text = element_text(size = 8)
+  )
+
+# Panel D: Regression model histogram
+sigma_hat <- summary(fit)$sigma
+panel_d <- ggplot(houses_both, aes(x = resid)) +
+  geom_histogram(bins = 40, fill = "gray70", color = "white", alpha = 0.7) +
+  geom_segment(data = examples_both,
+               aes(x = resid, xend = resid, y = 0, yend = -2, color = color),
+               linewidth = 1.5, show.legend = FALSE) +
+  scale_color_identity() +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5) +
+  annotate("label", x = hist_xlim[2] * 0.7, y = 20,
+           label = paste0("bold(RSE == '$", format(round(sigma_hat, 0), big.mark = ","), "')"),
+           parse = TRUE,
+           color = "#009E73", fontface = "bold", fill = "white", size = 3) +
+  scale_x_continuous(labels = scales::comma_format(), limits = hist_xlim) +
+  labs(
+    x = "Residual: y - ŷ ($)",
+    y = "Count",
+    title = "Regression Model Errors"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 10, face = "bold"),
+    axis.title = element_text(size = 9),
+    axis.text = element_text(size = 8)
+  )
+
+# Combine panels in 2x2 layout
+(panel_a + panel_b) / (panel_c + panel_d) +
+  plot_annotation(
+    title = "Comparing Prediction Errors: Null Model vs Regression Model",
+    theme = theme(plot.title = element_text(hjust = 0.5, size = 13, face = "bold"))
+  )
+```
+
+
+## $R^2$ as proportion of variance "explained"
+
+$$
+R^2 = \frac{246,274^2 - 155,630^2}{246,274^2}\approx 0.601
+$$
+
+- We say $X$ "explained"  60.1% ($R^2=0.601$) of the total variability in $Y$
+- Remember: this is just a way of quantifying how closely the line tracks actual values
+  - You can predict something without being able to explain why it happens!
+
+## Multiple or Adjusted $R^2$?
+
+- The only difference is how residual variance is estimated
+- In practice, the difference is usually small
+  - If they're very different then neither is very reliable
+- On a HW/Quiz/Exam you can use either
+- Later we'll see how to get more accurate measures of prediction error
+
+## $R^2$ or RSE?
+
+- $R^2$ measures the **strength of the linear relationship** between Y and the X's
+    - Since it's a relative measure, we don't know how big our prediction errors are likely to be
+- $RSE$ measures the **typical size of our prediction errors** using X to predict Y
+    - Since it's an absolute measure, we don't know how strong the linear relationship is
+
+Both can be useful, but in practice RSE is usually more relevant.
+
+## $R^2$ or RSE?
+
+Predicting the price of a house from its area:
+
+- R^2 = 0.601
+- RSE = $155,630
+
+Pretty strong linear relationship, but typical prediction errors are still very large!
+
+## $R^2$ doesn't add up
+
+- We can use $R^2$ to measure "independent" contributions of multiple $X$ variables
+- Compare $R^2$ from models with different sets of $X$ variables
+  - Area: $R^2$ = `r round(summary(lm(price ~ area, data=houses))$r.squared,3)`
+  - Beds: $R^2$  = `r round(summary(lm(price ~ beds, data=houses))$r.squared,3)`
+  - Area and Beds $R^2$  = `r round(summary(lm(price ~ beds+area, data=houses))$r.squared,3)` $\neq 0.601+0.137$
+- Adding beds once you know area -> only about 1.4% more variance explained
+
+## Why?
+
+
+```{r}
+# boxplots of living area by beds
+ggplot(houses, aes(x=factor(beds), y=area)) +
+  geom_boxplot(fill="lightblue") +
+  scale_y_continuous(labels = scales::comma_format()) +
+  labs(
+    x = "Number of Bedrooms",
+    y = "Living Area (sq ft)",
+    title = "Living Area vs Number of Bedrooms"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10)
+  )
+```
+
+- Area already contains a lot of information about beds
+- The new information we get from introducing beds is not that useful for predicting prices
+- Compare this to starting with beds and adding area -- we get a big boost in $R^2$
+
+## Prediction isn't everything
+- Notice that the area and area+beds model have very similar $R^2$ values
+- The RSE values are also similar
+  - Area only: `r round(summary(lm(price ~ area, data=houses))$sigma,0)`
+  - Area + Beds: `r round(summary(lm(price ~ beds+area, data=houses))$sigma,0)`
+- Both models predict prices about equally well (or badly)
+  - But they tell very different stories about what an additional sqft is worth!
+
+# Incorporating uncertainty
+
+## Accounting for error and uncertainty
+
+- So far we've focused on estimated coefficients and predictions
+- We know our predictions will be wrong -- how wrong are the likely to be?
+- We know our coefficients don't match the true population values -- how close are they?
+
+## The simple linear regression model
+
+We need a *model* for our data to answer these questions. Our model has four components:
+
+- **L**inearity
+- **I**ndependence of prediction errors
+- **N**ormality of prediction errors
+- **E**qual variance of prediction errors
+
+## Linearity
+
+The relationship between $Y$ and each $X$ is linear:
+
+$Y = \beta_0 + \beta_1 X_{1} + \beta_2 X_{2} + ... + \beta_p X_{p} + \epsilon$
+
+- $\beta_0, \beta_1, ..., \beta_p$ are the **true/population** regression coefficients
+- $\epsilon$ is the **true** error if we predict $Y$ using the **true** regression coefficients
+
+Our other assumptions are about those true error terms $\epsilon$...
+
+## Independence 
+
+- Each observation has an *independent* true error term
+- If my neighbor's house sells for more than expected, that doesn't tell me anything about whether my house will sell for more or less than expected
+- If the last house sells for less than expected, that doesn't tell us anything about whether the next house will sell for more or less than expected
+
+## Normality
+
+The true error terms $\epsilon$ are normally distributed and centered at zero
+
+- The average error over many predictions is zero
+- Over-prediction and under-prediction are equally likely
+- Most errors are small, but large errors are possible
+
+## Equal Variance
+
+- The true error terms $\epsilon$ all have the same standard deviation $\sigma$
+- The size of the true errors does not depend on the values of the X's (or anything else)
+  - For example, errors are about the same size (on average) for small and large houses
+
+## The linear model
+
+Putting the LINE assumptions together, we have the full linear regression model:
+
+$$
+Y = \beta_0 + \beta_1 X_{1} + \beta_2 X_{2} + ... + \beta_p X_{p} + \epsilon
+$$
+
+$$
+\epsilon\sim N(0, \sigma^2)\text{ independently for each observation}
+$$
+
+For an individual observation with predictors $X$, we have:
+
+$$
+(Y\mid X) \sim N(\beta_0 + \beta_1 X_{1} + \beta_2 X_{2} + ... + \beta_p X_{p}, \sigma^2)
+$$
+
+
+## Visualizing the linear model
+
+```{r, fig.height=6, fig.width=7}
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+library(tidyverse)
+
+houses = houses %>% mutate(size=area)
+# Fit simple linear regression: Price ~ LivingArea
+model <- lm(price ~ size, data = houses)
+
+# Extract model parameters
+alpha <- coef(model)[1]  # Intercept
+beta <- coef(model)[2]   # Slope
+sigma <- sigma(model)    # Residual standard error
+
+# Create a specific point to annotate
+annotated_point <- data.frame(
+  size = 3500,
+  price = 800000
+)
+
+# Calculate predicted value and residual for this point
+annotated_point$predicted <- alpha + beta * annotated_point$size
+annotated_point$residual <- annotated_point$price - annotated_point$predicted
+
+# cat("Regression parameters:\n")
+# cat(sprintf("α (intercept): $%.2f\n", alpha))
+# cat(sprintf("β (slope): $%.2f per sq ft\n", beta))
+# cat(sprintf("σ (residual SE): $%.2f\n", sigma))
+
+# Key house sizes to show distributions
+key_sizes <- c(1500, 2500, 3500)
+
+# Colorblind-safe palette
+cb_blue <- "#0173B2"
+cb_orange <- "#D55E00" 
+cb_purple <- "#CC79A7"
+cb_gray <- "#999999"
+
+# Assign colors to each size
+size_colors <- c("1500" = cb_blue, "2500" = cb_orange, "3500" = cb_purple)
+
+# Create detailed distributions for key sizes
+distribution_list <- lapply(key_sizes, function(size) {
+  mean_price <- alpha + beta * size
+  price_range <- seq(mean_price - 3*sigma, mean_price + 3*sigma, length.out = 100)
+  density_vals <- dnorm(price_range, mean_price, sigma)
+  
+  data.frame(
+    size = size,
+    size_factor = as.factor(size),
+    price = price_range,
+    density = density_vals,
+    # For rotated display: x position offset by density
+    # Scale so curves extend ~400 sq ft on each side
+    x_pos = size + density_vals * 200000000,
+    mean_price = mean_price,
+    size_label = paste(format(size, big.mark = ","), "sq ft")
+  )
+})
+
+distribution_data <- do.call(rbind, distribution_list)
+
+# Sample data points (take a subset for visualization)
+set.seed(42)
+sample_data <- houses %>%
+  select(size, price) %>%
+  na.omit() %>%
+  sample_n(min(50, n()))
+
+sample_fit = lm(price~size, data=sample_data)
+
+# Create regression line data
+size_range <- range(houses$size, na.rm = TRUE)
+regression_line <- data.frame(
+  size = seq(size_range[1], size_range[2], length.out = 100)
+)
+regression_line$price <- alpha + beta * regression_line$size
+
+# Create means data for dots
+means_data <- data.frame(
+  size = key_sizes,
+  size_factor = as.factor(key_sizes),
+  mean_price = alpha + beta * key_sizes
+)
+
+# Calculate peak density for positioning annotations
+peak_densities <- means_data
+peak_densities$peak_density <- dnorm(peak_densities$mean_price, 
+                                     peak_densities$mean_price, sigma)
+
+# Determine axis ranges
+x_min <- min(key_sizes) - 500
+x_max <- max(key_sizes) + 500
+y_min <- min(means_data$mean_price - 3*sigma)
+y_max <- max(means_data$mean_price + 3*sigma)
+
+# MAIN PLOT (TOP PANEL)
+main_plot <- ggplot() +
+  # Background sample points (faded)
+  # geom_point(data = sample_data, 
+  #            aes(x = size, y = price), 
+  #            color = "gray70", alpha = 0.5, size = 2) +
+
+  # True regression line
+  geom_line(data = regression_line,
+            aes(x = size, y = price), 
+            color = cb_gray, size = 1, linetype = "solid") +
+
+  # Vertical reference lines at key sizes (colored by size)
+  geom_vline(data = means_data,
+             aes(xintercept = size, color = size_factor), 
+             linetype = "dotted", alpha = 0.6, size = 0.8) +
+  
+  # Horizontal dotted lines from means to y-axis
+  geom_segment(data = means_data,
+               aes(x = x_min + 100, xend = size, y = mean_price, yend = mean_price,
+                   color = size_factor),
+               linetype = "dotted", alpha = 0.7, size = 0.6) +
+  
+  # Base of distributions (vertical lines at each size)
+  geom_segment(data = means_data,
+               aes(x = size, xend = size, 
+                   y = mean_price - 2.5*sigma, yend = mean_price + 2.5*sigma,
+                   color = size_factor),
+               alpha = 0.4, size = 1) +
+  
+  # Price distributions (rotated, extending horizontally from regression line)
+  geom_path(data = distribution_data, 
+            aes(x = x_pos, y = price, 
+                color = size_factor, group = size_factor),
+            size = 1.8) +
+  
+  # Distribution means (colored dots)
+  geom_point(data = means_data,
+             aes(x = size, y = mean_price, fill = size_factor), 
+             size = 4, stroke = 1.5, color = "white", shape = 21) +
+  
+# Estimated line
+  #geom_abline(intercept = coef(sample_fit)[1], slope = coef(sample_fit)[2]) + 
+  
+  # Size labels for distributions (colored by size)
+  geom_text(data = data.frame(size = key_sizes, 
+                              size_factor = as.factor(key_sizes),
+                              y_pos = alpha + beta * key_sizes + 3.2*sigma,
+                              size_label = paste(format(key_sizes, big.mark = ","), "sq ft")),
+            aes(x = size, y = y_pos, label = size_label, color = size_factor),
+            size = 3.5, fontface = "bold") +
+  
+  # Y-axis annotations for means
+  geom_text(data = means_data,
+            aes(x = x_min + 80, y = mean_price, 
+                label = paste0("$", format(round(mean_price/1000, 0), big.mark = ","), "K"),
+                color = size_factor),
+            hjust = 1, size = 3.2, fontface = "bold") +
+  
+  
+  # The annotated point
+  geom_point(data = annotated_point,
+             aes(x = size, y = price),
+             color = "gray70", size = 2, alpha = 0.5) +
+  
+  # Vertical line showing residual
+  geom_segment(data = annotated_point,
+               aes(x = size, xend = size, 
+                   y = predicted, yend = price),
+               color = "darkgreen", size = 0.8, linetype = "solid") +
+  
+  # Epsilon label
+  annotate("text", 
+           x = annotated_point$size + 100, 
+           y = mean(c(annotated_point$price, annotated_point$predicted)),
+           label = "epsilon[i]",
+           parse=TRUE,
+           size = 5, color = "darkgreen") +
+  
+  # Color scales
+  scale_color_manual(values = size_colors, guide = "none") +
+  scale_fill_manual(values = size_colors, guide = "none") +
+  
+  # Format y-axis as currency in thousands
+  scale_y_continuous(labels = scales::dollar_format(scale = 0.001, suffix = "K")) +
+  # 
+  # # Annotations
+  # annotate("text", x = mean(key_sizes), y = y_min + 0.15*(y_max - y_min), 
+  #          label = "True regression line:\nPrice = α + β×Size", 
+  #          color = cb_gray, size = 3.5, hjust = 0.5,
+  #          fontface = "italic") +
+  # 
+  # annotate("text", x = key_sizes[2], y = means_data$mean_price[2] + 1.2*sigma,
+  #          label = "Distribution of prices\nfor houses of\nidentical size",
+  #          color = "gray30", size = 3.5, hjust = 0.5) +
+  # 
+  # # Add arrow for annotation
+  # annotate("segment", 
+  #          x = key_sizes[2] + 50, 
+  #          y = means_data$mean_price[2] + 1.1*sigma, 
+  #          xend = key_sizes[2] + 20, 
+  #          yend = means_data$mean_price[2] + 0.5*sigma,
+  #          arrow = arrow(length = unit(0.02, "npc")), 
+  #          color = "gray30", size = 0.8) +
+  # 
+  # Styling
+  labs(x = "Living Area (square feet)", 
+       y = "Sale Price",
+       title = "The Linear Regression Model"#,
+#       subtitle = "Even houses of identical size have variable prices, but average price increases predictably with size"
+       ) +
+  
+  theme_minimal() +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_line(color = "gray95"),
+    plot.title = element_text(size = 14, face = "bold"),
+    plot.subtitle = element_text(size = 11, color = "gray40"),
+    axis.title = element_text(size = 11)
+    #axis.title.x = element_blank()
+  ) +
+  
+  coord_cartesian(xlim = c(x_min, x_max), ylim = c(y_min, y_max))
+
+# DENSITY PANEL (BOTTOM)
+density_panel <- ggplot(data = distribution_data, 
+                        aes(x = price, y = density, color = size_factor, fill = size_factor)) +
+  
+  # Density curves
+  geom_line(size = 1.8) +
+  
+  # Fill under curves with transparency
+  geom_area(alpha = 0.3, position = "identity") +
+  
+  # Vertical lines at means
+  geom_vline(data = means_data, 
+             aes(xintercept = mean_price, color = size_factor),
+             linetype = "dashed", size = 1, alpha = 0.8) +
+  
+  # Mean value annotations above the density curves
+  geom_text(data = peak_densities,
+            aes(x = mean_price, y = peak_density * 1.15, 
+                label = paste0("mean = $", format(round(mean_price/1000, 0), big.mark = ","), "K"), 
+                color = size_factor),
+            hjust = 0.5, vjust = 0, size = 3.2, fontface = "bold") +
+  
+  # Color scales
+  scale_color_manual(values = size_colors, guide = "none") +
+  scale_fill_manual(values = size_colors, guide = "none") +
+  
+  # Format x-axis as currency in thousands
+  scale_x_continuous(labels = scales::dollar_format(scale = 0.001, suffix = "K")) +
+  
+  # Match x-axis range to main plot
+  coord_cartesian(xlim = c(y_min, y_max)) +
+  
+  labs(x = "Sale Price", 
+       y = "Density") +
+  
+  ylim(0, 3.4e-06) +
+  
+  theme_minimal() +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_line(color = "gray95"),
+    axis.title = element_text(size = 11),
+    plot.caption = element_text(size = 9, color = "gray50", hjust=0)
+  )
+
+# Combine plots
+combined_plot <- main_plot / density_panel + 
+  plot_layout(heights = c(2, 1))
+
+
+combined_plot
+
+```
+
+## Estimates vs True Values
+
+- Our $\hat \beta_0, \hat \beta_1, ..., \hat \beta_p$ are just estimates of the true $\beta_0, \beta_1, ..., \beta_p$
+- The residuals estimate the true prediction errors
+- The RSE (standard deviation of residuals) is an estimate of the true $\sigma$ (error **standard deviation**)
+
+## Accounting for uncertainty in estimates
+
+- If we want to know how uncertain our estimates are, we need to quantify their variability.
+- We can do this using the **sampling distribution** of our estimates (how much they change over repeated samples)
+- More specifically, we can compute **confidence intervals** 
+
+
+## Confidence intervals
+
+- A confidence interval gives a range of plausible values for a population parameter (e.g., a regression coefficient)
+- These are possible values of the true coefficients that are consistent with our observed data at a given level of confidence (e.g., 95%)
+- If our LINE assumptions hold, these are easy to get:
+
+```{r, echo=TRUE}
+confint(fit)
+```
+
+## Returning to course evaluations {.smaller}
+
+```{r include=FALSE}
+profs <- read.csv("week_02_docs/data/pretty-profs.csv")
+options(digits=3)
+```
+
+```{r}
+# linear regression of eval on beauty
+model_simple <- lm(eval ~ beauty, data = profs)
+summary(model_simple)
+bprof = coef(model_simple)
+```
+
+## Is there evidence for a linear relationship?
+
+```{r, echo=TRUE}
+confint(model_simple)
+```
+
+- The range of plausible values for the slope $\beta_1$ is (0.07, 0.20)
+- No linear relationship would mean $\beta_1=0$
+- All the plausible values are positive, so we have *statistically significant* evidence of a positive linear relationship between beauty and evaluations
+
+## How strong is the linear relationship?
+
+::: columns
+::: {.column width="50%"}
+```{r, fig.height=4, fig.width=4}
+# scatterplot of eval vs beauty with regression line
+ggplot(profs, aes(x=beauty, y=eval)) +
+  geom_point(alpha=0.5, color="gray40") +
+  geom_smooth(method="lm", color="#0072B2", size=1, se=FALSE) +
+  labs(
+    x = "Beauty Score",
+    y = "Course Evaluation Score"
+  ) +
+  theme_minimal()
+```
+:::
+
+::: {.column width="50%"}
+
+- $\text{Cor}(\text{beauty, eval}) = 0.19$
+- $R^2$ = 0.036 -- only 3.6% of the variance in eval is explained by beauty
+- But we have strong statistical evidence that this (weak) linear relationship holds among the population of all instructors
+  - i.e., it isn't just a fluke in this particular sample
+:::
+:::
+
+## How strong is the linear relationship?
+
+::: columns
+::: {.column width="50%"}
+```{r, fig.height=4, fig.width=4}
+# scatterplot of eval vs beauty with regression line
+ggplot(profs, aes(x=beauty, y=eval)) +
+  geom_point(alpha=0.5, color="gray40") +
+  geom_smooth(method="lm", color="#0072B2", size=1, se=FALSE) +
+  labs(
+    x = "Beauty Score",
+    y = "Course Evaluation Score"
+  ) +
+  theme_minimal()
+```
+:::
+
+::: {.column width="50%"}
+
+- Remember: $R^2$ doesn't tell us directly how confident we are that a linear relationship exists
+- In this case we have **strong evidence** of a **weak linear relationship**
+- This is because many factors unrelated to beauty affect eval scores
+:::
+:::
+
+
+## Accounting for uncertainty in predictions
+
+If I'm selling a house I'd like to know:
+
+- What's the most likely sale price (best prediction)?
+- What's a range of likely sale prices (prediction interval)?
+
+## Prediciton intervals{.smaller}
+
+
+::: columns
+::: {.column width="70%"}
+```{r, fig.height=5, fig.width=7}
+combined_plot
+```
+:::
+
+::: {.column width="30%"}
+Our model: Actual prices for houses of a given size will:
+
+1. Have normal distributions
+2. Centered at the predicted value (location on the line)
+3. With standard deviation $\sigma$
+
+95\% of the time, actual prices fall within $\pm 2\sigma$ of the predicted price (if we knew the true line and $\sigma$)
+:::
+:::
+
+## Prediction intervals
+
+Under our LINE assumptions, we can get prediction intervals for new observations that account for both:
+
+- Uncertainty in our estimated regression line
+- The inherent variability in actual outcomes around that line
+
+```{r, echo=TRUE}
+new_house = data.frame(area = 2000)
+predict(fit, newdata = new_house, 
+  interval = "prediction")
+```
+
+95% prediction interval: ($256,518, $868,632)
+
+## Prediction intervals
+```{r, echo=TRUE}
+new_house = data.frame(area = 2000)
+predict(fit, newdata = new_house, 
+  interval = "prediction")
+```
+
+- There's a 95% chance that a new house will sell for a price in this range
+- 95% of all future houses with 2000 sq ft will sell for between $256,518 and $868,632
