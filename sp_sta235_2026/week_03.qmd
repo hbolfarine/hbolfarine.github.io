@@ -148,6 +148,21 @@ The **residuals vs fitted** graph plots:
 
 This graph effectively subtracts out the linear trend between $Y$ and the $X$’s, so we want to [see no trend left]{style="color:darkorange;"} in this graph.
 
+
+## Download data
+
+```{r}
+#| eval: true
+#| echo: true
+#| output: true
+linear_data = read.csv("week_03_docs/linear_data.csv")
+nonlinear_data = read.csv("week_03_docs/nonlinear_data.csv")
+non_normal = read.csv("week_03_docs/nonnormal_data.csv")
+heter_data = read.csv("week_03_docs/heter_data.csv")
+outlier_residual = read.csv("week_03_docs/outlier_data.csv")
+```
+
+
 ## Regression diagnostic plot {.smaller}
 
 -   To check non-linearity we focus on the [Residual vs. Fitted]{style="color:darkorange;"} plot
