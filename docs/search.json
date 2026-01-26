@@ -5913,5 +5913,12 @@
     "title": "Data Science for Business Applications",
     "section": "Points with high influence",
     "text": "Points with high influence\n\nWhen a case has a very unusual \\(X\\) value, it has leverage — the potential to have a big impact on the regression line\nIf the case is in line with the overall trend of the regression line, it won’t be a problem\nBut when that case also has a \\(Y\\) (high residual) value that is out of line\nWe need both a large residual and high leverage for an observation to be influential\nWe should be worried about these points\nThey affect the coefficents and predictions"
+  },
+  {
+    "objectID": "sp_sta235_2026/week_03.html#download-data",
+    "href": "sp_sta235_2026/week_03.html#download-data",
+    "title": "Data Science for Business Applications",
+    "section": "Download data",
+    "text": "Download data\n\nlinear_data = read.csv(\"week_03_docs/linear_data.csv\")\nnonlinear_data = read.csv(\"week_03_docs/nonlinear_data.csv\")\nnon_normal = read.csv(\"week_03_docs/nonnormal_data.csv\")\nheter_data = read.csv(\"week_03_docs/heter_data.csv\")\noutlier_residual = read.csv(\"week_03_docs/outlier_data.csv\")"
   }
 ]

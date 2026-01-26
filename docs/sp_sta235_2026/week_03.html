@@ -283,19 +283,29 @@ Class 03 - Regression Assumptions, and Potential Problems
 </ul>
 <p>This graph effectively subtracts out the linear trend between <span class="math inline">\(Y\)</span> and the <span class="math inline">\(X\)</span>’s, so we want to <span style="color:darkorange;">see no trend left</span> in this graph.</p>
 </section>
+<section id="download-data" class="slide level2">
+<h2>Download data</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>linear_data <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"week_03_docs/linear_data.csv"</span>)</span>
+<span id="cb2-2"><a></a>nonlinear_data <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"week_03_docs/nonlinear_data.csv"</span>)</span>
+<span id="cb2-3"><a></a>non_normal <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"week_03_docs/nonnormal_data.csv"</span>)</span>
+<span id="cb2-4"><a></a>heter_data <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"week_03_docs/heter_data.csv"</span>)</span>
+<span id="cb2-5"><a></a>outlier_residual <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"week_03_docs/outlier_data.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
 <section id="regression-diagnostic-plot" class="slide level2 smaller">
 <h2>Regression diagnostic plot</h2>
 <ul>
 <li>To check non-linearity we focus on the <span style="color:darkorange;">Residual vs.&nbsp;Fitted</span> plot</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(ggfortify)</span>
-<span id="cb2-2"><a></a></span>
-<span id="cb2-3"><a></a>lm1 <span class="ot">=</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> linear_data)</span>
-<span id="cb2-4"><a></a><span class="fu">autoplot</span>(lm1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(ggfortify)</span>
+<span id="cb3-2"><a></a></span>
+<span id="cb3-3"><a></a>lm1 <span class="ot">=</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> linear_data)</span>
+<span id="cb3-4"><a></a><span class="fu">autoplot</span>(lm1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
-<img data-src="week_03_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<img data-src="week_03_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="regression-diagnostic-plot-1" class="slide level2">
 <h2>Regression diagnostic plot</h2>
 <ul>
@@ -309,30 +319,30 @@ Class 03 - Regression Assumptions, and Potential Problems
 <li>What we would expect to observe if the relation is <span style="color:darkorange;">non linear</span>?</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">ggplot</span>(nonlinear_data, <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y)) <span class="sc">+</span></span>
-<span id="cb3-2"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb3-3"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">ggplot</span>(nonlinear_data, <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y)) <span class="sc">+</span></span>
+<span id="cb4-2"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb4-3"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
-<img data-src="week_03_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<img data-src="week_03_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="non-linearity-example-1" class="slide level2 smaller">
 <h2>Non-Linearity Example</h2>
 <ul>
 <li>Let’s look at the residuals for this model</li>
 </ul>
 
-<img data-src="week_03_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><ul>
+<img data-src="week_03_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><ul>
 <li>Let’s check the <strong>residual plot</strong></li>
 </ul>
 </section>
 <section id="non-linearity-example-2" class="slide level2 smaller">
 <h2>Non-Linearity Example</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>lm2 <span class="ot">=</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> nonlinear_data)</span>
-<span id="cb4-2"><a></a><span class="fu">autoplot</span>(lm2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>lm2 <span class="ot">=</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> nonlinear_data)</span>
+<span id="cb5-2"><a></a><span class="fu">autoplot</span>(lm2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
-<img data-src="week_03_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<img data-src="week_03_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="non-linearity-example-3" class="slide level2">
 <h2>Non-Linearity Example</h2>
 <ul>
@@ -366,14 +376,14 @@ Class 03 - Regression Assumptions, and Potential Problems
 <li>We can check the distribution of the residuals</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>linear_data <span class="ot">=</span> linear_data <span class="sc">%&gt;%</span> </span>
-<span id="cb5-2"><a></a>  <span class="fu">mutate</span>(<span class="at">resid =</span> <span class="fu">residuals</span>(lm1))</span>
-<span id="cb5-3"><a></a></span>
-<span id="cb5-4"><a></a><span class="fu">ggplot</span>(linear_data, <span class="fu">aes</span>(<span class="at">x =</span> resid)) <span class="sc">+</span> </span>
-<span id="cb5-5"><a></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"grey"</span>, <span class="at">binwidth =</span> <span class="fl">0.2</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>linear_data <span class="ot">=</span> linear_data <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a></a>  <span class="fu">mutate</span>(<span class="at">resid =</span> <span class="fu">residuals</span>(lm1))</span>
+<span id="cb6-3"><a></a></span>
+<span id="cb6-4"><a></a><span class="fu">ggplot</span>(linear_data, <span class="fu">aes</span>(<span class="at">x =</span> resid)) <span class="sc">+</span> </span>
+<span id="cb6-5"><a></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"grey"</span>, <span class="at">binwidth =</span> <span class="fl">0.2</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
-<img data-src="week_03_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<img data-src="week_03_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="normality-example-1" class="slide level2">
 <h2>Normality example</h2>
 <ul>
@@ -388,11 +398,11 @@ Class 03 - Regression Assumptions, and Potential Problems
 <li>To check for Normality we focus on the <strong>Normal Q-Q</strong> plot</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>lm1 <span class="ot">=</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> linear_data)</span>
-<span id="cb6-2"><a></a><span class="fu">autoplot</span>(lm1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>lm1 <span class="ot">=</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> linear_data)</span>
+<span id="cb7-2"><a></a><span class="fu">autoplot</span>(lm1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
-<img data-src="week_03_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><ul>
+<img data-src="week_03_files/figure-revealjs/unnamed-chunk-10-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><ul>
 <li>In this case the normality assumptions seem to be met</li>
 </ul>
 </section>
@@ -403,30 +413,30 @@ Class 03 - Regression Assumptions, and Potential Problems
 <li>In this case the data has non Normal errors.</li>
 </ul>
 
-<img data-src="week_03_files/figure-revealjs/unnamed-chunk-10-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<img data-src="week_03_files/figure-revealjs/unnamed-chunk-11-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="normality-example-3" class="slide level2 smaller">
 <h2>Normality example</h2>
 <ul>
 <li>Histogram of the residuals (right skewed)</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>lm3 <span class="ot">=</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> non_normal)</span>
-<span id="cb7-2"><a></a></span>
-<span id="cb7-3"><a></a>non_normal <span class="ot">=</span> non_normal <span class="sc">%&gt;%</span> </span>
-<span id="cb7-4"><a></a>  <span class="fu">mutate</span>(<span class="at">resid =</span> <span class="fu">residuals</span>(lm3))</span>
-<span id="cb7-5"><a></a></span>
-<span id="cb7-6"><a></a><span class="fu">ggplot</span>(non_normal, <span class="fu">aes</span>(<span class="at">x =</span> resid)) <span class="sc">+</span> </span>
-<span id="cb7-7"><a></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"grey"</span>, <span class="at">binwidth =</span> <span class="dv">1</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-
-</div>
-<img data-src="week_03_files/figure-revealjs/unnamed-chunk-11-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="regression-diagnostic-plot-3" class="slide level2 smaller">
-<h2>Regression diagnostic plot</h2>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">autoplot</span>(lm3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>lm3 <span class="ot">=</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> non_normal)</span>
+<span id="cb8-2"><a></a></span>
+<span id="cb8-3"><a></a>non_normal <span class="ot">=</span> non_normal <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a></a>  <span class="fu">mutate</span>(<span class="at">resid =</span> <span class="fu">residuals</span>(lm3))</span>
+<span id="cb8-5"><a></a></span>
+<span id="cb8-6"><a></a><span class="fu">ggplot</span>(non_normal, <span class="fu">aes</span>(<span class="at">x =</span> resid)) <span class="sc">+</span> </span>
+<span id="cb8-7"><a></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"grey"</span>, <span class="at">binwidth =</span> <span class="dv">1</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
 <img data-src="week_03_files/figure-revealjs/unnamed-chunk-12-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="regression-diagnostic-plot-3" class="slide level2 smaller">
+<h2>Regression diagnostic plot</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">autoplot</span>(lm3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+</div>
+<img data-src="week_03_files/figure-revealjs/unnamed-chunk-13-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="interpretation-of-the-plot" class="slide level2">
 <h2>Interpretation of the plot</h2>
 <ul>
@@ -451,23 +461,23 @@ Class 03 - Regression Assumptions, and Potential Problems
 <li>The vertical spread of the points is larger along the right side of the graph</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">ggplot</span>(heter_data, <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y)) <span class="sc">+</span></span>
-<span id="cb9-2"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb9-3"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">ggplot</span>(heter_data, <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y)) <span class="sc">+</span></span>
+<span id="cb10-2"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb10-3"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
-<img data-src="week_03_files/figure-revealjs/unnamed-chunk-14-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<img data-src="week_03_files/figure-revealjs/unnamed-chunk-15-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="regression-diagnostic-plot-4" class="slide level2 smaller">
 <h2>Regression diagnostic plot</h2>
 <ul>
 <li>To check for <span style="color:darkorange;">homoscidacity</span> we focus on the <span style="color:darkorange;">Scale-Location</span> plot</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>lm4 <span class="ot">=</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> heter_data)</span>
-<span id="cb10-2"><a></a><span class="fu">autoplot</span>(lm4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>lm4 <span class="ot">=</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> heter_data)</span>
+<span id="cb11-2"><a></a><span class="fu">autoplot</span>(lm4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
-<img data-src="week_03_files/figure-revealjs/unnamed-chunk-15-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<img data-src="week_03_files/figure-revealjs/unnamed-chunk-16-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="interpretation-of-the-plot-1" class="slide level2">
 <h2>Interpretation of the plot</h2>
 <ul>
@@ -478,18 +488,18 @@ Class 03 - Regression Assumptions, and Potential Problems
 <section id="example-austin-houses" class="slide level2 smaller">
 <h2>Example: Austin houses</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>model.houses <span class="ot">=</span> <span class="fu">lm</span>(price <span class="sc">~</span> area, <span class="at">data =</span> houses)</span>
-<span id="cb11-2"><a></a><span class="fu">autoplot</span>(model.houses)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>model.houses <span class="ot">=</span> <span class="fu">lm</span>(price <span class="sc">~</span> area, <span class="at">data =</span> houses)</span>
+<span id="cb12-2"><a></a><span class="fu">autoplot</span>(model.houses)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
-<img data-src="week_03_files/figure-revealjs/unnamed-chunk-17-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<img data-src="week_03_files/figure-revealjs/unnamed-chunk-18-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="influential-observations" class="slide level2 smaller">
 <h2>Influential observations</h2>
 <ul>
 <li>Adding a new observation with <span class="math inline">\(X\)</span> near the mean of <span class="math inline">\(X\)</span> doesn’t matter much even if it’s out of line with the rest of the data:</li>
 </ul>
 
-<img data-src="week_03_files/figure-revealjs/unnamed-chunk-19-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><ul>
+<img data-src="week_03_files/figure-revealjs/unnamed-chunk-20-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><ul>
 <li>This point has high residual but low leverage. RSE = 0.5504</li>
 </ul>
 </section>
@@ -499,18 +509,18 @@ Class 03 - Regression Assumptions, and Potential Problems
 <li>We can observe the point with high residual on the Residual vs.&nbsp;Leverage plot</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>lm5 <span class="ot">=</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> outlier_residual)</span>
-<span id="cb12-2"><a></a><span class="fu">autoplot</span>(lm5)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>lm5 <span class="ot">=</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> outlier_residual)</span>
+<span id="cb13-2"><a></a><span class="fu">autoplot</span>(lm5)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
-<img data-src="week_03_files/figure-revealjs/unnamed-chunk-20-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<img data-src="week_03_files/figure-revealjs/unnamed-chunk-21-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="high-leverage" class="slide level2 smaller">
 <h2>High leverage</h2>
 <ul>
 <li>We can also have points with high leverage - when a point in <span class="math inline">\(X\)</span> is distant from the average on <span class="math inline">\(X\)</span></li>
 </ul>
 
-<img data-src="week_03_files/figure-revealjs/unnamed-chunk-22-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><ul>
+<img data-src="week_03_files/figure-revealjs/unnamed-chunk-23-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><ul>
 <li>This point has low residual but high leverage. RSE = 0.2956</li>
 </ul>
 </section>
@@ -520,18 +530,18 @@ Class 03 - Regression Assumptions, and Potential Problems
 <li>We can observe the point with high leverage on the Residual vs.&nbsp;Leverage plot</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>lm6 <span class="ot">=</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> outlier_leverage)</span>
-<span id="cb13-2"><a></a><span class="fu">autoplot</span>(lm6)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>lm6 <span class="ot">=</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> outlier_leverage)</span>
+<span id="cb14-2"><a></a><span class="fu">autoplot</span>(lm6)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
-<img data-src="week_03_files/figure-revealjs/unnamed-chunk-23-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<img data-src="week_03_files/figure-revealjs/unnamed-chunk-24-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="points-with-high-influence" class="slide level2 smaller">
 <h2>Points with high influence</h2>
 <ul>
 <li>Points with high leverage and high residuals are known as influential points</li>
 </ul>
 
-<img data-src="week_03_files/figure-revealjs/unnamed-chunk-25-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><ul>
+<img data-src="week_03_files/figure-revealjs/unnamed-chunk-26-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><ul>
 <li>This point has high residual but high leverage. RSE = 0.8281</li>
 </ul>
 </section>
@@ -541,11 +551,11 @@ Class 03 - Regression Assumptions, and Potential Problems
 <li>We can observe the point with high influence on the Residual vs.&nbsp;Leverage plot</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>lm7 <span class="ot">=</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> outlier_influence)</span>
-<span id="cb14-2"><a></a><span class="fu">autoplot</span>(lm7)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>lm7 <span class="ot">=</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> outlier_influence)</span>
+<span id="cb15-2"><a></a><span class="fu">autoplot</span>(lm7)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
-<img data-src="week_03_files/figure-revealjs/unnamed-chunk-26-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<img data-src="week_03_files/figure-revealjs/unnamed-chunk-27-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="points-with-high-influence-2" class="slide level2 smaller">
 <h2>Points with high influence</h2>
 <ul>
