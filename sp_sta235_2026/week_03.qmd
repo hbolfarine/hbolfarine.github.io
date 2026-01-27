@@ -148,7 +148,6 @@ The **residuals vs fitted** graph plots:
 
 This graph effectively subtracts out the linear trend between $Y$ and the $X$’s, so we want to [see no trend left]{style="color:darkorange;"} in this graph.
 
-
 ## Regression diagnostic plot {.smaller}
 
 -   To check non-linearity we focus on the [Residual vs. Fitted]{style="color:darkorange;"} plot
@@ -479,3 +478,16 @@ autoplot(lm7)
 -   We need both a large residual and high leverage for an observation to be influential
 -   We should be worried about these points
 -   They affect the coefficents and predictions
+
+## Important take aways {.smaller}
+
+-   Violations of linearity are the most serious: Everything is wrong
+    -   If only linearity holds, we can make good predictions
+    -   But not prediction intervals, coefficient estimates, or confidence intervals
+-   Violations of normality are the least serious:
+    -   Prediction intervals are wrong, but everything else is OK if sample size is large enough-
+    -   Violations of normality/equal variance can be addressed with bootstrap techniques (beyond the scope of this class)
+-   Violations of independence are best addressed by modeling the dependence
+    -   If we don't, our intervals will tend to be **too small**
+
+- **Important**: Often fixing a linearity problem will fix other issues as well, so we usually check this first.

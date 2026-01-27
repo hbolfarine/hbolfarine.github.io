@@ -5920,5 +5920,12 @@
     "title": "Data Science for Business Applications",
     "section": "Download data",
     "text": "Download data\n\nlinear_data = read.csv(\"week_03_docs/linear_data.csv\")\nnonlinear_data = read.csv(\"week_03_docs/nonlinear_data.csv\")\nnon_normal = read.csv(\"week_03_docs/nonnormal_data.csv\")\nheter_data = read.csv(\"week_03_docs/heter_data.csv\")\noutlier_residual = read.csv(\"week_03_docs/outlier_data.csv\")"
+  },
+  {
+    "objectID": "sp_sta235_2026/week_03.html#important-take-aways",
+    "href": "sp_sta235_2026/week_03.html#important-take-aways",
+    "title": "Data Science for Business Applications",
+    "section": "Important take aways",
+    "text": "Important take aways\n\nViolations of linearity are the most serious: Everything is wrong\n\nIf only linearity holds, we can make good predictions\nBut not prediction intervals, coefficient estimates, or confidence intervals\n\nViolations of normality are the least serious:\n\nPrediction intervals are wrong, but everything else is OK if sample size is large enough-\nViolations of normality/equal variance can be addressed with bootstrap techniques (beyond the scope of this class)\n\nViolations of independence are best addressed by modeling the dependence\n\nIf we don’t, our intervals will tend to be too small\n\nImportant: Often fixing a linearity problem will fix other issues as well, so we usually check this first."
   }
 ]
