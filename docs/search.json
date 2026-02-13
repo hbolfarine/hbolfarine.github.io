@@ -6151,5 +6151,12 @@
     "title": "Quiz 5: Statistical and Grammatical Review",
     "section": "",
     "text": "Progressive difficulty: Questions build from interpretation to application to synthesis\nTests multiple competencies: Parameter interpretation, calculation, conceptual understanding, visual interpretation\nFocus on interactions: Excellent pedagogical focus on a challenging topic\nRealistic context: Food truck scenario is relatable and practical\n\n\n\n\n\nQuestion 3 ambiguity: The main effect interpretation in the presence of an interaction could be clearer. Consider adding “for the reference category” or “when day = weekday” to the question stem.\nConsistency in wording: Some questions say “strong evidence” while others don’t. Consider standardizing language around statistical significance.\nExplicit connection to output: Questions could reference specific coefficient values to help students connect their interpretations to the actual output.\n\n\n\n\n\nQuestion 1: Awkward phrasing with multiple blanks - consider restructuring\nQuestion 2: “answer can be in decimal” → “provide answer as a decimal”\nAll questions: Consider adding actual coefficient values in parentheses for reference\n\n\n\n\n\nQuestion 1: Minor rephrasing for clarity\nQuestion 2: Clarify decimal instruction\nQuestion 3: Add context about reference category (IMPORTANT for statistical accuracy)\nQuestion 4: Minor wording improvement\nQuestion 5: Minor wording improvement\n\nOverall, this is a well-designed quiz that effectively tests understanding of interaction terms in linear regression. The main suggestion is to be more explicit in Question 3 about the conditional nature of the distance coefficient in an interaction model."
+  },
+  {
+    "objectID": "quiz_suggestions.html",
+    "href": "quiz_suggestions.html",
+    "title": "Quiz suggestions",
+    "section": "",
+    "text": "Spring 2026\n\n\nSpring 2026\n\nSTA 235 - Data Science for Business Applications\n\nclass 05 - Interactions"
   }
 ]

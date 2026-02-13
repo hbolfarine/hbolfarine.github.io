@@ -1,0 +1,10 @@
+---
+title: "Quiz suggestions"
+---
+
+### Spring 2026
+
+### Spring 2026
+
+- STA 235 - Data Science for Business Applications
+  - [class 05 - Interactions](sp_sta235_2026/quizzes_suggestions_2026/quiz_review_quiz_05.md)
