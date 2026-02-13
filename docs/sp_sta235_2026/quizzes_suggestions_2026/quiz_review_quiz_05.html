@@ -179,44 +179,64 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="question-3-multiple-choice-3-points">Question 3: Multiple Choice (3 points)</h2>
 <section id="current-wording-2" class="level3">
 <h3 class="anchored" data-anchor-id="current-wording-2">Current Wording:</h3>
-<p>“What can we conclude by examining the coefficient of distance?”</p>
+<p>“What does the coefficient of distance tell us on its own?”</p>
 </section>
-<section id="statistical-soundness-potentially-problematic" class="level3">
-<h3 class="anchored" data-anchor-id="statistical-soundness-potentially-problematic">Statistical Soundness: ⚠️ POTENTIALLY PROBLEMATIC</h3>
+<section id="statistical-soundness-problematic---needs-revision" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-soundness-problematic---needs-revision">Statistical Soundness: ⚠️ PROBLEMATIC - NEEDS REVISION</h3>
+<p>The phrase “on its own” creates significant statistical and pedagogical issues.</p>
+<p><strong>Major Concerns:</strong></p>
+<ol type="1">
+<li><p><strong>Contradicts fundamental principle of interaction models:</strong> In a model with interactions, main effect coefficients should NOT be interpreted “on their own” - they are inherently conditional on the other variable being at its reference level.</p></li>
+<li><p><strong>The phrase “on its own” is ambiguous and misleading:</strong></p>
 <ul>
-<li><strong>Issue:</strong> In a model with interactions, the “coefficient of distance” (-3.00) ONLY represents the effect of distance when day = weekday (the reference category). This is a subtle but important point.</li>
-</ul>
+<li>Does it mean “ignoring the interaction term”? (pedagogically wrong)</li>
+<li>Does it mean “when the other variable is at zero/reference”? (technically correct but poorly worded)</li>
+<li>Does it mean “the isolated effect of distance”? (doesn’t exist in interaction models)</li>
+</ul></li>
+<li><p><strong>Teaches bad statistical practice:</strong> The wording could encourage students to ignore interactions when interpreting coefficients, which is a common and serious error in applied regression analysis.</p></li>
+</ol>
+<p><strong>What the distance coefficient (-3.00) actually represents:</strong> - The effect of distance <strong>specifically when day = weekday</strong> (the reference category) - It is NOT the effect of distance “on its own” or “in general” or “independently”</p>
 <p><strong>Analysis of answer choices:</strong></p>
 <ol type="1">
-<li>✓ <strong>CORRECT:</strong> “There is strong evidence that, on weekdays, customer turnout decreases by three for every one mile increase in distance from downtown.”
+<li>✓ <strong>CORRECT (but question wording undermines this):</strong> “There is strong evidence that, on weekdays, customer turnout decreases by three for every one mile increase in distance from downtown.”
 <ul>
 <li>This is statistically accurate - it correctly specifies “on weekdays”</li>
+<li>However, this answer contradicts the question’s phrase “on its own” since it requires specifying the day type</li>
+<li><strong>Pedagogical confusion:</strong> Students who correctly understand interactions might second-guess this answer because the question asks what it tells us “on its own” but the answer requires conditional interpretation</li>
 </ul></li>
 <li>✗ <strong>INCORRECT:</strong> “There is strong evidence that, on weekends, customer turnout decreases by two for each extra mile in distance from downtown.”
 <ul>
-<li>This is actually about the interaction effect, not the distance coefficient alone</li>
-<li>The slope on weekends is -3 + 2 = -1, not -2</li>
+<li>This is about the net effect (distance + interaction), not the distance coefficient alone</li>
+<li>The slope on weekends is -3 + 2 = -1, not -2 (this answer is also factually wrong)</li>
 </ul></li>
-<li>⚠️ <strong>PROBLEMATIC:</strong> “There is strong evidence that customer turnout decreases as the distance from downtown increases.”
+<li>⚠️ <strong>COULD BE MISINTERPRETED AS CORRECT given the poor wording:</strong> “There is strong evidence that customer turnout decreases as the distance from downtown increases.”
 <ul>
-<li>This is too general and doesn’t acknowledge that the effect differs by day</li>
-<li>While technically distance does have a negative effect overall, in an interaction model you can’t interpret main effects without considering the interaction</li>
-<li>This could mislead students into thinking main effects can be interpreted independently in interaction models</li>
+<li>This is too general and statistically incorrect for an interaction model</li>
+<li>BUT: students might select this because the question asks for “on its own” interpretation</li>
+<li><strong>This is the dangerous answer</strong> - it reinforces the exact misconception that the question should be teaching against</li>
 </ul></li>
 <li>✗ <strong>CLEARLY INCORRECT:</strong> “There is strong evidence that moving a food truck further away from downtown causes it to gain customers.”
 <ul>
 <li>This is obviously wrong given the negative coefficient</li>
+<li>Note: Also conflates correlation with causation (“causes”)</li>
 </ul></li>
 </ol>
-<p><strong>Recommendation:</strong> The question is acceptable but could be improved by being more explicit about asking for the interpretation “in the reference category” or “when day = weekday.”</p>
+<p><strong>Critical Issue:</strong> The wording “on its own” may lead well-informed students to choose answer 3 (the general statement) thinking that’s what “on its own” means, while the intended correct answer (1) requires conditional interpretation - the exact opposite of “on its own.”</p>
 </section>
 <section id="grammar-suggestions-2" class="level3">
 <h3 class="anchored" data-anchor-id="grammar-suggestions-2">Grammar Suggestions:</h3>
-<p><strong>Current:</strong> “What can we conclude by examining the coefficient of distance?”</p>
-<p><strong>Suggested revision:</strong> “What can we conclude by examining the coefficient for distance (-3.00)?”</p>
-<p>OR better yet:</p>
-<p><strong>Improved version:</strong> “In this model with an interaction term, what does the coefficient for distance (-3.00) tell us?”</p>
-<p><strong>Changes made:</strong> - Added the actual coefficient value for reference - OR: Added context about the interaction to cue students that they need to think carefully about interpretation</p>
+<p><strong>Current:</strong> “What does the coefficient of distance tell us on its own?”</p>
+<p><strong>Problems with current wording:</strong> - “on its own” is vague and problematic - Doesn’t acknowledge the interaction structure - Could encourage ignoring interactions</p>
+<p><strong>Strongly Recommended Revision:</strong></p>
+<p><strong>Option 1 (Most Clear):</strong> “In this interaction model, what does the coefficient for distance (-3.00) specifically tell us?”</p>
+<p><strong>Option 2 (Explicit about reference category):</strong> “What does the coefficient for distance (-3.00) tell us about the reference category (weekdays)?”</p>
+<p><strong>Option 3 (Educational framing):</strong> “The distance coefficient is -3.00. What does this value represent in an interaction model?”</p>
+<p><strong>Option 4 (Most pedagogically sound):</strong> “In a model with an interaction term, the coefficient for distance (-3.00) tells us:”</p>
+</section>
+<section id="recommendation-revise-this-question" class="level3">
+<h3 class="anchored" data-anchor-id="recommendation-revise-this-question">RECOMMENDATION: <strong>REVISE THIS QUESTION</strong></h3>
+<p>The current wording with “on its own” is pedagogically harmful. It either: 1. Contradicts the correct answer (which requires conditional interpretation), OR 2. Encourages students to ignore the interaction (statistical malpractice)</p>
+<p><strong>Better approach:</strong> Rephrase to explicitly acknowledge that the interpretation is conditional on the reference category. This teaches the correct principle: in interaction models, main effects are always conditional.</p>
 <hr>
 </section>
 </section>
@@ -315,7 +335,13 @@ ul.task-list li input[type="checkbox"] {
 <section id="areas-for-improvement" class="level3">
 <h3 class="anchored" data-anchor-id="areas-for-improvement">Areas for Improvement:</h3>
 <ol type="1">
-<li><p><strong>Question 3 ambiguity:</strong> The main effect interpretation in the presence of an interaction could be clearer. Consider adding “for the reference category” or “when day = weekday” to the question stem.</p></li>
+<li><p><strong>Question 3 - CRITICAL ISSUE:</strong> The phrase “on its own” is pedagogically harmful and statistically misleading:</p>
+<ul>
+<li>Creates direct contradiction between question wording and correct answer</li>
+<li>The phrase “on its own” suggests ignoring the interaction, which is bad statistical practice</li>
+<li>May cause well-informed students to choose the wrong answer</li>
+<li><strong>STRONG RECOMMENDATION:</strong> Revise to explicitly acknowledge the conditional interpretation (e.g., “In this interaction model, what does the coefficient for distance specifically tell us?”)</li>
+</ul></li>
 <li><p><strong>Consistency in wording:</strong> Some questions say “strong evidence” while others don’t. Consider standardizing language around statistical significance.</p></li>
 <li><p><strong>Explicit connection to output:</strong> Questions could reference specific coefficient values to help students connect their interpretations to the actual output.</p></li>
 </ol>
@@ -333,11 +359,11 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><strong>Question 1:</strong> Minor rephrasing for clarity</li>
 <li><strong>Question 2:</strong> Clarify decimal instruction</li>
-<li><strong>Question 3:</strong> Add context about reference category (<strong>IMPORTANT for statistical accuracy</strong>)</li>
+<li><strong>Question 3:</strong> <strong>CRITICAL - REQUIRES REVISION</strong> - Remove “on its own” phrasing, which contradicts proper interpretation of interactions and may confuse students who understand the material correctly</li>
 <li><strong>Question 4:</strong> Minor wording improvement</li>
 <li><strong>Question 5:</strong> Minor wording improvement</li>
 </ul>
-<p>Overall, this is a <strong>well-designed quiz</strong> that effectively tests understanding of interaction terms in linear regression. The main suggestion is to be more explicit in Question 3 about the conditional nature of the distance coefficient in an interaction model.</p>
+<p>Overall, this quiz has strong pedagogical goals and tests important concepts about interaction terms. However, <strong>Question 3 needs immediate revision</strong> because the phrase “on its own” directly contradicts the fundamental principle that main effects in interaction models should be interpreted conditionally, not in isolation. This could teach students incorrect statistical practice or penalize those who correctly understand interactions.</p>
 
 
 </section>
