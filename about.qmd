@@ -4,18 +4,19 @@ title: "Research"
 
 ## Working papers
 
-- "Lower-dimensional posterior density and cluster summaries for overparameterized Bayesian models." H. Bolfarine, H.F. Lopes, & C.M. Carvalho. *https://arxiv.org/abs/2506.09850*
+- "Lower-dimensional posterior density and cluster summaries for overparameterized Bayesian models." H. Bolfarine, H.F. Lopes, & C.M. Carvalho. [https://arxiv.org/abs/2506.09850](https://arxiv.org/abs/2506.09850) - submitted 
+
 
 ## Publications
 
-- "Decoupling Shrinkage and Selection in Gaussian Linear Factor Analysis." H. Bolfarine, C.M. Carvalho, H.F. Lopes, & J.S. Murray. *Bayesian Analysis (2024) 19, Number 1, pp. 181–203*
+- "Decoupling Shrinkage and Selection in Gaussian Linear Factor Analysis." H. Bolfarine, C.M. Carvalho, H.F. Lopes, & J.S. Murray. [Bayesian Analysis (2024) 19, Number 1, pp. 181–203](https://projecteuclid.org/journals/bayesian-analysis/advance-publication/Decoupling-Shrinkage-and-Selection-in-Gaussian-Linear-Factor-Analysis/10.1214/22-BA1349.full)
 
 - "2021 International Statistical Institute Mahalanobis Award: A Tribute to Heleno Bolfarine."
-F. Ruggeri, H. Bolfarine, J.L. Bazan, & C.M. Carvalho. *International Statistical Review (2021), 89, 3, 2021 International Statistical Institute.*
+F. Ruggeri, H.Bolfarine, J. L. Bazán, R. B. Arellano-Valle, V. H. L. Davila, M. de Castro. [International Statistical Review (2021), 89, 3, 2021 International Statistical Institute.](https://onlinelibrary.wiley.com/doi/abs/10.1111/insr.12472)
 
 ## Preprints
 
-- "Network reconstruction with local partial correlation: comparative evaluation." H. Bolfarine, L. Thomas, & A. Yambartsev. *Working Paper*
+- "Network reconstruction with local partial correlation: comparative evaluation." H. Bolfarine, L. Thomas, & A. Yambartsev. [https://arxiv.org/abs/1806.04098](https://arxiv.org/abs/1806.04098)
 
 ## Invited Reviewer
 
