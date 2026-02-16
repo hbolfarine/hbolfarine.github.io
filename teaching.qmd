@@ -12,7 +12,7 @@ title: "Teaching"
   - [class 03 - Regression Assumptions](sp_sta235_2026/week_03.qmd)
   - [class 04 - Categorical Variables](sp_sta235_2026/week_04.qmd)
   - [class 05 - Interactions](sp_sta235_2026/week_05.qmd)
-  - [class 06 - Modeling nonlinear relationships](sp_sta235_2026/week_05.qmd)
+  - [class 06 - Modeling nonlinear relationships](sp_sta235_2026/week_06.qmd)
 
 
 ### Fall 2025
