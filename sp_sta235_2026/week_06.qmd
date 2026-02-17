@@ -338,7 +338,7 @@ Two interpretations of the slope coefficient:
 
 -   Every year, the [predicted log of transistors]{style="color:darkorange;"} goes up by 0.35
 
--   More useful: Every year, the predicted number of transistors goes up by $(exp(0.35)-1)*100$ = 41.9%
+-   More useful: Every year, the predicted number of transistors goes up by $(\exp(0.35)-1)\times 100$ = 41.9%
 
 -   A [constant percentage increase]{style="color:darkorange;"} every year is exponential growth!
 
