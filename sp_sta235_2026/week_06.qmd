@@ -338,7 +338,7 @@ Two interpretations of the slope coefficient:
 
 -   Every year, the [predicted log of transistors]{style="color:darkorange;"} goes up by 0.35
 
--   More useful: Every year, the predicted number of transistors goes up by 35%
+-   More useful: Every year, the predicted number of transistors goes up by $(exp(0.35)-1)*100$ = 41.9%
 
 -   A [constant percentage increase]{style="color:darkorange;"} every year is exponential growth!
 
@@ -370,7 +370,7 @@ ggplot(moores, aes(x = Date.of.introduction, y = Transistor.count)) +
 | Model | Equation | Interpretation |
 |:-----------------|:-----------------|:-----------------------------------|
 | Linear | $\widehat{Y} = \widehat{\beta}_0 + \widehat{\beta}_1 X$ | 1 unit increase in $X$ implies $\widehat{\beta}_1$ unit increase in $\widehat{Y}$ |
-| Log-linear | $\log(\widehat{Y}) = \widehat{\beta}_0 + \widehat{\beta}_1 X$ | 1 unit increase in $X$ implies ($\exp(\widehat{\beta}_1)-1)\times 100\%$ |
+| Log-linear | $\log(\widehat{Y}) = \widehat{\beta}_0 + \widehat{\beta}_1 X$ | 1 unit increase in $X$ implies ($(\exp(\widehat{\beta}_1)-1)\times 100\%$ |
 | Linear-log | $\widehat{Y} = \widehat{\beta}_0 + \widehat{\beta}_1 \log(X)$ | 1% increase in $X$ implies ≈ $0.01 \cdot \widehat{\beta}_1$ unit increase in $\widehat{Y}$ |
 | Log-log | $\log(\widehat{Y}) = \widehat{\beta}_0 + \widehat{\beta}_1 \log(X)$ | 1% increase in $X$ implies ≈ $\widehat{\beta}_1 \%$ increase in $\widehat{Y}$ |
 
