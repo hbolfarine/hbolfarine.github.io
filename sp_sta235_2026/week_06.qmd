@@ -244,14 +244,14 @@ The [log transformation]{style="color:darkorange;"} is frequently useful in regr
 -   $\log_b x=y$ when $b^y=x$
 -   For example, $\log_{10} 1000 = 3$, $\log_{10}100 = 2$, and $\log_{10}10 = 1$
 
-![](week_05_docs/exp_log.png){fig-align="center" width="50%"}
+![](week_06_docs/exp_log.png){fig-align="center" width="50%"}
 
 ## The log transformation {.smaller}
 
 -   Anytime you need to [”squash”]{style="color:darkorange;"} one of the variables (logs make huge numbers not so big!)
 -   [Skewed]{style="color:darkorange;"} data is also a good candidate for log
 
-![](week_05_docs/exp_normal.png){fig-align="center" width="50%"}
+![](week_06_docs/exp_normal.png){fig-align="center" width="50%"}
 
 ## Moore’s Law {.smaller}
 
@@ -368,7 +368,7 @@ ggplot(moores, aes(x = Date.of.introduction, y = Transistor.count)) +
 ## Interpretation of the model {.smaller}
 
 | Model | Equation | Interpretation |
-|:-----------------|:-----------------|:-----------------------------------|
+|:------------------|:------------------|:-----------------------------------|
 | Linear | $\widehat{Y} = \widehat{\beta}_0 + \widehat{\beta}_1 X$ | 1 unit increase in $X$ implies $\widehat{\beta}_1$ unit increase in $\widehat{Y}$ |
 | Log-linear | $\log(\widehat{Y}) = \widehat{\beta}_0 + \widehat{\beta}_1 X$ | 1 unit increase in $X$ implies $(\exp(\widehat{\beta}_1)-1)\times 100\%$ |
 | Linear-log | $\widehat{Y} = \widehat{\beta}_0 + \widehat{\beta}_1 \log(X)$ | 1% increase in $X$ implies ≈ $0.01 \cdot \widehat{\beta}_1$ unit increase in $\widehat{Y}$ |
