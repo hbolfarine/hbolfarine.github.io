@@ -219,21 +219,11 @@ Class 06 - Modeling nonlinear relationships
 <li><code>temp</code> is the average temperature outside for that month</li>
 </ul>
 </section>
-<section id="polynomial-models-1" class="slide level2 smaller">
-<h2>Polynomial models</h2>
-<p>What problems do you see here?</p>
+<section id="simple-linear-regression-model" class="slide level2 smaller">
+<h2>Simple Linear Regression Model</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a></a><span class="fu">ggplot</span>(utilities, <span class="fu">aes</span>(<span class="at">x =</span> temp, <span class="at">y =</span> dailyspend)) <span class="sc">+</span></span>
-<span id="cb1-3"><a></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-
-</div>
-<img data-src="week_06_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="polynomial-models-2" class="slide level2 smaller">
-<h2>Polynomial models</h2>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> temp, <span class="at">data=</span>utilities) </span>
-<span id="cb2-2"><a></a><span class="fu">summary</span>(lm1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> temp, <span class="at">data=</span>utilities) </span>
+<span id="cb1-2"><a></a><span class="fu">summary</span>(lm1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -260,8 +250,19 @@ F-statistic: 608.1 on 1 and 115 DF,  p-value: &lt; 0.00000000000000022</code></p
 <li>For one unit increase in temperature (Fahrenheit), there will be a 7-cent decrease in spending</li>
 </ul>
 </section>
-<section id="polynomial-models-3" class="slide level2 smaller">
-<h2>Polynomial models</h2>
+<section id="simple-linear-regression-model-1" class="slide level2 smaller">
+<h2>Simple Linear Regression Model</h2>
+<p>What problems do you see here?</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-2"><a></a><span class="fu">ggplot</span>(utilities, <span class="fu">aes</span>(<span class="at">x =</span> temp, <span class="at">y =</span> dailyspend)) <span class="sc">+</span></span>
+<span id="cb3-3"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb3-4"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> temp, <span class="at">y =</span> <span class="fu">predict</span>(lm1)), <span class="at">col =</span> <span class="st">"red"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+</div>
+<img data-src="week_06_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="diagnostics-plot" class="slide level2 smaller">
+<h2>Diagnostics Plot</h2>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(ggfortify)</span>
 <span id="cb4-2"><a></a><span class="fu">autoplot</span>(lm1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -271,7 +272,7 @@ F-statistic: 608.1 on 1 and 115 DF,  p-value: &lt; 0.00000000000000022</code></p
 <li>Linearity and homoscedasticity are violated</li>
 </ul>
 </section>
-<section id="polynomial-models-4" class="slide level2">
+<section id="polynomial-models-1" class="slide level2">
 <h2>Polynomial models</h2>
 <ul>
 <li>We’ll use <span style="color:darkorange;">polynomial regression</span> to fix problems</li>
@@ -282,7 +283,7 @@ Y = \beta_0 + \beta_1\cdot X + \beta\cdot X^2 + e
 \]</span></li>
 </ul>
 </section>
-<section id="polynomial-models-5" class="slide level2 smaller">
+<section id="polynomial-models-2" class="slide level2 smaller">
 <h2>Polynomial models</h2>
 <ul>
 <li>We add the term <code>I(temp^2)</code> in the regression equation:</li>
@@ -316,7 +317,7 @@ F-statistic: 419.3 on 2 and 114 DF,  p-value: &lt; 0.00000000000000022</code></p
 <li>We have that the new term is evaluated as an extra variable.</li>
 </ul>
 </section>
-<section id="polynomial-models-6" class="slide level2 smaller">
+<section id="polynomial-models-3" class="slide level2 smaller">
 <h2>Polynomial models</h2>
 <p>Writing out the equation: <span class="math display">\[
 \widehat{\texttt{dailyspend}} = 9.4723 −0.2116\cdot \texttt{temp} + 0.0012\cdot \texttt{temp}^2
@@ -335,18 +336,18 @@ I(temp^2)    0.0008440041  0.001651114</code></pre>
 <li>The residual standard error of the linear model is <span class="math inline">\(\texttt{0.87}\)</span>.</li>
 </ul>
 </section>
-<section id="polynomial-models-7" class="slide level2 smaller">
+<section id="polynomial-models-4" class="slide level2 smaller">
 <h2>Polynomial models</h2>
 <p>Adding an <span class="math inline">\(X^2\)</span> term fits a <span style="color:darkorange;">parabola</span> to the data (orange line)</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">ggplot</span>(utilities, <span class="fu">aes</span>(<span class="at">x =</span> temp, <span class="at">y =</span> dailyspend)) <span class="sc">+</span></span>
 <span id="cb9-2"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb9-3"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> temp, <span class="at">y =</span> <span class="fu">predict</span>(lm1)), <span class="at">col =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span> </span>
+<span id="cb9-3"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> temp, <span class="at">y =</span> <span class="fu">predict</span>(lm1)), <span class="at">col =</span> <span class="st">"red"</span>) <span class="sc">+</span> </span>
 <span id="cb9-4"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> temp, <span class="at">y =</span> <span class="fu">predict</span>(lm2)), <span class="at">col =</span> <span class="st">"orange"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
 <img data-src="week_06_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="polynomial-models-8" class="slide level2 smaller">
+<section id="polynomial-models-5" class="slide level2 smaller">
 <h2>Polynomial models</h2>
 <p>It solves the linearity problem</p>
 <div class="cell" data-layout-align="center">
@@ -354,7 +355,7 @@ I(temp^2)    0.0008440041  0.001651114</code></pre>
 
 </div>
 <img data-src="week_06_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="polynomial-models-9" class="slide level2 smaller">
+<section id="polynomial-models-6" class="slide level2 smaller">
 <h2>Polynomial models</h2>
 <ul>
 <li>What about a higher-order polynomial?</li>
@@ -409,7 +410,7 @@ I(temp^2)    0.0008440041  0.001651114</code></pre>
 </tbody>
 </table>
 </section>
-<section id="polynomial-models-10" class="slide level2 smaller">
+<section id="polynomial-models-7" class="slide level2 smaller">
 <h2>Polynomial models</h2>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>lm7 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> <span class="fu">poly</span>(temp,<span class="dv">7</span>), <span class="at">data=</span>utilities) </span>
@@ -594,7 +595,7 @@ F-statistic:  1914 on 1 and 99 DF,  p-value: &lt; 0.00000000000000022</code></pr
 <tr class="even">
 <td style="text-align: left;">Log-linear</td>
 <td style="text-align: left;"><span class="math inline">\(\log(\widehat{Y}) = \widehat{\beta}_0 + \widehat{\beta}_1 X\)</span></td>
-<td style="text-align: left;">1 unit increase in <span class="math inline">\(X\)</span> implies <span class="math inline">\((\exp(\widehat{\beta}_1)-1)\times 100\%\)</span></td>
+<td style="text-align: left;">1 unit increase in <span class="math inline">\(X\)</span> implies <span class="math inline">\((\exp(\widehat{\beta}_1)-1)\times 100\%\)</span> in <span class="math inline">\(\widehat{Y}\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Linear-log</td>

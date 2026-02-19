@@ -65,20 +65,8 @@ The data set `utilities` contains information on the utility bills for a house i
 -   `dailyspend` is the average amount of money spent on utilities (e.g. heating) for each day during the month
 -   `temp` is the average temperature outside for that month
 
-## Polynomial models {.smaller}
 
-What problems do you see here?
-
-```{r, fig.align = 'center'}
-#| eval: true
-#| echo: true
-#| output: true
-library(tidyverse)
-ggplot(utilities, aes(x = temp, y = dailyspend)) +
-  geom_point()
-```
-
-## Polynomial models {.smaller}
+## Simple Linear Regression Model {.smaller}
 
 ```{r}
 #| eval: true
@@ -91,7 +79,22 @@ summary(lm1)
 -   Let's interpret this relation
 -   For one unit increase in temperature (Fahrenheit), there will be a 7-cent decrease in spending
 
-## Polynomial models {.smaller}
+## Simple Linear Regression Model {.smaller}
+
+What problems do you see here?
+
+```{r, fig.align = 'center'}
+#| eval: true
+#| echo: true
+#| output: true
+library(tidyverse)
+ggplot(utilities, aes(x = temp, y = dailyspend)) +
+  geom_point() +
+  geom_line(aes(x = temp, y = predict(lm1)), col = "red")
+```
+
+
+## Diagnostics Plot {.smaller}
 
 ```{r, fig.align = 'center'}
 #| eval: true
@@ -152,7 +155,7 @@ Adding an $X^2$ term fits a [parabola]{style="color:darkorange;"} to the data (o
 #| output: true
 ggplot(utilities, aes(x = temp, y = dailyspend)) +
   geom_point() + 
-  geom_line(aes(x = temp, y = predict(lm1)), col = "lightblue") + 
+  geom_line(aes(x = temp, y = predict(lm1)), col = "red") + 
   geom_line(aes(x = temp, y = predict(lm2)), col = "orange")
 ```
 
@@ -370,7 +373,7 @@ ggplot(moores, aes(x = Date.of.introduction, y = Transistor.count)) +
 | Model | Equation | Interpretation |
 |:------------------|:------------------|:-----------------------------------|
 | Linear | $\widehat{Y} = \widehat{\beta}_0 + \widehat{\beta}_1 X$ | 1 unit increase in $X$ implies $\widehat{\beta}_1$ unit increase in $\widehat{Y}$ |
-| Log-linear | $\log(\widehat{Y}) = \widehat{\beta}_0 + \widehat{\beta}_1 X$ | 1 unit increase in $X$ implies $(\exp(\widehat{\beta}_1)-1)\times 100\%$ |
+| Log-linear | $\log(\widehat{Y}) = \widehat{\beta}_0 + \widehat{\beta}_1 X$ | 1 unit increase in $X$ implies $(\exp(\widehat{\beta}_1)-1)\times 100\%$ in $\widehat{Y}$|
 | Linear-log | $\widehat{Y} = \widehat{\beta}_0 + \widehat{\beta}_1 \log(X)$ | 1% increase in $X$ implies ≈ $0.01 \cdot \widehat{\beta}_1$ unit increase in $\widehat{Y}$ |
 | Log-log | $\log(\widehat{Y}) = \widehat{\beta}_0 + \widehat{\beta}_1 \log(X)$ | 1% increase in $X$ implies ≈ $\widehat{\beta}_1 \%$ increase in $\widehat{Y}$ |
 

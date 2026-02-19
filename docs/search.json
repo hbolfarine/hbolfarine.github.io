@@ -6171,56 +6171,56 @@
     "href": "sp_sta235_2026/week_06.html#polynomial-models-1",
     "title": "Data Science for Business Applications",
     "section": "Polynomial models",
-    "text": "Polynomial models\nWhat problems do you see here?\n\nlibrary(tidyverse)\nggplot(utilities, aes(x = temp, y = dailyspend)) +\n  geom_point()"
+    "text": "Polynomial models\n\nWe’ll use polynomial regression to fix problems\nIf a polynomial curve (e.g., quadratic, cubic, etc) would be a better fit for the data than a line, we can fit a curve to the data.\nThe way we do this is by adding \\(X^2\\) to the model as a second predictor variable.\nThis can “fix” the linearity problem because now \\(Y\\) is a linear function of \\(X\\) and \\(X^2\\), resulting in: \\[\nY = \\beta_0 + \\beta_1\\cdot X + \\beta\\cdot X^2 + e\n\\]"
   },
   {
     "objectID": "sp_sta235_2026/week_06.html#polynomial-models-2",
     "href": "sp_sta235_2026/week_06.html#polynomial-models-2",
     "title": "Data Science for Business Applications",
     "section": "Polynomial models",
-    "text": "Polynomial models\n\nlm1 &lt;- lm(dailyspend ~ temp, data=utilities) \nsummary(lm1)\n\n\nCall:\nlm(formula = dailyspend ~ temp, data = utilities)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-2.84674 -0.50361 -0.02397  0.51540  2.44843 \n\nCoefficients:\n             Estimate Std. Error t value            Pr(&gt;|t|)    \n(Intercept)  7.347617   0.206446   35.59 &lt;0.0000000000000002 ***\ntemp        -0.096432   0.003911  -24.66 &lt;0.0000000000000002 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.8663 on 115 degrees of freedom\nMultiple R-squared:  0.841, Adjusted R-squared:  0.8396 \nF-statistic: 608.1 on 1 and 115 DF,  p-value: &lt; 0.00000000000000022\n\n\n\nLet’s interpret this relation\nFor one unit increase in temperature (Fahrenheit), there will be a 7-cent decrease in spending"
+    "text": "Polynomial models\n\nWe add the term I(temp^2) in the regression equation:\n\n\nlm2 &lt;- lm(dailyspend ~ temp + I(temp^2), data=utilities) \nsummary(lm2)\n\n\nCall:\nlm(formula = dailyspend ~ temp + I(temp^2), data = utilities)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-2.87250 -0.28048 -0.03929  0.26391  2.19117 \n\nCoefficients:\n              Estimate Std. Error t value             Pr(&gt;|t|)    \n(Intercept)  9.4722885  0.3907892  24.239 &lt; 0.0000000000000002 ***\ntemp        -0.2115553  0.0191046 -11.074 &lt; 0.0000000000000002 ***\nI(temp^2)    0.0012476  0.0002037   6.124         0.0000000133 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.7547 on 114 degrees of freedom\nMultiple R-squared:  0.8803,    Adjusted R-squared:  0.8782 \nF-statistic: 419.3 on 2 and 114 DF,  p-value: &lt; 0.00000000000000022\n\n\n\nWe have that the new term is evaluated as an extra variable."
   },
   {
     "objectID": "sp_sta235_2026/week_06.html#polynomial-models-3",
     "href": "sp_sta235_2026/week_06.html#polynomial-models-3",
     "title": "Data Science for Business Applications",
     "section": "Polynomial models",
-    "text": "Polynomial models\n\nlibrary(ggfortify)\nautoplot(lm1)\n\n\n\nLinearity and homoscedasticity are violated"
+    "text": "Polynomial models\nWriting out the equation: \\[\n\\widehat{\\texttt{dailyspend}} = 9.4723 −0.2116\\cdot \\texttt{temp} + 0.0012\\cdot \\texttt{temp}^2\n\\] The effect of the extra variable is statistically significant:\n\nconfint(lm2)\n\n                    2.5 %       97.5 %\n(Intercept)  8.6981381712 10.246438869\ntemp        -0.2494014032 -0.173709160\nI(temp^2)    0.0008440041  0.001651114\n\n\n\nThe residual standard error of the polynomial model is \\(\\texttt{0.75}\\).\nThe residual standard error of the linear model is \\(\\texttt{0.87}\\)."
   },
   {
     "objectID": "sp_sta235_2026/week_06.html#polynomial-models-4",
     "href": "sp_sta235_2026/week_06.html#polynomial-models-4",
     "title": "Data Science for Business Applications",
     "section": "Polynomial models",
-    "text": "Polynomial models\n\nWe’ll use polynomial regression to fix problems\nIf a polynomial curve (e.g., quadratic, cubic, etc) would be a better fit for the data than a line, we can fit a curve to the data.\nThe way we do this is by adding \\(X^2\\) to the model as a second predictor variable.\nThis can “fix” the linearity problem because now \\(Y\\) is a linear function of \\(X\\) and \\(X^2\\), resulting in: \\[\nY = \\beta_0 + \\beta_1\\cdot X + \\beta\\cdot X^2 + e\n\\]"
+    "text": "Polynomial models\nAdding an \\(X^2\\) term fits a parabola to the data (orange line)\n\nggplot(utilities, aes(x = temp, y = dailyspend)) +\n  geom_point() + \n  geom_line(aes(x = temp, y = predict(lm1)), col = \"red\") + \n  geom_line(aes(x = temp, y = predict(lm2)), col = \"orange\")"
   },
   {
     "objectID": "sp_sta235_2026/week_06.html#polynomial-models-5",
     "href": "sp_sta235_2026/week_06.html#polynomial-models-5",
     "title": "Data Science for Business Applications",
     "section": "Polynomial models",
-    "text": "Polynomial models\n\nWe add the term I(temp^2) in the regression equation:\n\n\nlm2 &lt;- lm(dailyspend ~ temp + I(temp^2), data=utilities) \nsummary(lm2)\n\n\nCall:\nlm(formula = dailyspend ~ temp + I(temp^2), data = utilities)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-2.87250 -0.28048 -0.03929  0.26391  2.19117 \n\nCoefficients:\n              Estimate Std. Error t value             Pr(&gt;|t|)    \n(Intercept)  9.4722885  0.3907892  24.239 &lt; 0.0000000000000002 ***\ntemp        -0.2115553  0.0191046 -11.074 &lt; 0.0000000000000002 ***\nI(temp^2)    0.0012476  0.0002037   6.124         0.0000000133 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.7547 on 114 degrees of freedom\nMultiple R-squared:  0.8803,    Adjusted R-squared:  0.8782 \nF-statistic: 419.3 on 2 and 114 DF,  p-value: &lt; 0.00000000000000022\n\n\n\nWe have that the new term is evaluated as an extra variable."
+    "text": "Polynomial models\nIt solves the linearity problem\n\nautoplot(lm2)"
   },
   {
     "objectID": "sp_sta235_2026/week_06.html#polynomial-models-6",
     "href": "sp_sta235_2026/week_06.html#polynomial-models-6",
     "title": "Data Science for Business Applications",
     "section": "Polynomial models",
-    "text": "Polynomial models\nWriting out the equation: \\[\n\\widehat{\\texttt{dailyspend}} = 9.4723 −0.2116\\cdot \\texttt{temp} + 0.0012\\cdot \\texttt{temp}^2\n\\] The effect of the extra variable is statistically significant:\n\nconfint(lm2)\n\n                    2.5 %       97.5 %\n(Intercept)  8.6981381712 10.246438869\ntemp        -0.2494014032 -0.173709160\nI(temp^2)    0.0008440041  0.001651114\n\n\n\nThe residual standard error of the polynomial model is \\(\\texttt{0.75}\\).\nThe residual standard error of the linear model is \\(\\texttt{0.87}\\)."
+    "text": "Polynomial models\n\nWhat about a higher-order polynomial?\nWe could fit a cubic curve by adding an \\(X^3\\) term\nMaking the polynomial higher order will decrease the RSE\nWhy not go nuts and fit a 7th degree polynomial?\n\n\n\n\nDegree\nname\nRSE\n\n\n\n\n1\nlinear\n0.866\n\n\n2\nquadratic\n0.754\n\n\n3\ncubic\n0.755\n\n\n4\nquartic\n0.755\n\n\n5\nquintic\n0.758\n\n\n6\n\n0.761\n\n\n7\n\n0.761"
   },
   {
     "objectID": "sp_sta235_2026/week_06.html#polynomial-models-7",
     "href": "sp_sta235_2026/week_06.html#polynomial-models-7",
     "title": "Data Science for Business Applications",
     "section": "Polynomial models",
-    "text": "Polynomial models\nAdding an \\(X^2\\) term fits a parabola to the data (orange line)\n\nggplot(utilities, aes(x = temp, y = dailyspend)) +\n  geom_point() + \n  geom_line(aes(x = temp, y = predict(lm1)), col = \"lightblue\") + \n  geom_line(aes(x = temp, y = predict(lm2)), col = \"orange\")"
+    "text": "Polynomial models\n\nlm7 &lt;- lm(dailyspend ~ poly(temp,7), data=utilities) \nggplot(utilities, aes(x = temp, y = dailyspend)) +\n  geom_point() + \n  geom_line(aes(x = temp, y = predict(lm7)), col = \"red\") + \n  geom_line(aes(x = temp, y = predict(lm2)), col = \"orange\")\n\n\n\nToo high a degree creates dangers with extrapolation"
   },
   {
     "objectID": "sp_sta235_2026/week_06.html#polynomial-models-8",
     "href": "sp_sta235_2026/week_06.html#polynomial-models-8",
     "title": "Data Science for Business Applications",
     "section": "Polynomial models",
-    "text": "Polynomial models\nIt solves the linearity problem\n\nautoplot(lm2)"
+    "text": "Polynomial models\n\nlm7 &lt;- lm(dailyspend ~ poly(temp,7), data=utilities) \nggplot(utilities, aes(x = temp, y = dailyspend)) +\n  geom_point() + \n  geom_line(aes(x = temp, y = predict(lm7)), col = \"red\") + \n  geom_line(aes(x = temp, y = predict(lm2)), col = \"orange\")\n\n\n\nToo high a degree creates dangers with extrapolation"
   },
   {
     "objectID": "sp_sta235_2026/week_06.html#polynomial-models-9",
@@ -6332,7 +6332,7 @@
     "href": "sp_sta235_2026/week_06.html#interpretation-of-the-model-3",
     "title": "Data Science for Business Applications",
     "section": "Interpretation of the model",
-    "text": "Interpretation of the model\n\n\n\n\n\n\n\n\nModel\nEquation\nInterpretation\n\n\n\n\nLinear\n\\(\\widehat{Y} = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 X\\)\n1 unit increase in \\(X\\) implies \\(\\widehat{\\beta}_1\\) unit increase in \\(\\widehat{Y}\\)\n\n\nLog-linear\n\\(\\log(\\widehat{Y}) = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 X\\)\n1 unit increase in \\(X\\) implies \\((\\exp(\\widehat{\\beta}_1)-1)\\times 100\\%\\)\n\n\nLinear-log\n\\(\\widehat{Y} = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 \\log(X)\\)\n1% increase in \\(X\\) implies ≈ \\(0.01 \\cdot \\widehat{\\beta}_1\\) unit increase in \\(\\widehat{Y}\\)\n\n\nLog-log\n\\(\\log(\\widehat{Y}) = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 \\log(X)\\)\n1% increase in \\(X\\) implies ≈ \\(\\widehat{\\beta}_1 \\%\\) increase in \\(\\widehat{Y}\\)"
+    "text": "Interpretation of the model\n\n\n\n\n\n\n\n\nModel\nEquation\nInterpretation\n\n\n\n\nLinear\n\\(\\widehat{Y} = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 X\\)\n1 unit increase in \\(X\\) implies \\(\\widehat{\\beta}_1\\) unit increase in \\(\\widehat{Y}\\)\n\n\nLog-linear\n\\(\\log(\\widehat{Y}) = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 X\\)\n1 unit increase in \\(X\\) implies \\((\\exp(\\widehat{\\beta}_1)-1)\\times 100\\%\\) in \\(\\widehat{Y}\\)\n\n\nLinear-log\n\\(\\widehat{Y} = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 \\log(X)\\)\n1% increase in \\(X\\) implies ≈ \\(0.01 \\cdot \\widehat{\\beta}_1\\) unit increase in \\(\\widehat{Y}\\)\n\n\nLog-log\n\\(\\log(\\widehat{Y}) = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 \\log(X)\\)\n1% increase in \\(X\\) implies ≈ \\(\\widehat{\\beta}_1 \\%\\) increase in \\(\\widehat{Y}\\)"
   },
   {
     "objectID": "sp_sta235_2026/week_06.html#conclusion",
@@ -6340,5 +6340,26 @@
     "title": "Data Science for Business Applications",
     "section": "Conclusion",
     "text": "Conclusion\n\nWhen is the log transformation useful?\nYou can transform \\(X \\rightarrow \\log(X)\\), \\(Y \\rightarrow \\log(Y)\\), or both\nAnytime you need to ”squash” one of the variables (logs make huge numbers not so big!), try transforming it with a log\nIn this case, Transistors is skewed right so it is a good candidate for log\nYou may need to do a little bit of trial and error to see what works best\nOther transformations are possible!"
+  },
+  {
+    "objectID": "sp_sta235_2026/week_06.html#simple-linear-regression-model",
+    "href": "sp_sta235_2026/week_06.html#simple-linear-regression-model",
+    "title": "Data Science for Business Applications",
+    "section": "Simple Linear Regression Model",
+    "text": "Simple Linear Regression Model\n\nlm1 &lt;- lm(dailyspend ~ temp, data=utilities) \nsummary(lm1)\n\n\nCall:\nlm(formula = dailyspend ~ temp, data = utilities)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-2.84674 -0.50361 -0.02397  0.51540  2.44843 \n\nCoefficients:\n             Estimate Std. Error t value            Pr(&gt;|t|)    \n(Intercept)  7.347617   0.206446   35.59 &lt;0.0000000000000002 ***\ntemp        -0.096432   0.003911  -24.66 &lt;0.0000000000000002 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.8663 on 115 degrees of freedom\nMultiple R-squared:  0.841, Adjusted R-squared:  0.8396 \nF-statistic: 608.1 on 1 and 115 DF,  p-value: &lt; 0.00000000000000022\n\n\n\nLet’s interpret this relation\nFor one unit increase in temperature (Fahrenheit), there will be a 7-cent decrease in spending"
+  },
+  {
+    "objectID": "sp_sta235_2026/week_06.html#simple-linear-regression-model-1",
+    "href": "sp_sta235_2026/week_06.html#simple-linear-regression-model-1",
+    "title": "Data Science for Business Applications",
+    "section": "Simple Linear Regression Model",
+    "text": "Simple Linear Regression Model\nWhat problems do you see here?\n\nlibrary(tidyverse)\nggplot(utilities, aes(x = temp, y = dailyspend)) +\n  geom_point() +\n  geom_line(aes(x = temp, y = predict(lm1)), col = \"red\")"
+  },
+  {
+    "objectID": "sp_sta235_2026/week_06.html#diagnostics-plot",
+    "href": "sp_sta235_2026/week_06.html#diagnostics-plot",
+    "title": "Data Science for Business Applications",
+    "section": "Diagnostics Plot",
+    "text": "Diagnostics Plot\n\nlibrary(ggfortify)\nautoplot(lm1)\n\n\n\nLinearity and homoscedasticity are violated"
   }
 ]
