@@ -90,7 +90,7 @@ What problems do you see here?
 library(tidyverse)
 ggplot(utilities, aes(x = temp, y = dailyspend)) +
   geom_point() +
-  geom_line(aes(x = temp, y = predict(lm1)), col = "red")
+  geom_line(aes(x = temp, y = predict(lm1)), col = "blue")
 ```
 
 
@@ -155,7 +155,7 @@ Adding an $X^2$ term fits a [parabola]{style="color:darkorange;"} to the data (o
 #| output: true
 ggplot(utilities, aes(x = temp, y = dailyspend)) +
   geom_point() + 
-  geom_line(aes(x = temp, y = predict(lm1)), col = "red") + 
+  geom_line(aes(x = temp, y = predict(lm1)), col = "blue") + 
   geom_line(aes(x = temp, y = predict(lm2)), col = "orange")
 ```
 

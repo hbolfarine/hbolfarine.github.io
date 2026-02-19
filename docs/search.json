@@ -6192,7 +6192,7 @@
     "href": "sp_sta235_2026/week_06.html#polynomial-models-4",
     "title": "Data Science for Business Applications",
     "section": "Polynomial models",
-    "text": "Polynomial models\nAdding an \\(X^2\\) term fits a parabola to the data (orange line)\n\nggplot(utilities, aes(x = temp, y = dailyspend)) +\n  geom_point() + \n  geom_line(aes(x = temp, y = predict(lm1)), col = \"red\") + \n  geom_line(aes(x = temp, y = predict(lm2)), col = \"orange\")"
+    "text": "Polynomial models\nAdding an \\(X^2\\) term fits a parabola to the data (orange line)\n\nggplot(utilities, aes(x = temp, y = dailyspend)) +\n  geom_point() + \n  geom_line(aes(x = temp, y = predict(lm1)), col = \"blue\") + \n  geom_line(aes(x = temp, y = predict(lm2)), col = \"orange\")"
   },
   {
     "objectID": "sp_sta235_2026/week_06.html#polynomial-models-5",
@@ -6353,7 +6353,7 @@
     "href": "sp_sta235_2026/week_06.html#simple-linear-regression-model-1",
     "title": "Data Science for Business Applications",
     "section": "Simple Linear Regression Model",
-    "text": "Simple Linear Regression Model\nWhat problems do you see here?\n\nlibrary(tidyverse)\nggplot(utilities, aes(x = temp, y = dailyspend)) +\n  geom_point() +\n  geom_line(aes(x = temp, y = predict(lm1)), col = \"red\")"
+    "text": "Simple Linear Regression Model\nWhat problems do you see here?\n\nlibrary(tidyverse)\nggplot(utilities, aes(x = temp, y = dailyspend)) +\n  geom_point() +\n  geom_line(aes(x = temp, y = predict(lm1)), col = \"blue\")"
   },
   {
     "objectID": "sp_sta235_2026/week_06.html#diagnostics-plot",
