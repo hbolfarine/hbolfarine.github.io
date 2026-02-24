@@ -13,7 +13,7 @@ title: "Teaching"
   - [class 04 - Categorical Variables](sp_sta235_2026/week_04.qmd)
   - [class 05 - Interactions](sp_sta235_2026/week_05.qmd)
   - [class 06 - Modeling nonlinear relationships](sp_sta235_2026/week_06.qmd)
-
+  - [class 07 - Time series modelling](sp_sta235_2026/week_07.qmd)
 
 ### Fall 2025
 
