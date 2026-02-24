@@ -359,8 +359,8 @@ Y_t = \text{Trend} + \text{Seasonal} + \text{Random} = T_t +S_t +E_t
 
 </div>
 <img data-src="week_07_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="fitting-additive-model" class="slide level2 smaller">
-<h2>Fitting additive model</h2>
+<section id="fitting-an-additive-model" class="slide level2 smaller">
+<h2>Fitting an Additive model</h2>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>lm_additive <span class="ot">=</span> <span class="fu">lm</span>(Revenue <span class="sc">~</span> Period <span class="sc">+</span> Quarter, <span class="at">data=</span>apple) </span>
 <span id="cb3-2"><a></a><span class="fu">summary</span>(lm_additive)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -407,8 +407,8 @@ F-statistic: 228.7 on 4 and 61 DF,  p-value: &lt; 0.00000000000000022</code></pr
 <li>How can we interpret these results?</li>
 </ul>
 </section>
-<section id="fitting-additive-model-1" class="slide level2 smaller">
-<h2>Fitting additive model</h2>
+<section id="fitting-an-additive-model-1" class="slide level2 smaller">
+<h2>Fitting an Additive model</h2>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">ggplot</span>(apple, <span class="fu">aes</span>(<span class="at">x =</span> Time, <span class="at">y =</span> Revenue)) <span class="sc">+</span> </span>
 <span id="cb5-2"><a></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
@@ -416,8 +416,8 @@ F-statistic: 228.7 on 4 and 61 DF,  p-value: &lt; 0.00000000000000022</code></pr
 
 </div>
 <img data-src="week_07_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="fitting-additive-model-2" class="slide level2 smaller">
-<h2>Fitting additive model</h2>
+<section id="fitting-an-additive-model-2" class="slide level2 smaller">
+<h2>Fitting an Additive model</h2>
 <ul>
 <li>What does the final model <span style="color:darkorange;">predict</span> from the <code>Quarter</code> component indicates: for Apple in 2026 <code>Q1</code>?</li>
 </ul>
@@ -433,8 +433,8 @@ F-statistic: 228.7 on 4 and 61 DF,  p-value: &lt; 0.00000000000000022</code></pr
 <li>What does the final model <span style="color:darkorange;">predict</span> from the <code>Quarter</code> component indicates: for Apple in 2030 <code>Q1</code>? (Should we trust that prediction?)</li>
 </ul>
 </section>
-<section id="fitting-additive-model-3" class="slide level2 smaller">
-<h2>Fitting additive model</h2>
+<section id="fitting-an-additive-model-3" class="slide level2 smaller">
+<h2>Fitting an Additive model</h2>
 <ul>
 <li>The residuals from this model show the “<span style="color:darkorange;">detrended</span> and <span style="color:darkorange;">deasonalized</span>” data (but there’s still some trend left!):</li>
 <li>We hadn’t yet dealt with the time <span style="color:darkorange;">dependence</span></li>

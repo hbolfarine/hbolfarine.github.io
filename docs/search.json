@@ -6627,5 +6627,33 @@
     "title": "Data Science for Business Applications",
     "section": "Time Series Strategy",
     "text": "Time Series Strategy\nTo building a time series model:\n\nStart with a an additive or multiplicative model with trend and seasonal components. (Plot your data! If the seasonal variation increases or decreases over time you’ll want a multiplicative model.)\nExamine the usual diagnostic plots, and plot your residuals as a function of time. Do you need a (different) nonlinear time trend? A transformation of \\(Y\\)?\nCheck your residuals for autocorrelation. If it’s present, add appropriate lag terms to your model."
+  },
+  {
+    "objectID": "sp_sta235_2026/week_07.html#fitting-an-additive-model",
+    "href": "sp_sta235_2026/week_07.html#fitting-an-additive-model",
+    "title": "Data Science for Business Applications",
+    "section": "Fitting an Additive model",
+    "text": "Fitting an Additive model\n\nlm_additive = lm(Revenue ~ Period + Quarter, data=apple) \nsummary(lm_additive)\n\n\nCall:\nlm(formula = Revenue ~ Period + Quarter, data = apple)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-23.3671  -4.6673   0.4707   4.8452  18.3182 \n\nCoefficients:\n             Estimate Std. Error t value             Pr(&gt;|t|)    \n(Intercept)  34.88613    2.51292  13.883 &lt; 0.0000000000000002 ***\nPeriod        1.38697    0.04943  28.062 &lt; 0.0000000000000002 ***\nQuarterQ2   -21.20822    2.70397  -7.843  0.00000000008182889 ***\nQuarterQ3   -28.19154    2.66346 -10.585  0.00000000000000194 ***\nQuarterQ4   -24.43405    2.66392  -9.172  0.00000000000043655 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 7.647 on 61 degrees of freedom\nMultiple R-squared:  0.9375,    Adjusted R-squared:  0.9334 \nF-statistic: 228.7 on 4 and 61 DF,  p-value: &lt; 0.00000000000000022"
+  },
+  {
+    "objectID": "sp_sta235_2026/week_07.html#fitting-an-additive-model-1",
+    "href": "sp_sta235_2026/week_07.html#fitting-an-additive-model-1",
+    "title": "Data Science for Business Applications",
+    "section": "Fitting an Additive model",
+    "text": "Fitting an Additive model\n\nggplot(apple, aes(x = Time, y = Revenue)) + \n  geom_line() +\n  geom_line(aes(x = Time, y = predict(lm_additive)), col = \"orange\")"
+  },
+  {
+    "objectID": "sp_sta235_2026/week_07.html#fitting-an-additive-model-2",
+    "href": "sp_sta235_2026/week_07.html#fitting-an-additive-model-2",
+    "title": "Data Science for Business Applications",
+    "section": "Fitting an Additive model",
+    "text": "Fitting an Additive model\n\nWhat does the final model predict from the Quarter component indicates: for Apple in 2026 Q1?\n\n\npredict(lm_additive, list(Period = 67, Quarter = \"Q1\"), interval = \"prediction\")\n\n       fit     lwr      upr\n1 127.8133 111.698 143.9287\n\n\n\nThe actual revenue was US$ 143.8 billions\nWhat does the final model predict from the Quarter component indicates: for Apple in 2030 Q1? (Should we trust that prediction?)"
+  },
+  {
+    "objectID": "sp_sta235_2026/week_07.html#fitting-an-additive-model-3",
+    "href": "sp_sta235_2026/week_07.html#fitting-an-additive-model-3",
+    "title": "Data Science for Business Applications",
+    "section": "Fitting an Additive model",
+    "text": "Fitting an Additive model\n\nThe residuals from this model show the “detrended and deasonalized” data (but there’s still some trend left!):\nWe hadn’t yet dealt with the time dependence\n\n\nggplot(apple, aes(x = Time, y = Revenue)) + \n  geom_line(aes(x = Time, y = residuals(lm_additive)))"
   }
 ]

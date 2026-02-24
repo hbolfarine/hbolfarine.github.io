@@ -219,7 +219,7 @@ ggplot(apple, aes(x=Time, y=Revenue)) +
   geom_line()
 ```
 
-## Fitting additive model {.smaller}
+## Fitting an Additive model {.smaller}
 
 ```{r, fig.align = 'center'}
 #| eval: true
@@ -244,7 +244,7 @@ summary(lm_additive)
 -   The RSE from this model is US\$ 7.647 billions of dollars.
 -   How can we interpret these results?
 
-## Fitting additive model {.smaller}
+## Fitting an Additive model {.smaller}
 
 ```{r, fig.align = 'center'}
 #| eval: true
@@ -255,7 +255,7 @@ ggplot(apple, aes(x = Time, y = Revenue)) +
   geom_line(aes(x = Time, y = predict(lm_additive)), col = "orange") 
 ```
 
-## Fitting additive model {.smaller}
+## Fitting an Additive model {.smaller}
 
 -   What does the final model [predict]{style="color:darkorange;"} from the `Quarter` component indicates: for Apple in 2026 `Q1`?
 
@@ -269,7 +269,7 @@ predict(lm_additive, list(Period = 67, Quarter = "Q1"), interval = "prediction")
 -   The [actual revenue](https://www.apple.com/newsroom/2024/08/apple-reports-third-quarter-results/){preview-link="false"} was US\$ 143.8 billions
 -   What does the final model [predict]{style="color:darkorange;"} from the `Quarter` component indicates: for Apple in 2030 `Q1`? (Should we trust that prediction?)
 
-## Fitting additive model {.smaller}
+## Fitting an Additive model {.smaller}
 
 -   The residuals from this model show the “[detrended]{style="color:darkorange;"} and [deasonalized]{style="color:darkorange;"}” data (but there’s still some trend left!):
 -   We hadn't yet dealt with the time [dependence]{style="color:darkorange;"}
