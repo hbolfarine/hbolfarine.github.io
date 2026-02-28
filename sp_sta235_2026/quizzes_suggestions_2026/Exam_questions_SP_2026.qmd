@@ -10,13 +10,13 @@ library(ggfortify)
 gym = read.csv("gym.csv")
 ```
 
-You were asked to analyze workout data from a health and wellness company with a big chain of workout gyms scattered throughout the US. The data consists of five hundred paid subscribers from different gyms across the Austin area. Your job is to understand how different types of workouts, frequency, and experience affect calories burned. The variables available in the data are listed below.
+You were asked to analyze workout data from a health and wellness company with a big chain of workout gyms scattered throughout the US. The data consist of five hundred paid subscribers from different gyms across the Austin area. Your job is to understand how different types of workouts, frequency, and experience affect calories burned. The variables available in the data are listed below.
 
 ### Variables
 
 -   `calories` - number of calories burned during the workout
--   `experience` - level experience of the user
--   `frequency` - frequency on the number of workouts during the week
+-   `experience` - experience level of the user
+-   `frequency` - number of workout sessions per week
 -   `workout.type`- type of workouts
     -   Strength - Resistance, power and building muscle.
     -   HIIT - High Intensity Interval Training (HIIT)
@@ -25,7 +25,7 @@ You were asked to analyze workout data from a health and wellness company with a
 
 ### 1. Categorical variables
 
-Create a model predicting the number of calories burn in relation to experience and workout type.
+Create a model predicting the number of calories burned in relation to experience and workout type.
 
 ```{r}
 model1 = lm(calories ~ experience + workout.type, gym)
@@ -139,7 +139,7 @@ The effect of frequency on burned calories given a Yoga workout.
 
 Which type of workout results in the highest calorie burn relative to frequency? Which yields the lowest? Explain your answer based on the values displayed on the summary and on statistical significance.
 
-answer: *From the summary, we can observe that by going to the gym an extra time a week, a subscriber will burn 491.43 calories if they opt for a strength workout. This is the highest calorie burn compared to the different workouts. Furthermore, there is strong evidence that the strength slope is statistically different than the cardio slope (157.32, 258.05). The lowest calorie burn workout in relation to frequency is yoga (262.89), although the interaction effect in thiscase is not statistically significant; thus, it is the same as cardio in relation to frequency.*
+answer: *From the summary, we can observe that by going to the gym an extra time a week, a subscriber will burn 491.43 calories if they opt for a strength workout. This is the highest calorie burn compared to the different workouts. Furthermore, there is strong evidence that the strength slope is statistically different than the cardio slope (157.32, 258.05). The lowest calorie burn workout in relation to frequency is yoga (262.89), although the interaction effect in this case is not statistically significant; hus, we cannot statistically distinguish the yoga slope from the cardio slope.*
 
 ### 3. Regression Assumptions
 

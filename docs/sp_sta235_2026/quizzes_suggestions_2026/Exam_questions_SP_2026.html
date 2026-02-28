@@ -173,13 +173,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>You were asked to analyze workout data from a health and wellness company with a big chain of workout gyms scattered throughout the US. The data consists of five hundred paid subscribers from different gyms across the Austin area. Your job is to understand how different types of workouts, frequency, and experience affect calories burned. The variables available in the data are listed below.</p>
+<p>You were asked to analyze workout data from a health and wellness company with a big chain of workout gyms scattered throughout the US. The data consist of five hundred paid subscribers from different gyms across the Austin area. Your job is to understand how different types of workouts, frequency, and experience affect calories burned. The variables available in the data are listed below.</p>
 <section id="variables" class="level3">
 <h3 class="anchored" data-anchor-id="variables">Variables</h3>
 <ul>
 <li><code>calories</code> - number of calories burned during the workout</li>
-<li><code>experience</code> - level experience of the user</li>
-<li><code>frequency</code> - frequency on the number of workouts during the week</li>
+<li><code>experience</code> - experience level of the user</li>
+<li><code>frequency</code> - number of workout sessions per week</li>
 <li><code>workout.type</code>- type of workouts
 <ul>
 <li>Strength - Resistance, power and building muscle.</li>
@@ -191,7 +191,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="categorical-variables" class="level3">
 <h3 class="anchored" data-anchor-id="categorical-variables">1. Categorical variables</h3>
-<p>Create a model predicting the number of calories burn in relation to experience and workout type.</p>
+<p>Create a model predicting the number of calories burned in relation to experience and workout type.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">=</span> <span class="fu">lm</span>(calories <span class="sc">~</span> experience <span class="sc">+</span> workout.type, gym)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -366,7 +366,7 @@ frequency:workout.typeYoga      -93.26033   9.970128</code></pre>
 <section id="question-9" class="level4">
 <h4 class="anchored" data-anchor-id="question-9">Question 9</h4>
 <p>Which type of workout results in the highest calorie burn relative to frequency? Which yields the lowest? Explain your answer based on the values displayed on the summary and on statistical significance.</p>
-<p>answer: <em>From the summary, we can observe that by going to the gym an extra time a week, a subscriber will burn 491.43 calories if they opt for a strength workout. This is the highest calorie burn compared to the different workouts. Furthermore, there is strong evidence that the strength slope is statistically different than the cardio slope (157.32, 258.05). The lowest calorie burn workout in relation to frequency is yoga (262.89), although the interaction effect in thiscase is not statistically significant; thus, it is the same as cardio in relation to frequency.</em></p>
+<p>answer: <em>From the summary, we can observe that by going to the gym an extra time a week, a subscriber will burn 491.43 calories if they opt for a strength workout. This is the highest calorie burn compared to the different workouts. Furthermore, there is strong evidence that the strength slope is statistically different than the cardio slope (157.32, 258.05). The lowest calorie burn workout in relation to frequency is yoga (262.89), although the interaction effect in this case is not statistically significant; hus, we cannot statistically distinguish the yoga slope from the cardio slope.</em></p>
 </section>
 </section>
 <section id="regression-assumptions" class="level3">
