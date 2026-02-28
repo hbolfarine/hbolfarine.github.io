@@ -1,0 +1,176 @@
+---
+title: "Mastery Exam A"
+format: html
+editor: visual
+---
+
+```{r,echo=FALSE, message=FALSE}
+library(tidyverse)
+library(ggfortify)
+gym = read.csv("gym.csv")
+```
+
+You were asked to analyze workout data from a health and wellness company with a big chain of workout gyms scattered throughout the US. The data consists of five hundred paid subscribers from different gyms across the Austin area. Your job is to understand how different types of workouts, frequency, and experience affect calories burned. The variables available in the data are listed below.
+
+### Variables
+
+-   `calories` - number of calories burned during the workout
+-   `experience` - level experience of the user
+-   `frequency` - frequency on the number of workouts during the week
+-   `workout.type`- type of workouts
+    -   Strength - Resistance, power and building muscle.
+    -   HIIT - High Intensity Interval Training (HIIT)
+    -   Cardio - Aerobic-focused exercises (e.g., running, cycling)
+    -   Yoga - Flexibility and mindfulness-based sessions
+
+### 1. Categorical variables
+
+Create a model predicting the number of calories burn in relation to experience and workout type.
+
+```{r}
+model1 = lm(calories ~ experience + workout.type, gym)
+summary(model1)
+confint(model1)
+```
+
+#### Question 1
+
+For **model1**, the intercept value of `399.42` indicates the predicted `calories burned` during `aerobic-focused` exercise, with an experience of `zero`.
+
+#### Question 2
+
+What can we can say about **experience** in model1?
+
+-   (correct) For two subscribers performing the same workout type, a one-point increase in experience is associated with an expected difference of 534.63 calories burned.
+
+-   Increasing a subscriber's experience by one point causes them to burn 534.63 more calories independently of any other factors.
+
+-   For every one-point increase in experience, a subscriber is expected to burn a total of 534.63 calories during a cardio workout.
+
+-   If a subscriber burns an additional 534.63 calories, we can conclude that their experience level has increased by exactly one point.
+
+#### Question 3
+
+In relation to variable `workout.type` we conclude that:
+
+`supported`: For two subscribers with the same experience level, the difference in the number of calories burned between doing yoga and performing a cardio workout is not statistically significant.
+
+`not supported`: Yoga has no effect on burning calories simply because its coefficient is not statistically significant.
+
+`not supported`: For two subscribers with the same experience level, performing High-Intensity Interval Training increases the number of calories burned compared to all other workout types.
+
+`supported`: Given the same experience level, we can conclude that strength based exercise burns more calories than HIIT compared to cardio workouts.
+
+#### Question 4
+
+Match the description with the numerical equivalent.
+
+The expected number of calories burned by a subscriber with an experience level of 3.5 performing a strength-based workout.
+
+```{r}
+predict(model1, list(experience = 3.5, workout.type = "Strength"))
+```
+
+The expected number of calories burned by a subscriber with an experience level of 1.2 performing a cardio workout.
+
+```{r}
+predict(model1, list(experience = 1.2, workout.type = "Cardio"))
+```
+
+The expected number of calories burned by a subscriber with an experience level of 2.0 performing yoga.
+
+```{r}
+predict(model1, list(experience = 2, workout.type = "Yoga"))
+```
+
+#### Question 5
+
+```{r}
+autoplot(model1)
+```
+
+Make a diagnostics plot for model1. From this plot we can conclude that the linearity assumption appears `to be satisfied`since there `is no` visible trend in the `residuals vs. fitted` plot. The normality assumption seems `to be satisfied` since `most of the points align with the dashed line` on the `Normal Q-Q plot`. Finally, equal variance appears `to be an issue`, as we can observe `an uneven spread of the residuals` in relation to a change in fitted values in `both the residuals vs. fitted and scale-location` plots.
+
+### 2. Interactions
+
+Create a model predicting calories from the frequency of the subscriber, the workout type, and an interaction between the two.
+
+```{r}
+model2 = lm(calories ~ frequency*workout.type, gym)
+summary(model2)
+confint(model2)
+```
+
+#### Question 6
+
+The main effect for frequency shows that for each additional `cardio workout` session, the estimated calories burned increase by `283.74`.
+
+This coefficient `is` statistically significant so we `can` be confident that there is an effect in the population.
+
+#### Question 7
+
+In relation to **model2** we can conclude that:
+
+-   When gym frequency is zero, the differences between the various workouts are statistically significant.
+
+-   Independently of gym frequency, there is strong evidence of a difference between the expected number of calories burned when practicing yoga versus doing a cardio workout.
+
+-   (correct) When gym frequency is zero, there is no evidence of a difference between strength and cardio workouts.
+
+-   For two subscribers with the same gym attendance, the expected increase in calories burned is 99.49 if one opts for high-intensity training compared to cardio training.
+
+#### Question 8
+
+How many extra calories are consumed if a subscriber frequents the gym four times a week given the different workouts? Match the description with the numerical equivalent.
+
+The effect of frequency on burned calories given a HIIT workout.
+
+(283.74 + 118.59)\*4
+
+The effect of frequency on burned calories given a strength workout.
+
+(283.74 + 207.69)\*4
+
+The effect of frequency on burned calories given a Yoga workout.
+
+(283.74 - 41.65)\*4
+
+#### Question 9
+
+Which type of workout results in the highest calorie burn relative to frequency? Which yields the lowest? Explain your answer based on the values displayed on the summary and on statistical significance.
+
+answer: *From the summary, we can observe that by going to the gym an extra time a week, a subscriber will burn 491.43 calories if they opt for a strength workout. This is the highest calorie burn compared to the different workouts. Furthermore, there is strong evidence that the strength slope is statistically different than the cardio slope (157.32, 258.05). The lowest calorie burn workout in relation to frequency is yoga (262.89), although the interaction effect in thiscase is not statistically significant; thus, it is the same as cardio in relation to frequency.*
+
+### 3. Regression Assumptions
+
+#### Question 10
+
+Suppose an extra variable, duration, which is not in the data, is used to predict the number of calories. This variable is added as an interaction with the workout variable. The resulted diagnostics plot is seen below.
+
+Based on the plot alone, which assumption does not seem to be met in this case?
+
+![](alternative_diag.png)
+
+-   Linearity
+
+-   Independence
+
+-   Normality
+
+-   Equal variance
+
+#### Question 11
+
+Based on the diagnostic plot from Question XX, `we can use model3 for making predictions`, `although we must be careful when using it` to evaluate the significance of the coefficients or to calculate prediction intervals. In relation to points A, B and C, in the plot in Question XX, we have that point `A` is an influential point and `should be considered to be removed from` the data.
+
+#### Question 12
+
+The plot on the left displays the model's predicted calories relative to workout duration. How do these new data points affect our analysis?
+
+![](resid_leverage.png)
+
+A - high residual and high leverage
+
+B - high residual and low leverage
+
+C - low residual and high leverage
