@@ -122,311 +122,374 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="mastery-exam-a-review-suggestions" class="level1">
-<h1>Mastery Exam A — Review &amp; Suggestions</h1>
+<section id="review-of-mastery-exam-a-grammar-conceptual-soundness-solutions" class="level1">
+<h1>Review of Mastery Exam A — Grammar, Conceptual Soundness &amp; Solutions</h1>
 <hr>
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>The exam covers three well-chosen topics in applied regression: categorical predictors, interaction effects, and regression diagnostics. The dataset context is clear and engaging. Overall, the exam is conceptually solid, but there are several grammar issues, a few ambiguous phrasings, and one notable conceptual clarification worth addressing.</p>
+<section id="overall-assessment" class="level2">
+<h2 class="anchored" data-anchor-id="overall-assessment">Overall Assessment</h2>
+<p>The exam is well-structured and covers important topics in applied linear regression: categorical predictors, interaction terms, diagnostics, and influential points. The questions progress logically in difficulty. Below are itemized suggestions followed by a solutions guide.</p>
 <hr>
 </section>
-<section id="grammar-writing-issues" class="level2">
-<h2 class="anchored" data-anchor-id="grammar-writing-issues">Grammar &amp; Writing Issues</h2>
-<section id="introduction-variables-section" class="level3">
-<h3 class="anchored" data-anchor-id="introduction-variables-section">Introduction / Variables Section</h3>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Location</th>
-<th>Original</th>
-<th>Suggested Revision</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Line 2</td>
-<td>“The data consists of five hundred paid subscribers…”</td>
-<td>“The data consist of five hundred paid subscribers…” <em>(data is plural)</em></td>
-</tr>
-<tr class="even">
-<td>Line 4</td>
-<td>“Your job is to understand how different types of workouts, frequency, and experience affect calories burned.”</td>
-<td>“Your job is to understand how workout type, frequency, and experience level affect the number of calories burned.”</td>
-</tr>
-<tr class="odd">
-<td>Variable definition</td>
-<td>“frequency - frequency on the number of workouts during the week”</td>
-<td>“frequency – number of workout sessions per week” <em>(the original is redundant)</em></td>
-</tr>
-<tr class="even">
-<td>Variable definition</td>
-<td>“experience - level experience of the user”</td>
-<td>“experience – experience level of the user”</td>
-</tr>
-</tbody>
-</table>
+<section id="grammar-clarity-suggestions" class="level2">
+<h2 class="anchored" data-anchor-id="grammar-clarity-suggestions">Grammar &amp; Clarity Suggestions</h2>
+<section id="introduction-preamble" class="level3">
+<h3 class="anchored" data-anchor-id="introduction-preamble">Introduction / Preamble</h3>
+<ul>
+<li><strong>“data consist of five hundred paid subscribers”</strong> — grammatically correct (data as plural), but consider “The dataset consists of…” for clarity in a non-technical audience context.</li>
+<li><strong>“Your job is to understand how different types of workouts, frequency, and experience affect calories burned.”</strong> — Clear. No change needed.</li>
+<li>The variable descriptions could benefit from a consistent format. <code>workout.type</code> lists sub-types with dashes but the others do not. Consider aligning presentation.</li>
+</ul>
 <hr>
 </section>
 <section id="section-1-categorical-variables" class="level3">
-<h3 class="anchored" data-anchor-id="section-1-categorical-variables">Section 1 – Categorical Variables</h3>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Location</th>
-<th>Original</th>
-<th>Suggested Revision</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Prompt</td>
-<td>“Create a model predicting the number of calories burn in relation to experience and workout type.”</td>
-<td>“Create a model predicting the number of calories <strong>burned</strong> in relation to experience level and workout type.”</td>
-</tr>
-<tr class="even">
-<td>Q1 answer</td>
-<td>“…the predicted calories burned during aerobic-focused exercise, with an experience of zero.”</td>
-<td>“…the predicted number of calories burned during a cardio (aerobic-focused) workout for a subscriber with an experience level of zero.”</td>
-</tr>
-<tr class="odd">
-<td>Q3 first bullet</td>
-<td>“…the difference in the number of calories burned between doing yoga and performing a cardio workout is not statistically significant.”</td>
-<td>Correct and clear. ✅</td>
-</tr>
-<tr class="even">
-<td>Q3 third bullet</td>
-<td>“…performing High-Intensity Interval Training increases the number of calories burned compared to all other workout types.”</td>
-<td>Correct phrasing; just flag it as “not supported.” ✅</td>
-</tr>
-<tr class="odd">
-<td>Q3 fourth bullet</td>
-<td>“…we can conclude that strength based exercise burns more calories than HIIT compared to cardio workouts.”</td>
-<td>Awkward. Suggest: “…strength-based exercise burns more calories than both HIIT and cardio workouts.”</td>
-</tr>
-</tbody>
-</table>
+<h3 class="anchored" data-anchor-id="section-1-categorical-variables">Section 1 — Categorical Variables</h3>
+<p><strong>Question 1</strong></p>
+<ul>
+<li>The statement reads: <em>“the intercept value of 399.42 indicates the predicted calories burned during aerobic-focused exercise, with an experience of zero.”</em></li>
+<li><strong>Conceptual note:</strong> This is correct. Cardio is the reference category and experience = 0 is the baseline. However, an experience level of 0 may not be a meaningful or realistic value. It would be worth noting this to students as a limitation of literal interpretation of the intercept.</li>
+</ul>
+<p><strong>Question 2</strong></p>
+<ul>
+<li><em>“(correct) For two subscribers performing the same workout type, a one-point increase in experience is associated with an expected difference of 534.63 calories burned.”</em>
+<ul>
+<li>Grammatically and conceptually <strong>correct</strong>. The phrase “expected difference” appropriately signals association rather than causation.</li>
+</ul></li>
+<li>The distractor <em>“Increasing a subscriber’s experience by one point causes them to burn 534.63 more calories independently of any other factors”</em> correctly introduces the causation fallacy — good pedagogical choice.</li>
+<li><strong>Suggestion:</strong> Replace “independently of any other factors” with “regardless of workout type” to make the distractor more precise and directly contrast with the correct answer.</li>
+</ul>
+<p><strong>Question 3</strong></p>
+<ul>
+<li><em>“not supported: Yoga has no effect on burning calories simply because its coefficient is not statistically significant.”</em>
+<ul>
+<li>Conceptually <strong>correct</strong> to mark this as not supported — absence of evidence is not evidence of absence. Well done.</li>
+</ul></li>
+<li><em>“not supported: For two subscribers with the same experience level, performing High-Intensity Interval Training increases the number of calories burned compared to all other workout types.”</em>
+<ul>
+<li>Conceptually <strong>correct</strong> — HIIT has a positive and significant coefficient relative to Cardio, but Strength (972.93) &gt; HIIT (599.88), so HIIT does not outperform all workout types.</li>
+</ul></li>
+<li><em>“supported: Given the same experience level, we can conclude that strength based exercise burns more calories than HIIT compared to cardio workouts.”</em>
+<ul>
+<li><strong>Grammar issue:</strong> The phrasing “burns more calories than HIIT compared to cardio workouts” is ambiguous. It could be read as saying Strength &gt; HIIT relative to cardio, which is correct (972.93 &gt; 599.88 above baseline), but the sentence structure is confusing. Suggested revision: <em>“Given the same experience level, strength-based exercise is associated with more calories burned than both HIIT and cardio workouts.”</em></li>
+</ul></li>
+</ul>
+<p><strong>Question 4 (Predictions)</strong></p>
+<ul>
+<li>The three numerical predictions are correct and verifiable:
+<ul>
+<li><code>399.42 + 534.63×3.5 + 972.93 = 3243.54</code> ✓</li>
+<li><code>399.42 + 534.63×1.2 + 0 = 1040.97</code> ✓</li>
+<li><code>399.42 + 534.63×2.0 − 158.13 = 1310.55</code> ✓ (minor rounding to 1310.538)</li>
+</ul></li>
+<li>No issues here.</li>
+</ul>
+<hr>
+</section>
+<section id="section-1-diagnostics-question-5" class="level3">
+<h3 class="anchored" data-anchor-id="section-1-diagnostics-question-5">Section 1 — Diagnostics (Question 5)</h3>
+<ul>
+<li><em>“the linearity assumption appears to be satisfied since there is no visible trend in the residuals vs.&nbsp;fitted plot”</em>
+<ul>
+<li><strong>Conceptually sound.</strong> Small caveat: the Residuals vs.&nbsp;Fitted plot in the PDF actually shows a slight curve in the smoother — instructors may want to mention this as borderline rather than clearly satisfied.</li>
+</ul></li>
+<li><em>“equal variance appears to be an issue, as we can observe an uneven spread of the residuals”</em>
+<ul>
+<li><strong>Correct.</strong> The fan-shaped spread in both Residuals vs.&nbsp;Fitted and Scale-Location plots is consistent with heteroscedasticity.</li>
+</ul></li>
+<li><strong>Grammar issue:</strong> <em>“Finally, equal variance appears to be an issue”</em> — awkward. Suggested revision: <em>“Finally, the equal variance (homoscedasticity) assumption appears to be violated, as the residuals show increasing spread with larger fitted values.”</em></li>
+</ul>
 <hr>
 </section>
 <section id="section-2-interactions" class="level3">
-<h3 class="anchored" data-anchor-id="section-2-interactions">Section 2 – Interactions</h3>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Location</th>
-<th>Original</th>
-<th>Suggested Revision</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Q6 answer</td>
-<td>“This coefficient is statistically significant so we can be confident that there is an effect in the population.”</td>
-<td>Add a comma: “This coefficient is statistically significant, so we can be confident that there is an effect in the population.”</td>
-</tr>
-<tr class="even">
-<td>Q9 answer</td>
-<td>“…the interaction effect in thiscase is not statistically significant…”</td>
-<td>Missing space: “…in <strong>this case</strong>…”</td>
-</tr>
-<tr class="odd">
-<td>Q9 answer</td>
-<td>“…thus, it is the same as cardio in relation to frequency.”</td>
-<td>Slightly imprecise. Suggest: “…thus, we cannot statistically distinguish the yoga slope from the cardio slope.”</td>
-</tr>
-</tbody>
-</table>
+<h3 class="anchored" data-anchor-id="section-2-interactions">Section 2 — Interactions</h3>
+<p><strong>Question 6</strong></p>
+<ul>
+<li><em>“The main effect for frequency shows that for each additional cardio workout session, the estimated calories burned increase by 283.74.”</em>
+<ul>
+<li><strong>Conceptually correct.</strong> The main effect of frequency applies to the reference category (Cardio) when the interaction terms are included.</li>
+</ul></li>
+<li><em>“This coefficient is statistically significant so we can be confident that there is an effect in the population.”</em>
+<ul>
+<li><strong>Minor conceptual note:</strong> Statistical significance does not prove an effect exists; rather, it means the observed result is unlikely under the null hypothesis. Suggested revision: <em>“This coefficient is statistically significant, providing evidence of an association between frequency and calories burned for cardio workouts in the population.”</em></li>
+</ul></li>
+</ul>
+<p><strong>Question 7</strong></p>
+<ul>
+<li><em>“(correct) When gym frequency is zero, there is no evidence of a difference between strength and cardio workouts.”</em>
+<ul>
+<li><strong>Correct.</strong> <code>workout.typeStrength</code> has p = 0.4743, so at frequency = 0, Strength and Cardio are not statistically distinguishable.</li>
+</ul></li>
+<li><em>“When gym frequency is zero, the differences between the various workouts are statistically significant.”</em>
+<ul>
+<li>Correctly labeled as incorrect — none of the workout type main effects are significant.</li>
+</ul></li>
+<li><em>“For two subscribers with the same gym attendance, the expected increase in calories burned is 99.49 if one opts for high-intensity training compared to cardio training.”</em>
+<ul>
+<li><strong>Conceptual issue:</strong> This is a misleading distractor. The 99.49 coefficient is the <strong>main effect</strong> of HIIT at frequency = 0, not a general expected difference for “the same gym attendance.” At any nonzero frequency, the difference depends on the interaction. The distractor could be improved to be more precise about what “same attendance” means in this context.</li>
+</ul></li>
+</ul>
+<p><strong>Question 8 (Calorie Calculations)</strong></p>
+<ul>
+<li>HIIT: <code>(283.74 + 118.59) × 4 = 1649.32</code> ✓</li>
+<li>Strength: <code>(283.74 + 207.69) × 4 = 1965.72</code> ✓</li>
+<li>Yoga: <code>(283.74 − 41.65) × 4 = 1048.36</code> ✓</li>
+<li>These represent the marginal effect of going from frequency = 0 to frequency = 4 for each workout type, which is a correct and sensible interpretation.</li>
+</ul>
+<p><strong>Question 9</strong></p>
+<ul>
+<li>The answer correctly identifies Strength as yielding the highest calorie burn per additional gym session, and correctly notes the yoga interaction is not statistically significant.</li>
+<li><strong>Typo:</strong> <em>“hus, we cannot statistically distinguish…”</em> — should be <strong>“thus”</strong>.</li>
+<li><strong>Suggestion:</strong> Add that for Cardio itself, the slope is 283.74 per session, so Yoga (242.09… wait, 283.74 − 41.65 = 242.09) should be presented for completeness in the comparison table.</li>
+</ul>
 <hr>
 </section>
 <section id="section-3-regression-assumptions" class="level3">
-<h3 class="anchored" data-anchor-id="section-3-regression-assumptions">Section 3 – Regression Assumptions</h3>
+<h3 class="anchored" data-anchor-id="section-3-regression-assumptions">Section 3 — Regression Assumptions</h3>
+<p><strong>Question 10</strong></p>
+<ul>
+<li>The diagnostic plots clearly show a funnel/fan shape in both Residuals vs.&nbsp;Fitted and Scale-Location plots, indicating <strong>heteroscedasticity (non-constant variance)</strong>. The Q-Q plot also shows heavy tails, suggesting a <strong>normality violation</strong> as well.</li>
+<li>The correct answer listed is “Equal variance” — this is appropriate given the visual evidence.</li>
+<li><strong>Suggestion:</strong> The question asks which assumption “does not seem to be met.” Since there appear to be violations of <em>both</em> equal variance and normality, the question would benefit from specifying: <em>“Which is the most visually apparent assumption violation?”</em> or listing both as correct.</li>
+</ul>
+<p><strong>Question 11</strong></p>
+<ul>
+<li><em>“we can use model3 for making predictions, although we must be careful when using it to evaluate the significance of the coefficients or to calculate prediction intervals.”</em>
+<ul>
+<li><strong>Conceptually sound.</strong> When heteroscedasticity is present, point predictions remain unbiased but standard errors (and thus inference) are compromised.</li>
+</ul></li>
+<li><em>“point A is an influential point and should be considered to be removed from the data.”</em>
+<ul>
+<li><strong>Conceptual caution:</strong> Recommending removal of influential points is debatable practice. A more careful statement would be: <em>“Point A has high leverage and high residual, making it influential. It should be investigated further — if it represents a data entry error or a genuinely anomalous case, removal may be justified.”</em> Automatically removing influential points without justification can introduce bias.</li>
+</ul></li>
+</ul>
+<p><strong>Question 12</strong></p>
+<ul>
+<li>The characterization of A, B, C is correct:
+<ul>
+<li><strong>A</strong>: High residual (far from regression line vertically) + high leverage (extreme x value, low duration) → <strong>influential point</strong></li>
+<li><strong>B</strong>: High residual + near the center of x distribution → <strong>outlier, low leverage</strong></li>
+<li><strong>C</strong>: Close to regression line (low residual) + extreme x value → <strong>high leverage, not influential</strong></li>
+</ul></li>
+<li><strong>Grammar note:</strong> The labels are presented without full sentences, which is fine for a matching exercise.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="summary-of-key-issues" class="level2">
+<h2 class="anchored" data-anchor-id="summary-of-key-issues">Summary of Key Issues</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 17%">
+<col style="width: 35%">
+<col style="width: 47%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Location</th>
-<th>Original</th>
-<th>Suggested Revision</th>
+<th>#</th>
+<th>Type</th>
+<th>Issue</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Q11</td>
-<td>“Based on the diagnostic plot from Question XX…”</td>
-<td><strong>Placeholder not filled in.</strong> Replace “Question XX” with the actual question number (likely Q10). Appears twice.</td>
+<td>Q3</td>
+<td>Grammar</td>
+<td>“burns more calories than HIIT compared to cardio” is ambiguous</td>
 </tr>
 <tr class="even">
-<td>Q10 question</td>
-<td>“Based on the plot alone, which assumption does not seem to be met in this case?”</td>
-<td>Clear and fine. ✅</td>
+<td>Q5</td>
+<td>Grammar</td>
+<td>“equal variance appears to be an issue” is awkward</td>
 </tr>
 <tr class="odd">
-<td>Q12 prompt</td>
-<td>“How do these new data points affect our analysis?”</td>
-<td>Clear and fine. ✅</td>
+<td>Q6</td>
+<td>Conceptual</td>
+<td>Overstates what statistical significance implies</td>
+</tr>
+<tr class="even">
+<td>Q7</td>
+<td>Conceptual</td>
+<td>The 99.49 distractor would benefit from clearer framing</td>
+</tr>
+<tr class="odd">
+<td>Q9</td>
+<td>Typo</td>
+<td>“hus” should be “thus”</td>
+</tr>
+<tr class="even">
+<td>Q10</td>
+<td>Conceptual</td>
+<td>Normality also appears violated; question could acknowledge both</td>
+</tr>
+<tr class="odd">
+<td>Q11</td>
+<td>Conceptual</td>
+<td>Influential point removal should be framed as investigation, not automatic removal</td>
 </tr>
 </tbody>
 </table>
 <hr>
 </section>
+<section id="complete-solutions-guide" class="level2">
+<h2 class="anchored" data-anchor-id="complete-solutions-guide">Complete Solutions Guide</h2>
+<section id="q1-intercept-interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="q1-intercept-interpretation">Q1 — Intercept Interpretation</h3>
+<p>The intercept (399.42) represents the predicted calories burned for a subscriber performing a <strong>Cardio</strong> workout (the reference category) with an experience level of <strong>zero</strong>. It is the baseline from which all other estimates are measured.</p>
 </section>
-<section id="conceptual-issues-suggestions" class="level2">
-<h2 class="anchored" data-anchor-id="conceptual-issues-suggestions">Conceptual Issues &amp; Suggestions</h2>
-<section id="q2-interpretation-of-experience" class="level3">
-<h3 class="anchored" data-anchor-id="q2-interpretation-of-experience">Q2 — Interpretation of <code>experience</code></h3>
-<p>The correct answer is well-chosen and properly phrased as an <strong>association</strong> rather than a causal claim. The three incorrect options are good distractors. One small note: the second distractor (“causes them to burn…”) correctly tests for causal language, but could be made even clearer as a distractor by adding “holding all else constant” to make the causal framing more explicit.</p>
-<blockquote class="blockquote">
-<p><strong>No change required</strong>, but consider: “Increasing a subscriber’s experience by one point <strong>causes</strong> them to burn 534.63 more calories, holding all other factors constant.”</p>
-</blockquote>
-<hr>
+<section id="q2-experience-coefficient" class="level3">
+<h3 class="anchored" data-anchor-id="q2-experience-coefficient">Q2 — Experience Coefficient</h3>
+<p><strong>Correct answer:</strong> <em>For two subscribers performing the same workout type, a one-point increase in experience is associated with an expected difference of 534.63 calories burned.</em></p>
+<p>This uses the language of association (not causation) and holds workout type constant — the two features that make it the correct interpretation of a regression coefficient.</p>
 </section>
-<section id="q3-significance-of-workout.typeyoga" class="level3">
-<h3 class="anchored" data-anchor-id="q3-significance-of-workout.typeyoga">Q3 — Significance of <code>workout.typeYoga</code></h3>
-<p>The “not supported” statement — <em>“Yoga has no effect on burning calories simply because its coefficient is not statistically significant”</em> — is a great conceptual trap. However, the explanation could benefit from an explicit note to students:</p>
-<blockquote class="blockquote">
-<p><strong>Suggested addition:</strong> <em>“A non-significant coefficient means we lack sufficient evidence to conclude there is a difference relative to the reference category (Cardio), not that the effect is exactly zero.”</em></p>
-</blockquote>
-<hr>
+<section id="q3-workout-type-conclusions" class="level3">
+<h3 class="anchored" data-anchor-id="q3-workout-type-conclusions">Q3 — Workout Type Conclusions</h3>
+<ul>
+<li>✅ <strong>Supported:</strong> Yoga vs.&nbsp;Cardio difference is not statistically significant (p = 0.0888 &gt; 0.05).</li>
+<li>❌ <strong>Not supported:</strong> Non-significance ≠ no effect.</li>
+<li>❌ <strong>Not supported:</strong> HIIT coefficient (599.88) &lt; Strength coefficient (972.93), so HIIT does not beat all workout types.</li>
+<li>✅ <strong>Supported:</strong> Strength (972.93) &gt; HIIT (599.88), both relative to Cardio baseline.</li>
+</ul>
 </section>
-<section id="q5-diagnostic-plot-interpretation" class="level3">
-<h3 class="anchored" data-anchor-id="q5-diagnostic-plot-interpretation">Q5 — Diagnostic Plot Interpretation</h3>
-<p>The conclusion about equal variance is correct (heteroscedasticity is visible). However, the exam states that <strong>linearity and normality are satisfied</strong>, which is reasonable from the plots shown. Consider adding a caveat about the <strong>Residuals vs.&nbsp;Leverage</strong> plot — it is mentioned in the <code>autoplot</code> output but not discussed in the written conclusion.</p>
-<blockquote class="blockquote">
-<p><strong>Suggested addition to Q5 answer:</strong> <em>“The Residuals vs.&nbsp;Leverage plot does not show any points beyond Cook’s distance, so there are no immediately influential observations to be concerned about in model1.”</em></p>
-</blockquote>
-<hr>
-</section>
-<section id="q6-main-effect-for-frequency-in-an-interaction-model" class="level3">
-<h3 class="anchored" data-anchor-id="q6-main-effect-for-frequency-in-an-interaction-model">Q6 — Main Effect for Frequency in an Interaction Model</h3>
-<p>The answer is conceptually correct: in an interaction model, the main effect for <code>frequency</code> applies specifically to the <strong>reference category</strong> (Cardio). This is stated well. However, the phrasing “for each additional cardio workout session” could be confused with “per additional session while doing cardio.” Consider:</p>
-<blockquote class="blockquote">
-<p><strong>Suggested revision:</strong> <em>“The main effect for frequency shows that, for subscribers doing cardio workouts, each additional weekly session is associated with an estimated increase of 283.74 calories burned.”</em></p>
-</blockquote>
-<hr>
-</section>
-<section id="q7-correct-answer-identification" class="level3">
-<h3 class="anchored" data-anchor-id="q7-correct-answer-identification">Q7 — Correct Answer Identification</h3>
-<p>The correct answer is: <em>“When gym frequency is zero, there is no evidence of a difference between strength and cardio workouts.”</em></p>
-<p>This is conceptually sound — at <code>frequency = 0</code>, only the main effects of workout type apply, and <code>workout.typeStrength</code> has p = 0.4743, which is not significant. ✅</p>
-<p>The first distractor (<em>“differences between the various workouts are statistically significant”</em>) is a good trap. The second distractor (<em>“independently of gym frequency”</em>) is also effective. ✅</p>
-<hr>
-</section>
-<section id="q8-calorie-calculations" class="level3">
-<h3 class="anchored" data-anchor-id="q8-calorie-calculations">Q8 — Calorie Calculations</h3>
-<p>The formulas provided are correct:</p>
+<section id="q4-predictions" class="level3">
+<h3 class="anchored" data-anchor-id="q4-predictions">Q4 — Predictions</h3>
+<p>Using <code>ŷ = 399.42 + 534.63 × experience + β_workout</code>:</p>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 32%">
+<col style="width: 41%">
+<col style="width: 25%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>Workout</th>
+<th>Scenario</th>
 <th>Calculation</th>
 <th>Result</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>HIIT</td>
-<td>(283.74 + 118.59) × 4</td>
-<td><strong>1,609.32 calories</strong></td>
+<td>Experience = 3.5, Strength</td>
+<td>399.42 + 534.63(3.5) + 972.93</td>
+<td><strong>3243.54</strong></td>
 </tr>
 <tr class="even">
-<td>Strength</td>
-<td>(283.74 + 207.69) × 4</td>
-<td><strong>1,965.72 calories</strong></td>
+<td>Experience = 1.2, Cardio</td>
+<td>399.42 + 534.63(1.2) + 0</td>
+<td><strong>1040.97</strong></td>
 </tr>
 <tr class="odd">
-<td>Yoga</td>
-<td>(283.74 − 41.65) × 4</td>
-<td><strong>1,048.36 calories</strong></td>
+<td>Experience = 2.0, Yoga</td>
+<td>399.42 + 534.63(2.0) − 158.13</td>
+<td><strong>1310.54</strong></td>
 </tr>
 </tbody>
 </table>
-<blockquote class="blockquote">
-<p><strong>Suggestion:</strong> Include the computed numerical results in the exam/answer key so students can self-check.</p>
-</blockquote>
-<hr>
 </section>
-<section id="q10-violated-assumption" class="level3">
-<h3 class="anchored" data-anchor-id="q10-violated-assumption">Q10 — Violated Assumption</h3>
-<p>The correct answer is <strong>Equal Variance</strong> (heteroscedasticity). The fan-shaped spread in the Residuals vs.&nbsp;Fitted and Scale-Location plots makes this clear. The answer choices are appropriately designed.</p>
-<blockquote class="blockquote">
-<p><strong>Note:</strong> The Normal Q-Q plot shows some deviation in the tails, which could be argued as a Normality concern too. Consider adding a brief note acknowledging that normality shows <em>mild</em> violations in the tails but that equal variance is the <em>primary</em> concern.</p>
-</blockquote>
-<hr>
+<section id="q5-diagnostic-plot-model1" class="level3">
+<h3 class="anchored" data-anchor-id="q5-diagnostic-plot-model1">Q5 — Diagnostic Plot (model1)</h3>
+<ul>
+<li><strong>Linearity:</strong> Satisfied — no strong trend in Residuals vs.&nbsp;Fitted (borderline).</li>
+<li><strong>Normality:</strong> Satisfied — points follow the Q-Q line reasonably well.</li>
+<li><strong>Equal Variance:</strong> <strong>Violated</strong> — increasing spread of residuals with larger fitted values (heteroscedasticity).</li>
+</ul>
 </section>
-<section id="q11-influential-points" class="level3">
-<h3 class="anchored" data-anchor-id="q11-influential-points">Q11 — Influential Points</h3>
-<p>Labeling point A as influential is correct — it has both high leverage (extreme x-value) and a high residual, placing it outside the main data cloud. Points B and C are correctly characterized as well.</p>
-<blockquote class="blockquote">
-<p><strong>Suggested clarification in Q11:</strong> Explicitly define <strong>influential point</strong> for students: <em>“An influential point is one where removing it would substantially change the regression estimates. Influence is a combination of high leverage and a high residual.”</em></p>
-</blockquote>
-<hr>
+<section id="q6-frequency-main-effect-model2" class="level3">
+<h3 class="anchored" data-anchor-id="q6-frequency-main-effect-model2">Q6 — Frequency Main Effect (model2)</h3>
+<p>283.74 calories per additional session applies to <strong>Cardio</strong> workouts specifically (the reference category). The coefficient is statistically significant (p &lt; 2e-16), providing strong evidence of a positive association between frequency and calories for cardio subscribers.</p>
 </section>
-<section id="q12-residualleverage-classification" class="level3">
-<h3 class="anchored" data-anchor-id="q12-residualleverage-classification">Q12 — Residual/Leverage Classification</h3>
-<p>The classifications are correct:</p>
+<section id="q7-model2-conclusions" class="level3">
+<h3 class="anchored" data-anchor-id="q7-model2-conclusions">Q7 — model2 Conclusions</h3>
+<p><strong>Correct:</strong> When gym frequency is zero, there is no evidence of a difference between strength and cardio workouts (p = 0.4743).</p>
+<p>The other options are wrong because: (a) all workout main effects are non-significant at frequency = 0; (b) the yoga coefficient confidence interval crosses zero; (c) 99.49 is the HIIT main effect at frequency = 0, not a general frequency-adjusted comparison.</p>
+</section>
+<section id="q8-calorie-effect-at-frequency-4" class="level3">
+<h3 class="anchored" data-anchor-id="q8-calorie-effect-at-frequency-4">Q8 — Calorie Effect at Frequency = 4</h3>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
+<thead>
+<tr class="header">
+<th>Workout</th>
+<th>Slope</th>
+<th>× 4</th>
+<th>Calories</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cardio</td>
+<td>283.74</td>
+<td>× 4</td>
+<td>1134.96</td>
+</tr>
+<tr class="even">
+<td>HIIT</td>
+<td>283.74 + 118.59 = 402.33</td>
+<td>× 4</td>
+<td><strong>1649.32</strong></td>
+</tr>
+<tr class="odd">
+<td>Strength</td>
+<td>283.74 + 207.69 = 491.43</td>
+<td>× 4</td>
+<td><strong>1965.72</strong></td>
+</tr>
+<tr class="even">
+<td>Yoga</td>
+<td>283.74 − 41.65 = 242.09</td>
+<td>× 4</td>
+<td><strong>968.36</strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="q9-highestlowest-calorie-burn-by-frequency" class="level3">
+<h3 class="anchored" data-anchor-id="q9-highestlowest-calorie-burn-by-frequency">Q9 — Highest/Lowest Calorie Burn by Frequency</h3>
+<p><strong>Highest:</strong> Strength, at 491.43 calories per additional weekly session (interaction significant: CI [157.32, 258.05]). <strong>Lowest:</strong> Yoga, at 242.09 per session, though this interaction is <strong>not statistically significant</strong> (p = 0.1135; CI includes 0), so we cannot statistically distinguish the yoga slope from the cardio slope.</p>
+</section>
+<section id="q10-violated-assumption-in-model3" class="level3">
+<h3 class="anchored" data-anchor-id="q10-violated-assumption-in-model3">Q10 — Violated Assumption in model3</h3>
+<p><strong>Equal variance (homoscedasticity)</strong> is the most visually apparent violation — the Residuals vs.&nbsp;Fitted and Scale-Location plots show a pronounced fan shape. The Q-Q plot also suggests possible normality issues (heavy tails).</p>
+</section>
+<section id="q11-using-model3-for-predictions" class="level3">
+<h3 class="anchored" data-anchor-id="q11-using-model3-for-predictions">Q11 — Using model3 for Predictions</h3>
+<p>Model3 can still be used for <strong>point predictions</strong>, since OLS estimates remain unbiased under heteroscedasticity. However, <strong>hypothesis tests, confidence intervals, and prediction intervals</strong> are unreliable because they depend on correct standard errors. Point A (high residual + high leverage) is <strong>influential</strong> and warrants investigation before any decision about removal.</p>
+</section>
+<section id="q12-classifying-points-a-b-c" class="level3">
+<h3 class="anchored" data-anchor-id="q12-classifying-points-a-b-c">Q12 — Classifying Points A, B, C</h3>
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Point</th>
+<th>Residual</th>
+<th>Leverage</th>
 <th>Classification</th>
-<th>Rationale</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>A</td>
-<td>High residual, high leverage</td>
-<td>Low duration, very high calories — far from both axes of the data cloud</td>
+<td>High</td>
+<td>High</td>
+<td>Influential point</td>
 </tr>
 <tr class="even">
 <td>B</td>
-<td>High residual, low leverage</td>
-<td>Duration is near the center of the x-range, but calories are far above the regression line</td>
+<td>High</td>
+<td>Low</td>
+<td>Outlier (non-influential)</td>
 </tr>
 <tr class="odd">
 <td>C</td>
-<td>Low residual, high leverage</td>
-<td>Low duration and low calories — extreme on x but close to the regression line</td>
+<td>Low</td>
+<td>High</td>
+<td>High-leverage, not influential</td>
 </tr>
 </tbody>
 </table>
+<p>An influential point is one that substantially affects the fitted regression line. A has both high leverage (extreme x) and a large residual, so it “pulls” the line toward it. B is anomalous in y but sits in the middle of the x range, so it exerts less influence on the slope. C is far out in x but falls close to the regression line, so it reinforces rather than distorts the fit.</p>
 <hr>
-</section>
-</section>
-<section id="summary-of-key-actions" class="level2">
-<h2 class="anchored" data-anchor-id="summary-of-key-actions">Summary of Key Actions</h2>
-<ol type="1">
-<li><strong>Fix the “Question XX” placeholder</strong> in Q11 — this is the most critical error.</li>
-<li><strong>Correct minor grammar</strong> throughout (see table above), especially “calories burn” → “calories burned” and “level experience” → “experience level.”</li>
-<li><strong>Add computed numerical answers</strong> to Q8 for student reference.</li>
-<li><strong>Strengthen Q3 and Q5</strong> with brief conceptual notes on non-significance and the Leverage plot.</li>
-<li><strong>Clarify Q6</strong> so that the main effect for frequency is explicitly tied to the Cardio reference category.</li>
-</ol>
+<p><em>Review prepared for Mastery Exam A — Henrique Bolfarine (referenced course material)</em></p>
 
 
+</section>
 </section>
 </section>
 
