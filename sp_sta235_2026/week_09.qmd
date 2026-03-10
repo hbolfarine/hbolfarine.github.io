@@ -174,46 +174,46 @@ model2 = lm(Graduation.rate ~ Average.math.SAT + Average.verbal.SAT + Acceptance
 summary(model2)
 ```
 
-## How can we detect multicollinearity? {.smaller}
+<!-- ## How can we detect multicollinearity? {.smaller} -->
 
--   The VIF for variable $X_j$ is:
+<!-- -   The VIF for variable $X_j$ is: -->
 
-$$\text{VIF}(\beta_j) = \frac{1}{1 - R_j^2},$$
+<!-- $$\text{VIF}(\beta_j) = \frac{1}{1 - R_j^2},$$ -->
 
-where $R_j^2$ is the $R^2$ in a regression predicting $X_j$ from the other $X$ variables.
+<!-- where $R_j^2$ is the $R^2$ in a regression predicting $X_j$ from the other $X$ variables. -->
 
--   $\text{VIF}(\beta_j) = 1$ when $R_j^2 = 0$; i.e., the $j$th predictor variable is completely independent from the others.\
--   Higher VIF for variable $X_j$ means that variable is more closely related to the other $X$ variables (more multicollinearity).
+<!-- -   $\text{VIF}(\beta_j) = 1$ when $R_j^2 = 0$; i.e., the $j$th predictor variable is completely independent from the others.\ -->
+<!-- -   Higher VIF for variable $X_j$ means that variable is more closely related to the other $X$ variables (more multicollinearity). -->
 
-## How can we detect multicollinearity? {.smaller}
+<!-- ## How can we detect multicollinearity? {.smaller} -->
 
-To calculate VIF for each predictor, you would have to run one regression for each predictor. But you don't have to run all of these regressions by hand!
+<!-- To calculate VIF for each predictor, you would have to run one regression for each predictor. But you don't have to run all of these regressions by hand! -->
 
-```{r, echo = TRUE}
-model = lm(Graduation.rate ~ Average.math.SAT + Average.verbal.SAT + Acceptance.rate, data = colleges)
-# install.packages("car")
-library(car)
-vif(model)
-```
+<!-- ```{r, echo = TRUE} -->
+<!-- model = lm(Graduation.rate ~ Average.math.SAT + Average.verbal.SAT + Acceptance.rate, data = colleges) -->
+<!-- # install.packages("car") -->
+<!-- library(car) -->
+<!-- vif(model) -->
+<!-- ``` -->
 
-## Dealing with multicollinearity {.smaller}
+<!-- ## Dealing with multicollinearity {.smaller} -->
 
-There are two general strategies for dealing with **multicollinearity**:
+<!-- There are two general strategies for dealing with **multicollinearity**: -->
 
--   Drop one of the variables with a high VIF factor, and rerun to see if VIFs have improved. (Just like we drop one of the dummy variables when putting a categorical variable in the model!)\
--   Combine the variables that correlate into a composite variable. (Combined SAT score = Math + Verbal)
+<!-- -   Drop one of the variables with a high VIF factor, and rerun to see if VIFs have improved. (Just like we drop one of the dummy variables when putting a categorical variable in the model!)\ -->
+<!-- -   Combine the variables that correlate into a composite variable. (Combined SAT score = Math + Verbal) -->
 
-## Dealing with multicollinearity
+<!-- ## Dealing with multicollinearity -->
 
-When we combine math and verbal SAT into a single variable, VIFs are now close to 1.
+<!-- When we combine math and verbal SAT into a single variable, VIFs are now close to 1. -->
 
-```{r, echo = TRUE}
-model = lm(Graduation.rate ~ Average.combined.SAT + Acceptance.rate, data = colleges)
-vif(model)
-```
+<!-- ```{r, echo = TRUE} -->
+<!-- model = lm(Graduation.rate ~ Average.combined.SAT + Acceptance.rate, data = colleges) -->
+<!-- vif(model) -->
+<!-- ``` -->
 
-## When is multicollinearity not a problem?
+<!-- ## When is multicollinearity not a problem? -->
 
--   When there is high collinearity in $X$'s that are strictly for adjustment, not interpretation, and the coefficient we want to interpret corresponds to a variable with low multicollinearity.\
--   When multicollinearity comes from how we construct $X$: e.g., adding polynomial terms (like last week!), turning categories into dummy variables, or adding interactions.\
--   When we are just trying to predict using relatively few $X$'s, and only predicting at *“typical”* $X$ values.
+<!-- -   When there is high collinearity in $X$'s that are strictly for adjustment, not interpretation, and the coefficient we want to interpret corresponds to a variable with low multicollinearity.\ -->
+<!-- -   When multicollinearity comes from how we construct $X$: e.g., adding polynomial terms (like last week!), turning categories into dummy variables, or adding interactions.\ -->
+<!-- -   When we are just trying to predict using relatively few $X$'s, and only predicting at *“typical”* $X$ values. -->
