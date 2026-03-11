@@ -6745,7 +6745,7 @@
     "href": "sp_sta235_2026/lecture-08.html#testing-the-model-on-the-test-set",
     "title": "Data Science for Business Applications",
     "section": "Testing the model on the test set",
-    "text": "Testing the model on the test set\nNow we can see how well the model predicts the test set.\n\npredict(model4, test)\n\n      52       53       54       55 \n4.377099 4.502806 4.918158 4.558995 \n\n\n\nThese are predictions for log revenue, so we need to convert them back to revenue:\n\nexp(predict(model4, test))\n\n       52        53        54        55 \n 79.60673  90.27005 136.75045  95.48747 \n\n\n\n\nHow do we compare this to the actual revenues of the last 4 quarters?\n\ntest.Rev = test$Revenue"
+    "text": "Testing the model on the test set\nNow we can see how well the model predicts the test set.\n\npredict(model4, test)\n\n      52       53       54       55 \n4.377099 4.502806 4.918158 4.558995 \n\n\n\nThese are predictions for log revenue, so we need to convert them back to revenue:\n\nexp(predict(model4, test))\n\n       52        53        54        55 \n 79.60673  90.27005 136.75045  95.48747 \n\n\n\n\nHow do we compare this to the actual revenues of the last 4 quarters?\n\ntest.Rev = test$Revenue\ntest.Rev\n\n[1]  85.8  94.9 124.3  95.4"
   },
   {
     "objectID": "sp_sta235_2026/lecture-08.html#measuring-prediction-error",
@@ -6759,7 +6759,7 @@
     "href": "sp_sta235_2026/lecture-08.html#calculating-rmspe",
     "title": "Data Science for Business Applications",
     "section": "Calculating RMSPE",
-    "text": "Calculating RMSPE\n\n\n\n\n\n\n\n\n\n\n\\(i\\)\n\\(Y_i\\)\n\\(\\hat Y_i\\)\n\\(Y_i - \\hat Y_i\\)\n\\((Y_i - \\hat Y_i)^2\\)\n\n\n\n\n\\(1\\)\n\\(85.8\\)\n\\(79.61\\)\n\\(6.19\\)\n\\(38.36\\)\n\n\n\\(3\\)\n\\(124.3\\)\n\\(136.75\\)\n\\(-12.45\\)\n\\(155.01\\)\n\n\n\n\n\\[\n  \\text{RMSPE} = \\sqrt{\\frac{1}{4} \\sum_{i=1}^4 (Y_i - \\hat Y_i)^2} = 7.33\n\\]\n\n\nIn other words, we expect our model to be off by about\n\nround(sqrt(mean((test$Revenue - exp(predict(model4, test)))^2)), 2)\n\n[1] 7.33\n\n\nbillion dollars on average when forecasting the future."
+    "text": "Calculating RMSPE\n\n\n\n\\(i\\)\n\\(Y_i\\)\n\\(\\hat Y_i\\)\n\\(Y_i - \\hat Y_i\\)\n\\((Y_i - \\hat Y_i)^2\\)\n\n\n\n\n\\(1\\)\n\\(85.8\\)\n\\(79.61\\)\n\\(6.19\\)\n\\(38.36\\)\n\n\n\\(2\\)\n\\(94.9\\)\n\\(90.27\\)\n\\(4.63\\)\n\\(21.44\\)\n\n\n\\(3\\)\n\\(124.3\\)\n\\(136.75\\)\n\\(-12.45\\)\n\\(155.01\\)\n\n\n\\(4\\)\n\\(95.4\\)\n\\(95.49\\)\n\\(-0.09\\)\n\\(0.01\\)\n\n\n\n\n\\[\n  \\text{RMSPE} = \\sqrt{\\frac{1}{4} \\sum_{i=1}^4 (Y_i - \\hat Y_i)^2} = 7.33\n\\]\n\n\nIn other words, we expect our model to be off by about\n\nround(sqrt(mean((test$Revenue - exp(predict(model4, test)))^2)), 2)\n\n[1] 7.33\n\n\nbillion dollars on average when forecasting the future."
   },
   {
     "objectID": "sp_sta235_2026/lecture-08.html#a-shortcut-for-calculating-rmspe",
@@ -6836,7 +6836,7 @@
     "href": "sp_sta235_2026/lecture-08.html#measuring-performance",
     "title": "Data Science for Business Applications",
     "section": "Measuring performance",
-    "text": "Measuring performance\nNow let’s calculate RMSPE on the testing data:\n\nsqrt(mean((actuals - predictions1)^2))\n\n[1] 1.013597\n\nsqrt(mean((actuals - predictions2)^2))\n\n[1] 0.8534912\n\nsqrt(mean((actuals - predictions9)^2))\n\n[1] 0.9482653\n\n\n\n\n\n\n\n\n\n\n\nModel\nRSE (all data)\nRMSPE (training/test split)\n\n\n\n\nLinear\n\\(0.83\\)\n\\(1.01\\)\n\n\nQuadratic\n\\(0.73\\)\n\\(0.85\\)\n\n\n9th Degree\n\\(0.71\\)\n\\(0.95\\)\n\n\n\n\n\n\nThese are all worse than the predictions of the models fit to the entire data set!\nIt shows that the quadratic model is the best of the three for making predictions on new data"
+    "text": "Measuring performance\nNow let’s calculate RMSPE on the testing data:\n\nsqrt(mean((actuals - predictions1)^2))\n\n[1] 1.013597\n\nsqrt(mean((actuals - predictions2)^2))\n\n[1] 0.8534912\n\nsqrt(mean((actuals - predictions9)^2))\n\n[1] 0.9482653\n\n\n\n\n\n\nModel\nRSE (all data)\nRMSPE (training/test split)\n\n\n\n\nLinear\n\\(0.83\\)\n\\(1.01\\)\n\n\nQuadratic\n\\(0.73\\)\n\\(0.85\\)\n\n\n9th Degree\n\\(0.71\\)\n\\(0.95\\)\n\n\n\n\n\n\nThese are all worse than the predictions of the models fit to the entire data set!\nIt shows that the quadratic model is the best of the three for making predictions on new data"
   },
   {
     "objectID": "sp_sta235_2026/lecture-08.html#the-problem-with-this-approach",

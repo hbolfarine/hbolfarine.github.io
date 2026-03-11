@@ -348,7 +348,11 @@ F-statistic: 267.9 on 6 and 47 DF,  p-value: &lt; 0.00000000000000022</code></pr
 <div class="fragment">
 <p>How do we compare this to the actual revenues of the last 4 quarters?</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>test.Rev <span class="ot">=</span> test<span class="sc">$</span>Revenue</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>test.Rev <span class="ot">=</span> test<span class="sc">$</span>Revenue</span>
+<span id="cb9-2"><a></a>test.Rev</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  85.8  94.9 124.3  95.4</code></pre>
+</div>
 </div>
 </div>
 </section>
@@ -368,13 +372,6 @@ F-statistic: 267.9 on 6 and 47 DF,  p-value: &lt; 0.00000000000000022</code></pr
 <section id="calculating-rmspe" class="slide level2 smaller">
 <h2>Calculating RMSPE</h2>
 <table class="caption-top">
-<colgroup>
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-</colgroup>
 <thead>
 <tr class="header">
 <th><span class="math inline">\(i\)</span></th>
@@ -393,11 +390,25 @@ F-statistic: 267.9 on 6 and 47 DF,  p-value: &lt; 0.00000000000000022</code></pr
 <td><span class="math inline">\(38.36\)</span></td>
 </tr>
 <tr class="even">
+<td><span class="math inline">\(2\)</span></td>
+<td><span class="math inline">\(94.9\)</span></td>
+<td><span class="math inline">\(90.27\)</span></td>
+<td><span class="math inline">\(4.63\)</span></td>
+<td><span class="math inline">\(21.44\)</span></td>
+</tr>
+<tr class="odd">
 <td><span class="math inline">\(3\)</span></td>
 <td><span class="math inline">\(124.3\)</span></td>
 <td><span class="math inline">\(136.75\)</span></td>
 <td><span class="math inline">\(-12.45\)</span></td>
 <td><span class="math inline">\(155.01\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(4\)</span></td>
+<td><span class="math inline">\(95.4\)</span></td>
+<td><span class="math inline">\(95.49\)</span></td>
+<td><span class="math inline">\(-0.09\)</span></td>
+<td><span class="math inline">\(0.01\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -409,7 +420,7 @@ F-statistic: 267.9 on 6 and 47 DF,  p-value: &lt; 0.00000000000000022</code></pr
 <div class="fragment">
 <p>In other words, we expect our model to be off by about</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">round</span>(<span class="fu">sqrt</span>(<span class="fu">mean</span>((test<span class="sc">$</span>Revenue <span class="sc">-</span> <span class="fu">exp</span>(<span class="fu">predict</span>(model4, test)))<span class="sc">^</span><span class="dv">2</span>)), <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">round</span>(<span class="fu">sqrt</span>(<span class="fu">mean</span>((test<span class="sc">$</span>Revenue <span class="sc">-</span> <span class="fu">exp</span>(<span class="fu">predict</span>(model4, test)))<span class="sc">^</span><span class="dv">2</span>)), <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7.33</code></pre>
 </div>
@@ -420,10 +431,10 @@ F-statistic: 267.9 on 6 and 47 DF,  p-value: &lt; 0.00000000000000022</code></pr
 <section id="a-shortcut-for-calculating-rmspe" class="slide level2 smaller">
 <h2>A shortcut for calculating RMSPE</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="co"># exp here only because we're predicting log(Revenue) instead of Revenue</span></span>
-<span id="cb12-2"><a></a>predictions <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">predict</span>(model4, test))</span>
-<span id="cb12-3"><a></a>actuals <span class="ot">&lt;-</span> test<span class="sc">$</span>Revenue</span>
-<span id="cb12-4"><a></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((predictions <span class="sc">-</span> actuals)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="co"># exp here only because we're predicting log(Revenue) instead of Revenue</span></span>
+<span id="cb13-2"><a></a>predictions <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">predict</span>(model4, test))</span>
+<span id="cb13-3"><a></a>actuals <span class="ot">&lt;-</span> test<span class="sc">$</span>Revenue</span>
+<span id="cb13-4"><a></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((predictions <span class="sc">-</span> actuals)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7.328273</code></pre>
 </div>
@@ -456,17 +467,17 @@ F-statistic: 267.9 on 6 and 47 DF,  p-value: &lt; 0.00000000000000022</code></pr
 <h2>Creating a train/test split</h2>
 <p>Let’s do the same thing for the utilities data, but by <em>randomly</em> splitting the data into a training and test set.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb14-2"><a></a><span class="fu">set.seed</span>(<span class="dv">9529</span>)</span>
-<span id="cb14-3"><a></a></span>
-<span id="cb14-4"><a></a><span class="co"># Ask R to shuffle all 117 observations</span></span>
-<span id="cb14-5"><a></a>randomized <span class="ot">&lt;-</span> <span class="fu">slice_sample</span>(utilities, <span class="at">n =</span> <span class="dv">117</span>)</span>
-<span id="cb14-6"><a></a></span>
-<span id="cb14-7"><a></a><span class="co"># 24 is about 20% of 117, so we'll use the first 24 rows as our test set</span></span>
-<span id="cb14-8"><a></a>utilities_test <span class="ot">&lt;-</span> randomized[<span class="dv">1</span><span class="sc">:</span><span class="dv">24</span>,]</span>
-<span id="cb14-9"><a></a></span>
-<span id="cb14-10"><a></a><span class="co"># The rest are our training set</span></span>
-<span id="cb14-11"><a></a>utilities_train <span class="ot">&lt;-</span> randomized[<span class="dv">25</span><span class="sc">:</span><span class="dv">117</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb15-2"><a></a><span class="fu">set.seed</span>(<span class="dv">9529</span>)</span>
+<span id="cb15-3"><a></a></span>
+<span id="cb15-4"><a></a><span class="co"># Ask R to shuffle all 117 observations</span></span>
+<span id="cb15-5"><a></a>randomized <span class="ot">&lt;-</span> <span class="fu">slice_sample</span>(utilities, <span class="at">n =</span> <span class="dv">117</span>)</span>
+<span id="cb15-6"><a></a></span>
+<span id="cb15-7"><a></a><span class="co"># 24 is about 20% of 117, so we'll use the first 24 rows as our test set</span></span>
+<span id="cb15-8"><a></a>utilities_test <span class="ot">&lt;-</span> randomized[<span class="dv">1</span><span class="sc">:</span><span class="dv">24</span>,]</span>
+<span id="cb15-9"><a></a></span>
+<span id="cb15-10"><a></a><span class="co"># The rest are our training set</span></span>
+<span id="cb15-11"><a></a>utilities_train <span class="ot">&lt;-</span> randomized[<span class="dv">25</span><span class="sc">:</span><span class="dv">117</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The <code>set.seed(9529)</code> command ensures reproducible “random” splits. (I chose this number because it’s my EID number; use your EID number!)</p>
 </section>
@@ -486,7 +497,7 @@ F-statistic: 267.9 on 6 and 47 DF,  p-value: &lt; 0.00000000000000022</code></pr
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> temp, <span class="at">data=</span>utilities)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> temp, <span class="at">data=</span>utilities)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -525,7 +536,7 @@ F-statistic: 608.1 on 1 and 115 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> temp <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">2</span>), <span class="at">data=</span>utilities)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> temp <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">2</span>), <span class="at">data=</span>utilities)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -565,9 +576,9 @@ F-statistic: 419.3 on 2 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>model9 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> temp <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">3</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">4</span>) </span>
-<span id="cb19-2"><a></a>              <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">5</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">6</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">7</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">8</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">9</span>),</span>
-<span id="cb19-3"><a></a>              <span class="at">data=</span>utilities)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>model9 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> temp <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">3</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">4</span>) </span>
+<span id="cb20-2"><a></a>              <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">5</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">6</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">7</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">8</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">9</span>),</span>
+<span id="cb20-3"><a></a>              <span class="at">data=</span>utilities)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -614,44 +625,39 @@ F-statistic: 95.26 on 9 and 107 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>We can avoid overfitting to the training data by fitting the models to the training data and then testing them on the test data.</p>
 <p>Fit the models <strong>using the training set</strong>:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> temp, <span class="at">data=</span>utilities_train)</span>
-<span id="cb21-2"><a></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> temp <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">2</span>), <span class="at">data=</span>utilities_train)</span>
-<span id="cb21-3"><a></a>model9 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> temp <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">3</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">4</span>) </span>
-<span id="cb21-4"><a></a>              <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">5</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">6</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">7</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">8</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">9</span>),</span>
-<span id="cb21-5"><a></a>              <span class="at">data=</span>utilities_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> temp, <span class="at">data=</span>utilities_train)</span>
+<span id="cb22-2"><a></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> temp <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">2</span>), <span class="at">data=</span>utilities_train)</span>
+<span id="cb22-3"><a></a>model9 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> temp <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">3</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">4</span>) </span>
+<span id="cb22-4"><a></a>              <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">5</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">6</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">7</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">8</span>) <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">9</span>),</span>
+<span id="cb22-5"><a></a>              <span class="at">data=</span>utilities_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Get their predictions <strong>on the test set</strong>:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>actuals <span class="ot">&lt;-</span> utilities_test<span class="sc">$</span>dailyspend</span>
-<span id="cb22-2"><a></a>predictions1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(model1, utilities_test)</span>
-<span id="cb22-3"><a></a>predictions2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(model2, utilities_test)</span>
-<span id="cb22-4"><a></a>predictions9 <span class="ot">&lt;-</span> <span class="fu">predict</span>(model9, utilities_test)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>actuals <span class="ot">&lt;-</span> utilities_test<span class="sc">$</span>dailyspend</span>
+<span id="cb23-2"><a></a>predictions1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(model1, utilities_test)</span>
+<span id="cb23-3"><a></a>predictions2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(model2, utilities_test)</span>
+<span id="cb23-4"><a></a>predictions9 <span class="ot">&lt;-</span> <span class="fu">predict</span>(model9, utilities_test)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="measuring-performance" class="slide level2 smaller">
 <h2>Measuring performance</h2>
 <p>Now let’s calculate RMSPE on the testing data:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((actuals <span class="sc">-</span> predictions1)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((actuals <span class="sc">-</span> predictions1)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.013597</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((actuals <span class="sc">-</span> predictions2)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((actuals <span class="sc">-</span> predictions2)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8534912</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((actuals <span class="sc">-</span> predictions9)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((actuals <span class="sc">-</span> predictions9)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.9482653</code></pre>
 </div>
 </div>
 <div class="fragment">
 <table class="caption-top">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>Model</th>
@@ -710,9 +716,9 @@ F-statistic: 95.26 on 9 and 107 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Let’s work through an example with <span class="math inline">\(k=3\)</span></h2>
 <p>First we need to split the data into 3 random groups of roughly the same size (<span class="math inline">\(39\times 3=117\)</span>):</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>fold1 <span class="ot">&lt;-</span> randomized[<span class="dv">1</span><span class="sc">:</span><span class="dv">39</span>,]</span>
-<span id="cb29-2"><a></a>fold2 <span class="ot">&lt;-</span> randomized[<span class="dv">40</span><span class="sc">:</span><span class="dv">78</span>,]</span>
-<span id="cb29-3"><a></a>fold3 <span class="ot">&lt;-</span> randomized[<span class="dv">79</span><span class="sc">:</span><span class="dv">117</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>fold1 <span class="ot">&lt;-</span> randomized[<span class="dv">1</span><span class="sc">:</span><span class="dv">39</span>,]</span>
+<span id="cb30-2"><a></a>fold2 <span class="ot">&lt;-</span> randomized[<span class="dv">40</span><span class="sc">:</span><span class="dv">78</span>,]</span>
+<span id="cb30-3"><a></a>fold3 <span class="ot">&lt;-</span> randomized[<span class="dv">79</span><span class="sc">:</span><span class="dv">117</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p>Now we need to build the model 3 times:</p>
@@ -726,35 +732,35 @@ F-statistic: 95.26 on 9 and 107 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="building-the-models-1" class="slide level2 smaller">
 <h2>Building the models</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>modelA <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> temp, <span class="at">data=</span><span class="fu">rbind</span>(fold2, fold3))</span>
-<span id="cb30-2"><a></a>modelB <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> temp, <span class="at">data=</span><span class="fu">rbind</span>(fold1, fold3))</span>
-<span id="cb30-3"><a></a>modelC <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> temp, <span class="at">data=</span><span class="fu">rbind</span>(fold1, fold2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>modelA <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> temp, <span class="at">data=</span><span class="fu">rbind</span>(fold2, fold3))</span>
+<span id="cb31-2"><a></a>modelB <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> temp, <span class="at">data=</span><span class="fu">rbind</span>(fold1, fold3))</span>
+<span id="cb31-3"><a></a>modelC <span class="ot">&lt;-</span> <span class="fu">lm</span>(dailyspend <span class="sc">~</span> temp, <span class="at">data=</span><span class="fu">rbind</span>(fold1, fold2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="getting-the-predictions" class="slide level2 smaller">
 <h2>Getting the predictions</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>predictionsA <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelA, fold1)</span>
-<span id="cb31-2"><a></a>predictionsB <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelB, fold2)</span>
-<span id="cb31-3"><a></a>predictionsC <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelC, fold3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>predictionsA <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelA, fold1)</span>
+<span id="cb32-2"><a></a>predictionsB <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelB, fold2)</span>
+<span id="cb32-3"><a></a>predictionsC <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelC, fold3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="calculating-rmspe-1" class="slide level2 smaller">
 <h2>Calculating RMSPE</h2>
 <p>We now get 3 different RMSPE estimates:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>actualsA <span class="ot">&lt;-</span> fold1<span class="sc">$</span>dailyspend</span>
-<span id="cb32-2"><a></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((actualsA <span class="sc">-</span> predictionsA)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>actualsA <span class="ot">&lt;-</span> fold1<span class="sc">$</span>dailyspend</span>
+<span id="cb33-2"><a></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((actualsA <span class="sc">-</span> predictionsA)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.9898423</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>actualsB <span class="ot">&lt;-</span> fold2<span class="sc">$</span>dailyspend</span>
-<span id="cb34-2"><a></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((actualsB <span class="sc">-</span> predictionsB)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a>actualsB <span class="ot">&lt;-</span> fold2<span class="sc">$</span>dailyspend</span>
+<span id="cb35-2"><a></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((actualsB <span class="sc">-</span> predictionsB)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.745035</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>actualsC <span class="ot">&lt;-</span> fold3<span class="sc">$</span>dailyspend</span>
-<span id="cb36-2"><a></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((actualsC <span class="sc">-</span> predictionsC)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>actualsC <span class="ot">&lt;-</span> fold3<span class="sc">$</span>dailyspend</span>
+<span id="cb37-2"><a></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((actualsC <span class="sc">-</span> predictionsC)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8463284</code></pre>
 </div>
@@ -815,18 +821,18 @@ F-statistic: 95.26 on 9 and 107 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Isn’t there a faster way?</h2>
 <p>In practice, you don’t have to do this all manually! The <code>tidymodels</code> package makes it easy to do cross-validation even for larger <span class="math inline">\(k\)</span>.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="fu">library</span>(tidymodels)</span>
-<span id="cb38-2"><a></a></span>
-<span id="cb38-3"><a></a><span class="co"># Randomly split the data into 5 folds</span></span>
-<span id="cb38-4"><a></a>folds <span class="ot">&lt;-</span> <span class="fu">vfold_cv</span>(utilities, <span class="at">v=</span><span class="dv">5</span>)</span>
-<span id="cb38-5"><a></a></span>
-<span id="cb38-6"><a></a><span class="co"># Build a tidymodels "workflow" for a linear model</span></span>
-<span id="cb38-7"><a></a><span class="co"># with the formula dailyspend ~ temp, using RMSE as the target metric</span></span>
-<span id="cb38-8"><a></a><span class="fu">workflow</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb38-9"><a></a>  <span class="fu">add_model</span>(<span class="fu">linear_reg</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb38-10"><a></a>  <span class="fu">add_formula</span>(dailyspend <span class="sc">~</span> temp) <span class="sc">%&gt;%</span></span>
-<span id="cb38-11"><a></a>  <span class="fu">fit_resamples</span>(folds, <span class="at">metrics=</span><span class="fu">metric_set</span>(rmse)) <span class="sc">%&gt;%</span></span>
-<span id="cb38-12"><a></a>  <span class="fu">collect_metrics</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb39-2"><a></a></span>
+<span id="cb39-3"><a></a><span class="co"># Randomly split the data into 5 folds</span></span>
+<span id="cb39-4"><a></a>folds <span class="ot">&lt;-</span> <span class="fu">vfold_cv</span>(utilities, <span class="at">v=</span><span class="dv">5</span>)</span>
+<span id="cb39-5"><a></a></span>
+<span id="cb39-6"><a></a><span class="co"># Build a tidymodels "workflow" for a linear model</span></span>
+<span id="cb39-7"><a></a><span class="co"># with the formula dailyspend ~ temp, using RMSE as the target metric</span></span>
+<span id="cb39-8"><a></a><span class="fu">workflow</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb39-9"><a></a>  <span class="fu">add_model</span>(<span class="fu">linear_reg</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb39-10"><a></a>  <span class="fu">add_formula</span>(dailyspend <span class="sc">~</span> temp) <span class="sc">%&gt;%</span></span>
+<span id="cb39-11"><a></a>  <span class="fu">fit_resamples</span>(folds, <span class="at">metrics=</span><span class="fu">metric_set</span>(rmse)) <span class="sc">%&gt;%</span></span>
+<span id="cb39-12"><a></a>  <span class="fu">collect_metrics</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 6
   .metric .estimator  mean     n std_err .config        
