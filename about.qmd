@@ -2,12 +2,12 @@
 title: "Research"
 ---
 
-## Working papers
-
-- "Lower-dimensional posterior density and cluster summaries for overparameterized Bayesian models." H. Bolfarine, H.F. Lopes, & C.M. Carvalho. [https://arxiv.org/abs/2506.09850](https://arxiv.org/abs/2506.09850) - (Accepted - Statistic and Computing)  
+<!-- ## Working papers -->
 
 
 ## Publications
+
+- "Lower-dimensional posterior density and cluster summaries for overparameterized Bayesian models." H. Bolfarine, H.F. Lopes, & C.M. Carvalho. [Statistics and Computing , Volume 36, article number 107, (2026)](https://link.springer.com/article/10.1007/s11222-026-10859-z)
 
 - "Decoupling Shrinkage and Selection in Gaussian Linear Factor Analysis." H. Bolfarine, C.M. Carvalho, H.F. Lopes, & J.S. Murray. [Bayesian Analysis (2024) 19, Number 1, pp. 181–203](https://projecteuclid.org/journals/bayesian-analysis/advance-publication/Decoupling-Shrinkage-and-Selection-in-Gaussian-Linear-Factor-Analysis/10.1214/22-BA1349.full)
 
