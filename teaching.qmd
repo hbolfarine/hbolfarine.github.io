@@ -16,6 +16,7 @@ title: "Teaching"
   - [class 07 - Time series modelling](sp_sta235_2026/week_07.qmd)
   - [class 08 - Model building for prediction](sp_sta235_2026/lecture-08.qmd)
   - [class 09 - Building models for explanation](sp_sta235_2026/week_09.qmd)
+  - [class 10 - Basic Causal Inference](sp_sta235_2026/week_10.qmd)
 
 ### Fall 2025
 
