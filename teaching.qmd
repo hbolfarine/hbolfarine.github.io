@@ -17,6 +17,7 @@ title: "Teaching"
   - [class 08 - Model building for prediction](sp_sta235_2026/lecture-08.qmd)
   - [class 09 - Building models for explanation](sp_sta235_2026/week_09.qmd)
   - [class 10 - Basic Causal Inference](sp_sta235_2026/week_10.qmd)
+  - [class 11 - Natural experiments and RDD](sp_sta235_2026/week_11.qmd)
 
 ### Fall 2025
 
