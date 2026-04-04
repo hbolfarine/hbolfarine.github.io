@@ -1,0 +1,12 @@
+name: shiny_grade_calculator
+title: shiny_grade_calculator
+username: 4y7a1g-henrique-bolfarine
+account: 4y7a1g-henrique-bolfarine
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 17056968
+bundleId: 11804798
+url: https://4y7a1g-henrique-bolfarine.shinyapps.io/shiny_grade_calculator/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
