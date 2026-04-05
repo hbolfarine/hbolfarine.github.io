@@ -18,6 +18,8 @@ title: "Teaching"
   - [class 09 - Building models for explanation](sp_sta235_2026/week_09.qmd)
   - [class 10 - Basic Causal Inference](sp_sta235_2026/week_10.qmd)
   - [class 11 - Natural experiments and RDD](sp_sta235_2026/week_11.qmd)
+  - [class 12 - Logistic Regression 1](sp_sta235_2026/week_12.qmd)
+  - [class 13 - Logistic Regression 2](sp_sta235_2026/week_13.qmd)
 
 ### Fall 2025
 
