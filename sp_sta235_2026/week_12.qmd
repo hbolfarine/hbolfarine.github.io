@@ -6,7 +6,7 @@ title-slide-attributes:
 format: 
   revealjs:
     chalkboard: true
-    logo: week_12_docs/texas_logo2.png`
+    logo: week_12_docs/texas_logo2.png
     toc: true
     toc-title: "Presentation Outline"
     toc-depth: 1
