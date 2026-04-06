@@ -7501,7 +7501,7 @@
     "href": "sp_sta235_2026/week_12.html#the-okcupid-data-set",
     "title": "Data Science for Business Applications",
     "section": "The OkCupid data set",
-    "text": "The OkCupid data set\n\n\n\nThe OkCupid data set contains information about 59826 profiles from users of the OkCupid online dating service.\nWe have data on user age, height, sex, income , sexual orientation, education level]{style=“color:darkorange;”}, body type , ethnicity, and more.\nLet’s see if we can predict the sex of the user based on their height. (In this data set, everyone is classified as male or female.)"
+    "text": "The OkCupid data set\n\n\n\nThe OkCupid data set contains information about 59826 profiles from users of the OkCupid online dating service.\nWe have data on user age, height, sex, income , sexual orientation, education level, body type , ethnicity, and more.\nLet’s see if we can predict the sex of the user based on their height. (In this data set, everyone is classified as male or female.)"
   },
   {
     "objectID": "sp_sta235_2026/week_12.html#lets-build-the-model",
