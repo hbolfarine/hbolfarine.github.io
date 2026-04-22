@@ -6,15 +6,17 @@ MAX <- list(
   pre = 44,
   participation = 86,
   hw = 15,    # per homework
-  hw_count = 13,
+  hw_count = 14,
   quiz = 25,  # per quiz
-  quiz_count = 11,
-  exam = 200, # per mastery exam
-  exam_count = 2
+  quiz_count = 13,
+  exams = c(200, 185), # Exam 1, Exam 2
+  extra_credit = 10
 )
 
 total_points <- function() {
-  MAX$pre + MAX$participation + (MAX$hw * MAX$hw_count) + (MAX$quiz * MAX$quiz_count) + (MAX$exam * MAX$exam_count)
+  # Drop the smallest quiz in Unit A and Unit B (one each)
+  quiz_count_counted <- MAX$quiz_count - 2
+  MAX$pre + MAX$participation + (MAX$hw * MAX$hw_count) + (MAX$quiz * quiz_count_counted) + sum(MAX$exams) + MAX$extra_credit
 }
 
 # Letter grade cutoffs (out of 1000 total points)
@@ -52,26 +54,34 @@ ui <- fluidPage(
       numericInput("pre", "Pre-class Preparation (Perusall) (0-44):", value = 0, min = 0, max = MAX$pre, step = 1),
       numericInput("part", "Class Participation (0-86):", value = 0, min = 0, max = MAX$participation, step = 1),
       tags$hr(),
-      h4("Homeworks (15 pts each, 13 total)"),
+      h4("Homeworks (15 pts each, 14 total)"),
       wellPanel(
         do.call(tagList, lapply(1:MAX$hw_count, function(i) {
           numericInput(paste0("hw", i), paste0("HW ", i, " (0-", MAX$hw, ")"), value = 0, min = 0, max = MAX$hw, step = 1)
         }))
       ),
       tags$hr(),
-      h4("Checkpoint Quizzes (25 pts each, 11 total)"),
+      h4(paste0("Checkpoint Quizzes (", MAX$quiz, " pts each, ", MAX$quiz_count, " total)")),
       wellPanel(
-        do.call(tagList, lapply(1:MAX$quiz_count, function(i) {
+        h5("Unit A — Quizzes 1 to 7 (drop smallest)"),
+        do.call(tagList, lapply(1:7, function(i) {
+          numericInput(paste0("q", i), paste0("Quiz ", i, " (0-", MAX$quiz, ")"), value = 0, min = 0, max = MAX$quiz, step = 1)
+        })),
+        tags$hr(),
+        h5("Unit B — Quizzes 8 to 13 (drop smallest)"),
+        do.call(tagList, lapply(8:MAX$quiz_count, function(i) {
           numericInput(paste0("q", i), paste0("Quiz ", i, " (0-", MAX$quiz, ")"), value = 0, min = 0, max = MAX$quiz, step = 1)
         }))
       ),
       tags$hr(),
-      h4("Mastery Exams (200 pts each, 2 total)"),
+      h4("Mastery Exams (Exam 1: 200 pts, Exam 2: 185 pts)"),
       wellPanel(
-        do.call(tagList, lapply(1:MAX$exam_count, function(i) {
-          numericInput(paste0("exam", i), paste0("Exam ", i, " (0-", MAX$exam, ")"), value = 0, min = 0, max = MAX$exam, step = 1)
+        do.call(tagList, lapply(seq_along(MAX$exams), function(i) {
+          numericInput(paste0("exam", i), paste0("Exam ", i, " (0-", MAX$exams[i], ")"), value = 0, min = 0, max = MAX$exams[i], step = 1)
         }))
       ),
+      tags$hr(),
+      numericInput("extra_credit", "Extra Credit (0-10):", value = 0, min = 0, max = MAX$extra_credit, step = 1),
       actionButton("reset", "Reset all to 0")
     ),
 
@@ -91,30 +101,48 @@ server <- function(input, output, session) {
   observeEvent(input$reset, {
     updateNumericInput(session, "pre", value = 0)
     updateNumericInput(session, "part", value = 0)
+    updateNumericInput(session, "extra_credit", value = 0)
     for (i in 1:MAX$hw_count) updateNumericInput(session, paste0("hw", i), value = 0)
     for (i in 1:MAX$quiz_count) updateNumericInput(session, paste0("q", i), value = 0)
-    for (i in 1:MAX$exam_count) updateNumericInput(session, paste0("exam", i), value = 0)
+    for (i in seq_along(MAX$exams)) updateNumericInput(session, paste0("exam", i), value = 0)
   })
 
   calc <- reactive({
     pre <- clamp(input$pre, 0, MAX$pre)
     part <- clamp(input$part, 0, MAX$participation)
+    extra_credit <- clamp(input$extra_credit, 0, MAX$extra_credit)
 
     hws <- sapply(1:MAX$hw_count, function(i) clamp(input[[paste0('hw', i)]], 0, MAX$hw))
     quizzes <- sapply(1:MAX$quiz_count, function(i) clamp(input[[paste0('q', i)]], 0, MAX$quiz))
-    exams <- sapply(1:MAX$exam_count, function(i) clamp(input[[paste0('exam', i)]], 0, MAX$exam))
+    exams <- sapply(seq_along(MAX$exams), function(i) clamp(input[[paste0('exam', i)]], 0, MAX$exams[i]))
 
     hw_total <- sum(hws)
-    quiz_total <- sum(quizzes)
     exam_total <- sum(exams)
 
-    total <- pre + part + hw_total + quiz_total + exam_total
+    # Split quizzes into Unit A (1:7) and Unit B (8:MAX$quiz_count)
+    unitA_idx <- 1:7
+    unitB_idx <- 8:MAX$quiz_count
+    unitA <- quizzes[unitA_idx]
+    unitB <- quizzes[unitB_idx]
+
+    # Drop the smallest quiz in each unit
+    dropA <- if (length(unitA) > 0) min(unitA, na.rm = TRUE) else 0
+    dropB <- if (length(unitB) > 0) min(unitB, na.rm = TRUE) else 0
+    unitA_total <- sum(unitA, na.rm = TRUE) - dropA
+    unitB_total <- sum(unitB, na.rm = TRUE) - dropB
+
+    quiz_total <- unitA_total + unitB_total
+    # Possible quiz points after dropping one per unit
+    quiz_possible_total <- MAX$quiz * (MAX$quiz_count - 2)
+
+    total <- pre + part + hw_total + quiz_total + exam_total + extra_credit
     pct <- (total / total_points()) * 100
 
-    list(pre = pre, part = part, hw_total = hw_total, hw_count = MAX$hw_count,
-         quiz_total = quiz_total, quiz_count = MAX$quiz_count,
-         exam_total = exam_total, exam_count = MAX$exam_count,
-         total = total, pct = pct)
+        list(pre = pre, part = part, hw_total = hw_total, hw_count = MAX$hw_count,
+          quiz_total = quiz_total, quiz_count = MAX$quiz_count,
+          quiz_count_counted = MAX$quiz_count - 2, quiz_possible_total = quiz_possible_total,
+          exam_total = exam_total, exam_count = length(MAX$exams), extra_credit = extra_credit,
+          total = total, pct = pct)
   })
 
   output$total_text <- renderText({
@@ -126,9 +154,9 @@ server <- function(input, output, session) {
   output$breakdown <- renderTable({
     v <- calc()
     data.frame(
-      Category = c("Pre-class Preparation", "Class Participation", paste0("Homeworks (", v$hw_count, ")"), paste0("Quizzes (", v$quiz_count, ")"), paste0("Mastery Exams (", v$exam_count, ")")),
-      Earned = c(v$pre, v$part, v$hw_total, v$quiz_total, v$exam_total),
-      Possible = c(MAX$pre, MAX$participation, MAX$hw * MAX$hw_count, MAX$quiz * MAX$quiz_count, MAX$exam * MAX$exam_count),
+      Category = c("Pre-class Preparation", "Class Participation", paste0("Homeworks (", v$hw_count, ")"), paste0("Quizzes (", v$quiz_count_counted, " counted of ", v$quiz_count, ")"), paste0("Mastery Exams (", v$exam_count, ")"), "Extra Credit"),
+      Earned = c(v$pre, v$part, v$hw_total, v$quiz_total, v$exam_total, v$extra_credit),
+      Possible = c(MAX$pre, MAX$participation, MAX$hw * MAX$hw_count, v$quiz_possible_total, sum(MAX$exams), MAX$extra_credit),
       stringsAsFactors = FALSE
     )
   }, digits = 2)
