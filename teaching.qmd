@@ -4,6 +4,11 @@ title: "Teaching"
 
 ## University of Texas at Austin
 
+### Summer 2026
+
+- STA 235 - Data Science for Business Applications
+  - [class 01 - Simple and Multiple Regression](summer_26_sta235/day1/week_01.qmd)
+
 ### Spring 2026
 
 - STA 235 - Data Science for Business Applications
