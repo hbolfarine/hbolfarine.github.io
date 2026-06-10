@@ -302,7 +302,7 @@ cor(profs$eval, profs$beauty)
 
 ## The simple regression fit
 
-```{r}
+```{r, echo=TRUE}
 # linear regression of eval on beauty
 model_simple <- lm(eval ~ beauty, data = profs)
 summary(model_simple)
@@ -338,7 +338,7 @@ ggplot(profs, aes(x = age, y = beauty)) +
 
 ## Multiple regression: eval on beauty and age {.smaller}
 
-```{r}
+```{r, echo = TRUE}
 #linear regression of eval on beauty and age
 model_beauty_age <- lm(eval ~ beauty + age, data = profs)
 summary(model_beauty_age)
