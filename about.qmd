@@ -23,4 +23,5 @@ F. Ruggeri, H.Bolfarine, J. L. Bazán, R. B. Arellano-Valle, V. H. L. Davila, M.
 - Bayesian Analysis
 - Entropy
 - Statistics and Computing
+- Journal of Business & Economic Statistics
 
