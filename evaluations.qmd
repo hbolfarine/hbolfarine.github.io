@@ -2,7 +2,7 @@
 title: "Evaluations"
 ---
 
-## Selected Evaluations
+## Selected Evaluations - University of Texas at Austin
 
 - Spring 2026
 
@@ -29,6 +29,7 @@ title: "Evaluations"
   -  [STA_235_05285](evaluations_pdf/fall_2022_05285.pdf)
 
 - Summer 2022
+  - no evaluation
 
 - Spring 2022
   -  [STA_235_05090](evaluations_pdf/spring_2022_05090.png)
