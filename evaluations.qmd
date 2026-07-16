@@ -5,6 +5,11 @@ title: "Evaluations"
 ## Selected Evaluations - University of Texas at Austin
 
 - Spring 2026
+  -  [STA_235_05780](evaluations_pdf/spring_2026_05780_235.pdf)
+  -  [STA_235_05820](evaluations_pdf/spring_2026_05820_235.pdf)
+  -  [STA_235_05805](evaluations_pdf/spring_2026_05805_235.pdf)
+  -  [STA_235_05790](evaluations_pdf/spring_2026_05790_235.pdf)
+  -  [STA_235_05830](evaluations_pdf/spring_2026_05830_235.pdf)
 
 - Fall 2025
   -  [STA_235_05775](evaluations_pdf/fall_2025_05775_235.pdf)
