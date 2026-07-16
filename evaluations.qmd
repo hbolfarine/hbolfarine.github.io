@@ -15,6 +15,7 @@ title: "Evaluations"
 - Fall 2024
 
 - Summer 2024
+  -  [STA_235_05305](evaluations_pdf/summer_2024_71810_235.pdf)
 
 - Spring 2024
   -  [STA_301_05305](evaluations_pdf/spring_2024_05145_301.pdf)
