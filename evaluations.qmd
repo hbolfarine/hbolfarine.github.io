@@ -21,7 +21,7 @@ title: "Evaluations"
 - Fall 2023
 
 - Spring 2023
-  -  [STA_301_05255](evaluations_pdfspring_2023_05255_301.pdf)
+  -  [STA_301_05255](evaluations_pdf/spring_2023_05255_301.pdf)
   -  [STA_301_05275](evaluations_pdf/spring_2023_05275_301.pdf)
   -  [STA_301_05285](evaluations_pdf/spring_2023_05285_301.pdf)
   -  [STA_301_05290](evaluations_pdf/spring_2023_05290_301.pdf)
