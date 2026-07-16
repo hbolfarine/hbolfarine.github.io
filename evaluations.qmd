@@ -13,16 +13,21 @@ title: "Evaluations"
 - Spring 2025
 
 - Fall 2024
+  -  [STA_235H_05205](evaluations_pdf/fall_2024_05205_235H.pdf)
+  -  [STA_235H_05220](evaluations_pdf/fall_2024_05220_235H.pdf)
+  -  [STA_235H_05215](evaluations_pdf/fall_2024_05215_235H.pdf)
+  -  [STA_235H_05210](evaluations_pdf/fall_2024_05210_235H.pdf)
+  -  [STA_235H_05225](evaluations_pdf/fall_2024_05225_235H.pdf)
 
 - Summer 2024
-  -  [STA_235_05305](evaluations_pdf/summer_2024_71810_235.pdf)
+  -  [STA_235_71810](evaluations_pdf/summer_2024_71810_235.pdf)
 
 - Spring 2024
-  -  [STA_301_05305](evaluations_pdf/spring_2024_05145_301.pdf)
-  -  [STA_301_05340](evaluations_pdf/spring_2024_05150_301.pdf)
-  -  [STA_301_05345](evaluations_pdf/spring_2024_05170_301.pdf)
-  -  [STA_301_05350](evaluations_pdf/spring_2024_05210_301.pdf)
-  -  [STA_235_05360](evaluations_pdf/spring_2024_05230_301.pdf)
+  -  [STA_301_05145](evaluations_pdf/spring_2024_05145_301.pdf)
+  -  [STA_301_05150](evaluations_pdf/spring_2024_05150_301.pdf)
+  -  [STA_301_05170](evaluations_pdf/spring_2024_05170_301.pdf)
+  -  [STA_301_05210](evaluations_pdf/spring_2024_05210_301.pdf)
+  -  [STA_235_05230](evaluations_pdf/spring_2024_05230_301.pdf)
 
 - Fall 2023
   -  [STA_301_05305](evaluations_pdf/fall_2023_05305_301.pdf)
