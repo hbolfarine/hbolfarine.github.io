@@ -9,6 +9,7 @@ title: "Evaluations"
 - Fall 2025
 
 - Summer 2025
+  -  [STA_235_71775](evaluations_pdf/summer_2025_71775_235.pdf)
 
 - Spring 2025
   -  [STA_235_05535](evaluations_pdf/spring_2025_05535_235.pdf)
