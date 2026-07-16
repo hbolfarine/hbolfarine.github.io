@@ -21,11 +21,17 @@ title: "Evaluations"
 - Fall 2023
 
 - Spring 2023
+  -  [STA_301_05255](evaluations_pdfspring_2023_05255_301.pdf)
+  -  [STA_301_05275](evaluations_pdf/spring_2023_05275_301.pdf)
+  -  [STA_301_05285](evaluations_pdf/spring_2023_05285_301.pdf)
+  -  [STA_301_05290](evaluations_pdf/spring_2023_05290_301.pdf)
+  -  [STA_235_05340](evaluations_pdf/spring_2023_05340_235.pdf)
+  -  [STA_235_05350](evaluations_pdf/spring_2023_05350_235.pdf)
 
 - Fall 2022
   -  [STA_235_05230](evaluations_pdf/fall_2022_05230.pdf)
-  -  [STA_235_05240](evaluations_pdf/fall_2022_ 05240.pdf)
-  -  [STA_235_05260](evaluations_pdf/fall_2022_ 05260.pdf)
+  -  [STA_235_05240](evaluations_pdf/fall_2022_05240.pdf)
+  -  [STA_235_05260](evaluations_pdf/fall_2022_05260.pdf)
   -  [STA_235_05285](evaluations_pdf/fall_2022_05285.pdf)
 
 - Summer 2022
