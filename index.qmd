@@ -14,6 +14,9 @@ about:
     - icon: google-scholar
       text: Google Scholar
       href: https://scholar.google.com/citations?user=QmriGBYAAAAJ&hl=en&oi=sra
+    - icon: journal-bookmark
+      text: ResearchGate
+      href: https://www.researchgate.net/profile/Henrique-Bolfarine
 ---
 
 ## About
