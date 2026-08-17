@@ -8195,5 +8195,222 @@
     "title": "Evaluations",
     "section": "",
     "text": "Summer 2026\n\nno evaluation yet\n\nSpring 2026\n\nSTA_235_05780\nSTA_235_05820\nSTA_235_05805\nSTA_235_05790\nSTA_235_05830\n\nFall 2025\n\nSTA_235_05775\nSTA_235_05795\nSTA_235_05785\nSTA_235_05780\nSTA_235_05800\n\nSummer 2025\n\nSTA_235_71775\n\nSpring 2025\n\nSTA_235_05535\nSTA_235_05560\nSTA_235_05550\nSTA_235_05570\nSTA_235_05545\n\nFall 2024\n\nSTA_235H_05205\nSTA_235H_05220\nSTA_235H_05215\nSTA_235H_05210\nSTA_235H_05225\n\nSummer 2024\n\nSTA_235_71810\n\nSpring 2024\n\nSTA_301_05145\nSTA_301_05150\nSTA_301_05170\nSTA_301_05210\nSTA_235_05230\n\nFall 2023\n\nSTA_301_05305\nSTA_301_05340\nSTA_301_05345\nSTA_301_05350\nSTA_235_05360\n\nSpring 2023\n\nSTA_301_05255\nSTA_301_05275\nSTA_301_05285\nSTA_301_05290\nSTA_235_05340\nSTA_235_05350\n\nFall 2022\n\nSTA_301_05230\nSTA_301_05240\nSTA_301_05260\nSTA_301_05285\n\nSummer 2022\n\nno evaluation\n\nSpring 2022\n\nSTA_235_05090\nSTA_235_05085"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#course-overview-1",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#course-overview-1",
+    "title": "Data Science for Business Applications",
+    "section": "Course Overview",
+    "text": "Course Overview\n\nData and analytics are fundamental sources of value creation for organizations and their stakeholders\nWe’ll practice applying sophisticated statistical methods to address complex business questions under conditions of uncertainty\nYou’ll learn to analyze data and communicate results in plain language so your organization can gain insight and take better action\nYou’ll build hands-on skills in RStudio, a leading platform for data analysis and visualization used across industries"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#course-overview-2",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#course-overview-2",
+    "title": "Data Science for Business Applications",
+    "section": "Course Overview",
+    "text": "Course Overview\n\nThis course carries the Quantitative Reasoning (QR) Flag\nQR courses equip you with skills for understanding quantitative methods and frameworks you’ll encounter regularly in your adult and professional life"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#university-course-catalog-description",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#university-course-catalog-description",
+    "title": "Data Science for Business Applications",
+    "section": "University Course Catalog Description",
+    "text": "University Course Catalog Description\n\nData science for business applications at the intermediate level:\n\nBuilding and validating predictive models\nAdvanced regression modeling\nModels for binary outcomes\nCausal inference\n\nThe equivalent of two lecture hours a week for one semester\nOffered on the letter-grade basis only; restricted to McCombs students"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#course-materials",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#course-materials",
+    "title": "Data Science for Business Applications",
+    "section": "Course Materials",
+    "text": "Course Materials\n\n\n\nNo textbook required for this course\nYou will need a laptop with a modern, updated operating system (macOS or Windows)\n\nBring it to every class meeting\n\nWe will use RStudio during most (if not all) class sessions\n\nIf you don’t have R/RStudio installed already from STA 301, you can download them for free"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#assignments-and-grading-1",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#assignments-and-grading-1",
+    "title": "Data Science for Business Applications",
+    "section": "Assignments and Grading",
+    "text": "Assignments and Grading\n\nYour course grade is the sum of points earned across all components below\nWe will not curve individual assignments\nBecause STA 235 is a core course, letter-grade cutoffs will target an overall course GPA of approximately 3.0-3.2\nCutoffs will be finalized at the end of the semester but will be set no higher than the scale on the next slide"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#grading-scale",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#grading-scale",
+    "title": "Data Science for Business Applications",
+    "section": "Grading Scale",
+    "text": "Grading Scale\n\n\n\n\n\nCutoff (/1000)\nGrade\n\n\n\n\n930\nA\n\n\n900\nA-\n\n\n870\nB+\n\n\n830\nB\n\n\n800\nB-\n\n\n770\nC+\n\n\n\n\n\n\n\nCutoff (/1000)\nGrade\n\n\n\n\n730\nC\n\n\n700\nC-\n\n\n670\nD+\n\n\n630\nD\n\n\n600\nD-"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#pre-class-preparation-45-points",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#pre-class-preparation-45-points",
+    "title": "Data Science for Business Applications",
+    "section": "Pre-class Preparation (45 points)",
+    "text": "Pre-class Preparation (45 points)\n\nCome to class prepared so class time isn’t the first time you see the material\nWe use Perusall to discuss short readings/videos with classmates before each class\nWhile reading/watching, you can:\n\nHighlight confusing text and ask a question\nAnswer a classmate’s question\nShare insights, outside knowledge, thoughts, or opinions\n\nFull credit as long as you make a reasonable effort to meaningfully engage"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#class-participation-40-points",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#class-participation-40-points",
+    "title": "Data Science for Business Applications",
+    "section": "Class Participation (40 points)",
+    "text": "Class Participation (40 points)\n\nPractice is essential, and the best time to start is during class\nWe use Canvas for in-class “clicker” questions and other collaborative activities\nScored on participation only, not correctness\nRespond to at least 75% of the questions over the semester for full credit"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#post-class-practice-5-points-each-55-points-total",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#post-class-practice-5-points-each-55-points-total",
+    "title": "Data Science for Business Applications",
+    "section": "Post-class Practice (5 points each, 55 points total)",
+    "text": "Post-class Practice (5 points each, 55 points total)\n\nWeekly homework on material covered in class that week\nSubmitted on Canvas, due at 11:59 PM the day before each class\nCredit is for completion only, with unlimited attempts and feedback\nForm study groups and discuss with classmates — but simply copying answers won’t help you learn"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#checkpoint-quizzes-40-points-each-440-points-total",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#checkpoint-quizzes-40-points-each-440-points-total",
+    "title": "Data Science for Business Applications",
+    "section": "Checkpoint Quizzes (40 points each, 440 points total)",
+    "text": "Checkpoint Quizzes (40 points each, 440 points total)\n\nMost classes start with a 15-minute Checkpoint Quiz on the previous week’s material\nYou may use one 8.5” x 11” reference page (both sides OK) during quizzes"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#team-labs-40-points-each-120-points-total",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#team-labs-40-points-each-120-points-total",
+    "title": "Data Science for Business Applications",
+    "section": "Team Labs (40 points each, 120 points total)",
+    "text": "Team Labs (40 points each, 120 points total)\n\n3 class sessions are devoted to Team Labs\nWork with your team through a set of questions to practice material learned so far\nTeam Labs also serve as practice for the Team Cases"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#team-cases-100-points-each-300-points-total",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#team-cases-100-points-each-300-points-total",
+    "title": "Data Science for Business Applications",
+    "section": "Team Cases (100 points each, 300 points total)",
+    "text": "Team Cases (100 points each, 300 points total)\n\nAn opportunity to demonstrate your skills on an authentic business analytics task\nYour team signs up for a time slot outside of class for each of the 3 Team Cases\nYou’ll be given a data set and business case, analyze it with your group, and produce slide(s) answering the business questions\nTeam members are randomly selected to present and answer questions"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#virtual-tokens",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#virtual-tokens",
+    "title": "Data Science for Business Applications",
+    "section": "Virtual Tokens",
+    "text": "Virtual Tokens\n\nEach student starts the semester with 3 virtual tokens\nSpend a token to discard a missed assignment score and receive a makeup assignment (often an oral assessment)\n\nOnce used, your original score is replaced by the makeup score — higher or lower\n\nExcused absences verified by Student Emergency Services don’t require a token\nNo late work is accepted outside of these parameters"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#teamwork-1",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#teamwork-1",
+    "title": "Data Science for Business Applications",
+    "section": "Teamwork",
+    "text": "Teamwork\n\nTeam-based activities (Team Labs and Team Cases) are integrated throughout the course\nYou’ll be assigned to a team after the first few weeks; your team stays the same for the semester\nTeam members generally receive the same score for team-based work\n\nIndividual scores may be adjusted up or down if circumstances warrant\nMissing a Team Lab/Case without a token results in a zero"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#teamwork-2",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#teamwork-2",
+    "title": "Data Science for Business Applications",
+    "section": "Teamwork",
+    "text": "Teamwork\n\nIf your team wants to replace an unsatisfactory score with a token, every team member must spend one of their tokens\nCheck in with your teammates throughout the semester:\n\nAm I satisfied with my teammates’ work? Are they satisfied with mine?\n\nOpen, honest dialogue now pays off later when working with teams in your career"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#section",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#section",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "What personal characteristics about an instructor do you think are predictive of the scores they receive on student evaluations?"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#hamermesh-parker-2005-data-set",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#hamermesh-parker-2005-data-set",
+    "title": "Data Science for Business Applications",
+    "section": "Hamermesh & Parker (2005) Data Set",
+    "text": "Hamermesh & Parker (2005) Data Set\n\nStudent evaluations of \\(N=463\\)$N=463$ instructors at UT Austin, 2000-2002\nFor each instructor:\n\\(\\texttt{eval}\\): average student evaluation of teacher\n\\(\\texttt{beauty}\\): average beauty score from a six-student panel\n\\(\\texttt{gender}\\): male or female\n\\(\\texttt{credits}\\): single- or multi-credit course\n\\(\\texttt{age}\\): age of instructor\n\n(and more…)"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#explore-the-data-texttteval",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#explore-the-data-texttteval",
+    "title": "Data Science for Business Applications",
+    "section": "Explore the data: \\(\\texttt{eval}\\)",
+    "text": "Explore the data: \\(\\texttt{eval}\\)"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#explore-the-data-textttbeauty",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#explore-the-data-textttbeauty",
+    "title": "Data Science for Business Applications",
+    "section": "Explore the data: \\(\\texttt{beauty}\\)",
+    "text": "Explore the data: \\(\\texttt{beauty}\\)"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#section-1",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#section-1",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "Do you think there is a positive or negative relationship between beauty and teaching ratings?"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#explore-the-data",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#explore-the-data",
+    "title": "Data Science for Business Applications",
+    "section": "Explore the data",
+    "text": "Explore the data"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#section-2",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#section-2",
+    "title": "Data Science for Business Applications",
+    "section": "",
+    "text": "The correlation \\(r\\) between two variables \\(X\\) and \\(Y\\) measures the strength of the linear relationship between them. Correlation ranges from \\(-1\\) (perfect negative relationship) to \\(0\\) (no relationship) to \\(1\\) (perfect positive relationship)."
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#correlation",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#correlation",
+    "title": "Data Science for Business Applications",
+    "section": "Correlation",
+    "text": "Correlation\n\n\n[1] 0.189\n\n\n\nHow can we interpret this?\nThe $ sign accesses the variables in the data set profs.csv."
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#the-simple-regression-fit",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#the-simple-regression-fit",
+    "title": "Data Science for Business Applications",
+    "section": "The simple regression fit",
+    "text": "The simple regression fit\n\n\n\nCall:\nlm(formula = eval ~ beauty, data = profs)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-1.8002 -0.3630  0.0725  0.4021  1.1037 \n\nCoefficients:\n            Estimate Std. Error t value             Pr(&gt;|t|)    \n(Intercept)   3.9983     0.0253  157.73 &lt; 0.0000000000000002 ***\nbeauty        0.1330     0.0322    4.13             0.000042 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.545 on 461 degrees of freedom\nMultiple R-squared:  0.0357,    Adjusted R-squared:  0.0336 \nF-statistic: 17.1 on 1 and 461 DF,  p-value: 0.0000425"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#interpreting-the-coefficients",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#interpreting-the-coefficients",
+    "title": "Data Science for Business Applications",
+    "section": "Interpreting the coefficients",
+    "text": "Interpreting the coefficients\n\nIntercept:\n\nWhen beauty = 0 (average), predicted eval = 3.998 points\nThe average evaluation for an average-looking instructor\nMeaningful this time!\n\nSlope:\n\nFor a one unit (standard deviation) increase in beauty, the predicted eval increases by 0.13 points\nComparing two instructors who differ by 1 SD on beauty, on average the more attractive instructor has an eval score 0.13 points higher"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#is-this-the-whole-story",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#is-this-the-whole-story",
+    "title": "Data Science for Business Applications",
+    "section": "Is this the whole story?",
+    "text": "Is this the whole story?\nProbably not!\n\nLots of other predictors to consider\nCould the positive association be due to another variable that isn’t in the model yet (think bedrooms and living area)?\nAge might be important here – how? - On average, older instructors are less hot - As they age instructors might get better at teaching (experience) – or worse (stale or out of touch)"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#is-age-actually-correlated-with-beauty",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#is-age-actually-correlated-with-beauty",
+    "title": "Data Science for Business Applications",
+    "section": "Is age actually correlated with beauty?",
+    "text": "Is age actually correlated with beauty?"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#multiple-regression-eval-on-beauty-and-age",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#multiple-regression-eval-on-beauty-and-age",
+    "title": "Data Science for Business Applications",
+    "section": "Multiple regression: eval on beauty and age",
+    "text": "Multiple regression: eval on beauty and age\n\n\n\nCall:\nlm(formula = eval ~ beauty + age, data = profs)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-1.8024 -0.3651  0.0741  0.3991  1.1021 \n\nCoefficients:\n            Estimate Std. Error t value             Pr(&gt;|t|)    \n(Intercept) 3.984401   0.133730   29.79 &lt; 0.0000000000000002 ***\nbeauty      0.134063   0.033744    3.97             0.000082 ***\nage         0.000287   0.002715    0.11                 0.92    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.546 on 460 degrees of freedom\nMultiple R-squared:  0.0358,    Adjusted R-squared:  0.0316 \nF-statistic: 8.53 on 2 and 460 DF,  p-value: 0.00023"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#interpreting-the-coefficients-1",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#interpreting-the-coefficients-1",
+    "title": "Data Science for Business Applications",
+    "section": "Interpreting the coefficients",
+    "text": "Interpreting the coefficients\n\nIn this case, whether we compare instructors of the same age or not, we get the same answer: Hotter instructors get higher evaluations on average.\nGood(ish) news – we ruled out one alternative explanation for the association between beauty and eval\nAre there others?"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#summary",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#summary",
+    "title": "Data Science for Business Applications",
+    "section": "Summary",
+    "text": "Summary\n\nAs we add or remove variables in regression models, the coefficients on other variables can go up, down, or stay about the same\nIt all depends on the relationships among the predictors and between the predictors and the outcome\nTo understand what’s happening – and which variables we should include to estimate the right effect – we need to understand the effect we’re estimating and whether it’s the one we want\nIn a few weeks we’ll learn how to build models that estimate the right effects, and how to build the best predictve models (these aren’t always the same!)"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_01_fa_2026.html#next-time-errors-and-uncertainty",
+    "href": "fa_sta235_2026/class_01_fa_2026.html#next-time-errors-and-uncertainty",
+    "title": "Data Science for Business Applications",
+    "section": "Next time: Errors and uncertainty",
+    "text": "Next time: Errors and uncertainty\nThe other missing part of the story:\n\nDoes the association between beauty and evals hold among ALL instructors, or just in this sample? - Could we be looking at a chance association that would disappear if we could get data on everyone?\nHow accurately can we predict the sale price of a house from its size and other factors? - How do we quantify prediction errors? Even with many variables our predictions will be off by some amount. How wrong should we expect to be?"
   }
 ]

@@ -1,0 +1,363 @@
+---
+title: "Data Science for Business Applications"
+author: "Class 01 - Course Syllabus"
+title-slide-attributes:
+    data-background-image: class_01_docs/background_sta235h.png
+format:
+  revealjs:
+    chalkboard: true
+    logo: class_01_docs/texas_logo2.png
+    toc: true
+    toc-title: "Presentation Outline"
+    toc-depth: 1
+editor: visual
+include-in-header:
+  - text: |
+      <style type="text/css">
+      ul li ul li {
+        font-size: 0.8em;
+      }
+      </style>
+---
+
+```{r init_setup, include=FALSE, cache=FALSE}
+# Include setup
+library(tidyverse)
+library(ggfortify)
+library(knitr)
+
+knitr::opts_chunk$set(
+  echo = FALSE, fig.align = "center"
+)
+
+hook_output <- knit_hooks$get("output")
+knit_hooks$set(output = function(x, options) {
+  lines <- options$output.lines
+  if (is.null(lines)) {
+    return(hook_output(x, options))  # pass to default hook
+  }
+  x <- unlist(strsplit(x, "\n"))
+  more <- "..."
+  if (length(lines) == 1) {        # first n lines
+    if (length(x) > lines) {
+      # truncate the output, but add ....
+      x <- c(head(x, lines), more)
+    }
+  } else {
+    x <- c(more, x[lines], more)
+  }
+  # paste these lines together
+  x <- paste(c(x, ""), collapse = "\n")
+  hook_output(x, options)
+})
+```
+
+```{r load_apple_data, include=FALSE, cache=FALSE}
+apple <- read.csv("class_01_docs/apple_short.csv")
+options(digits = 4)
+```
+
+```{r load_profs, include=FALSE, cache=FALSE}
+profs <- read.csv("class_01_docs/profs.csv")
+options(scipen = 999)
+```
+
+# Course Overview
+
+## Course Overview
+
+- Data and analytics are fundamental sources of value creation for organizations and their stakeholders
+- We'll practice applying sophisticated statistical methods to address complex business questions under conditions of uncertainty
+- You'll learn to analyze data and communicate results in plain language so your organization can gain insight and take better action
+- You'll build hands-on skills in **RStudio**, a leading platform for data analysis and visualization used across industries
+
+## Course Overview
+
+- This course carries the **Quantitative Reasoning (QR) Flag**
+- [**QR courses equip you with skills for understanding quantitative methods and frameworks you'll encounter regularly in your adult and professional life**]{style="color: orange;"}
+
+# Course Logistics
+
+## University Course Catalog Description
+
+- Data science for business applications at the intermediate level:
+  - Building and validating predictive models
+  - Advanced regression modeling
+  - Models for binary outcomes
+  - Causal inference
+- The equivalent of two lecture hours a week for one semester
+- Offered on the letter-grade basis only; restricted to McCombs students
+
+## Course Materials
+
+::::: columns
+::: {.column width="60%"}
+- No textbook required for this course
+- You will need a laptop with a modern, updated operating system (macOS or Windows)
+  - Bring it to every class meeting
+- We will use **RStudio** during most (if not all) class sessions
+  - If you don't have R/RStudio installed already from STA 301, you can download them for free
+:::
+
+::: {.column width="30%"}
+![](class_01_docs/R.png){width="100%"}
+:::
+:::::
+
+
+# Assignments and Grading
+
+## Assignments and Grading
+
+- Your course grade is the sum of points earned across all components below
+- We will not curve individual assignments
+- Because STA 235 is a core course, letter-grade cutoffs will target an overall course GPA of approximately 3.0-3.2
+- Cutoffs will be finalized at the end of the semester but will be set **no higher** than the scale on the next slide
+
+## Grading Scale {.smaller}
+
+::::: columns
+::: {.column width="45%"}
+| Cutoff (/1000) | Grade |
+|----------------|-------|
+| 930            | A     |
+| 900            | A-    |
+| 870            | B+    |
+| 830            | B     |
+| 800            | B-    |
+| 770            | C+    |
+:::
+
+::: {.column width="45%"}
+| Cutoff (/1000) | Grade |
+|----------------|-------|
+| 730            | C     |
+| 700            | C-    |
+| 670            | D+    |
+| 630            | D     |
+| 600            | D-    |
+:::
+:::::
+
+## Pre-class Preparation (45 points)
+
+- Come to class prepared so class time isn't the first time you see the material
+- We use **Perusall** to discuss short readings/videos with classmates before each class
+- While reading/watching, you can:
+  - Highlight confusing text and ask a question
+  - Answer a classmate's question
+  - Share insights, outside knowledge, thoughts, or opinions
+- Full credit as long as you make a **reasonable effort** to meaningfully engage
+
+## Class Participation (40 points)
+
+- Practice is essential, and the best time to start is during class
+- We use Canvas for in-class "clicker" questions and other collaborative activities
+- Scored on **participation only**, not correctness
+- Respond to at least [**75% of the questions**]{style="color: red;"} over the semester for full credit
+
+## Post-class Practice (5 points each, 55 points total)
+
+- Weekly homework on material covered in class that week
+- Submitted on Canvas, due [**at 11:59 PM the day before each class**]{style="color: red;"}
+- Credit is for **completion only**, with unlimited attempts and feedback
+- Form study groups and discuss with classmates — but simply copying answers won't help you learn
+
+## Checkpoint Quizzes (40 points each, 440 points total)
+
+- Most classes start with a 15-minute Checkpoint Quiz on the previous week's material
+- You may use one 8.5" x 11" reference page (both sides OK) during quizzes
+
+## Team Labs (40 points each, 120 points total)
+
+- 3 class sessions are devoted to Team Labs
+- Work with your team through a set of questions to practice material learned so far
+- Team Labs also serve as practice for the Team Cases
+
+## Team Cases (100 points each, 300 points total)
+
+- An opportunity to demonstrate your skills on an authentic business analytics task
+- Your team signs up for a time slot outside of class for each of the 3 Team Cases
+- You'll be given a data set and business case, analyze it with your group, and produce slide(s) answering the business questions
+- Team members are **randomly selected** to present and answer questions
+
+## Virtual Tokens
+
+- Each student starts the semester with **3 virtual tokens**
+- Spend a token to discard a missed assignment score and receive a makeup assignment (often an oral assessment)
+  - Once used, your original score is replaced by the makeup score — higher **or** lower
+- Excused absences verified by **Student Emergency Services** don't require a token
+- [**No late work is accepted outside of these parameters**]{style="color: red;"}
+
+# Teamwork
+
+## Teamwork
+
+
+- Team-based activities (Team Labs and Team Cases) are integrated throughout the course
+- You'll be assigned to a team after the first few weeks; your team stays the same for the semester
+- Team members generally receive the same score for team-based work
+  - Individual scores may be adjusted up or down if circumstances warrant
+  - Missing a Team Lab/Case without a token results in a zero
+
+
+## Teamwork
+
+- If your team wants to replace an unsatisfactory score with a token, **every** team member must spend one of their tokens
+- Check in with your teammates throughout the semester:
+  - Am I satisfied with my teammates' work? Are they satisfied with mine?
+- Open, honest dialogue now pays off later when working with teams in your career
+
+
+## 
+
+::: center
+- What personal characteristics about an instructor do you think are predictive of the scores they receive on student evaluations?
+:::
+
+::: center
+![](class_01_docs/hamermesh){width="100%"}
+:::
+
+## Hamermesh & Parker (2005) Data Set
+
+- Student evaluations of $N=463$ instructors at UT Austin, 2000-2002
+- For each instructor:
+- $\texttt{eval}$: average student evaluation of teacher
+- $\texttt{beauty}$: average beauty score from a six-student panel
+- $\texttt{gender}$: male or female
+- $\texttt{credits}$: single- or multi-credit course
+- $\texttt{age}$: age of instructor
+  - (and more...)
+
+## Explore the data: $\texttt{eval}$
+
+```{r plot1, echo=FALSE}
+ggplot(profs, aes(eval)) +
+geom_histogram(binwidth=0.2, col="black", fill="lightblue") +
+labs(x="Average student evaluation")
+```
+
+## Explore the data: $\texttt{beauty}$
+
+```{r plot2, echo=FALSE}
+ggplot(profs, aes(beauty)) +
+geom_histogram(binwidth=0.4, col="black", fill="lightblue") +
+labs(x="Beauty rating (0 is average)")
+```
+
+## 
+
+- Do you think there is a positive or negative relationship between beauty and teaching ratings?
+
+## Explore the data
+
+```{r plot3, echo=FALSE}
+ggplot(profs, aes(beauty, eval)) +
+geom_point() + 
+geom_smooth(method="lm", se=F, col="blue") +
+labs(y="Average student evaluation", x="Beauty")
+```
+
+## 
+
+The **correlation** $r$ between two variables $X$ and $Y$ measures the strength of the linear relationship between them. Correlation ranges from $-1$ (perfect negative relationship) to $0$ (no relationship) to $1$ (perfect positive relationship).
+
+## 
+
+```{r plot4, echo=FALSE}
+set.seed(1)
+par(mfrow = c(3, 5), mai = c(0.25, 0.3, 0.25, 0.05), family = "Fira Sans")
+
+for (r in c(-1, -0.9, -0.8, -0.5, -0.2, NA, NA, 0, NA, NA, 0.2, 0.5, 0.8, 0.9, 1)) {
+  if (is.na(r)) {
+    plot.new()
+  } else {
+    x <- rnorm(100)
+    y <- rnorm(100)
+    if (abs(r) < 1) {
+      a <- r / sqrt(1 - r^2)
+      z <- a * x + y
+    } else {
+      z <- r * x / 2
+    }
+    plot(x, z, xlab = "", ylab = "", main = sprintf("r = %.2f", r), pch = ".")
+  }
+}
+
+par(mfrow = c(1, 1), mai = c(1.02, 0.82, 0.22, 0.42))
+```
+
+## Correlation
+
+```{r}
+cor(profs$eval, profs$beauty)
+```
+
+- How can we interpret this?
+- The `$` sign accesses the variables in the data set `profs.csv`.
+
+## The simple regression fit
+
+```{r}
+# linear regression of eval on beauty
+model_simple <- lm(eval ~ beauty, data = profs)
+summary(model_simple)
+bprof = coef(model_simple)
+```
+
+## Interpreting the coefficients
+
+- Intercept:
+  - When beauty = 0 (average), predicted eval = `r round(bprof[1], 3)` points
+  - The average evaluation for an average-looking instructor
+  - Meaningful this time!
+- Slope:
+  - For a one unit (standard deviation) increase in beauty, the predicted eval increases by `r round(bprof[2], 2)` points
+  - Comparing two instructors who differ by 1 SD on beauty, on average the more attractive instructor has an eval score `r round(bprof[2], 2)` points higher
+
+## Is this the whole story? {.smaller}
+
+Probably not!
+
+- Lots of other predictors to consider
+- Could the positive association be due to another variable that isn't in the model yet (think bedrooms and living area)?
+- Age might be important here -- how? - On average, older instructors are less hot - As they age instructors might get better at teaching (experience) -- or worse (stale or out of touch)
+
+## Is age actually correlated with beauty? {.smaller}
+
+```{r echo=FALSE, message=FALSE}
+ggplot(profs, aes(x = age, y = beauty)) +
+  geom_point() + 
+  geom_smooth(method="lm", se=F, col="blue") +
+  labs(y="Beauty rating", x="Age")
+```
+
+## Multiple regression: eval on beauty and age {.smaller}
+
+```{r}
+#linear regression of eval on beauty and age
+model_beauty_age <- lm(eval ~ beauty + age, data = profs)
+summary(model_beauty_age)
+```
+
+## Interpreting the coefficients
+
+- In this case, *whether we compare instructors of the same age or not*, we get the same answer: Hotter instructors get higher evaluations on average.
+- Good(ish) news -- we ruled out one alternative explanation for the association between beauty and eval
+- Are there others?
+
+## Summary {.smaller}
+
+- As we add or remove variables in regression models, the coefficients on other variables can go up, down, or stay about the same
+- It all depends on the relationships among the predictors and between the predictors and the outcome
+- To understand what's happening -- and which variables we should include to estimate the right effect -- we need to understand the effect we're estimating and whether it's the one we want
+- In a few weeks we'll learn how to build models that estimate the right effects, and how to build the best predictve models (these aren't always the same!)
+
+## Next time: Errors and uncertainty
+
+The other missing part of the story:
+
+- Does the association between beauty and evals hold among ALL instructors, or just in this sample? - Could we be looking at a chance association that would disappear if we could get data on everyone?
+- How accurately can we predict the sale price of a house from its size and other factors? - How do we quantify **prediction errors**? Even with many variables our predictions will be off by some amount. How wrong should we expect to be?
+
