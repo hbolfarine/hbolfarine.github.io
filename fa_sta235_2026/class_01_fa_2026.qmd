@@ -104,7 +104,6 @@ options(scipen = 999)
 :::
 :::::
 
-
 # Assignments and Grading
 
 ## Assignments and Grading
@@ -193,13 +192,11 @@ options(scipen = 999)
 
 ## Teamwork
 
-
 - Team-based activities (Team Labs and Team Cases) are integrated throughout the course
 - You'll be assigned to a team after the first few weeks; your team stays the same for the semester
 - Team members generally receive the same score for team-based work
   - Individual scores may be adjusted up or down if circumstances warrant
   - Missing a Team Lab/Case without a token results in a zero
-
 
 ## Teamwork
 
@@ -207,7 +204,6 @@ options(scipen = 999)
 - Check in with your teammates throughout the semester:
   - Am I satisfied with my teammates' work? Are they satisfied with mine?
 - Open, honest dialogue now pays off later when working with teams in your career
-
 
 ## 
 
@@ -221,7 +217,7 @@ options(scipen = 999)
 
 ## Hamermesh & Parker (2005) Data Set
 
-- Student evaluations of $N=463$ instructors at UT Austin, 2000-2002
+- Student evaluations of $N=463$\$N=463\$ instructors at UT Austin, 2000-2002
 - For each instructor:
 - $\texttt{eval}$: average student evaluation of teacher
 - $\texttt{beauty}$: average beauty score from a six-student panel
@@ -360,4 +356,3 @@ The other missing part of the story:
 
 - Does the association between beauty and evals hold among ALL instructors, or just in this sample? - Could we be looking at a chance association that would disappear if we could get data on everyone?
 - How accurately can we predict the sale price of a house from its size and other factors? - How do we quantify **prediction errors**? Even with many variables our predictions will be off by some amount. How wrong should we expect to be?
-
