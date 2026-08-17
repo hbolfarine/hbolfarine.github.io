@@ -4,6 +4,11 @@ title: "Teaching"
 
 ## University of Texas at Austin
 
+### Fall 2026
+
+- STA 235 - Data Science for Business Applications
+  - [class 01 - Intro in Linear Regression](fa_sta235_2026/class_01_fa_2026.qmd)
+
 ### Summer 2026
 
 - STA 235 - Data Science for Business Applications
