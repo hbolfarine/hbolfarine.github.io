@@ -8313,7 +8313,7 @@
     "href": "fa_sta235_2026/class_01_fa_2026.html#hamermesh-parker-2005-data-set",
     "title": "Data Science for Business Applications",
     "section": "Hamermesh & Parker (2005) Data Set",
-    "text": "Hamermesh & Parker (2005) Data Set\n\nStudent evaluations of \\(N=463\\)$N=463$ instructors at UT Austin, 2000-2002\nFor each instructor:\n\\(\\texttt{eval}\\): average student evaluation of teacher\n\\(\\texttt{beauty}\\): average beauty score from a six-student panel\n\\(\\texttt{gender}\\): male or female\n\\(\\texttt{credits}\\): single- or multi-credit course\n\\(\\texttt{age}\\): age of instructor\n\n(and more…)"
+    "text": "Hamermesh & Parker (2005) Data Set\n\nStudent evaluations of \\(N=463\\) instructors at UT Austin, 2000-2002\nFor each instructor:\n\\(\\texttt{eval}\\): average student evaluation of teacher\n\\(\\texttt{beauty}\\): average beauty score from a six-student panel\n\\(\\texttt{gender}\\): male or female\n\\(\\texttt{credits}\\): single- or multi-credit course\n\\(\\texttt{age}\\): age of instructor\n\n(and more…)"
   },
   {
     "objectID": "fa_sta235_2026/class_01_fa_2026.html#explore-the-data-texttteval",

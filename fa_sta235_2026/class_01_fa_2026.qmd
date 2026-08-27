@@ -1,6 +1,6 @@
 ---
 title: "Data Science for Business Applications"
-author: "Class 01 - Course Syllabus"
+author: "Class 01 - Course Syllabus and Simple Regression"
 title-slide-attributes:
     data-background-image: class_01_docs/background_sta235h.png
 format:
@@ -217,7 +217,7 @@ options(scipen = 999)
 
 ## Hamermesh & Parker (2005) Data Set
 
-- Student evaluations of $N=463$\$N=463\$ instructors at UT Austin, 2000-2002
+- Student evaluations of $N=463$ instructors at UT Austin, 2000-2002
 - For each instructor:
 - $\texttt{eval}$: average student evaluation of teacher
 - $\texttt{beauty}$: average beauty score from a six-student panel
