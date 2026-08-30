@@ -300,6 +300,7 @@ cor(profs$eval, profs$beauty)
 model_simple <- lm(eval ~ beauty, data = profs)
 summary(model_simple)
 bprof = coef(model_simple)
+bprof
 ```
 
 ## Interpreting the coefficients

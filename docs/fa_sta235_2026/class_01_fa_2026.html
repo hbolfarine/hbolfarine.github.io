@@ -555,7 +555,12 @@ Residual standard error: 0.545 on 461 degrees of freedom
 Multiple R-squared:  0.0357,    Adjusted R-squared:  0.0336 
 F-statistic: 17.1 on 1 and 461 DF,  p-value: 0.0000425</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>bprof <span class="ot">=</span> <span class="fu">coef</span>(model_simple)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>bprof <span class="ot">=</span> <span class="fu">coef</span>(model_simple)</span>
+<span id="cb5-2"><a></a>bprof</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)      beauty 
+      3.998       0.133 </code></pre>
+</div>
 </div>
 </section>
 <section id="interpreting-the-coefficients" class="slide level2">
@@ -590,9 +595,9 @@ F-statistic: 17.1 on 1 and 461 DF,  p-value: 0.0000425</code></pre>
 <section id="multiple-regression-eval-on-beauty-and-age" class="slide level2 smaller">
 <h2>Multiple regression: eval on beauty and age</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="co">#linear regression of eval on beauty and age</span></span>
-<span id="cb6-2"><a></a>model_beauty_age <span class="ot">&lt;-</span> <span class="fu">lm</span>(eval <span class="sc">~</span> beauty <span class="sc">+</span> age, <span class="at">data =</span> profs)</span>
-<span id="cb6-3"><a></a><span class="fu">summary</span>(model_beauty_age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="co">#linear regression of eval on beauty and age</span></span>
+<span id="cb7-2"><a></a>model_beauty_age <span class="ot">&lt;-</span> <span class="fu">lm</span>(eval <span class="sc">~</span> beauty <span class="sc">+</span> age, <span class="at">data =</span> profs)</span>
+<span id="cb7-3"><a></a><span class="fu">summary</span>(model_beauty_age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
