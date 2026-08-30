@@ -6,7 +6,7 @@ filters:
   - line-highlight
 code-tools: true
 subtitle: STA 235 Lecture 2
-author: Brian Lukoff
+author: Henrique Bolfarine
 institute: University of Texas at Austin
 date: January 22, 2026
 format: 
