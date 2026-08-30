@@ -8,6 +8,7 @@ title: "Teaching"
 
 - STA 235 - Data Science for Business Applications
   - [class 01 - Intro in Linear Regression](fa_sta235_2026/class_01_fa_2026.qmd)
+  - [class 02 - Error, Uncertainty and the Linear Model](fa_sta235_2026/class_02_fa_2026.qmd)
 
 ### Summer 2026
 
