@@ -8475,5 +8475,341 @@
     "title": "Data Science for Business Applications",
     "section": "Analysis",
     "text": "Analysis\n\nAll else equal (i.e., among professors of the same gender and beauty):\n\nGen X professors are predicted to get scores that are 0.03 points below those of boomers.\nSilent gen professors are predicted to get scores that are 0.16 points below those of boomers.\nOnly the boomer/silent generation difference is statistically significant; Gen X professors are not significantly different than boomers.\nIn other words: age only seems to matter if you are really old."
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#predicting-price-from-area",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#predicting-price-from-area",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Predicting price from area",
+    "text": "Predicting price from area"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#residuals-and-fitted-values",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#residuals-and-fitted-values",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Residuals and fitted values",
+    "text": "Residuals and fitted values\n\nThe fitted value (“y hat”) for observation i is the predicted value from the regression line: \n\\widehat{y}_i = \\widehat{\\beta_0} + \\widehat{\\beta_1} \\times \\text{area}_i\n\nThe residual is the corresponding prediction error: e_i = y_i - \\widehat{y}_i = \\text{observed price} - \\text{predicted price}\nThe fitted line tells us about the part of price predictable from area\nThe residuals tell us about the part of price not predictable from area"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#visualizing-residuals-and-fitted-values",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#visualizing-residuals-and-fitted-values",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Visualizing residuals and fitted values",
+    "text": "Visualizing residuals and fitted values"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#what-does-a-residual-tell-us",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#what-does-a-residual-tell-us",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "What does a residual tell us?",
+    "text": "What does a residual tell us?"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#what-is-a-typical-residual",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#what-is-a-typical-residual",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "What is a “typical” residual?",
+    "text": "What is a “typical” residual?\n\nThe residual tells us the prediction error for a given point\nThe standard deviation of the residuals tells us the typical size of these prediction errors (in absolute value)\nIt’s a measure of how variable our prediction errors are\n\nLow variability: our predictions are usually close to actual values\nHigh variability: our predictions are often far off from actual values\n\nIn R, this is called the Residual Standard Error (RSE)"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#section",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#section",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "",
+    "text": "summary(fit)\n\n\nCall:\nlm(formula = price ~ area, data = houses)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-604840  -90641    2955   83298  519720 \n\nCoefficients:\n             Estimate Std. Error t value            Pr(&gt;|t|)    \n(Intercept)  4296.668  21017.955  0.2044              0.8381    \narea          279.139     10.101 27.6337 &lt;0.0000000000000002 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 155630 on 506 degrees of freedom\nMultiple R-squared:  0.60146,   Adjusted R-squared:  0.60067 \nF-statistic: 763.62 on 1 and 506 DF,  p-value: &lt; 0.000000000000000222\n\n\nFrom line 16: RSE = $155,630"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#another-interpretation-of-rse",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#another-interpretation-of-rse",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Another interpretation of RSE",
+    "text": "Another interpretation of RSE\n\nThe residuals look approximately Normally distributed\nThe mean of the residuals is 0\nThe standard deviation of the residuals is the RSE\n95% of a Normal distribution is within 2 standard deviations of the mean\nTherefore: 95% of the time, the prediction error is within \\pm 2 \\times \\text{RSE} of the predicted value"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#correlation",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#correlation",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Correlation",
+    "text": "Correlation\n\\text{Cor}(X,Y) measures linear association between two variables\n\nBetween -1 and +1\nSign indicates direction of linear relationship\nMagnitude indicates strength of linear relationship (0 = none, \\pm 1 = perfect)"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#correlation-1",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#correlation-1",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Correlation",
+    "text": "Correlation"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#r2-r-squared",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#r2-r-squared",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "R^2 (R-squared)",
+    "text": "R^2 (R-squared)\nR^2 is a measure of the strength of the linear relationship between the Y and all X’s in the linear regression\n\nR^2 ranges from 0 to 1\n\n0 = no linear relationship\n1 = perfect linear relationship"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#defining-r2",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#defining-r2",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Defining R^2",
+    "text": "Defining R^2\nR^2 has two equivalent definitions:\n\nThe squared correlation between observed and fitted values from the regression model\nThe proportion of variance in the outcome Y “explained” by the regression model"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#finding-r2",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#finding-r2",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Finding R^2",
+    "text": "Finding R^2\n\nsummary(fit)\n\n\nCall:\nlm(formula = price ~ area, data = houses)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-604840  -90641    2955   83298  519720 \n\nCoefficients:\n             Estimate Std. Error t value            Pr(&gt;|t|)    \n(Intercept)  4296.668  21017.955  0.2044              0.8381    \narea          279.139     10.101 27.6337 &lt;0.0000000000000002 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 155630 on 506 degrees of freedom\nMultiple R-squared:  0.60146,   Adjusted R-squared:  0.60067 \nF-statistic: 763.62 on 1 and 506 DF,  p-value: &lt; 0.000000000000000222\n\n\nLine 17 (Multiple R-squared): R^2 = 0.601 (we’ll cover adjusted R^2 later)"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#r2-textcory-haty2",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#r2-textcory-haty2",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "R^2 = \\text{Cor}(Y, \\hat{Y})^2",
+    "text": "R^2 = \\text{Cor}(Y, \\hat{Y})^2"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#r2-as-generalized-correlation",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#r2-as-generalized-correlation",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "R^2 as generalized correlation",
+    "text": "R^2 as generalized correlation\n\nR^2 tells us how closely the predicted values track actual values\nIn a simple linear model, it’s the same as \\text{Cor}(X,Y)^2\nSo you can think of R^2 as a generalization of correlation to multiple X’s"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#r2-as-generalized-correlation-1",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#r2-as-generalized-correlation-1",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "R^2 as generalized correlation",
+    "text": "R^2 as generalized correlation\nIt inherits the same limitations as correlation:\n\nLow R^2 does not imply\n\nNo “meaningful” linear relationship\nNo strong nonlinear relationship"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#r2-as-generalized-correlation-2",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#r2-as-generalized-correlation-2",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "R^2 as generalized correlation",
+    "text": "R^2 as generalized correlation\n\nHigh R^2 does not imply\n\nA causal relationship\nA true linear relationship\nPrediction errors are small enough to be useful\nThe model will predict well for future data"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#r2-as-proportion-of-variance-explained",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#r2-as-proportion-of-variance-explained",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "R^2 as proportion of variance “explained”",
+    "text": "R^2 as proportion of variance “explained”\n\nIf R^2 is high then our predictions track the observed values closely\nR^2 measures how much unpredictability (variance) in the outcome “goes away” when we ues X to predict"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#r2-as-proportion-of-variance-explained-1",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#r2-as-proportion-of-variance-explained-1",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "R^2 as proportion of variance “explained”",
+    "text": "R^2 as proportion of variance “explained”\n\nR^2 = \\frac{\\overbrace{\\text{variance of Y} - \\text{variance of residuals}}^{\\text{variance ``explained''}}}{\\text{variance of Y}}\n\n\nCommon phrasing: “R^2 is the proportion of variance in Y explained by the model”"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#r2-as-proportion-of-variance-explained-2",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#r2-as-proportion-of-variance-explained-2",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "R^2 as proportion of variance “explained”",
+    "text": "R^2 as proportion of variance “explained”\n\n\\begin{align*}\nR^2 &= \\frac{\\overbrace{\\text{variance of Y} - \\text{variance of residuals}}^{\\text{variance ``explained''}}}{\\text{variance of Y}} \\\\\n&= \\frac{246274^2 - 155630^2}{246274^2}\\approx 0.601\n\\end{align*}"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#r2-as-proportion-of-variance-explained-3",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#r2-as-proportion-of-variance-explained-3",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "R^2 as proportion of variance “explained”",
+    "text": "R^2 as proportion of variance “explained”\n\nWe say X “explained” 60.1% of the total variability in Y\nRemember: this is just a way of quantifying how closely the line tracks actual values\n\nYou can predict something without being able to explain why it happens!"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#r2-or-rse",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#r2-or-rse",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "R^2 or RSE?",
+    "text": "R^2 or RSE?\n\nR^2 measures the strength of the linear relationship between Y and the X’s\n\nSince it’s a relative measure, we don’t know how big our prediction errors are likely to be\n\nRSE measures the typical size of our prediction errors using X to predict Y\n\nSince it’s an absolute measure, we don’t know how strong the linear relationship is\n\n\nBoth can be useful, but in practice RSE is usually more relevant."
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#r2-or-rse-1",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#r2-or-rse-1",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "R^2 or RSE?",
+    "text": "R^2 or RSE?\nPredicting the price of a house from its area:\n\nR^2 = 0.601\n\\text{RSE} = \\$155630\n\nPretty strong linear relationship, but typical prediction errors are still very large!"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#r2-doesnt-add-up",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#r2-doesnt-add-up",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "R^2 doesn’t add up",
+    "text": "R^2 doesn’t add up\n\nWe can use R^2 to measure “independent” contributions of multiple X variables\nCompare R^2 from models with different sets of X variables\n\nArea: R^2 = 0.601\nBeds: R^2  = 0.137\nArea and Beds R^2  = 0.615 \\neq 0.601+0.137\n\nAdding beds once you know area explains only about 1.4% more variance!"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#why",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#why",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Why?",
+    "text": "Why?\n\n\nArea already contains a lot of information about beds\nThe new information we get from introducing beds is not that useful for predicting prices\nCompare this to starting with beds and adding area – we get a big boost in R^2"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#prediction-isnt-everything",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#prediction-isnt-everything",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Prediction isn’t everything",
+    "text": "Prediction isn’t everything\n\nNotice that the area and area+beds model have very similar R^2 values\nThe RSE values are also similar\n\nArea only: 155627\nArea + Beds: 153047\n\nBoth models predict prices about equally well (or badly)\n\nBut they tell very different stories about what an additional sqft is worth!"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#section-2",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#section-2",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "",
+    "text": "What personal characteristics about an instructor do you think are predictive of the scores they receive on student evaluations?"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#hamermesh-parker-2005-data-set",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#hamermesh-parker-2005-data-set",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Hamermesh & Parker (2005) data set",
+    "text": "Hamermesh & Parker (2005) data set\n\nStudent evaluations of N=463 instructors at UT Austin, 2000-2002\nFor each instructor:\n\neval: average student evaluation of teacher\nbeauty: average beauty score from a six-student panel (z-score, 0 is average)\ngender: male or female\ncredits: single- or multi-credit course\nage: age of instructor\n(and more…)"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#explore-the-data-eval",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#explore-the-data-eval",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Explore the data: eval",
+    "text": "Explore the data: eval"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#explore-the-data-beauty",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#explore-the-data-beauty",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Explore the data: beauty",
+    "text": "Explore the data: beauty"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#section-4",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#section-4",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "",
+    "text": "Do you think there is a positive or negative relationship between beauty and evaluations?"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#the-simple-regression-fit",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#the-simple-regression-fit",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "The simple regression fit",
+    "text": "The simple regression fit\n\nmodel2 &lt;- lm(eval ~ beauty, data = profs)\nsummary(model2)\n\n\nCall:\nlm(formula = eval ~ beauty, data = profs)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-1.8002 -0.3630  0.0725  0.4021  1.1037 \n\nCoefficients:\n            Estimate Std. Error t value             Pr(&gt;|t|)    \n(Intercept)   3.9983     0.0253  157.73 &lt; 0.0000000000000002 ***\nbeauty        0.1330     0.0322    4.13             0.000042 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.545 on 461 degrees of freedom\nMultiple R-squared:  0.0357,    Adjusted R-squared:  0.0336 \nF-statistic: 17.1 on 1 and 461 DF,  p-value: 0.0000425"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#the-simple-regression-fit-1",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#the-simple-regression-fit-1",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "The simple regression fit",
+    "text": "The simple regression fit"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#accounting-for-error-and-uncertainty",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#accounting-for-error-and-uncertainty",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Accounting for error and uncertainty",
+    "text": "Accounting for error and uncertainty\n\nSo far we’ve focused on estimated coefficients and predictions\nBut we only have a sample of instructors – what would the regression line look like if we had the entire population of all instructors in the world?\nWe know our predictions will be wrong – how wrong are the likely to be?\nWe know our coefficients don’t match the true population values – how close are they?"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#the-simple-linear-regression-model",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#the-simple-linear-regression-model",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "The simple linear regression model",
+    "text": "The simple linear regression model\nWe need a model for our data to answer these questions. Our model has four components:\n\nLinearity\nIndependence of prediction errors\nNormality of prediction errors\nEqual variance of prediction errors"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#linearity",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#linearity",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Linearity",
+    "text": "Linearity\nThe relationship between Y and each X is linear:\nY = \\beta_0 + \\beta_1 X_{1} + \\beta_2 X_{2} + ... + \\beta_p X_{p} + \\epsilon\n\n\\beta_0, \\beta_1, ..., \\beta_p are the true/population regression coefficients\n\\epsilon is the true error if we predict Y using the true regression coefficients\n\nOur other assumptions are about those true error terms \\epsilon…"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#independence",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#independence",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Independence",
+    "text": "Independence\n\nEach observation has an independent true error term\nIf my neighbor’s house sells for more than expected, that doesn’t tell me anything about whether my house will sell for more or less than expected\nIf the last house sells for less than expected, that doesn’t tell us anything about whether the next house will sell for more or less than expected"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#normality",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#normality",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Normality",
+    "text": "Normality\nThe true error terms \\epsilon are normally distributed and centered at zero\n\nThe average error over many predictions is zero\nOver-prediction and under-prediction are equally likely\nMost errors are small, but large errors are possible"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#equal-variance",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#equal-variance",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Equal Variance",
+    "text": "Equal Variance\n\nThe size of the true errors does not depend on the values of the X’s (or anything else)\n\nFor example, errors are about the same size (on average) for small and large houses"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#visualizing-the-linear-model",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#visualizing-the-linear-model",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Visualizing the linear model",
+    "text": "Visualizing the linear model"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#estimates-vs-true-values",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#estimates-vs-true-values",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Estimates vs True Values",
+    "text": "Estimates vs True Values\n\nOur \\hat \\beta_0, \\hat \\beta_1, ..., \\hat \\beta_p are just estimates of the true \\beta_0, \\beta_1, ..., \\beta_p\nThe residuals estimate the true prediction errors\nThe RSE (standard deviation of residuals) is an estimate of the true \\sigma (error standard deviation)"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#accounting-for-uncertainty-in-estimates",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#accounting-for-uncertainty-in-estimates",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Accounting for uncertainty in estimates",
+    "text": "Accounting for uncertainty in estimates\n\nIf we want to know how uncertain our estimates are, we need to quantify their variability.\nWe can do this using the sampling distribution of our estimates (how much they change over repeated samples)\nMore specifically, we can compute confidence intervals"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#confidence-intervals",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#confidence-intervals",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Confidence intervals",
+    "text": "Confidence intervals\n\nA confidence interval gives a range of plausible values for a population parameter (e.g., a regression coefficient)\nThese are possible values of the true coefficients that are consistent with our observed data at a given level of confidence (e.g., 95%)\nIf our LINE assumptions hold, these are easy to get:\n\n\nconfint(model2)\n\n             2.5 % 97.5 %\n(Intercept) 3.9485  4.048\nbeauty      0.0698  0.196"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#is-there-evidence-for-a-linear-relationship",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#is-there-evidence-for-a-linear-relationship",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Is there evidence for a linear relationship?",
+    "text": "Is there evidence for a linear relationship?\n\nconfint(model2)\n\n             2.5 % 97.5 %\n(Intercept) 3.9485  4.048\nbeauty      0.0698  0.196\n\n\n\nThe range of plausible values for the slope \\beta_1 is (0.07, 0.20)\nNo linear relationship would mean \\beta_1=0\nAll the plausible values are positive, so we have statistically significant evidence of a positive linear relationship between beauty and evaluations"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#how-strong-is-the-linear-relationship",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#how-strong-is-the-linear-relationship",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "How strong is the linear relationship?",
+    "text": "How strong is the linear relationship?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\text{Cor}(\\text{beauty}, \\text{eval}) = 0.19\nR^2 = 0.036 – only 3.6% of the variance in eval is explained by beauty\nBut we have strong statistical evidence that this (weak) linear relationship holds among the population of all instructors\n\ni.e., it isn’t just a fluke in this particular sample"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#how-strong-is-the-linear-relationship-1",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#how-strong-is-the-linear-relationship-1",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "How strong is the linear relationship?",
+    "text": "How strong is the linear relationship?\n\n\n\n\n\n\n\n\n\n\n\n\n\nRemember: R^2 doesn’t tell us directly how confident we are that a linear relationship exists\nIn this case we have strong evidence of a weak linear relationship\nThis is because many factors unrelated to beauty affect eval scores"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#accounting-for-uncertainty-in-predictions",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#accounting-for-uncertainty-in-predictions",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Accounting for uncertainty in predictions",
+    "text": "Accounting for uncertainty in predictions\nIf I’m trying to predict the evaluation score of a particular professor’s course, I’d like to know:\n\nWhat’s the most likely evaluation score (best prediction)?\nWhat’s a range of likely evaluation scores (prediction interval) – because my prediction will almost certainly be wrong!"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#prediction-intervals",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#prediction-intervals",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Prediction intervals",
+    "text": "Prediction intervals\n\n\n\n\n\n\n\n\n\n\n\n\nOur model: Actual evaluation scores for professors of a given beauty score will:\n\nHave normal distributions\nCentered at the predicted value (location on the line)\nWith standard deviation \\sigma\n\n95% of the time, actual prices fall within \\pm 2\\sigma of the predicted price (if we knew the true line and \\sigma)"
+  },
+  {
+    "objectID": "fa_sta235_2026/class_02_fa_2026.html#prediction-intervals-1",
+    "href": "fa_sta235_2026/class_02_fa_2026.html#prediction-intervals-1",
+    "title": "Error, Uncertainty and the Linear Model",
+    "section": "Prediction intervals",
+    "text": "Prediction intervals\nUnder our LINE assumptions, we can get prediction intervals for new observations that account for both:\n\nUncertainty in our estimated regression line\nThe inherent variability in actual outcomes around that line\n\nFor a fairly ugly professor (beauty score = -1), we predict an evaluation score of:\n\npredict(model2, list(beauty = -1), interval = \"prediction\")\n\n   fit  lwr  upr\n1 3.87 2.79 4.94\n\n\nWe can be 95% confident that the actual evaluation score for this professor will fall between 2.79 and 4.94."
   }
 ]

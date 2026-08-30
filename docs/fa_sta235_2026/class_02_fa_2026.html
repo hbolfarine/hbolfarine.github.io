@@ -6,11 +6,12 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e5c0da90bde570b7566f6217e7c63da7.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.9.36">
 
-  <meta name="author" content="Class 02 - Categorical Variables">
-  <title>Henrique Bolfarine – Data Science for Business Applications</title>
+  <meta name="author" content="Brian Lukoff">
+  <meta name="dcterms.date" content="2026-01-22">
+  <title>Henrique Bolfarine – Error, Uncertainty and the Linear Model</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -59,51 +60,65 @@
         -khtml-user-select: none; -moz-user-select: none;
         -ms-user-select: none; user-select: none;
         padding: 0 4px; width: 4em;
-        color: #aaaaaa;
       }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
     div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
+      { color: #383a42;  }
     @media screen {
     pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
     }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    code span { color: #383a42; } /* Normal */
+    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+    code span.an { color: #50a14f; } /* Annotation */
+    code span.at { color: #a626a4; } /* Attribute */
+    code span.bn { color: #986801; } /* BaseN */
+    code span.bu { color: #a626a4; } /* BuiltIn */
+    code span.cf { color: #a626a4; } /* ControlFlow */
+    code span.ch { color: #50a14f; } /* Char */
+    code span.cn { color: #986801; } /* Constant */
+    code span.co { color: #a0a1a7; font-style: italic; } /* Comment */
+    code span.cv { color: #e45649; font-style: italic; } /* CommentVar */
+    code span.do { color: #e45649; } /* Documentation */
+    code span.dt { color: #a626a4; } /* DataType */
+    code span.dv { color: #986801; } /* DecVal */
+    code span.er { color: #f44747; text-decoration: underline; } /* Error */
+    code span.ex { color: #4078f2; font-weight: bold; } /* Extension */
+    code span.fl { color: #986801; } /* Float */
+    code span.fu { color: #4078f2; } /* Function */
+    code span.im { color: #50a14f; } /* Import */
+    code span.in { color: #c45b00; } /* Information */
+    code span.kw { color: #a626a4; } /* Keyword */
+    code span.op { color: #a626a4; } /* Operator */
+    code span.ot { color: #27ae60; } /* Other */
+    code span.pp { color: #a626a4; } /* Preprocessor */
+    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+    code span.sc { color: #0184bc; } /* SpecialChar */
+    code span.ss { color: #da4453; } /* SpecialString */
+    code span.st { color: #50a14f; } /* String */
+    code span.va { color: #e45649; } /* Variable */
+    code span.vs { color: #da4453; } /* VerbatimString */
+    code span.wa { color: #da4453; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
@@ -192,217 +207,605 @@
       margin-right: 0; 
     }
   </style>
-  <style type="text/css">
-  ul li ul li {
-    font-size: 0.8em;
-  }
+  <style>
+    .column.center {
+      text-align: center;
+    }
+
+    .column.center img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .reveal pre code {
+      max-height: 650px;
+    }
   </style>
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="class_02_docs/background_sta235h.png" class="quarto-title-block center">
-  <h1 class="title">Data Science for Business Applications</h1>
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Error, Uncertainty and the Linear Model</h1>
+  <p class="subtitle">STA 235 Lecture 2</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Class 02 - Categorical Variables 
+Brian Lukoff 
 </div>
-</div>
+        <p class="quarto-title-affiliation">
+            University of Texas at Austin
+          </p>
+    </div>
 </div>
 
-</section><section id="TOC">
-<nav role="doc-toc"> 
-<h2 id="toc-title">Presentation Outline</h2>
-<ul>
-<li><a href="#/categorical-predictors-with-2-categories" id="/toc-categorical-predictors-with-2-categories">Categorical predictors with 2 categories</a></li>
-<li><a href="#/categorical-predictors-with-3-categories" id="/toc-categorical-predictors-with-3-categories">Categorical predictors with 3+ categories</a></li>
-</ul>
-</nav>
+  <p class="date">2026-01-22</p>
 </section>
-<section>
-<section id="categorical-predictors-with-2-categories" class="title-slide slide level1 center">
-<h1>Categorical predictors with 2 categories</h1>
-
-</section>
-<section id="whats-the-impact-of-gender-on-student-evaluations" class="slide level2">
-<h2>What’s the impact of gender on student evaluations?</h2>
-
-<img data-src="class_02_fa_2026_files/figure-revealjs/unnamed-chunk-1-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="incorporating-gender-into-the-multiple-regression-model" class="slide level2">
-<h2>Incorporating gender into the multiple regression model</h2>
-<div style="font-size: 0.9em;">
-<p>The model is given by: <span class="math display">\[\texttt{eval} = \beta_0 + \beta_1 \cdot \texttt{beauty} + \beta_2 \cdot \texttt{gender} + \epsilon\]</span> Where we have that:</p>
+<section id="posit-cloud-vs-rstudio" class="title-slide slide level1 center">
+<h1>Posit Cloud vs RStudio</h1>
 <ul>
-<li><p><span class="math inline">\(\texttt{eval}\)</span>: is the response variable - (numerical)</p></li>
-<li><p><span class="math inline">\(\texttt{beauty}\)</span>: is a predictor - (numerical)</p></li>
-<li><p><span class="math inline">\(\texttt{gender}\)</span>: is a predictor - (categorical) - two groups:</p>
+<li>Originally we had planned for you to use Posit Cloud not just for quizzes/exams, but for in-class work and homework too</li>
+<li>It turns out that the limits on the free version of Posit Cloud are too restrictive</li>
+<li>New plan:
 <ul>
-<li><code>female</code></li>
-<li><code>male</code></li>
+<li>You can use Posit Cloud for quizzes/exams</li>
+<li>You can use RStudio (install on your computer) for in-class work and homework</li>
 </ul></li>
 </ul>
-</div>
 </section>
-<section id="incorporating-gender-into-the-multiple-regression-model-1" class="slide level2">
-<h2>Incorporating gender into the multiple regression model</h2>
-<div style="font-size: 0.9em;">
+
+<section>
+<section id="measuring-prediction-error" class="title-slide slide level1 center">
+<h1>Measuring prediction error</h1>
+
+</section>
+<section id="predicting-price-from-area" class="slide level2 center">
+<h2>Predicting price from area</h2>
+
+<img data-src="class_02_fa_2026_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
+<section id="residuals-and-fitted-values" class="slide level2 center">
+<h2>Residuals and fitted values</h2>
 <ul>
-<li>Gender is a categorical variable (male or female in this data set) so we can’t use it as-is as a predictor.</li>
-<li>Idea: Recode gender into the quantitative variable 1 = male, 0 = female.</li>
-<li><strong>R</strong> does this for us!</li>
-<li>The ordering is totally arbitrary! If you put a categorical variable into a model, R will arbitrarily pick one category or the other as the “1” category, and make the other the “0” category.</li>
+<li><p>The <strong>fitted value</strong> (“y hat”) for observation <span class="math inline">i</span> is the predicted value from the regression line: <span class="math display">
+\widehat{y}_i = \widehat{\beta_0} + \widehat{\beta_1} \times \text{area}_i
+</span></p></li>
+<li><p>The <strong>residual</strong> is the corresponding prediction error: <span class="math display">e_i = y_i - \widehat{y}_i = \text{observed price} - \text{predicted price}</span></p></li>
+<li><p>The fitted line tells us about the part of price <strong>predictable</strong> from area</p></li>
+<li><p>The residuals tell us about the part of price <strong>not predictable</strong> from area</p></li>
 </ul>
+</section>
+<section id="visualizing-residuals-and-fitted-values" class="slide level2 center">
+<h2>Visualizing residuals and fitted values</h2>
+
+<img data-src="class_02_fa_2026_files/figure-revealjs/unnamed-chunk-2-1.png" width="672" class="r-stretch"></section>
+<section id="what-does-a-residual-tell-us" class="slide level2 center">
+<h2>What does a residual tell us?</h2>
+
+<img data-src="class_02_fa_2026_files/figure-revealjs/unnamed-chunk-3-1.png" width="672" class="r-stretch"></section>
+<section id="what-is-a-typical-residual" class="slide level2 center">
+<h2>What is a “typical” residual?</h2>
+<ul>
+<li>The residual tells us the prediction error for a given point</li>
+<li>The <strong>standard deviation of the residuals</strong> tells us the typical <strong>size</strong> of these prediction errors (in absolute value)</li>
+<li>It’s a measure of how <strong>variable our prediction errors are</strong>
+<ul>
+<li>Low variability: our predictions are usually close to actual values</li>
+<li>High variability: our predictions are often far off from actual values</li>
+</ul></li>
+<li>In R, this is called the <strong>Residual Standard Error (RSE)</strong></li>
+</ul>
+</section>
+<section id="section" class="slide level2 center">
+<h2></h2>
+<div class="cell" data-output-line-numbers="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">summary</span>(fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource highlight numberLines number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a></a></span>
+<span id="cb2-2"><a></a>Call:</span>
+<span id="cb2-3"><a></a>lm(formula = price ~ area, data = houses)</span>
+<span id="cb2-4"><a></a></span>
+<span id="cb2-5"><a></a>Residuals:</span>
+<span id="cb2-6"><a></a>    Min      1Q  Median      3Q     Max </span>
+<span id="cb2-7"><a></a>-604840  -90641    2955   83298  519720 </span>
+<span id="cb2-8"><a></a></span>
+<span id="cb2-9"><a></a>Coefficients:</span>
+<span id="cb2-10"><a></a>             Estimate Std. Error t value            Pr(&gt;|t|)    </span>
+<span id="cb2-11"><a></a>(Intercept)  4296.668  21017.955  0.2044              0.8381    </span>
+<span id="cb2-12"><a></a>area          279.139     10.101 27.6337 &lt;0.0000000000000002 ***</span>
+<span id="cb2-13"><a></a>---</span>
+<span id="cb2-14"><a></a>Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span id="cb2-15"><a></a></span>
+<span id="cb2-16"><a></a>Residual standard error: 155630 on 506 degrees of freedom</span>
+<span id="cb2-17"><a></a>Multiple R-squared:  0.60146,   Adjusted R-squared:  0.60067 </span>
+<span id="cb2-18"><a></a>F-statistic: 763.62 on 1 and 506 DF,  p-value: &lt; 0.000000000000000222</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>From line 16: RSE = $155,630</p>
+</section>
+<section id="section-1" class="slide level2 center">
+<h2></h2>
+
+<img data-src="class_02_fa_2026_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
+<section id="another-interpretation-of-rse" class="slide level2 center">
+<h2>Another interpretation of RSE</h2>
+<ul>
+<li>The residuals look approximately Normally distributed</li>
+<li>The mean of the residuals is 0</li>
+<li>The standard deviation of the residuals is the RSE</li>
+<li>95% of a Normal distribution is within 2 standard deviations of the mean</li>
+<li><strong>Therefore:</strong> 95% of the time, the prediction error is within <span class="math inline">\pm 2 \times \text{RSE}</span> of the predicted value</li>
+</ul>
+</section>
+<section id="correlation" class="slide level2 center">
+<h2>Correlation</h2>
+<p><span class="math inline">\text{Cor}(X,Y)</span> measures linear association between two variables</p>
+<ul>
+<li>Between <span class="math inline">-1</span> and <span class="math inline">+1</span></li>
+<li>Sign indicates direction of linear relationship</li>
+<li>Magnitude indicates strength of linear relationship (<span class="math inline">0</span> = none, <span class="math inline">\pm 1</span> = perfect)</li>
+</ul>
+</section>
+<section id="correlation-1" class="slide level2 center">
+<h2>Correlation</h2>
+
+<img data-src="class_02_fa_2026_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<section id="r2-r-squared" class="slide level2 center">
+<h2><span class="math inline">R^2</span> (R-squared)</h2>
+<p><span class="math inline">R^2</span> is a measure of the <strong>strength of the linear relationship</strong> between the <span class="math inline">Y</span> and all <span class="math inline">X</span>’s in the linear regression</p>
+<ul>
+<li><span class="math inline">R^2</span> ranges from 0 to 1
+<ul>
+<li><span class="math inline">0</span> = no linear relationship</li>
+<li><span class="math inline">1</span> = perfect linear relationship</li>
+</ul></li>
+</ul>
+</section>
+<section id="defining-r2" class="slide level2 center">
+<h2>Defining <span class="math inline">R^2</span></h2>
+<p><span class="math inline">R^2</span> has two equivalent definitions:</p>
+<ol type="1">
+<li>The squared correlation between observed and fitted values from the regression model</li>
+<li>The proportion of variance in the outcome <span class="math inline">Y</span> “explained” by the regression model</li>
+</ol>
+</section>
+<section id="finding-r2" class="slide level2 smaller center">
+<h2>Finding <span class="math inline">R^2</span></h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">summary</span>(fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource highlight numberLines number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a></a></span>
+<span id="cb4-2"><a></a>Call:</span>
+<span id="cb4-3"><a></a>lm(formula = price ~ area, data = houses)</span>
+<span id="cb4-4"><a></a></span>
+<span id="cb4-5"><a></a>Residuals:</span>
+<span id="cb4-6"><a></a>    Min      1Q  Median      3Q     Max </span>
+<span id="cb4-7"><a></a>-604840  -90641    2955   83298  519720 </span>
+<span id="cb4-8"><a></a></span>
+<span id="cb4-9"><a></a>Coefficients:</span>
+<span id="cb4-10"><a></a>             Estimate Std. Error t value            Pr(&gt;|t|)    </span>
+<span id="cb4-11"><a></a>(Intercept)  4296.668  21017.955  0.2044              0.8381    </span>
+<span id="cb4-12"><a></a>area          279.139     10.101 27.6337 &lt;0.0000000000000002 ***</span>
+<span id="cb4-13"><a></a>---</span>
+<span id="cb4-14"><a></a>Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span id="cb4-15"><a></a></span>
+<span id="cb4-16"><a></a>Residual standard error: 155630 on 506 degrees of freedom</span>
+<span id="cb4-17"><a></a>Multiple R-squared:  0.60146,   Adjusted R-squared:  0.60067 </span>
+<span id="cb4-18"><a></a>F-statistic: 763.62 on 1 and 506 DF,  p-value: &lt; 0.000000000000000222</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>Line 17 (Multiple R-squared): <span class="math inline">R^2 = 0.601</span> (we’ll cover adjusted <span class="math inline">R^2</span> later)</p>
+</section>
+<section id="r2-textcory-haty2" class="slide level2 center">
+<h2><span class="math inline">R^2 = \text{Cor}(Y, \hat{Y})^2</span></h2>
+
+<img data-src="class_02_fa_2026_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+<section id="r2-as-generalized-correlation" class="slide level2 center">
+<h2><span class="math inline">R^2</span> as generalized correlation</h2>
+<ul>
+<li><span class="math inline">R^2</span> tells us <strong>how closely the predicted values track actual values</strong></li>
+<li>In a simple linear model, it’s the same as <span class="math inline">\text{Cor}(X,Y)^2</span></li>
+<li>So you can think of <span class="math inline">R^2</span> as a generalization of correlation to multiple X’s</li>
+</ul>
+</section>
+<section id="r2-as-generalized-correlation-1" class="slide level2 center">
+<h2><span class="math inline">R^2</span> as generalized correlation</h2>
+<p>It inherits the same limitations as correlation:</p>
+<ul>
+<li>Low <span class="math inline">R^2</span> does <strong>not</strong> imply
+<ul>
+<li>No “meaningful” linear relationship</li>
+<li>No strong <em>nonlinear</em> relationship</li>
+</ul></li>
+</ul>
+</section>
+<section id="r2-as-generalized-correlation-2" class="slide level2 center">
+<h2><span class="math inline">R^2</span> as generalized correlation</h2>
+<ul>
+<li>High <span class="math inline">R^2</span> does <strong>not</strong> imply
+<ul>
+<li>A <em>causal</em> relationship</li>
+<li>A true <em>linear</em> relationship</li>
+<li>Prediction errors are small enough to be useful</li>
+<li>The model will predict well for <em>future</em> data</li>
+</ul></li>
+</ul>
+</section>
+<section id="r2-as-proportion-of-variance-explained" class="slide level2 center">
+<h2><span class="math inline">R^2</span> as proportion of variance “explained”</h2>
+<ul>
+<li>If <span class="math inline">R^2</span> is high then our predictions track the observed values closely</li>
+<li><span class="math inline">R^2</span> measures how much unpredictability (variance) in the outcome “goes away” when we ues X to predict</li>
+</ul>
+</section>
+<section id="r2-as-proportion-of-variance-explained-1" class="slide level2 center">
+<h2><span class="math inline">R^2</span> as proportion of variance “explained”</h2>
+<p><span class="math display">
+R^2 = \frac{\overbrace{\text{variance of Y} - \text{variance of residuals}}^{\text{variance ``explained''}}}{\text{variance of Y}}
+</span></p>
+<ul>
+<li>Common phrasing: “<span class="math inline">R^2</span> is the proportion of variance in <span class="math inline">Y</span> explained by the model”</li>
+</ul>
+</section>
+<section id="r2-as-proportion-of-variance-explained-2" class="slide level2 center">
+<h2><span class="math inline">R^2</span> as proportion of variance “explained”</h2>
+<p><span class="math display">
+\begin{align*}
+R^2 &amp;= \frac{\overbrace{\text{variance of Y} - \text{variance of residuals}}^{\text{variance ``explained''}}}{\text{variance of Y}} \\
+&amp;= \frac{246274^2 - 155630^2}{246274^2}\approx 0.601
+\end{align*}
+</span></p>
+</section>
+<section id="r2-as-proportion-of-variance-explained-3" class="slide level2 center">
+<h2><span class="math inline">R^2</span> as proportion of variance “explained”</h2>
+<ul>
+<li>We say <span class="math inline">X</span> “explained” 60.1% of the total variability in <span class="math inline">Y</span></li>
+<li>Remember: this is just a way of quantifying how closely the line tracks actual values
+<ul>
+<li>You can predict something without being able to explain why it happens!</li>
+</ul></li>
+</ul>
+</section>
+<section id="r2-or-rse" class="slide level2 center">
+<h2><span class="math inline">R^2</span> or RSE?</h2>
+<ul>
+<li><span class="math inline">R^2</span> measures the <strong>strength of the linear relationship</strong> between <span class="math inline">Y</span> and the <span class="math inline">X</span>’s
+<ul>
+<li>Since it’s a relative measure, we don’t know how big our prediction errors are likely to be</li>
+</ul></li>
+<li><span class="math inline">RSE</span> measures the <strong>typical size of our prediction errors</strong> using <span class="math inline">X</span> to predict <span class="math inline">Y</span>
+<ul>
+<li>Since it’s an absolute measure, we don’t know how strong the linear relationship is</li>
+</ul></li>
+</ul>
+<p>Both can be useful, but in practice RSE is usually more relevant.</p>
+</section>
+<section id="r2-or-rse-1" class="slide level2 center">
+<h2><span class="math inline">R^2</span> or RSE?</h2>
+<p>Predicting the price of a house from its area:</p>
+<ul>
+<li><span class="math inline">R^2 = 0.601</span></li>
+<li><span class="math inline">\text{RSE} = \$155630</span></li>
+</ul>
+<p>Pretty strong linear relationship, but typical prediction errors are still very large!</p>
+</section>
+<section id="r2-doesnt-add-up" class="slide level2 center">
+<h2><span class="math inline">R^2</span> doesn’t add up</h2>
+<ul>
+<li>We can use <span class="math inline">R^2</span> to measure “independent” contributions of multiple <span class="math inline">X</span> variables</li>
+<li>Compare <span class="math inline">R^2</span> from models with different sets of <span class="math inline">X</span> variables
+<ul>
+<li>Area: <span class="math inline">R^2 = 0.601</span></li>
+<li>Beds: <span class="math inline">R^2  = 0.137</span></li>
+<li>Area and Beds <span class="math inline">R^2  = 0.615 \neq 0.601+0.137</span></li>
+</ul></li>
+<li>Adding beds once you know area explains only about 1.4% more variance!</li>
+</ul>
+</section>
+<section id="why" class="slide level2 center">
+<h2>Why?</h2>
+
+<img data-src="class_02_fa_2026_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"><ul>
+<li>Area already contains a lot of information about beds</li>
+<li>The new information we get from introducing beds is not that useful for predicting prices</li>
+<li>Compare this to starting with beds and adding area – we get a big boost in <span class="math inline">R^2</span></li>
+</ul>
+</section>
+<section id="prediction-isnt-everything" class="slide level2 center">
+<h2>Prediction isn’t everything</h2>
+<ul>
+<li>Notice that the area and area+beds model have very similar <span class="math inline">R^2</span> values</li>
+<li>The RSE values are also similar
+<ul>
+<li>Area only: 155627</li>
+<li>Area + Beds: 153047</li>
+</ul></li>
+<li>Both models predict prices about equally well (or badly)
+<ul>
+<li>But they tell very different stories about what an additional sqft is worth!</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="incorporating-uncertainty" class="title-slide slide level1 center">
+<h1>Incorporating uncertainty</h1>
+
+</section>
+<section id="section-2" class="slide level2 center">
+<h2></h2>
+<div style="text-align: center;">
+<p><strong><em>What personal characteristics about an instructor do you think are predictive of the scores they receive on student evaluations?</em></strong></p>
 </div>
 </section>
-<section id="run-the-regression-model" class="slide level2">
-<h2>Run the Regression Model</h2>
-<div style="font-size: 0.7em;">
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
-<span id="cb1-2"><a></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(eval <span class="sc">~</span> beauty <span class="sc">+</span> gender, <span class="at">data=</span>profs)</span>
-<span id="cb1-3"><a></a><span class="fu">summary</span>(model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="section-3" class="slide level2 center">
+<h2></h2>
+
+<img data-src="hamermesh.png" class="r-stretch"></section>
+<section id="hamermesh-parker-2005-data-set" class="slide level2 smaller center">
+<h2>Hamermesh &amp; Parker (2005) data set</h2>
+<ul>
+<li>Student evaluations of <span class="math inline">N=463</span> instructors at UT Austin, 2000-2002</li>
+<li>For each instructor:
+<ul>
+<li><strong>eval</strong>: average student evaluation of teacher</li>
+<li><strong>beauty</strong>: average beauty score from a six-student panel (z-score, 0 is average)</li>
+<li><strong>gender</strong>: male or female</li>
+<li><strong>credits</strong>: single- or multi-credit course</li>
+<li><strong>age</strong>: age of instructor</li>
+<li>(and more…)</li>
+</ul></li>
+</ul>
+</section>
+<section id="explore-the-data-eval" class="slide level2 center">
+<h2>Explore the data: <code>eval</code></h2>
+
+<img data-src="class_02_fa_2026_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="explore-the-data-beauty" class="slide level2 center">
+<h2>Explore the data: <code>beauty</code></h2>
+
+<img data-src="class_02_fa_2026_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<section id="section-4" class="slide level2 center">
+<h2></h2>
+<div style="text-align: center;">
+<p>Do you think there is a positive or negative relationship between beauty and evaluations?</p>
+</div>
+</section>
+<section id="the-simple-regression-fit" class="slide level2 center">
+<h2>The simple regression fit</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(eval <span class="sc">~</span> beauty, <span class="at">data =</span> profs)</span>
+<span id="cb5-2"><a></a><span class="fu">summary</span>(model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = eval ~ beauty + gender, data = profs)
+lm(formula = eval ~ beauty, data = profs)
 
 Residuals:
-     Min       1Q   Median       3Q      Max 
--1.87196 -0.36913  0.03493  0.39919  1.03237 
+    Min      1Q  Median      3Q     Max 
+-1.8002 -0.3630  0.0725  0.4021  1.1037 
 
 Coefficients:
             Estimate Std. Error t value             Pr(&gt;|t|)    
-(Intercept)  3.88377    0.03866  100.47 &lt; 0.0000000000000002 ***
-beauty       0.14859    0.03195    4.65           0.00000434 ***
-gendermale   0.19781    0.05098    3.88              0.00012 ***
+(Intercept)   3.9983     0.0253  157.73 &lt; 0.0000000000000002 ***
+beauty        0.1330     0.0322    4.13             0.000042 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.5373 on 460 degrees of freedom
-Multiple R-squared:  0.0663,    Adjusted R-squared:  0.06224 
-F-statistic: 16.33 on 2 and 460 DF,  p-value: 0.0000001407</code></pre>
-</div>
+Residual standard error: 0.545 on 461 degrees of freedom
+Multiple R-squared:  0.0357,    Adjusted R-squared:  0.0336 
+F-statistic: 17.1 on 1 and 461 DF,  p-value: 0.0000425</code></pre>
 </div>
 </div>
 </section>
-<section id="regression-a-model-using-gender" class="slide level2">
-<h2>Regression a model using gender</h2>
-<div style="font-size: 0.8em;">
-<p>A multiple regression predicting evaluation score from beauty and gender effectively fits two <strong>parallel</strong> regression lines:</p>
-<div class="cell" data-layout-align="center">
+<section id="the-simple-regression-fit-1" class="slide level2 center">
+<h2>The simple regression fit</h2>
+
+<img data-src="class_02_fa_2026_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
+<section id="accounting-for-error-and-uncertainty" class="slide level2 center">
+<h2>Accounting for error and uncertainty</h2>
+<ul>
+<li>So far we’ve focused on estimated coefficients and predictions</li>
+<li>But we only have a <strong>sample</strong> of instructors – what would the regression line look like if we had the entire <strong>population</strong> of all instructors in the world?</li>
+<li>We know our predictions will be wrong – how wrong are the likely to be?</li>
+<li>We know our coefficients don’t match the true population values – how close are they?</li>
+</ul>
+</section>
+<section id="the-simple-linear-regression-model" class="slide level2 center">
+<h2>The simple linear regression model</h2>
+<p>We need a <em>model</em> for our data to answer these questions. Our model has four components:</p>
+<ul>
+<li><strong>L</strong>inearity</li>
+<li><strong>I</strong>ndependence of prediction errors</li>
+<li><strong>N</strong>ormality of prediction errors</li>
+<li><strong>E</strong>qual variance of prediction errors</li>
+</ul>
+</section>
+<section id="linearity" class="slide level2 center">
+<h2>Linearity</h2>
+<p>The relationship between <span class="math inline">Y</span> and each <span class="math inline">X</span> is linear:</p>
+<p><span class="math inline">Y = \beta_0 + \beta_1 X_{1} + \beta_2 X_{2} + ... + \beta_p X_{p} + \epsilon</span></p>
+<ul>
+<li><span class="math inline">\beta_0, \beta_1, ..., \beta_p</span> are the <strong>true/population</strong> regression coefficients</li>
+<li><span class="math inline">\epsilon</span> is the <strong>true</strong> error if we predict <span class="math inline">Y</span> using the <strong>true</strong> regression coefficients</li>
+</ul>
+<p>Our other assumptions are about those true error terms <span class="math inline">\epsilon</span>…</p>
+</section>
+<section id="independence" class="slide level2 center">
+<h2>Independence</h2>
+<ul>
+<li>Each observation has an <em>independent</em> true error term</li>
+<li>If my neighbor’s house sells for more than expected, that doesn’t tell me anything about whether my house will sell for more or less than expected</li>
+<li>If the last house sells for less than expected, that doesn’t tell us anything about whether the next house will sell for more or less than expected</li>
+</ul>
+</section>
+<section id="normality" class="slide level2 center">
+<h2>Normality</h2>
+<p>The true error terms <span class="math inline">\epsilon</span> are normally distributed and centered at zero</p>
+<ul>
+<li>The average error over many predictions is zero</li>
+<li>Over-prediction and under-prediction are equally likely</li>
+<li>Most errors are small, but large errors are possible</li>
+</ul>
+</section>
+<section id="equal-variance" class="slide level2 center">
+<h2>Equal Variance</h2>
+<ul>
+<li>The size of the true errors does not depend on the values of the <span class="math inline">X</span>’s (or anything else)
+<ul>
+<li>For example, errors are about the same size (on average) for small and large houses</li>
+</ul></li>
+</ul>
+</section>
+<section id="visualizing-the-linear-model" class="slide level2 center">
+<h2>Visualizing the linear model</h2>
+
+<img data-src="class_02_fa_2026_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
+<section id="estimates-vs-true-values" class="slide level2 center">
+<h2>Estimates vs True Values</h2>
+<ul>
+<li>Our <span class="math inline">\hat \beta_0, \hat \beta_1, ..., \hat \beta_p</span> are just estimates of the true <span class="math inline">\beta_0, \beta_1, ..., \beta_p</span></li>
+<li>The residuals estimate the true prediction errors</li>
+<li>The RSE (standard deviation of residuals) is an estimate of the true <span class="math inline">\sigma</span> (error <strong>standard deviation</strong>)</li>
+</ul>
+</section>
+<section id="accounting-for-uncertainty-in-estimates" class="slide level2 center">
+<h2>Accounting for uncertainty in estimates</h2>
+<ul>
+<li>If we want to know how uncertain our estimates are, we need to quantify their variability.</li>
+<li>We can do this using the <strong>sampling distribution</strong> of our estimates (how much they change over repeated samples)</li>
+<li>More specifically, we can compute <strong>confidence intervals</strong></li>
+</ul>
+</section>
+<section id="confidence-intervals" class="slide level2 center">
+<h2>Confidence intervals</h2>
+<ul>
+<li>A confidence interval gives a range of plausible values for a population parameter (e.g., a regression coefficient)</li>
+<li>These are possible values of the true coefficients that are consistent with our observed data at a given level of confidence (e.g., 95%)</li>
+<li>If our LINE assumptions hold, these are easy to get:</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">confint</span>(model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             2.5 % 97.5 %
+(Intercept) 3.9485  4.048
+beauty      0.0698  0.196</code></pre>
+</div>
+</div>
+</section>
+<section id="is-there-evidence-for-a-linear-relationship" class="slide level2 center">
+<h2>Is there evidence for a linear relationship?</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">confint</span>(model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             2.5 % 97.5 %
+(Intercept) 3.9485  4.048
+beauty      0.0698  0.196</code></pre>
+</div>
+</div>
+<ul>
+<li>The range of plausible values for the slope <span class="math inline">\beta_1</span> is (0.07, 0.20)</li>
+<li>No linear relationship would mean <span class="math inline">\beta_1=0</span></li>
+<li>All the plausible values are positive, so we have <em>statistically significant</em> evidence of a positive linear relationship between beauty and evaluations</li>
+</ul>
+</section>
+<section id="how-strong-is-the-linear-relationship" class="slide level2 center">
+<h2>How strong is the linear relationship?</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="cell">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="class_02_fa_2026_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+<p><img data-src="class_02_fa_2026_files/figure-revealjs/unnamed-chunk-18-1.png" width="384"></p>
 </figure>
 </div>
 </div>
 </div>
-</div>
-</section></section>
-<section>
-<section id="categorical-predictors-with-3-categories" class="title-slide slide level1 center">
-<h1>Categorical predictors with 3+ categories</h1>
-
-</section>
-<section id="is-there-a-generation-gap" class="slide level2">
-<h2>Is there a generation gap?</h2>
-<div style="font-size: 0.8em;">
+</div><div class="column" style="width:60%;">
 <ul>
-<li>The variable <code>generation</code> is either <code>silent</code> (born before 1945), <code>boomer</code> (born 1945-1964), or <code>genx</code> (born after 1965).</li>
-<li>Is generation a significant predictor of evaluations <strong>above and beyond</strong> <code>gender</code> and <code>beauty</code>?</li>
-<li>To answer this, we need a model that includes as predictors all of <code>gender</code>, <code>beauty</code>, and <code>generation</code>.</li>
-<li>But we can’t just create a variable that is 0 for the silent generation, 1 for baby boomers, and 2 for gen X—why not?</li>
-<li>Solution is to pick a “reference category” and create dummy variables for the <strong>other</strong> categories.</li>
+<li><span class="math inline">\text{Cor}(\text{beauty}, \text{eval}) = 0.19</span></li>
+<li><span class="math inline">R^2</span> = 0.036 – only 3.6% of the variance in eval is explained by beauty</li>
+<li>But we have strong statistical evidence that this (weak) linear relationship holds among the population of all instructors
+<ul>
+<li>i.e., it isn’t just a fluke in this particular sample</li>
+</ul></li>
 </ul>
-</div>
+</div></div>
 </section>
-<section id="ok-boomer" class="slide level2">
-<h2>OK boomer</h2>
-<div style="font-size: 0.8em;">
-<p>Let’s arbitrarily pick boomers as a reference category:</p>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Category</th>
-<th><code>genx</code></th>
-<th><code>silent</code></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Boomers</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td>Gen Xers</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<td>Silent Gens</td>
-<td>0</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<p>R will do this automatically when you add a categorical variable with 3+ categories to a regression (it will arbitrarily pick a reference category)!</p>
+<section id="how-strong-is-the-linear-relationship-1" class="slide level2 center">
+<h2>How strong is the linear relationship?</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="class_02_fa_2026_files/figure-revealjs/unnamed-chunk-19-1.png" width="384"></p>
+</figure>
 </div>
+</div>
+</div>
+</div><div class="column" style="width:60%;">
+<ul>
+<li>Remember: <span class="math inline">R^2</span> doesn’t tell us directly how confident we are that a linear relationship exists</li>
+<li>In this case we have <strong>strong evidence</strong> of a <strong>weak linear relationship</strong></li>
+<li>This is because many factors unrelated to beauty affect eval scores</li>
+</ul>
+</div></div>
 </section>
-<section id="run-the-regression-model-1" class="slide level2">
-<h2>Run the Regression Model</h2>
-<div style="font-size: 0.7em;">
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(eval <span class="sc">~</span> beauty <span class="sc">+</span> gender <span class="sc">+</span> generation, <span class="at">data=</span>profs)</span>
-<span id="cb3-2"><a></a><span class="fu">summary</span>(model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="accounting-for-uncertainty-in-predictions" class="slide level2 center">
+<h2>Accounting for uncertainty in predictions</h2>
+<p>If I’m trying to predict the evaluation score of a particular professor’s course, I’d like to know:</p>
+<ul>
+<li>What’s the most likely evaluation score (best prediction)?</li>
+<li>What’s a range of likely evaluation scores (prediction interval) – because my prediction will almost certainly be wrong!</li>
+</ul>
+</section>
+<section id="prediction-intervals" class="slide level2 smaller center">
+<h2>Prediction intervals</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="class_02_fa_2026_files/figure-revealjs/unnamed-chunk-20-1.png" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<p>Our model: Actual evaluation scores for professors of a given beauty score will:</p>
+<ol type="1">
+<li>Have normal distributions</li>
+<li>Centered at the predicted value (location on the line)</li>
+<li>With standard deviation <span class="math inline">\sigma</span></li>
+</ol>
+<p>95% of the time, actual prices fall within <span class="math inline">\pm 2\sigma</span> of the predicted price (if we knew the true line and <span class="math inline">\sigma</span>)</p>
+</div></div>
+</section>
+<section id="prediction-intervals-1" class="slide level2 center">
+<h2>Prediction intervals</h2>
+<p>Under our LINE assumptions, we can get prediction intervals for new observations that account for both:</p>
+<ul>
+<li>Uncertainty in our estimated regression line</li>
+<li>The inherent variability in actual outcomes around that line</li>
+</ul>
+<p>For a fairly ugly professor (beauty score = <span class="math inline">-1</span>), we predict an evaluation score of:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">predict</span>(model2, <span class="fu">list</span>(<span class="at">beauty =</span> <span class="sc">-</span><span class="dv">1</span>), <span class="at">interval =</span> <span class="st">"prediction"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = eval ~ beauty + gender + generation, data = profs)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--1.91613 -0.36042  0.03609  0.42282  1.04398 
-
-Coefficients:
-                 Estimate Std. Error t value             Pr(&gt;|t|)    
-(Intercept)       3.89727    0.04403  88.521 &lt; 0.0000000000000002 ***
-beauty            0.14021    0.03304   4.243            0.0000267 ***
-gendermale        0.22230    0.05345   4.159            0.0000382 ***
-generationgenx   -0.02831    0.06149  -0.460               0.6454    
-generationsilent -0.16292    0.07992  -2.039               0.0421 *  
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.536 on 458 degrees of freedom
-Multiple R-squared:  0.07477,   Adjusted R-squared:  0.06669 
-F-statistic: 9.253 on 4 and 458 DF,  p-value: 0.0000003386</code></pre>
+<pre><code>   fit  lwr  upr
+1 3.87 2.79 4.94</code></pre>
 </div>
 </div>
-</div>
-</section>
-<section id="analysis" class="slide level2">
-<h2>Analysis</h2>
-<div style="font-size: 0.8em;">
-<p>All else equal (i.e., among professors of the same gender and beauty):</p>
-<ul>
-<li>Gen X professors are predicted to get scores that are 0.03 points below those of boomers.</li>
-<li>Silent gen professors are predicted to get scores that are 0.16 points below those of boomers.</li>
-<li>Only the boomer/silent generation difference is statistically significant; Gen X professors are not significantly different than boomers.</li>
-<li>In other words: <strong>age only seems to matter if you are really old</strong>.</li>
-</ul>
-</div>
+<p>We can be 95% confident that the actual evaluation score for this professor will fall between 2.79 and 4.94.</p>
 
 
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
-<p><img src="class_02_docs/texas_logo2.png" class="slide-logo"></p>
 <div class="footer footer-default">
 
 </div>
@@ -415,14 +818,12 @@ F-statistic: 9.253 on 4 and 458 DF,  p-value: 0.0000003386</code></pre>
   <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
   <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -437,8 +838,7 @@ F-statistic: 9.253 on 4 and 458 DF,  p-value: 0.0000003386</code></pre>
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'chalkboard': {"buttons":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -488,7 +888,7 @@ F-statistic: 9.253 on 4 and 458 DF,  p-value: 0.0000003386</code></pre>
         disableLayout: false,
 
         // Vertical centering of slides
-        center: false,
+        center: true,
 
         // Enables touch navigation on devices with touch input
         touch: true,
@@ -591,27 +991,9 @@ F-statistic: 9.253 on 4 and 458 DF,  p-value: 0.0000003386</code></pre>
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom
