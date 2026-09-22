@@ -2,11 +2,11 @@
 title: "Data Science for Business Applications"
 author: "Class 04 - Categorical Variables"
 title-slide-attributes:
-    data-background-image: week_04_docs/background_sta235h.png
+    data-background-image: class_04_docs/background_sta235h.png
 format: 
   revealjs:
     chalkboard: true
-    logo: week_04_docs/texas_logo2.png
+    logo: class_04_docs/texas_logo2.png
     toc: true
     toc-title: "Presentation Outline"
     toc-depth: 1
@@ -54,7 +54,7 @@ knit_hooks$set(output = function(x, options) {
 ```
 
 ```{r load_profs, include=FALSE, cache=FALSE}
-profs <- read.csv("week_04_docs/profs.csv")
+profs <- read.csv("class_04_docs/profs.csv")
 options(scipen = 999)
 ```
 
