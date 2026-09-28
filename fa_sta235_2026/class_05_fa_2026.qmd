@@ -2,11 +2,11 @@
 title: "Data Science for Business Applications"
 author: "Class 05 - Interactions"
 title-slide-attributes:
-    data-background-image: week_05_docs/background_sta235h.png
+    data-background-image: class_05_docs/background_sta235h.png
 format: 
   revealjs:
     chalkboard: true
-    logo: week_05_docs/texas_logo2.png
+    logo: class_05_docs/texas_logo2.png
     toc: true
     toc-title: "Presentation Outline"
     toc-depth: 1
@@ -54,8 +54,8 @@ knit_hooks$set(output = function(x, options) {
 ```
 
 ```{r load_profs, include=FALSE, cache=FALSE}
-profs <- read.csv("week_05_docs/profs.csv")
-cars_luxury <- read.csv("week_05_docs/cars_luxury.csv")
+profs <- read.csv("class_05_docs/profs.csv")
+cars_luxury <- read.csv("class_05_docs/cars_luxury.csv")
 options(scipen = 999)
 ```
 
