@@ -12,6 +12,7 @@ title: "Teaching"
   - [class 03 - Regression Assumptions, and Potential Problems](fa_sta235_2026/class_03_fa_2023.qmd)
   - [class 04 - Categorical Variables](fa_sta235_2026/class_04_fa_2026.qmd)
   - [class 05 - Interactions](fa_sta235_2026/class_05_fa_2026.qmd)
+  - [class 06 - Modeling nonlinear relationships](fa_sta235_2026/class_06_fa_2026.qmd)
 
 ### Summer 2026
 
