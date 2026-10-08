@@ -452,7 +452,7 @@ I(temp^2)    0.0008440041  0.001651114</code></pre>
 <li>For example, <span class="math inline">\(\log_{10} 1000 = 3\)</span>, <span class="math inline">\(\log_{10}100 = 2\)</span>, and <span class="math inline">\(\log_{10}10 = 1\)</span></li>
 </ul>
 
-<img data-src="week_05_docs/exp_log.png" class="quarto-figure quarto-figure-center r-stretch" style="width:50.0%"></section>
+<img data-src="class_06_docs/exp_log.png" class="quarto-figure quarto-figure-center r-stretch" style="width:50.0%"></section>
 <section id="the-log-transformation-2" class="slide level2 smaller">
 <h2>The log transformation</h2>
 <ul>
@@ -468,7 +468,7 @@ I(temp^2)    0.0008440041  0.001651114</code></pre>
 <li><p>This implies <span style="color:darkorange;">exponential growth</span>, so a linear model won’t fit well (and neither will any polynomial)</p></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">ggplot</span>(moores, <span class="fu">aes</span>(<span class="at">x =</span> Date.of.introduction, <span class="at">y =</span> Transistor.count)) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">ggplot</span>(moores, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> transistors)) <span class="sc">+</span></span>
 <span id="cb12-2"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb12-3"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
@@ -477,7 +477,7 @@ I(temp^2)    0.0008440041  0.001651114</code></pre>
 <section id="moores-law-1" class="slide level2 smaller">
 <h2>Moore’s Law</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>lm_moore <span class="ot">=</span> <span class="fu">lm</span>(Transistor.count <span class="sc">~</span> Date.of.introduction, <span class="at">data =</span> moores)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>lm_moore <span class="ot">=</span> <span class="fu">lm</span>(transistors <span class="sc">~</span> year, <span class="at">data =</span> moores)</span>
 <span id="cb13-2"><a></a><span class="fu">autoplot</span>(lm_moore)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
@@ -501,7 +501,7 @@ I(temp^2)    0.0008440041  0.001651114</code></pre>
 <li><span class="math inline">\(\log(\texttt{Transistors})\)</span> does have a <span style="color:darkorange;">linear relationship</span> with year</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">ggplot</span>(moores, <span class="fu">aes</span>(<span class="at">x =</span> Date.of.introduction, <span class="at">y =</span> <span class="fu">log</span>(Transistor.count))) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">ggplot</span>(moores, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> <span class="fu">log</span>(transistors))) <span class="sc">+</span></span>
 <span id="cb14-2"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb14-3"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
@@ -512,27 +512,27 @@ I(temp^2)    0.0008440041  0.001651114</code></pre>
 <p>Let’s run the regression model</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
-<span id="cb15-2"><a></a>lm_moore <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">log</span>(Transistor.count) <span class="sc">~</span> Date.of.introduction, <span class="at">data =</span> moores)</span>
+<span id="cb15-2"><a></a>lm_moore <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">log</span>(transistors) <span class="sc">~</span> year, <span class="at">data =</span> moores)</span>
 <span id="cb15-3"><a></a><span class="fu">summary</span>(lm_moore)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = log(Transistor.count) ~ Date.of.introduction, data = moores)
+lm(formula = log(transistors) ~ year, data = moores)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--5.1299 -0.3338  0.1767  0.5230  2.0626 
+-5.0148 -0.4558  0.0676  0.6039  2.2520 
 
 Coefficients:
-                        Estimate  Std. Error t value            Pr(&gt;|t|)    
-(Intercept)          -681.212056   15.958165  -42.69 &lt;0.0000000000000002 ***
-Date.of.introduction    0.349154    0.007981   43.75 &lt;0.0000000000000002 ***
+               Estimate  Std. Error t value            Pr(&gt;|t|)    
+(Intercept) -660.119283   11.731691  -56.27 &lt;0.0000000000000002 ***
+year           0.338545    0.005854   57.83 &lt;0.0000000000000002 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.054 on 99 degrees of freedom
-Multiple R-squared:  0.9508,    Adjusted R-squared:  0.9503 
-F-statistic:  1914 on 1 and 99 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+Residual standard error: 0.9578 on 136 degrees of freedom
+Multiple R-squared:  0.9609,    Adjusted R-squared:  0.9606 
+F-statistic:  3344 on 1 and 136 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 </div>
 </div>
 </section>
@@ -545,11 +545,11 @@ F-statistic:  1914 on 1 and 99 DF,  p-value: &lt; 0.00000000000000022</code></pr
 <img data-src="class_06_fa_2026_files/figure-revealjs/unnamed-chunk-16-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="interpretation-of-the-model" class="slide level2 smaller">
 <h2>Interpretation of the model</h2>
-<p>Our model is <span class="math display">\[\widehat{\log(\texttt{Transistors})} = −681.21 + 0.35 \cdot \texttt{Year}\]</span></p>
+<p>Our model is <span class="math display">\[\widehat{\log(\texttt{Transistors})} = -660.119283 + 0.338545\times\texttt{Year}\]</span></p>
 <p>Two interpretations of the slope coefficient:</p>
 <ul>
-<li><p>Every year, the <span style="color:darkorange;">predicted log of transistors</span> goes up by 0.35</p></li>
-<li><p>More useful: Every year, the predicted number of transistors goes up by 35%</p></li>
+<li><p>Every year, the <span style="color:darkorange;">predicted log of transistors</span> goes up by 0.34</p></li>
+<li><p>More useful: Every year, the predicted number of transistors goes up by <span class="math inline">\((\exp(0.338545)-1)\times 100 = 40.29049 \%\)</span></p></li>
 <li><p>A <span style="color:darkorange;">constant percentage increase</span> every year is exponential growth!</p></li>
 </ul>
 </section>
@@ -560,16 +560,16 @@ F-statistic:  1914 on 1 and 99 DF,  p-value: &lt; 0.00000000000000022</code></pr
 <li><p>When making predictions, we have to remember that our equation gives us predictions for <span class="math inline">\(\log(\texttt{Transistors})\)</span>, not Transistors!</p></li>
 </ul>
 <p>Example: To make a prediction for the number of transistors in 2022: <span class="math display">\[
-\log(\texttt{Transistors}) = −681.21 + 0.35(2022) = 26.49
+\log(\texttt{Transistors}) = -660.119283 + 0.338545\times (2022) = 24.41871
 \]</span> But our prediction is not 26.49:</p>
-<p><span class="math inline">\(e^{\log(\texttt{Transistors})} = e^{26.49} = 319,492,616,196\)</span></p>
+<p><span class="math inline">\(e^{\log(\texttt{Transistors})} = e^{24.41871} = 40,263,452,155\)</span></p>
 </section>
 <section id="interpretation-of-the-model-2" class="slide level2 smaller">
 <h2>Interpretation of the model</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">ggplot</span>(moores, <span class="fu">aes</span>(<span class="at">x =</span> Date.of.introduction, <span class="at">y =</span> Transistor.count)) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">ggplot</span>(moores, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> transistors)) <span class="sc">+</span></span>
 <span id="cb18-2"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb18-3"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date.of.introduction, <span class="at">y =</span> <span class="fu">exp</span>(<span class="fu">predict</span>(lm_moore))), <span class="at">col =</span> <span class="st">"orange"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb18-3"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> <span class="fu">exp</span>(<span class="fu">predict</span>(lm_moore))), <span class="at">col =</span> <span class="st">"orange"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
 <img data-src="class_06_fa_2026_files/figure-revealjs/unnamed-chunk-17-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
@@ -577,8 +577,8 @@ F-statistic:  1914 on 1 and 99 DF,  p-value: &lt; 0.00000000000000022</code></pr
 <h2>Interpretation of the model</h2>
 <table class="caption-top">
 <colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
+<col style="width: 24%">
+<col style="width: 24%">
 <col style="width: 50%">
 </colgroup>
 <thead>
@@ -597,7 +597,7 @@ F-statistic:  1914 on 1 and 99 DF,  p-value: &lt; 0.00000000000000022</code></pr
 <tr class="even">
 <td style="text-align: left;">Log-linear</td>
 <td style="text-align: left;"><span class="math inline">\(\log(\widehat{Y}) = \widehat{\beta}_0 + \widehat{\beta}_1 X\)</span></td>
-<td style="text-align: left;">1 unit increase in <span class="math inline">\(X\)</span> implies ≈ <span class="math inline">\(100 \cdot \widehat{\beta}_1 \%\)</span> increase in <span class="math inline">\(\widehat{Y}\)</span></td>
+<td style="text-align: left;">1 unit increase in <span class="math inline">\(X\)</span> implies that <span class="math inline">\((\exp( \widehat{\beta}_1)-1)\times 100\%\)</span> increase in <span class="math inline">\(\widehat{Y}\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Linear-log</td>
