@@ -17,7 +17,7 @@ title: "Teaching"
   - [class 08 - Model building for prediction](fa_sta235_2026/class_08_fa_2026.qmd)
   - [class 09 - Building models for explanation](fa_sta235_2026/class_09_fa_2026.qmd)
   - [class 10 - Randomized Control Trials](fa_sta235_2026/class_10_fa_2026.qmd)
-  - [class 11 - Natural Experiments](fa_sta235_2026/class_11_fa_2026.qmd)
+  - [class 11 - Natural Experiments](fa_sta235_2026/week_11_fa_2026.qmd)
 
 ### Summer 2026
 
