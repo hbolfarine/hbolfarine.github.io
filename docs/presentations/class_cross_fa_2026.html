@@ -248,7 +248,7 @@ Henrique Bolfarine
 <li>email: <a href="henrique.bolfarine@austin.utexas.edu">henrique.bolfarine@austin.utexas.edu</a></li>
 <li>website: <a href="https://hbolfarine.github.io">hbolfarine.github.io</a></li>
 <li>Link with <a href="https://hbolfarine.github.io/Henrique_Bolfarine_s_CV.pdf">CV</a></li>
-<li>Fun fact about me: I was born in the US. Ask me how!</li>
+<li>Fun fact about me: I was born in the U.S. while my father was doing his Ph.D.&nbsp;in statistics at Berkeley.</li>
 </ul>
 </div></div>
 </section>
@@ -298,6 +298,13 @@ Henrique Bolfarine
 <h2>Evaluation Grade</h2>
 
 <img data-src="week_10_docs/grades_02_high.jpg" style="width:40.0%" class="r-stretch quarto-figure-center"><p class="caption">Evaluation scores for the 46 sections taught from Spring 2022 to Summer 2026. The line represents the overall average evaluation score.</p></section>
+<section id="section" class="slide level2 center">
+<h2></h2>
+<div style="text-align: center; font-size: 1.5em;">
+<p>“When a measure becomes a target, it ceases to be a good measure.”</p>
+</div>
+<p>Goodhart’s law</p>
+</section>
 <section id="sta-301---introduction-to-data-science" class="slide level2">
 <h2><span style="color: #bf5700;">STA 301</span> - Introduction to Data Science</h2>
 <ul>
@@ -397,7 +404,7 @@ Henrique Bolfarine
 <li>Many strategies were tested: Lockdown, WebR, Posit</li>
 <li>Move from coding to understanding</li>
 <li>Code is still covered in class, though with less emphasis</li>
-<li>Move to paper exams and quizzes</li>
+<li>Transition to paper assignments, exams and quizzes</li>
 <li>Other sections are moving from exams to <span style="color: #bf5700;">oral presentations</span></li>
 <li><span style="color: #bf5700;">LLM tools</span> are being used to create study material
 <ul>
@@ -412,7 +419,7 @@ Henrique Bolfarine
 <li>Coding is important:
 <ul>
 <li>Helps with <span style="color: #bf5700;">logical steps</span> connecting to statistical concepts</li>
-<li><span style="color: #bf5700;">Self-sufficiency</span> : “I didn’t know what programming was before 301. After I took it, I did.”</li>
+<li><span style="color: #bf5700;">Self-sufficiency</span> : <em>“I didn’t know what programming was before 301. After I took it, I did.”</em></li>
 <li>A large number of students still <span style="color: #bf5700;">follow along</span> with live coding</li>
 <li><code>tidyverse</code> creates standards</li>
 </ul></li>
@@ -469,7 +476,7 @@ Henrique Bolfarine
 <li>Logistic regression</li>
 <li>Decision trees</li>
 <li>Random forests</li>
-<li>Tabular foundation models</li>
+<li><span style="color: #bf5700;"><strong>Tabular foundation models</strong></span></li>
 </ul></li>
 </ul>
 </div><div class="column" style="width:1%;">
@@ -483,10 +490,10 @@ Henrique Bolfarine
 <h2>Objectives</h2>
 <ul>
 <li>Select models that <span style="color: #bf5700;">predict well</span> on out-of-sample data</li>
-<li><span style="color: #bf5700;">Model assessment</span> , not model selection</li>
+<li><span style="color: #bf5700;">Model assessment</span>, not model selection</li>
 <li>Compare different models in a fair way</li>
 <li>Start with a single <span style="color: #bf5700;">train/test split</span></li>
-<li>Introduce the <span style="color: #bf5700;"><span class="math inline">\(k\)</span>-fold</span> cross-validation procedure.</li>
+<li>Introduce the <span style="color: #bf5700;"><span class="math inline">\(k\)</span>-fold cross-validation</span> procedure.</li>
 <li>We’ll do this first without the use of <code>tidymodels</code></li>
 </ul>
 </section>
@@ -494,12 +501,12 @@ Henrique Bolfarine
 <h2>Today’s question</h2>
 <ul>
 <li><p>Which model better <span style="color: #bf5700;">predicts</span> male vs.&nbsp;female penguins from a pre-defined set of variables?</p></li>
-<li><p>We are evaluating four models for a binary response.</p>
+<li><p>For this task, we are evaluating four models:</p>
 <ul>
 <li>Logistic Regression</li>
-<li>Decision Trees</li>
-<li>Random Forest</li>
-<li>Tabular Foundation Models</li>
+<li>Decision trees</li>
+<li>Random forests</li>
+<li>Tabular foundation models</li>
 </ul></li>
 </ul>
 <p>Naive approach - <span style="color: #bf5700;">no fine tuning</span></p>
@@ -521,10 +528,10 @@ Henrique Bolfarine
 <thead>
 <tr class="header">
 <th style="text-align: left;">Criterion</th>
-<th style="text-align: center;">Logistic Regression</th>
-<th style="text-align: center;">Decision Tree</th>
-<th style="text-align: center;">Random Forest</th>
-<th style="text-align: center;">Tabular Foundation Models</th>
+<th style="text-align: center;">Logistic regression</th>
+<th style="text-align: center;">Decision trees</th>
+<th style="text-align: center;">Random forests</th>
+<th style="text-align: center;">Tabular foundation models</th>
 </tr>
 </thead>
 <tbody>
@@ -674,7 +681,7 @@ Table&nbsp;1: Source: <a href="https://bgreenwell.github.io/treebook/">Tree-base
 <span id="cb1-7"><a></a><span class="co"># Number of samples</span></span>
 <span id="cb1-8"><a></a>n <span class="ot">=</span> <span class="fu">nrow</span>(penguins)</span>
 <span id="cb1-9"><a></a></span>
-<span id="cb1-10"><a></a><span class="co"># Indexes from 80% of the original data</span></span>
+<span id="cb1-10"><a></a><span class="co"># Indexes created from 80% of the original data</span></span>
 <span id="cb1-11"><a></a>idx <span class="ot">=</span> <span class="fu">sample</span>(n, <span class="fl">0.8</span><span class="sc">*</span>n)</span>
 <span id="cb1-12"><a></a></span>
 <span id="cb1-13"><a></a><span class="co"># Create a 80% training and 20% testing split </span></span>
@@ -793,15 +800,15 @@ Table&nbsp;1: Source: <a href="https://bgreenwell.github.io/treebook/">Tree-base
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Logistic Regression</td>
+<td style="text-align: left;">Logistic regression</td>
 <td style="text-align: center;">0.75</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>Decision Trees</strong></td>
+<td style="text-align: left;"><strong>Decision trees</strong></td>
 <td style="text-align: center;"><strong>0.84</strong></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Random Forest</td>
+<td style="text-align: left;">Random forest</td>
 <td style="text-align: center;">0.75</td>
 </tr>
 <tr class="even">
@@ -817,7 +824,7 @@ Table&nbsp;1: Source: <a href="https://bgreenwell.github.io/treebook/">Tree-base
 <p><br>
 </p>
 <ul>
-<li>We might get unlucky in our train/test split.</li>
+<li>We might get <span style="color: #bf5700;">unlucky</span> in our train/test split.</li>
 <li>How can we solve this problem?</li>
 </ul>
 </section>
@@ -904,7 +911,7 @@ Table&nbsp;1: Source: <a href="https://bgreenwell.github.io/treebook/">Tree-base
 <p>We’ll do the same for the other methods</p>
 </section>
 <section id="cv-for-decision-trees" class="slide level2 smaller">
-<h2>CV for Decision Trees</h2>
+<h2>CV for Decision trees</h2>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>modelA.t <span class="ot">=</span> <span class="fu">rpart</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
 <span id="cb23-2"><a></a>                  <span class="at">data =</span> <span class="fu">rbind</span>(fold2, fold3), <span class="at">method =</span> <span class="st">"class"</span>)</span>
@@ -934,8 +941,8 @@ Table&nbsp;1: Source: <a href="https://bgreenwell.github.io/treebook/">Tree-base
 <p>Accuracy<span class="math inline">\(_{\text{CV}}\)</span> = <span class="math inline">\(\frac{0.84 + 0.87 + 0.86}{3} \approx 0.86\)</span></p>
 </div>
 </section>
-<section id="cv-for-random-forest" class="slide level2 smaller">
-<h2>CV for Random Forest</h2>
+<section id="cv-for-random-forests" class="slide level2 smaller">
+<h2>CV for Random forests</h2>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>modelA.f <span class="ot">=</span> <span class="fu">randomForest</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
 <span id="cb29-2"><a></a>                           <span class="at">data =</span> <span class="fu">rbind</span>(fold2, fold3), <span class="at">ntree =</span> <span class="dv">500</span>)</span>
@@ -1021,19 +1028,19 @@ Table&nbsp;1: Source: <a href="https://bgreenwell.github.io/treebook/">Tree-base
 </thead>
 <tbody>
 <tr class="odd">
-<td>Logistic Regression</td>
+<td>Logistic regression</td>
 <td style="text-align: center;">0.78</td>
 <td style="text-align: center;">0.75</td>
 <td style="text-align: center;">0.79</td>
 </tr>
 <tr class="even">
-<td>Decision Trees</td>
+<td>Decision trees</td>
 <td style="text-align: center;">0.86</td>
 <td style="text-align: center;">0.84</td>
 <td style="text-align: center;">0.86</td>
 </tr>
 <tr class="odd">
-<td><strong>Random Forest</strong></td>
+<td><strong>Random forest</strong></td>
 <td style="text-align: center;">0.99</td>
 <td style="text-align: center;">0.75</td>
 <td style="text-align: center;"><strong>0.95</strong></td>

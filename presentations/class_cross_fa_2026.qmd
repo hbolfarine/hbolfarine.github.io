@@ -81,7 +81,7 @@ knit_hooks$set(output = function(x, options) {
 - email: [henrique.bolfarine\@austin.utexas.edu](henrique.bolfarine@austin.utexas.edu)
 - website: [hbolfarine.github.io](https://hbolfarine.github.io)
 - Link with [CV](https://hbolfarine.github.io/Henrique_Bolfarine_s_CV.pdf)
-- Fun fact about me: I was born in the US. Ask me how!
+- Fun fact about me: I was born in the U.S. while my father was doing his Ph.D. in statistics at Berkeley.
 :::
 ::::::
 
@@ -124,6 +124,13 @@ knit_hooks$set(output = function(x, options) {
 ## Evaluation Grade
 
 ![Evaluation scores for the 46 sections taught from Spring 2022 to Summer 2026. The line represents the overall average evaluation score.](week_10_docs/grades_02_high.jpg){fig-align="center" width="40%"}
+
+##  {.center}
+
+::: {style="text-align: center; font-size: 1.5em;"}
+"When a measure becomes a target, it ceases to be a good measure."
+:::
+Goodhart's law
 
 ## [STA 301]{style="color: #bf5700;"} - Introduction to Data Science
 
@@ -213,7 +220,7 @@ Textbook: [*Data Science in R: A Gentle Introduction*](https://bookdown.org/jgsc
 - Many strategies were tested: Lockdown, WebR, Posit
 - Move from coding to understanding
 - Code is still covered in class, though with less emphasis
-- Move to paper exams and quizzes
+- Transition to paper assignments, exams and quizzes
 - Other sections are moving from exams to [oral presentations]{style="color: #bf5700;"}
 - [LLM tools]{style="color: #bf5700;"} are being used to create study material
   - [Claude Practice Room](https://claude.ai/artifact/2fX9TcNeU6mQY7wpyZhxWZ)
@@ -223,7 +230,7 @@ Textbook: [*Data Science in R: A Gentle Introduction*](https://bookdown.org/jgsc
 - Emphasize that Statistics and Data Science is about [answering questions]{style="color: #bf5700;"} with [data as evidence]{style="color: #bf5700;"}
 - Coding is important:
   - Helps with [logical steps]{style="color: #bf5700;"} connecting to statistical concepts
-  - [Self-sufficiency]{style="color: #bf5700;"} : "I didn't know what programming was before 301. After I took it, I did."
+  - [Self-sufficiency]{style="color: #bf5700;"} : *"I didn't know what programming was before 301. After I took it, I did."*
   - A large number of students still [follow along]{style="color: #bf5700;"} with live coding
   - `tidyverse` creates standards
 
@@ -267,7 +274,7 @@ There are [several issues]{style="color: #bf5700;"} that might come into place
   - Logistic regression
   - Decision trees
   - Random forests
-  - Tabular foundation models
+  - [**Tabular foundation models**]{style="color: #bf5700;"}
 :::
 
 ::: {.column width="1%"}
@@ -282,29 +289,29 @@ There are [several issues]{style="color: #bf5700;"} that might come into place
 ## Objectives
 
 - Select models that [predict well]{style="color: #bf5700;"} on out-of-sample data
-- [Model assessment]{style="color: #bf5700;"} , not model selection
+- [Model assessment]{style="color: #bf5700;"}, not model selection
 - Compare different models in a fair way
 - Start with a single [train/test split]{style="color: #bf5700;"}
-- Introduce the [$k$-fold]{style="color: #bf5700;"} cross-validation procedure.
+- Introduce the [$k$-fold cross-validation]{style="color: #bf5700;"} procedure.
 - We'll do this first without the use of `tidymodels`
 
 ## Today's question
 
 - Which model better [predicts]{style="color: #bf5700;"} male vs. female penguins from a pre-defined set of variables?
 
-- We are evaluating four models for a binary response.
+- For this task, we are evaluating four models:
 
   - Logistic Regression
-  - Decision Trees
-  - Random Forest
-  - Tabular Foundation Models
+  - Decision trees
+  - Random forests
+  - Tabular foundation models
 
 Naive approach - [no fine tuning]{style="color: #bf5700;"}
 
 ## Classification Models {.smaller}
 
 ::: {#tbl-model-comparison tbl-cap-location="bottom" style="font-size: 0.7em;"}
-| Criterion | Logistic Regression | Decision Tree | Random Forest | Tabular Foundation Models |
+| Criterion | Logistic regression | Decision trees | Random forests | Tabular foundation models |
 |:--------------|:-------------:|:-------------:|:-------------:|:-------------:|
 | Captures non-linearity | ❌ | ✅ | ✅ | ✅ |
 | Feature interactions | ❌ | ✅ | ✅ | ✅ |
@@ -410,7 +417,7 @@ set.seed(1234)
 # Number of samples
 n = nrow(penguins)
 
-# Indexes from 80% of the original data
+# Indexes created from 80% of the original data
 idx = sample(n, 0.8*n)
 
 # Create a 80% training and 20% testing split 
@@ -505,9 +512,9 @@ mean(pred_tabicl == as.character(y_test))
 
 | Model               | Accuracy (Single Train/Test Split) |
 |:--------------------|:----------------------------------:|
-| Logistic Regression |                0.75                |
-| **Decision Trees**  |              **0.84**              |
-| Random Forest       |                0.75                |
+| Logistic regression |                0.75                |
+| **Decision trees**  |              **0.84**              |
+| Random forest       |                0.75                |
 | TabICL              |                0.78                |
 
 Can we conclude that the Decision Trees is the [best model]{style="color: #bf5700;"} in making predictions?
@@ -516,7 +523,7 @@ Can we conclude that the Decision Trees is the [best model]{style="color: #bf570
 
 \
 
-- We might get unlucky in our train/test split.
+- We might get [unlucky]{style="color: #bf5700;"} in our train/test split.
 - How can we solve this problem?
 
 ## $k$-fold Cross-Validation
@@ -595,7 +602,7 @@ Accuracy$_{\text{CV}}$ = $\frac{0.74 + 0.79 + 0.83}{3} \approx 0.79$
 
 We'll do the same for the other methods
 
-## CV for Decision Trees {.smaller}
+## CV for Decision trees {.smaller}
 
 ```{r, echo = TRUE}
 modelA.t = rpart(as.factor(sex) ~ bill_length_mm + bill_depth_mm,
@@ -618,7 +625,7 @@ mean(as.character(pred_model_C.t) == as.character(fold3$sex))
 Accuracy$_{\text{CV}}$ = $\frac{0.84 + 0.87 + 0.86}{3} \approx 0.86$
 :::
 
-## CV for Random Forest {.smaller}
+## CV for Random forests {.smaller}
 
 ```{r, echo = TRUE}
 modelA.f = randomForest(as.factor(sex) ~ bill_length_mm + bill_depth_mm,
@@ -676,9 +683,9 @@ Accuracy$_{\text{CV}}$ = $\frac{0.77 + 0.87 + 0.86}{3} \approx 0.83$
 
 | Model | Accuracy (all data) | Accuracy (Single Train/Test Split) | Accuracy (3 Fold CV) |
 |------------------|:----------------:|:----------------:|:-----------------:|
-| Logistic Regression | 0.78 | 0.75 | 0.79 |
-| Decision Trees | 0.86 | 0.84 | 0.86 |
-| **Random Forest** | 0.99 | 0.75 | **0.95** |
+| Logistic regression | 0.78 | 0.75 | 0.79 |
+| Decision trees | 0.86 | 0.84 | 0.86 |
+| **Random forest** | 0.99 | 0.75 | **0.95** |
 | TabICL | \- | 0.78 | 0.83 |
 
 - A single split doesn't show the complete picture

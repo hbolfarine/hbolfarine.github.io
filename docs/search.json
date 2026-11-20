@@ -10336,7 +10336,7 @@
     "href": "presentations/class_cross_fa_2026.html#henrique-bolfarine",
     "title": "Regression to Foundation Models",
     "section": "Henrique Bolfarine",
-    "text": "Henrique Bolfarine\n\n\n\n\n\n\n\nDoctor in Statistics/ University of São Paulo\nemail: henrique.bolfarine@austin.utexas.edu\nwebsite: hbolfarine.github.io\nLink with CV\nFun fact about me: I was born in the US. Ask me how!"
+    "text": "Henrique Bolfarine\n\n\n\n\n\n\n\nDoctor in Statistics/ University of São Paulo\nemail: henrique.bolfarine@austin.utexas.edu\nwebsite: hbolfarine.github.io\nLink with CV\nFun fact about me: I was born in the U.S. while my father was doing his Ph.D. in statistics at Berkeley."
   },
   {
     "objectID": "presentations/class_cross_fa_2026.html#about-me-1",
@@ -10413,7 +10413,7 @@
     "href": "presentations/class_cross_fa_2026.html#observations-on-sta-235",
     "title": "Regression to Foundation Models",
     "section": "Observations on STA 235",
-    "text": "Observations on STA 235\n\nMany strategies were tested: Lockdown, WebR, Posit\nMove from coding to understanding\nCode is still covered in class, though with less emphasis\nMove to paper exams and quizzes\nOther sections are moving from exams to oral presentations\nLLM tools are being used to create study material\n\nClaude Practice Room"
+    "text": "Observations on STA 235\n\nMany strategies were tested: Lockdown, WebR, Posit\nMove from coding to understanding\nCode is still covered in class, though with less emphasis\nTransition to paper assignments, exams and quizzes\nOther sections are moving from exams to oral presentations\nLLM tools are being used to create study material\n\nClaude Practice Room"
   },
   {
     "objectID": "presentations/class_cross_fa_2026.html#what-ive-learned-so-far",
@@ -10455,21 +10455,21 @@
     "href": "presentations/class_cross_fa_2026.html#objectives",
     "title": "Regression to Foundation Models",
     "section": "Objectives",
-    "text": "Objectives\n\nSelect models that predict well on out-of-sample data\nModel assessment , not model selection\nCompare different models in a fair way\nStart with a single train/test split\nIntroduce the \\(k\\)-fold cross-validation procedure.\nWe’ll do this first without the use of tidymodels"
+    "text": "Objectives\n\nSelect models that predict well on out-of-sample data\nModel assessment, not model selection\nCompare different models in a fair way\nStart with a single train/test split\nIntroduce the \\(k\\)-fold cross-validation procedure.\nWe’ll do this first without the use of tidymodels"
   },
   {
     "objectID": "presentations/class_cross_fa_2026.html#todays-question",
     "href": "presentations/class_cross_fa_2026.html#todays-question",
     "title": "Regression to Foundation Models",
     "section": "Today’s question",
-    "text": "Today’s question\n\nWhich model better predicts male vs. female penguins from a pre-defined set of variables?\nWe are evaluating four models for a binary response.\n\nLogistic Regression\nDecision Trees\nRandom Forest\nTabular Foundation Models\n\n\nNaive approach - no fine tuning"
+    "text": "Today’s question\n\nWhich model better predicts male vs. female penguins from a pre-defined set of variables?\nFor this task, we are evaluating four models:\n\nLogistic Regression\nDecision trees\nRandom forests\nTabular foundation models\n\n\nNaive approach - no fine tuning"
   },
   {
     "objectID": "presentations/class_cross_fa_2026.html#classification-models",
     "href": "presentations/class_cross_fa_2026.html#classification-models",
     "title": "Regression to Foundation Models",
     "section": "Classification Models",
-    "text": "Classification Models\n\n\n\n\nComparison of the different models (✅ Good, 🟡 So-so, ❌ Bad)\n\n\n\n\n\n\n\n\n\nCriterion\nLogistic Regression\nDecision Tree\nRandom Forest\nTabular Foundation Models\n\n\n\n\nCaptures non-linearity\n❌\n✅\n✅\n✅\n\n\nFeature interactions\n❌\n✅\n✅\n✅\n\n\nInterpretability\n✅\n🟡\n🟡\n❌\n\n\nPredictive accuracy\n🟡\n🟡\n✅\n✅\n\n\nScales to large datasets\n✅\n✅\n✅\n❌\n\n\nTraining speed\n✅\n✅\n🟡\n✅\n\n\nInference speed\n✅\n✅\n✅\n🟡\n\n\nLittle hyperparameter tuning needed\n✅\n🟡\n🟡\n✅\n\n\nLittle preprocessing needed\n❌\n✅\n✅\n✅\n\n\nLow compute requirements\n✅\n✅\n🟡\n❌\n\n\n\n\n\nTable 1: Source: Tree-based methods and Tabular Foundation Models: First Look."
+    "text": "Classification Models\n\n\n\n\nComparison of the different models (✅ Good, 🟡 So-so, ❌ Bad)\n\n\n\n\n\n\n\n\n\nCriterion\nLogistic regression\nDecision trees\nRandom forests\nTabular foundation models\n\n\n\n\nCaptures non-linearity\n❌\n✅\n✅\n✅\n\n\nFeature interactions\n❌\n✅\n✅\n✅\n\n\nInterpretability\n✅\n🟡\n🟡\n❌\n\n\nPredictive accuracy\n🟡\n🟡\n✅\n✅\n\n\nScales to large datasets\n✅\n✅\n✅\n❌\n\n\nTraining speed\n✅\n✅\n🟡\n✅\n\n\nInference speed\n✅\n✅\n✅\n🟡\n\n\nLittle hyperparameter tuning needed\n✅\n🟡\n🟡\n✅\n\n\nLittle preprocessing needed\n❌\n✅\n✅\n✅\n\n\nLow compute requirements\n✅\n✅\n🟡\n❌\n\n\n\n\n\nTable 1: Source: Tree-based methods and Tabular Foundation Models: First Look."
   },
   {
     "objectID": "presentations/class_cross_fa_2026.html#details-on-the-analysis",
@@ -10504,7 +10504,7 @@
     "href": "presentations/class_cross_fa_2026.html#creating-a-traintest-split",
     "title": "Regression to Foundation Models",
     "section": "Creating a train/test split",
-    "text": "Creating a train/test split\nLet’s do the same thing for the penguins data, but by randomly splitting the data into a training and test set\n\nlibrary(tidyverse)\nlibrary(rpart) # Decsion Trees\nlibrary(randomForest) # Random Forest\nlibrary(reticulate)\nset.seed(1234)\n\n# Number of samples\nn = nrow(penguins)\n\n# Indexes from 80% of the original data\nidx = sample(n, 0.8*n)\n\n# Create a 80% training and 20% testing split \nX_train = penguins[idx, ]\nX_test = penguins[-idx, ]\n\n# Response variable from the original split\ny_train &lt;- X_train$sex\ny_test  &lt;- X_test$sex\n\n\nThe set.seed(1234) command ensures reproducible “random” splits."
+    "text": "Creating a train/test split\nLet’s do the same thing for the penguins data, but by randomly splitting the data into a training and test set\n\nlibrary(tidyverse)\nlibrary(rpart) # Decsion Trees\nlibrary(randomForest) # Random Forest\nlibrary(reticulate)\nset.seed(1234)\n\n# Number of samples\nn = nrow(penguins)\n\n# Indexes created from 80% of the original data\nidx = sample(n, 0.8*n)\n\n# Create a 80% training and 20% testing split \nX_train = penguins[idx, ]\nX_test = penguins[-idx, ]\n\n# Response variable from the original split\ny_train &lt;- X_train$sex\ny_test  &lt;- X_test$sex\n\n\nThe set.seed(1234) command ensures reproducible “random” splits."
   },
   {
     "objectID": "presentations/class_cross_fa_2026.html#train-the-models",
@@ -10532,7 +10532,7 @@
     "href": "presentations/class_cross_fa_2026.html#measuring-performance-1",
     "title": "Regression to Foundation Models",
     "section": "Measuring performance",
-    "text": "Measuring performance\n\n\n\nModel\nAccuracy (Single Train/Test Split)\n\n\n\n\nLogistic Regression\n0.75\n\n\nDecision Trees\n0.84\n\n\nRandom Forest\n0.75\n\n\nTabICL\n0.78\n\n\n\nCan we conclude that the Decision Trees is the best model in making predictions?"
+    "text": "Measuring performance\n\n\n\nModel\nAccuracy (Single Train/Test Split)\n\n\n\n\nLogistic regression\n0.75\n\n\nDecision trees\n0.84\n\n\nRandom forest\n0.75\n\n\nTabICL\n0.78\n\n\n\nCan we conclude that the Decision Trees is the best model in making predictions?"
   },
   {
     "objectID": "presentations/class_cross_fa_2026.html#what-is-the-problem-with-this-approach",
@@ -10573,8 +10573,8 @@
     "objectID": "presentations/class_cross_fa_2026.html#cv-for-decision-trees",
     "href": "presentations/class_cross_fa_2026.html#cv-for-decision-trees",
     "title": "Regression to Foundation Models",
-    "section": "CV for Decision Trees",
-    "text": "CV for Decision Trees\n\nmodelA.t = rpart(as.factor(sex) ~ bill_length_mm + bill_depth_mm,\n                  data = rbind(fold2, fold3), method = \"class\")\nmodelB.t = rpart(as.factor(sex) ~ bill_length_mm + bill_depth_mm,\n                  data = rbind(fold1, fold3), method = \"class\")\nmodelC.t = rpart(as.factor(sex) ~ bill_length_mm + bill_depth_mm,\n                  data = rbind(fold1, fold2), method = \"class\")\n\npred_model_A.t &lt;- predict(fit_tree, newdata = fold1, type = \"class\")\npred_model_B.t &lt;- predict(fit_tree, newdata = fold2, type = \"class\")\npred_model_C.t &lt;- predict(fit_tree, newdata = fold3, type = \"class\")\n\nmean(as.character(pred_model_A.t) == as.character(fold1$sex))\n\n[1] 0.8378378\n\nmean(as.character(pred_model_B.t) == as.character(fold2$sex))\n\n[1] 0.8738739\n\nmean(as.character(pred_model_C.t) == as.character(fold3$sex))\n\n[1] 0.8648649\n\n\n\nAccuracy\\(_{\\text{CV}}\\) = \\(\\frac{0.84 + 0.87 + 0.86}{3} \\approx 0.86\\)"
+    "section": "CV for Decision trees",
+    "text": "CV for Decision trees\n\nmodelA.t = rpart(as.factor(sex) ~ bill_length_mm + bill_depth_mm,\n                  data = rbind(fold2, fold3), method = \"class\")\nmodelB.t = rpart(as.factor(sex) ~ bill_length_mm + bill_depth_mm,\n                  data = rbind(fold1, fold3), method = \"class\")\nmodelC.t = rpart(as.factor(sex) ~ bill_length_mm + bill_depth_mm,\n                  data = rbind(fold1, fold2), method = \"class\")\n\npred_model_A.t &lt;- predict(fit_tree, newdata = fold1, type = \"class\")\npred_model_B.t &lt;- predict(fit_tree, newdata = fold2, type = \"class\")\npred_model_C.t &lt;- predict(fit_tree, newdata = fold3, type = \"class\")\n\nmean(as.character(pred_model_A.t) == as.character(fold1$sex))\n\n[1] 0.8378378\n\nmean(as.character(pred_model_B.t) == as.character(fold2$sex))\n\n[1] 0.8738739\n\nmean(as.character(pred_model_C.t) == as.character(fold3$sex))\n\n[1] 0.8648649\n\n\n\nAccuracy\\(_{\\text{CV}}\\) = \\(\\frac{0.84 + 0.87 + 0.86}{3} \\approx 0.86\\)"
   },
   {
     "objectID": "presentations/class_cross_fa_2026.html#cv-for-random-forest",
@@ -10595,7 +10595,7 @@
     "href": "presentations/class_cross_fa_2026.html#re-doing-our-model-comparisons",
     "title": "Regression to Foundation Models",
     "section": "Re-doing our model comparisons",
-    "text": "Re-doing our model comparisons\n\n\n\n\n\n\n\n\n\nModel\nAccuracy (all data)\nAccuracy (Single Train/Test Split)\nAccuracy (3 Fold CV)\n\n\n\n\nLogistic Regression\n0.78\n0.75\n0.79\n\n\nDecision Trees\n0.86\n0.84\n0.86\n\n\nRandom Forest\n0.99\n0.75\n0.95\n\n\nTabICL\n-\n0.78\n0.83\n\n\n\n\nA single split doesn’t show the complete picture\nLogistic regression can be improved by adding non-linear features\nDecision trees work surprisingly well on this data\nRandom forest is based on a resampling procedure - (in-sample/CV difference)\nBy design, TabICL can’t be evaluated on in-sample data"
+    "text": "Re-doing our model comparisons\n\n\n\n\n\n\n\n\n\nModel\nAccuracy (all data)\nAccuracy (Single Train/Test Split)\nAccuracy (3 Fold CV)\n\n\n\n\nLogistic regression\n0.78\n0.75\n0.79\n\n\nDecision trees\n0.86\n0.84\n0.86\n\n\nRandom forest\n0.99\n0.75\n0.95\n\n\nTabICL\n-\n0.78\n0.83\n\n\n\n\nA single split doesn’t show the complete picture\nLogistic regression can be improved by adding non-linear features\nDecision trees work surprisingly well on this data\nRandom forest is based on a resampling procedure - (in-sample/CV difference)\nBy design, TabICL can’t be evaluated on in-sample data"
   },
   {
     "objectID": "presentations/class_cross_fa_2026.html#take-away",
@@ -10610,5 +10610,19 @@
     "title": "Regression to Foundation Models",
     "section": "Isn’t there a faster way?",
     "text": "Isn’t there a faster way?\nIn practice, you don’t have to do this all manually! The tidymodels package makes it easy to do cross-validation even for larger \\(k\\).\n\nlibrary(tidymodels)\n\n# Randomly split the data into 5 folds\nfolds &lt;- vfold_cv(penguins, v=5)\n\n# Build a tidymodels \"workflow\" for a linear model\n# with the formula dailyspend ~ temp, using RMSE as the target metric\nworkflow() |&gt; \n  add_model(logistic_reg()) |&gt; \n  add_formula(as.factor(sex) ~ bill_length_mm + bill_depth_mm) %&gt;%\n  fit_resamples(folds, metrics = metric_set(accuracy)) %&gt;%\n  collect_metrics()\n\n# A tibble: 1 × 6\n  .metric  .estimator  mean     n std_err .config        \n  &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;          \n1 accuracy binary     0.775     5  0.0163 pre0_mod0_post0\n\n\nAccuracy of the logistic regression model is 0.77 using \\(k = 5\\) folds."
+  },
+  {
+    "objectID": "presentations/class_cross_fa_2026.html#section",
+    "href": "presentations/class_cross_fa_2026.html#section",
+    "title": "Regression to Foundation Models",
+    "section": "",
+    "text": "“When a measure becomes a target, it ceases to be a good measure.”\n\nGoodhart’s law"
+  },
+  {
+    "objectID": "presentations/class_cross_fa_2026.html#cv-for-random-forests",
+    "href": "presentations/class_cross_fa_2026.html#cv-for-random-forests",
+    "title": "Regression to Foundation Models",
+    "section": "CV for Random forests",
+    "text": "CV for Random forests\n\nmodelA.f = randomForest(as.factor(sex) ~ bill_length_mm + bill_depth_mm,\n                           data = rbind(fold2, fold3), ntree = 500)\nmodelB.f = randomForest(as.factor(sex) ~ bill_length_mm + bill_depth_mm,\n                           data = rbind(fold1, fold3), ntree = 500)\nmodelC.f = randomForest(as.factor(sex) ~ bill_length_mm + bill_depth_mm,\n                           data = rbind(fold1, fold2), ntree = 500)\n\npred_model_A.f &lt;- predict(fit_forest, newdata = fold1)\npred_model_B.f &lt;- predict(fit_forest, newdata = fold2)\npred_model_C.f &lt;- predict(fit_forest, newdata = fold3)\n\nmean(as.character(pred_model_A.f) == as.character(fold1$sex))\n\n[1] 0.954955\n\nmean(as.character(pred_model_B.f) == as.character(fold2$sex))\n\n[1] 0.963964\n\nmean(as.character(pred_model_C.f) == as.character(fold3$sex))\n\n[1] 0.9189189\n\n\n\nAccuracy\\(_{\\text{CV}}\\) = \\(\\frac{0.96 + 0.96 + 0.92}{3} \\approx 0.95\\)"
   }
 ]
