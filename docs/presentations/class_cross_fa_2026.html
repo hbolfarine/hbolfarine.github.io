@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Henrique Bolfarine">
+
+<title>Regression to Foundation Models – Henrique Bolfarine</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style type="text/css">
+ul li ul li {
+  font-size: 0.8em;
+}
+.reveal .cell-output {
+  font-size: 0.55em;
+}
+.reveal .cell-output pre {
+  font-size: inherit;
+}
+</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Henrique Bolfarine</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../teaching.html"> 
+<span class="menu-text">Teaching</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="class_cross_fa_2026.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Regression to Foundation Models</h1>
+<p class="subtitle lead">Comparing Classifiers with Cross-Validation</p>
+</div>
+
+
+
+<div class="quarto-title-meta column-page-left">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Henrique Bolfarine </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="about-me" class="level1">
+<h1>About me</h1>
+<section id="henrique-bolfarine" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="henrique-bolfarine">Henrique Bolfarine</h2>
+<div class="columns">
+<div class="column" style="width:35%;">
+<p><img src="week_10_docs/small_picture.jpg" class="img-fluid"></p>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:60%;">
+<ul>
+<li>Doctor in Statistics/ University of São Paulo</li>
+<li>email: <a href="henrique.bolfarine@austin.utexas.edu">henrique.bolfarine@austin.utexas.edu</a></li>
+<li>website: <a href="https://hbolfarine.github.io">hbolfarine.github.io</a></li>
+<li>Link with <a href="https://hbolfarine.github.io/Henrique_Bolfarine_s_CV.pdf">CV</a></li>
+<li>Fun fact about me: I was born in the US. Ask me how!</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="about-me-1" class="level2">
+<h2 class="anchored" data-anchor-id="about-me-1">About me</h2>
+<p><span style="color: #bf5700;"><strong>Teaching:</strong></span> I served as a Lecturer in Statistics at the McCombs School of Business at UT Austin from spring 2022 to fall 2026. Previously, I taught at the University of São Paulo, where I completed my doctorate under Prof.&nbsp;Hedibert F. Lopes (Duke alumni and former University of Chicago professor).<br>
+<br>
+</p>
+<p><span style="color: #bf5700;"><strong>Post-Doc:</strong></span> I served as a Visiting Researcher at the McCombs School of Business at UT Austin from the spring to the fall of 2021 under Prof.&nbsp;Carlos M. Carvalho.</p>
+</section>
+<section id="about-me-2" class="level2">
+<h2 class="anchored" data-anchor-id="about-me-2">About me</h2>
+<p><span style="color: #bf5700;"><strong>Research:</strong></span> I still try to keep up with the most recent statistical methodology. Recently, I have focused on model interpretability in complex statistical methods.<br>
+</p>
+<div style="font-size: 0.7em;">
+<ul>
+<li><p>“Lower-dimensional posterior density and cluster summaries for overparameterized Bayesian models”, (H. Bolfarine, H.F. Lopes, &amp; C.M. Carvalho). <span style="color: #bf5700;"><em>Statistics and Computing</em></span>, 2026</p></li>
+<li><p>“Decoupling Shrinkage and Selection in Gaussian Linear Factor Analysis”, (H. Bolfarine, C. M. Carvalho, H. F. Lopes &amp; J. S. Murray), <span style="color: #bf5700;"><em>Bayesian Analysis</em></span>, 2024</p></li>
+<li><p>2021 International Statistical Institute Mahalanobis Award: A Tribute to Heleno Bolfarine.” (F. Ruggeri, H.Bolfarine, J. L. Bazán, R. B. Arellano-Valle, V. H. L. Davila, M. de Castro). <span style="color: #bf5700;"><em>International Statistical Review</em></span>, 2021</p></li>
+</ul>
+</div>
+</section>
+<section id="about-me-3" class="level2">
+<h2 class="anchored" data-anchor-id="about-me-3">About me</h2>
+<p><span style="color: #bf5700;"><strong>Personally:</strong></span> I have a wife and a 10-year-old daughter. The next step is adopting a puppy, though this part is still under negotiation.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="week_10_docs/fourth_fa_2026.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:55.0%"></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="teaching" class="level1">
+<h1>Teaching</h1>
+<section id="mccombs-school-of-business" class="level2">
+<h2 class="anchored" data-anchor-id="mccombs-school-of-business">McCombs School of Business</h2>
+<ul>
+<li><span style="color: #bf5700;"><strong>STA 301</strong></span> - Introduction to Data Science</li>
+<li><span style="color: #bf5700;"><strong>STA 235</strong></span> - Data Science for Business Applications
+<ul>
+<li>Core classes - Quantitative Reasoning</li>
+<li>Including this semester, so far I have taught 51 sections</li>
+<li>Each section has around 60–65 students</li>
+<li>This semester, I have 300 students enrolled across my five sections alone</li>
+</ul></li>
+</ul>
+</section>
+<section id="evaluation-grade" class="level2">
+<h2 class="anchored" data-anchor-id="evaluation-grade">Evaluation Grade</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="week_10_docs/grades_02_high.jpg" class="img-fluid figure-img" style="width:40.0%"></p>
+<figcaption>Evaluation scores for the 46 sections taught from Spring 2022 to Summer 2026. The line represents the overall average evaluation score.</figcaption>
+</figure>
+</div>
+</section>
+<section id="sta-301---introduction-to-data-science" class="level2">
+<h2 class="anchored" data-anchor-id="sta-301---introduction-to-data-science"><span style="color: #bf5700;">STA 301</span> - Introduction to Data Science</h2>
+<ul>
+<li>Standardized course across all sections</li>
+<li>Intro to R/RStudio</li>
+<li>Data wrangling/data exploration (<code>tidyverse</code>)</li>
+<li>Introduction to inference using bootstrapping</li>
+<li>Statistical modeling: linear regression</li>
+</ul>
+<!-- Textbook: *Data Science in R: A Gentle Introduction* -->
+<p>Textbook: <a href="https://bookdown.org/jgscott/DSGI/"><em>Data Science in R: A Gentle Introduction</em></a></p>
+</section>
+<section id="sta-301-list-of-topics" class="level2">
+<h2 class="anchored" data-anchor-id="sta-301-list-of-topics"><span style="color: #bf5700;">STA 301</span> list of topics</h2>
+<div style="font-size: 1em;">
+<div class="columns">
+<div class="column" style="width:48%;">
+<ul>
+<li>Understanding your Data</li>
+<li>Summaries and Plots</li>
+<li>Counting and probability</li>
+<li>Data Wrangling</li>
+<li>Linear models</li>
+<li>The bootstrap</li>
+</ul>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:48%;">
+<ul>
+<li>P-values</li>
+<li>Large-sample inference</li>
+<li>Experiments and observational studies</li>
+<li>Linear regression</li>
+<li>Predictive models</li>
+<li>Probability models</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="observations-on-sta-301" class="level2">
+<h2 class="anchored" data-anchor-id="observations-on-sta-301">Observations on <span style="color: #bf5700;">STA 301</span></h2>
+<ul>
+<li>Really well-defined material
+<ul>
+<li>Work with the material; don’t fight it</li>
+<li><span style="color: #bf5700;">Live coding</span> was a really important step in the process</li>
+</ul></li>
+<li>Emergence of LLMs in spring 2023
+<ul>
+<li>First noticed a student <span style="color: #bf5700;">using an LLM</span> (ChatGPT) while proctoring an exam</li>
+<li>Open notes until then, with exams using Canvas and RStudio</li>
+<li>Recently, exams were <span style="color: #bf5700;">moved to paper</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="sta-235---data-science-for-business-applications" class="level2">
+<h2 class="anchored" data-anchor-id="sta-235---data-science-for-business-applications"><span style="color: #bf5700;">STA 235</span> - Data Science for Business Applications</h2>
+<ul>
+<li>Upper level statistics course</li>
+<li>Focused basically in Regression Models and Applications</li>
+</ul>
+<div style="font-size: 0.7em;">
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Simple &amp; Multiple Regression</li>
+<li>Categorical variables &amp; interactions</li>
+<li>Diagnostics</li>
+<li>Non-linear transformations</li>
+<li>Time Series</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Logistic Regression</li>
+<li>Decision Trees/ Random Forest</li>
+<li>Model Selection</li>
+<li>Randomized Control Trial</li>
+<li>Natural Esxperiments</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="sta-235---data-science-for-business-applications-1" class="level2">
+<h2 class="anchored" data-anchor-id="sta-235---data-science-for-business-applications-1"><span style="color: #bf5700;">STA 235</span> - Data Science for Business Applications</h2>
+<ul>
+<li>First class that I taught at UT (spring 2022)</li>
+<li>One of the first <span style="color: #bf5700;">in-person</span>, post-pandemic classes at McCombs</li>
+<li>Not necessarily a standardized course</li>
+<li>Participated actively in curriculum development</li>
+<li>Almost like a lab for new ideas</li>
+<li>I also teach the <span style="color: #bf5700;">online section</span> for this class</li>
+</ul>
+</section>
+<section id="observations-on-sta-235" class="level2">
+<h2 class="anchored" data-anchor-id="observations-on-sta-235">Observations on <span style="color: #bf5700;">STA 235</span></h2>
+<ul>
+<li>Many strategies were tested: Lockdown, WebR, Posit</li>
+<li>Move from coding to understanding</li>
+<li>Code is still covered in class, though with less emphasis</li>
+<li>Move to paper exams and quizzes</li>
+<li>Other sections are moving from exams to <span style="color: #bf5700;">oral presentations</span></li>
+<li><span style="color: #bf5700;">LLM tools</span> are being used to create study material
+<ul>
+<li><a href="https://claude.ai/artifact/2fX9TcNeU6mQY7wpyZhxWZ">Claude Practice Room</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="what-ive-learned-so-far" class="level2">
+<h2 class="anchored" data-anchor-id="what-ive-learned-so-far">What I’ve learned so far</h2>
+<ul>
+<li>Emphasize that Statistics and Data Science is about <span style="color: #bf5700;">answering questions</span> with <span style="color: #bf5700;">data as evidence</span></li>
+<li>Coding is important:
+<ul>
+<li>Helps with <span style="color: #bf5700;">logical steps</span> connecting to statistical concepts</li>
+<li><span style="color: #bf5700;">Self-sufficiency</span> : “I didn’t know what programming was before 301. After I took it, I did.”</li>
+<li>A large number of students still <span style="color: #bf5700;">follow along</span> with live coding</li>
+<li><code>tidyverse</code> creates standards</li>
+</ul></li>
+</ul>
+</section>
+<section id="should-we-pivot-to-the-use-of-llms" class="level2">
+<h2 class="anchored" data-anchor-id="should-we-pivot-to-the-use-of-llms">Should we pivot to the use of LLMs?</h2>
+<p>There are <span style="color: #bf5700;">several issues</span> that might come into place</p>
+<ul>
+<li>No clear guidelines</li>
+<li>Constantly <span style="color: #bf5700;">changing environment</span>
+<ul>
+<li>Prompt engineering / vibe coding / agents / RAGs / MCPs / skills</li>
+</ul></li>
+<li>Uneven <span style="color: #bf5700;">code quality</span> across students</li>
+<li>Data security and cost</li>
+</ul>
+</section>
+<section id="llm-adoption" class="level2">
+<h2 class="anchored" data-anchor-id="llm-adoption">LLM adoption</h2>
+<ul>
+<li>Coding tools are interesting (Claude code)</li>
+<li><span style="color: #bf5700;">Self-sufficiency</span> is still necessary</li>
+<li>Focus on interpreting models and results</li>
+</ul>
+</section>
+</section>
+<section id="lecture" class="level1">
+<h1>Lecture</h1>
+<section id="goal-of-this-lecture" class="level2">
+<h2 class="anchored" data-anchor-id="goal-of-this-lecture">Goal of this lecture</h2>
+<ul>
+<li><span style="color: #bf5700;">Compare classification models</span> using cross-validation</li>
+<li>Present complex topics in an easily understandable way</li>
+<li>Connect concepts with my research interests</li>
+<li>Apply a <span style="color: #bf5700;">hands-on</span> approach</li>
+</ul>
+</section>
+<section id="elements-of-data-science" class="level2">
+<h2 class="anchored" data-anchor-id="elements-of-data-science">Elements of Data Science</h2>
+<p><br>
+</p>
+<div style="font-size: 0.9em;">
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span style="color: #bf5700;"><strong>Based on SDS 322E</strong></span></p>
+<ul>
+<li>Data wrangling</li>
+<li>Simulation-based inference</li>
+<li>Classification
+<ul>
+<li>Logistic regression</li>
+<li>Decision trees</li>
+<li>Random forests</li>
+<li>Tabular foundation models</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:1%;">
+
+</div><div class="column" style="width:49%;">
+<p><img src="week_10_docs/venn_data_science.png" class="img-fluid" style="width:110.0%"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<ul>
+<li>Select models that <span style="color: #bf5700;">predict well</span> on out-of-sample data</li>
+<li><span style="color: #bf5700;">Model assessment</span> , not model selection</li>
+<li>Compare different models in a fair way</li>
+<li>Start with a single <span style="color: #bf5700;">train/test split</span></li>
+<li>Introduce the <span style="color: #bf5700;"><span class="math inline">\(k\)</span>-fold</span> cross-validation procedure.</li>
+<li>We’ll do this first without the use of <code>tidymodels</code></li>
+</ul>
+</section>
+<section id="todays-question" class="level2">
+<h2 class="anchored" data-anchor-id="todays-question">Today’s question</h2>
+<ul>
+<li><p>Which model better <span style="color: #bf5700;">predicts</span> male vs.&nbsp;female penguins from a pre-defined set of variables?</p></li>
+<li><p>We are evaluating four models for a binary response.</p>
+<ul>
+<li>Logistic Regression</li>
+<li>Decision Trees</li>
+<li>Random Forest</li>
+<li>Tabular Foundation Models</li>
+</ul></li>
+</ul>
+<p>Naive approach - <span style="color: #bf5700;">no fine tuning</span></p>
+</section>
+<section id="classification-models" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="classification-models">Classification Models</h2>
+<div id="tbl-model-comparison" class="quarto-float quarto-figure quarto-figure-center anchored" data-tbl-cap-location="bottom" style="font-size: 0.7em;">
+<figure class="quarto-float quarto-float-tbl figure">
+<div aria-describedby="tbl-model-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<caption>Comparison of the different models (✅ Good, 🟡 So-so, ❌ Bad)</caption>
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Criterion</th>
+<th style="text-align: center;">Logistic Regression</th>
+<th style="text-align: center;">Decision Tree</th>
+<th style="text-align: center;">Random Forest</th>
+<th style="text-align: center;">Tabular Foundation Models</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Captures non-linearity</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Feature interactions</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Interpretability</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">🟡</td>
+<td style="text-align: center;">🟡</td>
+<td style="text-align: center;">❌</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Predictive accuracy</td>
+<td style="text-align: center;">🟡</td>
+<td style="text-align: center;">🟡</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Scales to large datasets</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">❌</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Training speed</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">🟡</td>
+<td style="text-align: center;">✅</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Inference speed</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">🟡</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Little hyperparameter tuning needed</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">🟡</td>
+<td style="text-align: center;">🟡</td>
+<td style="text-align: center;">✅</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Little preprocessing needed</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Low compute requirements</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">🟡</td>
+<td style="text-align: center;">❌</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-model-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Source: <a href="https://bgreenwell.github.io/treebook/">Tree-based methods</a> and <a href="https://tabularfoundationmodels.com/first-look">Tabular Foundation Models: First Look</a>.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="details-on-the-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="details-on-the-analysis">Details on the Analysis</h2>
+<ul>
+<li>To keep the <span style="color: #bf5700;">analysis fair</span>:
+<ul>
+<li>Use the same train/test split</li>
+<li>Use the same cross-validation folds for all models</li>
+</ul></li>
+<li>Compare the models based on their cross-validation results and <span style="color: #bf5700;">choose one</span>.</li>
+</ul>
+</section>
+<section id="palmer-penguins" class="level2">
+<h2 class="anchored" data-anchor-id="palmer-penguins">Palmer Penguins</h2>
+<div style="font-size: 0.75em;">
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li><p>The <code>penguins</code> data set contains <strong>333 penguins</strong> of different species (Palmer antarctic station). <!-- **Variables** --></p></li>
+<li><p><code>bill_length_mm</code>: culmen (upper ridge of the beak) length, in mm</p></li>
+<li><p><code>bill_depth_mm</code>: culmen depth, in mm</p></li>
+<li><p><code>sex</code>: dummy variable, <strong>1 = male</strong>, <strong>0 = female</strong></p></li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="week_10_docs/palmer_penguin.png" class="quarto-figure quarto-figure-center figure-img" style="width:8.3in;height:4in"></p>
+</figure>
+</div>
+</div>
+</div>
+<div style="font-size: 0.8em; text-align: center;">
+<p>Source: <a href="https://allisonhorst.github.io/palmerpenguins/" class="uri">https://allisonhorst.github.io/palmerpenguins/</a></p>
+</div>
+</div>
+</section>
+<section id="palmer-penguins-1" class="level2">
+<h2 class="anchored" data-anchor-id="palmer-penguins-1">Palmer Penguins</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="class_cross_fa_2026_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="trainingtest-splits-in-general" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="trainingtest-splits-in-general">Training/test splits in general</h2>
+<p><br>
+</p>
+<div class="columns">
+<div class="column" style="width:70%;">
+<p><img src="week_10_docs/train-test-split-diagram.png" class="img-fluid"></p>
+</div><div class="column" style="width:30%;">
+<div class="incremental">
+<ul class="incremental">
+<li><span style="color: #bf5700;">Randomly</span> allocating observations makes train/test sets representative of the full data set</li>
+<li><span style="color: #bf5700;">80/20% train/test</span> splits are common</li>
+<li>More testing data <span class="math inline">\(\to\)</span> More accurate estimates of prediction error</li>
+<li>More training data <span class="math inline">\(\to\)</span> Better representation of full-data fit</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="creating-a-traintest-split" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="creating-a-traintest-split">Creating a train/test split</h2>
+<p>Let’s do the same thing for the <code>penguins</code> data, but by randomly splitting the data into a training and test set</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart) <span class="co"># Decsion Trees</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest) <span class="co"># Random Forest</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>randomForest 4.7-1.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Type rfNews() to see new features/changes/bug fixes.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'randomForest'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:dplyr':
+
+    combine</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:ggplot2':
+
+    margin</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of samples</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="fu">nrow</span>(penguins)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Indexes from 80% of the original data</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">=</span> <span class="fu">sample</span>(n, <span class="fl">0.8</span><span class="sc">*</span>n)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a 80% training and 20% testing split </span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>X_train <span class="ot">=</span> penguins[idx, ]</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>X_test <span class="ot">=</span> penguins[<span class="sc">-</span>idx, ]</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Response variable from the original split</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>y_train <span class="ot">&lt;-</span> X_train<span class="sc">$</span>sex</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>y_test  <span class="ot">&lt;-</span> X_test<span class="sc">$</span>sex</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li>The <code>set.seed(1234)</code> command ensures <span style="color: #bf5700;">reproducible</span> “random” splits.</li>
+</ul>
+</section>
+<section id="train-the-models" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="train-the-models">Train the models</h2>
+<ul>
+<li>Models are fitted without fine-tuning (<span style="color: #bf5700;">out of the box</span>)
+<ul>
+<li><strong>Logistic Regression</strong> / <strong>Decision Trees</strong> / <strong>Random Forest</strong></li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Logistic Regression Model</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fit_logistic <span class="ot">&lt;-</span> <span class="fu">glm</span>(sex <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> X_train, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Decision Tree Model</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>fit_tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> X_train, <span class="at">method =</span> <span class="st">"class"</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Random Forest</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>fit_forest <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> X_train, <span class="at">ntree =</span> <span class="dv">500</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li><strong>TabICL</strong> model</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">py_require</span>(<span class="st">"tabicl"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>features <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"bill_length_mm"</span>, <span class="st">"bill_depth_mm"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Import tabicl python function</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>tabicl <span class="ot">=</span> <span class="fu">import</span>(<span class="st">"tabicl"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>clf <span class="ot">=</span> tabicl<span class="sc">$</span><span class="fu">TabICLClassifier</span>()</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>clf<span class="sc">$</span><span class="fu">fit</span>(<span class="fu">as.matrix</span>(X_train[, features]), <span class="fu">as.character</span>(y_train))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>TabICLClassifier()</code></pre>
+</div>
+</div>
+</section>
+<section id="generate-predictions" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="generate-predictions">Generate predictions</h2>
+<ul>
+<li>Get their predictions on the test set:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prediction for logistic regression using 0.5 threshold</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>pred_logistic <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">predict</span>(fit_logistic, <span class="at">newdata =</span> X_test,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">type =</span> <span class="st">"response"</span>) <span class="sc">&gt;=</span> <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Prediction for decision trees</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>pred_tree <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_tree, <span class="at">newdata =</span> X_test, <span class="at">type =</span> <span class="st">"class"</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Prediction using random forest</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>pred_forest <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_forest, <span class="at">newdata =</span> X_test)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Prediction for TabICL</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>pred_tabicl <span class="ot">&lt;-</span> clf<span class="sc">$</span><span class="fu">predict</span>(<span class="fu">as.matrix</span>(X_test[, features]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li>Performance is defined by</li>
+</ul>
+<div style="text-align: center; font-size: 1.5em;">
+<p>Accuracy = <span class="math inline">\(\frac{\text{TP + TN}}{\text{Total}}\)</span></p>
+</div>
+<p>Here, <span class="math inline">\(\text{TP}\)</span> is the number of <span style="color: #bf5700;">true positives</span>, <span class="math inline">\(\text{TN}\)</span> is the number of <span style="color: #bf5700;">true negatives</span>, and <span class="math inline">\(\text{Total}\)</span> is the size of the data set.</p>
+</section>
+<section id="measuring-performance" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="measuring-performance">Measuring performance</h2>
+<ul>
+<li>We can easily calculate the accuracy simply by matching the 1s and 0s of the predicted and actual values.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Accuracy of the logistic regression</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pred_logistic <span class="sc">==</span> y_test)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7462687</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Accuracy of the decision trees</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">as.character</span>(pred_tree) <span class="sc">==</span> <span class="fu">as.character</span>(y_test))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8358209</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Accuracy of the Random Forest model</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">as.character</span>(pred_forest) <span class="sc">==</span> <span class="fu">as.character</span>(y_test))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7462687</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Accuracy of the TabICL model</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pred_tabicl <span class="sc">==</span> <span class="fu">as.character</span>(y_test))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7761194</code></pre>
+</div>
+</div>
+</section>
+<section id="measuring-performance-1" class="level2">
+<h2 class="anchored" data-anchor-id="measuring-performance-1">Measuring performance</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Model</th>
+<th style="text-align: center;">Accuracy (Single Train/Test Split)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Logistic Regression</td>
+<td style="text-align: center;">0.75</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Decision Trees</strong></td>
+<td style="text-align: center;"><strong>0.84</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Random Forest</td>
+<td style="text-align: center;">0.75</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TabICL</td>
+<td style="text-align: center;">0.78</td>
+</tr>
+</tbody>
+</table>
+<p>Can we conclude that the Decision Trees is the <span style="color: #bf5700;">best model</span> in making predictions?</p>
+</section>
+<section id="what-is-the-problem-with-this-approach" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-the-problem-with-this-approach">What is the problem with this approach?</h2>
+<p><br>
+</p>
+<ul>
+<li>We might get unlucky in our train/test split.</li>
+<li>How can we solve this problem?</li>
+</ul>
+</section>
+<section id="k-fold-cross-validation" class="level2">
+<h2 class="anchored" data-anchor-id="k-fold-cross-validation"><span class="math inline">\(k\)</span>-fold Cross-Validation</h2>
+<div class="center">
+<p><img src="week_10_docs/k-fold-cv-diagram.png" class="img-fluid"></p>
+</div>
+</section>
+<section id="example-with-k-3" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="example-with-k-3">Example with <span class="math inline">\(k\)</span> = 3</h2>
+<p>First we need to split the data into <span class="math inline">\(k = 3\)</span> random groups/folds of roughly the same size</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of folds</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign each row to a fold </span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>folds <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>k, <span class="at">length.out =</span> n))</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data into the 3 folds</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>fold1 <span class="ot">&lt;-</span> penguins[folds <span class="sc">==</span> <span class="dv">1</span>, ]</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>fold2 <span class="ot">&lt;-</span> penguins[folds <span class="sc">==</span> <span class="dv">2</span>, ]</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>fold3 <span class="ot">&lt;-</span> penguins[folds <span class="sc">==</span> <span class="dv">3</span>, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now we need to run the model 3 times:</p>
+<ul>
+<li>Model A: test on <code>fold1</code>, train on <code>fold2</code> and <code>fold3</code></li>
+<li>Model B: test on <code>fold2</code>, train on <code>fold1</code> and <code>fold3</code></li>
+<li>Model C: test on <code>fold3</code>, train on <code>fold1</code> and <code>fold2</code></li>
+</ul>
+</section>
+<section id="building-the-models" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="building-the-models">Building the models</h2>
+<ul>
+<li>We’ll focus on the <strong>logistic regression model</strong> first</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fold1 predicted by fold2 and fold3</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>modelA.l <span class="ot">=</span> <span class="fu">glm</span>(sex <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> <span class="fu">rbind</span>(fold2, fold3), <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># fold2 predicted by fold1 and fold3</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>modelB.l <span class="ot">=</span> <span class="fu">glm</span>(sex <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> <span class="fu">rbind</span>(fold1, fold3), <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># fold3 predicted by fold1 and fold2</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>modelC.l <span class="ot">=</span> <span class="fu">glm</span>(sex <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> <span class="fu">rbind</span>(fold1, fold2), <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li>Getting the predictions</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>pred_model_A <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">predict</span>(modelA.l, <span class="at">newdata =</span> fold1,</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">type =</span> <span class="st">"response"</span>) <span class="sc">&gt;=</span> <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>pred_model_B <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">predict</span>(modelB.l, <span class="at">newdata =</span> fold2,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">type =</span> <span class="st">"response"</span>) <span class="sc">&gt;=</span> <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>pred_model_C <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">predict</span>(modelC.l, <span class="at">newdata =</span> fold3,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>                               <span class="at">type =</span> <span class="st">"response"</span>) <span class="sc">&gt;=</span> <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="calculating-the-accuracy" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="calculating-the-accuracy">Calculating the Accuracy</h2>
+<p>For each model we get three different Accuracy estimates:</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pred_model_A <span class="sc">==</span> fold1<span class="sc">$</span>sex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7387387</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pred_model_B <span class="sc">==</span> fold2<span class="sc">$</span>sex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7927928</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pred_model_C <span class="sc">==</span> fold3<span class="sc">$</span>sex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8288288</code></pre>
+</div>
+</div>
+<p>Our final estimate of accuracy is the average of these three estimates:<br>
+</p>
+<div style="text-align: center; font-size: 1.5em;">
+<p>Accuracy<span class="math inline">\(_{\text{CV}}\)</span> = <span class="math inline">\(\frac{0.74 + 0.79 + 0.83}{3} \approx 0.79\)</span></p>
+</div>
+<p>We’ll do the same for the other methods</p>
+</section>
+<section id="cv-for-decision-trees" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="cv-for-decision-trees">CV for Decision Trees</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>modelA.t <span class="ot">=</span> <span class="fu">rpart</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> <span class="fu">rbind</span>(fold2, fold3), <span class="at">method =</span> <span class="st">"class"</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>modelB.t <span class="ot">=</span> <span class="fu">rpart</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> <span class="fu">rbind</span>(fold1, fold3), <span class="at">method =</span> <span class="st">"class"</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>modelC.t <span class="ot">=</span> <span class="fu">rpart</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> <span class="fu">rbind</span>(fold1, fold2), <span class="at">method =</span> <span class="st">"class"</span>)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>pred_model_A.t <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_tree, <span class="at">newdata =</span> fold1, <span class="at">type =</span> <span class="st">"class"</span>)</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>pred_model_B.t <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_tree, <span class="at">newdata =</span> fold2, <span class="at">type =</span> <span class="st">"class"</span>)</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>pred_model_C.t <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_tree, <span class="at">newdata =</span> fold3, <span class="at">type =</span> <span class="st">"class"</span>)</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">as.character</span>(pred_model_A.t) <span class="sc">==</span> <span class="fu">as.character</span>(fold1<span class="sc">$</span>sex))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8378378</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">as.character</span>(pred_model_B.t) <span class="sc">==</span> <span class="fu">as.character</span>(fold2<span class="sc">$</span>sex))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8738739</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">as.character</span>(pred_model_C.t) <span class="sc">==</span> <span class="fu">as.character</span>(fold3<span class="sc">$</span>sex))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8648649</code></pre>
+</div>
+</div>
+<div style="text-align: center; font-size: 1.5em;">
+<p>Accuracy<span class="math inline">\(_{\text{CV}}\)</span> = <span class="math inline">\(\frac{0.84 + 0.87 + 0.86}{3} \approx 0.86\)</span></p>
+</div>
+</section>
+<section id="cv-for-random-forest" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="cv-for-random-forest">CV for Random Forest</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>modelA.f <span class="ot">=</span> <span class="fu">randomForest</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> <span class="fu">rbind</span>(fold2, fold3), <span class="at">ntree =</span> <span class="dv">500</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>modelB.f <span class="ot">=</span> <span class="fu">randomForest</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> <span class="fu">rbind</span>(fold1, fold3), <span class="at">ntree =</span> <span class="dv">500</span>)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>modelC.f <span class="ot">=</span> <span class="fu">randomForest</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> <span class="fu">rbind</span>(fold1, fold2), <span class="at">ntree =</span> <span class="dv">500</span>)</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>pred_model_A.f <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_forest, <span class="at">newdata =</span> fold1)</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>pred_model_B.f <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_forest, <span class="at">newdata =</span> fold2)</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>pred_model_C.f <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_forest, <span class="at">newdata =</span> fold3)</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">as.character</span>(pred_model_A.f) <span class="sc">==</span> <span class="fu">as.character</span>(fold1<span class="sc">$</span>sex))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.954955</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">as.character</span>(pred_model_B.f) <span class="sc">==</span> <span class="fu">as.character</span>(fold2<span class="sc">$</span>sex))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.963964</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">as.character</span>(pred_model_C.f) <span class="sc">==</span> <span class="fu">as.character</span>(fold3<span class="sc">$</span>sex))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9189189</code></pre>
+</div>
+</div>
+<div style="text-align: center; font-size: 1.5em;">
+<p>Accuracy<span class="math inline">\(_{\text{CV}}\)</span> = <span class="math inline">\(\frac{0.96 + 0.96 + 0.92}{3} \approx 0.95\)</span></p>
+</div>
+</section>
+<section id="cv-for-tabicl" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="cv-for-tabicl">CV for TAbICL</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the classifiers</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>clf.A <span class="ot">=</span> tabicl<span class="sc">$</span><span class="fu">TabICLClassifier</span>()</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>clf.B <span class="ot">=</span> tabicl<span class="sc">$</span><span class="fu">TabICLClassifier</span>()</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>clf.C <span class="ot">=</span> tabicl<span class="sc">$</span><span class="fu">TabICLClassifier</span>()</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="co"># invisible - hides the messages from the prediction function</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(clf.A<span class="sc">$</span><span class="fu">fit</span>(<span class="fu">as.matrix</span>(<span class="fu">rbind</span>(fold2, fold3)[, features]), <span class="fu">as.character</span>(<span class="fu">rbind</span>(fold2, fold3)[, <span class="st">'sex'</span>])))</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(clf.B<span class="sc">$</span><span class="fu">fit</span>(<span class="fu">as.matrix</span>(<span class="fu">rbind</span>(fold1, fold3)[, features]), <span class="fu">as.character</span>(<span class="fu">rbind</span>(fold1, fold3)[, <span class="st">'sex'</span>])))</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(clf.C<span class="sc">$</span><span class="fu">fit</span>(<span class="fu">as.matrix</span>(<span class="fu">rbind</span>(fold1, fold2)[, features]), <span class="fu">as.character</span>(<span class="fu">rbind</span>(fold1, fold2)[, <span class="st">'sex'</span>])))</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Prediction for each classfier</span></span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>pred_tabicl.A <span class="ot">&lt;-</span> clf.A<span class="sc">$</span><span class="fu">predict</span>(<span class="fu">as.matrix</span>(fold1[, features]))</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>pred_tabicl.B <span class="ot">&lt;-</span> clf.B<span class="sc">$</span><span class="fu">predict</span>(<span class="fu">as.matrix</span>(fold2[, features]))</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>pred_tabicl.C <span class="ot">&lt;-</span> clf.C<span class="sc">$</span><span class="fu">predict</span>(<span class="fu">as.matrix</span>(fold3[, features]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Measuring the out of sample accuracy</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">as.character</span>(pred_tabicl.A) <span class="sc">==</span> <span class="fu">as.character</span>(fold1<span class="sc">$</span>sex))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7747748</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">as.character</span>(pred_tabicl.B) <span class="sc">==</span> <span class="fu">as.character</span>(fold2<span class="sc">$</span>sex))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8738739</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">as.character</span>(pred_tabicl.C) <span class="sc">==</span> <span class="fu">as.character</span>(fold3<span class="sc">$</span>sex))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8558559</code></pre>
+</div>
+</div>
+<div style="text-align: center; font-size: 1.2em;">
+<p>Accuracy<span class="math inline">\(_{\text{CV}}\)</span> = <span class="math inline">\(\frac{0.77 + 0.87 + 0.86}{3} \approx 0.83\)</span></p>
+</div>
+</section>
+<section id="re-doing-our-model-comparisons" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="re-doing-our-model-comparisons">Re-doing our model comparisons</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th style="text-align: center;">Accuracy (all data)</th>
+<th style="text-align: center;">Accuracy (Single Train/Test Split)</th>
+<th style="text-align: center;">Accuracy (3 Fold CV)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Logistic Regression</td>
+<td style="text-align: center;">0.78</td>
+<td style="text-align: center;">0.75</td>
+<td style="text-align: center;">0.79</td>
+</tr>
+<tr class="even">
+<td>Decision Trees</td>
+<td style="text-align: center;">0.86</td>
+<td style="text-align: center;">0.84</td>
+<td style="text-align: center;">0.86</td>
+</tr>
+<tr class="odd">
+<td><strong>Random Forest</strong></td>
+<td style="text-align: center;">0.99</td>
+<td style="text-align: center;">0.75</td>
+<td style="text-align: center;"><strong>0.95</strong></td>
+</tr>
+<tr class="even">
+<td>TabICL</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">0.78</td>
+<td style="text-align: center;">0.83</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>A single split doesn’t show the complete picture</li>
+<li>Logistic regression can be improved by adding non-linear features</li>
+<li>Decision trees work surprisingly well on this data</li>
+<li>Random forest is based on a resampling procedure - (in-sample/CV difference)</li>
+<li>By design, TabICL can’t be evaluated on in-sample data</li>
+</ul>
+</section>
+<section id="take-away" class="level2">
+<h2 class="anchored" data-anchor-id="take-away">Take away</h2>
+<ul>
+<li>More folds give a better estimate of the out-of-sample error
+<ul>
+<li>The <span style="color: #bf5700;">variance of the estimator</span> can go up!</li>
+</ul></li>
+<li><span style="color: #bf5700;"><em>Leave-one-out cross-validation</em></span>: <span class="math inline">\(k\)</span> is equal to the sample size
+<ul>
+<li>Can be expensive to run</li>
+<li>Overlapping observations (the training sets are nearly identical)</li>
+</ul></li>
+<li>Typically, <span class="math inline">\(k = 5\)</span> or <span class="math inline">\(k = 10\)</span> has been empirically shown to be a good choice</li>
+</ul>
+</section>
+<section id="isnt-there-a-faster-way" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="isnt-there-a-faster-way">Isn’t there a faster way?</h2>
+<p>In practice, you don’t have to do this all manually! The <code>tidymodels</code> package makes it easy to do <span style="color: #bf5700;">cross-validation</span> even for larger <span class="math inline">\(k\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching packages ────────────────────────────────────── tidymodels 1.5.0 ──</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ broom        1.0.13     ✔ rsample      1.3.2 
+✔ dials        1.4.4      ✔ tailor       0.1.0 
+✔ infer        1.1.0      ✔ tune         2.1.0 
+✔ modeldata    1.5.1      ✔ workflows    1.3.0 
+✔ parsnip      1.6.0      ✔ workflowsets 1.1.1 
+✔ recipes      1.3.3      ✔ yardstick    1.4.0 </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──
+✖ randomForest::combine() masks dplyr::combine()
+✖ scales::discard()       masks purrr::discard()
+✖ dplyr::filter()         masks stats::filter()
+✖ recipes::fixed()        masks stringr::fixed()
+✖ dplyr::lag()            masks stats::lag()
+✖ randomForest::margin()  masks ggplot2::margin()
+✖ dials::prune()          masks rpart::prune()
+✖ yardstick::spec()       masks readr::spec()
+✖ recipes::step()         masks stats::step()</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomly split the data into 5 folds</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>folds <span class="ot">&lt;-</span> <span class="fu">vfold_cv</span>(penguins, <span class="at">v=</span><span class="dv">5</span>)</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Build a tidymodels "workflow" for a linear model</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="co"># with the formula dailyspend ~ temp, using RMSE as the target metric</span></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="fu">workflow</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_model</span>(<span class="fu">logistic_reg</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_formula</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm) <span class="sc">%&gt;%</span></span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit_resamples</span>(folds, <span class="at">metrics =</span> <span class="fu">metric_set</span>(accuracy)) <span class="sc">%&gt;%</span></span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">collect_metrics</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 6
+  .metric  .estimator  mean     n std_err .config        
+  &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;          
+1 accuracy binary     0.775     5  0.0163 pre0_mod0_post0</code></pre>
+</div>
+</div>
+<p>Accuracy of the logistic regression model is 0.77 using <span class="math inline">\(k = 5\)</span> folds.</p>
+<!-- ```{r} -->
+<!-- # ---- Logistic regression ---------------------------------------------------- -->
+<!-- fit_logistic <- glm(sex ~ bill_length_mm + bill_depth_mm, -->
+<!--                     data = penguins, family = "binomial") -->
+<!-- # summary(fit_logistic) -->
+<!-- pred_logistic <- ifelse(predict(fit_logistic, newdata = penguins, -->
+<!--                                 type = "response") >= 0.5, 1, 0) -->
+<!-- mean(pred_logistic == penguins$sex) -->
+<!-- # ---- Decision tree ---------------------------------------------------------- -->
+<!-- fit_tree <- rpart(factor(sex) ~ bill_length_mm + bill_depth_mm, -->
+<!--                   data = penguins, method = "class") -->
+<!-- pred_tree <- predict(fit_tree, newdata = penguins, type = "class") -->
+<!-- mean(as.character(pred_tree) == as.character(penguins$sex)) -->
+<!-- # plot tree -->
+<!-- # ---- Random forest ---------------------------------------------------------- -->
+<!-- fit_forest <- randomForest(as.factor(penguins$sex) ~ bill_length_mm + bill_depth_mm, -->
+<!--                            data = penguins, ntree = 500) -->
+<!-- pred_forest <- predict(fit_forest, newdata = penguins) -->
+<!-- mean(as.character(pred_forest) == as.character(penguins$sex)) -->
+<!-- ``` -->
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

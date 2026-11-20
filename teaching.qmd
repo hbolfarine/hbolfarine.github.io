@@ -7,7 +7,7 @@ title: "Teaching"
 ### Fall 2026
 
 - Statistics and Data Science presentation
-  - [Slides Fall 2026](fa_sta235_2026/class_01_fa_2026.qmd)
+  - [Slides Fall 2026](presentations/class_cross_fa_2026.qmd)
 
 - STA 235 - Data Science for Business Applications
   - [class 01 - Intro in Linear Regression](fa_sta235_2026/class_01_fa_2026.qmd)
