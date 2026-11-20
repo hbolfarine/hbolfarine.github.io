@@ -120,7 +120,7 @@ knit_hooks$set(output = function(x, options) {
   - Including this semester, so far I have taught 51 sections
   - Each section has around 60–65 students
   - This semester, I have 300 students enrolled across my five sections alone
-  
+
 ## Evaluation Grade
 
 ![Evaluation scores for the 46 sections taught from Spring 2022 to Summer 2026. The line represents the overall average evaluation score.](week_10_docs/grades_02_high.jpg){fig-align="center" width="40%"}
@@ -199,7 +199,7 @@ Textbook: [*Data Science in R: A Gentle Introduction*](https://bookdown.org/jgsc
 :::::
 ::::::
 
-## [STA 235]{style="color: #bf5700;"}  - Data Science for Business Applications
+## [STA 235]{style="color: #bf5700;"} - Data Science for Business Applications
 
 - First class that I taught at UT (spring 2022)
 - One of the first [in-person]{style="color: #bf5700;"}, post-pandemic classes at McCombs
@@ -208,49 +208,49 @@ Textbook: [*Data Science in R: A Gentle Introduction*](https://bookdown.org/jgsc
 - Almost like a lab for new ideas
 - I also teach the [online section]{style="color: #bf5700;"} for this class
 
-## Observations on [STA 235]{style="color: #bf5700;"} 
+## Observations on [STA 235]{style="color: #bf5700;"}
 
 - Many strategies were tested: Lockdown, WebR, Posit
 - Move from coding to understanding
 - Code is still covered in class, though with less emphasis
 - Move to paper exams and quizzes
-- Other sections are moving from exams to [oral presentations]{style="color: #bf5700;"} 
+- Other sections are moving from exams to [oral presentations]{style="color: #bf5700;"}
 - [LLM tools]{style="color: #bf5700;"} are being used to create study material
   - [Claude Practice Room](https://claude.ai/artifact/2fX9TcNeU6mQY7wpyZhxWZ)
 
 ## What I've learned so far
 
-- Emphasize that Statistics and Data Science is about [answering questions]{style="color: #bf5700;"}  with [data as evidence]{style="color: #bf5700;"} 
+- Emphasize that Statistics and Data Science is about [answering questions]{style="color: #bf5700;"} with [data as evidence]{style="color: #bf5700;"}
 - Coding is important:
-  - Helps with [logical steps]{style="color: #bf5700;"}  connecting to statistical concepts
+  - Helps with [logical steps]{style="color: #bf5700;"} connecting to statistical concepts
   - [Self-sufficiency]{style="color: #bf5700;"} : "I didn't know what programming was before 301. After I took it, I did."
-  - A large number of students still [follow along]{style="color: #bf5700;"}  with live coding
+  - A large number of students still [follow along]{style="color: #bf5700;"} with live coding
   - `tidyverse` creates standards
 
 ## Should we pivot to the use of LLMs?
 
-There are [several issues]{style="color: #bf5700;"}  that might come into place
+There are [several issues]{style="color: #bf5700;"} that might come into place
 
 - No clear guidelines
-- Constantly [changing environment]{style="color: #bf5700;"} 
+- Constantly [changing environment]{style="color: #bf5700;"}
   - Prompt engineering / vibe coding / agents / RAGs / MCPs / skills
-- Uneven [code quality]{style="color: #bf5700;"}  across students
+- Uneven [code quality]{style="color: #bf5700;"} across students
 - Data security and cost
 
 ## LLM adoption
 
 - Coding tools are interesting (Claude code)
-- [Self-sufficiency]{style="color: #bf5700;"}  is still necessary
+- [Self-sufficiency]{style="color: #bf5700;"} is still necessary
 - Focus on interpreting models and results
 
 # Lecture
 
 ## Goal of this lecture
 
-- [Compare classification models]{style="color: #bf5700;"}  using cross-validation
+- [Compare classification models]{style="color: #bf5700;"} using cross-validation
 - Present complex topics in an easily understandable way
 - Connect concepts with my research interests
-- Apply a [hands-on]{style="color: #bf5700;"}  approach
+- Apply a [hands-on]{style="color: #bf5700;"} approach
 
 ## Elements of Data Science
 
@@ -259,7 +259,7 @@ There are [several issues]{style="color: #bf5700;"}  that might come into place
 ::::::: {style="font-size: 0.9em;"}
 :::::: columns
 ::: {.column width="50%"}
-[**Based on SDS 322E**]{style="color: #bf5700;"} 
+[**Based on SDS 322E**]{style="color: #bf5700;"}
 
 - Data wrangling
 - Simulation-based inference
@@ -299,8 +299,7 @@ There are [several issues]{style="color: #bf5700;"}  that might come into place
   - Random Forest
   - Tabular Foundation Models
 
-Naive approach - [no fine tuning]{style="color: #bf5700;"} 
-
+Naive approach - [no fine tuning]{style="color: #bf5700;"}
 
 ## Classification Models {.smaller}
 
@@ -326,8 +325,8 @@ Source: [Tree-based methods](https://bgreenwell.github.io/treebook/) and [Tabula
 ## Details on the Analysis
 
 - To keep the [analysis fair]{style="color: #bf5700;"}:
-  + Use the same train/test split
-  + Use the same cross-validation folds for all models
+  - Use the same train/test split
+  - Use the same cross-validation folds for all models
 - Compare the models based on their cross-validation results and [choose one]{style="color: #bf5700;"}.
 
 ## Palmer Penguins
@@ -335,11 +334,12 @@ Source: [Tree-based methods](https://bgreenwell.github.io/treebook/) and [Tabula
 ::::::: {style="font-size: 0.75em;"}
 ::::: columns
 ::: {.column width="40%"}
-- The `penguins` data set contains **333 penguins** of different species (Palmer antarctic station).
-<!-- **Variables** -->
+- The `penguins` data set contains **333 penguins** of different species (Palmer antarctic station). <!-- **Variables** -->
 
 - `bill_length_mm`: culmen (upper ridge of the beak) length, in mm
+
 - `bill_depth_mm`: culmen depth, in mm
+
 - `sex`: dummy variable, **1 = male**, **0 = female**
 :::
 
@@ -506,13 +506,14 @@ mean(pred_tabicl == as.character(y_test))
 | Model               | Accuracy (Single Train/Test Split) |
 |:--------------------|:----------------------------------:|
 | Logistic Regression |                0.75                |
-| **Decision Trees**  |                **0.84**            |
+| **Decision Trees**  |              **0.84**              |
 | Random Forest       |                0.75                |
 | TabICL              |                0.78                |
 
 Can we conclude that the Decision Trees is the [best model]{style="color: #bf5700;"} in making predictions?
 
 ## What is the problem with this approach?
+
 \
 
 - We might get unlucky in our train/test split.
@@ -586,8 +587,7 @@ mean(pred_model_B == fold2$sex)
 mean(pred_model_C == fold3$sex)
 ```
 
-Our final estimate of accuracy is the average of these three estimates:
-\
+Our final estimate of accuracy is the average of these three estimates:\
 
 ::: {style="text-align: center; font-size: 1.5em;"}
 Accuracy$_{\text{CV}}$ = $\frac{0.74 + 0.79 + 0.83}{3} \approx 0.79$

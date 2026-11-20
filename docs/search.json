@@ -10335,29 +10335,29 @@
     "objectID": "presentations/class_cross_fa_2026.html#henrique-bolfarine",
     "href": "presentations/class_cross_fa_2026.html#henrique-bolfarine",
     "title": "Regression to Foundation Models",
-    "section": "",
-    "text": "Doctor in Statistics/ University of São Paulo\nemail: henrique.bolfarine@austin.utexas.edu\nwebsite: hbolfarine.github.io\nLink with CV\nFun fact about me: I was born in the US. Ask me how!"
+    "section": "Henrique Bolfarine",
+    "text": "Henrique Bolfarine\n\n\n\n\n\n\n\nDoctor in Statistics/ University of São Paulo\nemail: henrique.bolfarine@austin.utexas.edu\nwebsite: hbolfarine.github.io\nLink with CV\nFun fact about me: I was born in the US. Ask me how!"
   },
   {
     "objectID": "presentations/class_cross_fa_2026.html#about-me-1",
     "href": "presentations/class_cross_fa_2026.html#about-me-1",
     "title": "Regression to Foundation Models",
-    "section": "",
-    "text": "Teaching: I served as a Lecturer in Statistics at the McCombs School of Business at UT Austin from spring 2022 to fall 2026. Previously, I taught at the University of São Paulo, where I completed my doctorate under Prof. Hedibert F. Lopes (Duke alumni and former University of Chicago professor).\n\n\nPost-Doc: I served as a Visiting Researcher at the McCombs School of Business at UT Austin from the spring to the fall of 2021 under Prof. Carlos M. Carvalho."
+    "section": "About me",
+    "text": "About me\nTeaching: I served as a Lecturer in Statistics at the McCombs School of Business at UT Austin from spring 2022 to fall 2026. Previously, I taught at the University of São Paulo, where I completed my doctorate under Prof. Hedibert F. Lopes (Duke alumni and former University of Chicago professor).\n\n\nPost-Doc: I served as a Visiting Researcher at the McCombs School of Business at UT Austin from the spring to the fall of 2021 under Prof. Carlos M. Carvalho."
   },
   {
     "objectID": "presentations/class_cross_fa_2026.html#about-me-2",
     "href": "presentations/class_cross_fa_2026.html#about-me-2",
     "title": "Regression to Foundation Models",
-    "section": "",
-    "text": "Research: I still try to keep up with the most recent statistical methodology. Recently, I have focused on model interpretability in complex statistical methods.\n\n\n\n“Lower-dimensional posterior density and cluster summaries for overparameterized Bayesian models”, (H. Bolfarine, H.F. Lopes, & C.M. Carvalho). Statistics and Computing, 2026\n“Decoupling Shrinkage and Selection in Gaussian Linear Factor Analysis”, (H. Bolfarine, C. M. Carvalho, H. F. Lopes & J. S. Murray), Bayesian Analysis, 2024\n2021 International Statistical Institute Mahalanobis Award: A Tribute to Heleno Bolfarine.” (F. Ruggeri, H.Bolfarine, J. L. Bazán, R. B. Arellano-Valle, V. H. L. Davila, M. de Castro). International Statistical Review, 2021"
+    "section": "About me",
+    "text": "About me\nResearch: I still try to keep up with the most recent statistical methodology. Recently, I have focused on model interpretability in complex statistical methods.\n\n\n\n“Lower-dimensional posterior density and cluster summaries for overparameterized Bayesian models”, (H. Bolfarine, H.F. Lopes, & C.M. Carvalho). Statistics and Computing, 2026\n“Decoupling Shrinkage and Selection in Gaussian Linear Factor Analysis”, (H. Bolfarine, C. M. Carvalho, H. F. Lopes & J. S. Murray), Bayesian Analysis, 2024\n2021 International Statistical Institute Mahalanobis Award: A Tribute to Heleno Bolfarine.” (F. Ruggeri, H.Bolfarine, J. L. Bazán, R. B. Arellano-Valle, V. H. L. Davila, M. de Castro). International Statistical Review, 2021"
   },
   {
     "objectID": "presentations/class_cross_fa_2026.html#about-me-3",
     "href": "presentations/class_cross_fa_2026.html#about-me-3",
     "title": "Regression to Foundation Models",
-    "section": "",
-    "text": "Personally: I have a wife and a 10-year-old daughter. The next step is adopting a puppy, though this part is still under negotiation."
+    "section": "About me",
+    "text": "About me\nPersonally: I have a wife and a 10-year-old daughter. The next step is adopting a puppy, though this part is still under negotiation."
   },
   {
     "objectID": "presentations/class_cross_fa_2026.html#mccombs-school-of-business",
@@ -10371,7 +10371,7 @@
     "href": "presentations/class_cross_fa_2026.html#evaluation-grade",
     "title": "Regression to Foundation Models",
     "section": "Evaluation Grade",
-    "text": "Evaluation Grade\n\n\n\nEvaluation scores for the 46 sections taught from Spring 2022 to Summer 2026. The line represents the overall average evaluation score."
+    "text": "Evaluation Grade\n\nEvaluation scores for the 46 sections taught from Spring 2022 to Summer 2026. The line represents the overall average evaluation score."
   },
   {
     "objectID": "presentations/class_cross_fa_2026.html#sta-301---introduction-to-data-science",
@@ -10483,28 +10483,28 @@
     "href": "presentations/class_cross_fa_2026.html#palmer-penguins",
     "title": "Regression to Foundation Models",
     "section": "Palmer Penguins",
-    "text": "Palmer Penguins\n\n\n\n\nThe penguins data set contains 333 penguins of different species (Palmer antarctic station). \nbill_length_mm: culmen (upper ridge of the beak) length, in mm\nbill_depth_mm: culmen depth, in mm\nsex: dummy variable, 1 = male, 0 = female\n\n\n\n\n\n\n\n\n\n\nSource: https://allisonhorst.github.io/palmerpenguins/"
+    "text": "Palmer Penguins\n\n\n\n\nThe penguins data set contains 333 penguins of different species (Palmer antarctic station). \nbill_length_mm: culmen (upper ridge of the beak) length, in mm\nbill_depth_mm: culmen depth, in mm\nsex: dummy variable, 1 = male, 0 = female\n\n\n\n\n\n\n\n\n\nSource: https://allisonhorst.github.io/palmerpenguins/"
   },
   {
     "objectID": "presentations/class_cross_fa_2026.html#palmer-penguins-1",
     "href": "presentations/class_cross_fa_2026.html#palmer-penguins-1",
     "title": "Regression to Foundation Models",
     "section": "Palmer Penguins",
-    "text": "Palmer Penguins\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.2.1     ✔ readr     2.2.0\n✔ forcats   1.0.1     ✔ stringr   1.6.0\n✔ ggplot2   4.0.3     ✔ tibble    3.3.1\n✔ lubridate 1.9.5     ✔ tidyr     1.3.2\n✔ purrr     1.2.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors"
+    "text": "Palmer Penguins"
   },
   {
     "objectID": "presentations/class_cross_fa_2026.html#trainingtest-splits-in-general",
     "href": "presentations/class_cross_fa_2026.html#trainingtest-splits-in-general",
     "title": "Regression to Foundation Models",
     "section": "Training/test splits in general",
-    "text": "Training/test splits in general\n\n\n\n\n\n\n\n\nRandomly allocating observations makes train/test sets representative of the full data set\n80/20% train/test splits are common\nMore testing data \\(\\to\\) More accurate estimates of prediction error\nMore training data \\(\\to\\) Better representation of full-data fit"
+    "text": "Training/test splits in general\n\n\n\n\n\n\n\nRandomly allocating observations makes train/test sets representative of the full data set\n80/20% train/test splits are common\nMore testing data \\(\\to\\) More accurate estimates of prediction error\nMore training data \\(\\to\\) Better representation of full-data fit"
   },
   {
     "objectID": "presentations/class_cross_fa_2026.html#creating-a-traintest-split",
     "href": "presentations/class_cross_fa_2026.html#creating-a-traintest-split",
     "title": "Regression to Foundation Models",
     "section": "Creating a train/test split",
-    "text": "Creating a train/test split\nLet’s do the same thing for the penguins data, but by randomly splitting the data into a training and test set\n\nlibrary(tidyverse)\nlibrary(rpart) # Decsion Trees\nlibrary(randomForest) # Random Forest\n\nrandomForest 4.7-1.2\n\n\nType rfNews() to see new features/changes/bug fixes.\n\n\n\nAttaching package: 'randomForest'\n\n\nThe following object is masked from 'package:dplyr':\n\n    combine\n\n\nThe following object is masked from 'package:ggplot2':\n\n    margin\n\nlibrary(reticulate)\nset.seed(1234)\n\n# Number of samples\nn = nrow(penguins)\n\n# Indexes from 80% of the original data\nidx = sample(n, 0.8*n)\n\n# Create a 80% training and 20% testing split \nX_train = penguins[idx, ]\nX_test = penguins[-idx, ]\n\n# Response variable from the original split\ny_train &lt;- X_train$sex\ny_test  &lt;- X_test$sex\n\n\nThe set.seed(1234) command ensures reproducible “random” splits."
+    "text": "Creating a train/test split\nLet’s do the same thing for the penguins data, but by randomly splitting the data into a training and test set\n\nlibrary(tidyverse)\nlibrary(rpart) # Decsion Trees\nlibrary(randomForest) # Random Forest\nlibrary(reticulate)\nset.seed(1234)\n\n# Number of samples\nn = nrow(penguins)\n\n# Indexes from 80% of the original data\nidx = sample(n, 0.8*n)\n\n# Create a 80% training and 20% testing split \nX_train = penguins[idx, ]\nX_test = penguins[-idx, ]\n\n# Response variable from the original split\ny_train &lt;- X_train$sex\ny_test  &lt;- X_test$sex\n\n\nThe set.seed(1234) command ensures reproducible “random” splits."
   },
   {
     "objectID": "presentations/class_cross_fa_2026.html#train-the-models",
@@ -10609,6 +10609,6 @@
     "href": "presentations/class_cross_fa_2026.html#isnt-there-a-faster-way",
     "title": "Regression to Foundation Models",
     "section": "Isn’t there a faster way?",
-    "text": "Isn’t there a faster way?\nIn practice, you don’t have to do this all manually! The tidymodels package makes it easy to do cross-validation even for larger \\(k\\).\n\nlibrary(tidymodels)\n\n── Attaching packages ────────────────────────────────────── tidymodels 1.5.0 ──\n\n\n✔ broom        1.0.13     ✔ rsample      1.3.2 \n✔ dials        1.4.4      ✔ tailor       0.1.0 \n✔ infer        1.1.0      ✔ tune         2.1.0 \n✔ modeldata    1.5.1      ✔ workflows    1.3.0 \n✔ parsnip      1.6.0      ✔ workflowsets 1.1.1 \n✔ recipes      1.3.3      ✔ yardstick    1.4.0 \n\n\n── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──\n✖ randomForest::combine() masks dplyr::combine()\n✖ scales::discard()       masks purrr::discard()\n✖ dplyr::filter()         masks stats::filter()\n✖ recipes::fixed()        masks stringr::fixed()\n✖ dplyr::lag()            masks stats::lag()\n✖ randomForest::margin()  masks ggplot2::margin()\n✖ dials::prune()          masks rpart::prune()\n✖ yardstick::spec()       masks readr::spec()\n✖ recipes::step()         masks stats::step()\n\n# Randomly split the data into 5 folds\nfolds &lt;- vfold_cv(penguins, v=5)\n\n# Build a tidymodels \"workflow\" for a linear model\n# with the formula dailyspend ~ temp, using RMSE as the target metric\nworkflow() |&gt; \n  add_model(logistic_reg()) |&gt; \n  add_formula(as.factor(sex) ~ bill_length_mm + bill_depth_mm) %&gt;%\n  fit_resamples(folds, metrics = metric_set(accuracy)) %&gt;%\n  collect_metrics()\n\n# A tibble: 1 × 6\n  .metric  .estimator  mean     n std_err .config        \n  &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;          \n1 accuracy binary     0.775     5  0.0163 pre0_mod0_post0\n\n\nAccuracy of the logistic regression model is 0.77 using \\(k = 5\\) folds."
+    "text": "Isn’t there a faster way?\nIn practice, you don’t have to do this all manually! The tidymodels package makes it easy to do cross-validation even for larger \\(k\\).\n\nlibrary(tidymodels)\n\n# Randomly split the data into 5 folds\nfolds &lt;- vfold_cv(penguins, v=5)\n\n# Build a tidymodels \"workflow\" for a linear model\n# with the formula dailyspend ~ temp, using RMSE as the target metric\nworkflow() |&gt; \n  add_model(logistic_reg()) |&gt; \n  add_formula(as.factor(sex) ~ bill_length_mm + bill_depth_mm) %&gt;%\n  fit_resamples(folds, metrics = metric_set(accuracy)) %&gt;%\n  collect_metrics()\n\n# A tibble: 1 × 6\n  .metric  .estimator  mean     n std_err .config        \n  &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;          \n1 accuracy binary     0.775     5  0.0163 pre0_mod0_post0\n\n\nAccuracy of the logistic regression model is 0.77 using \\(k = 5\\) folds."
   }
 ]
