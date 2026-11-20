@@ -513,7 +513,7 @@ Henrique Bolfarine
 </section>
 <section id="classification-models" class="slide level2 smaller">
 <h2>Classification Models</h2>
-<div id="tbl-model-comparison" class="quarto-float quarto-figure quarto-figure-center" style="font-size: 0.7em;" data-tbl-cap-location="bottom">
+<div id="tbl-model-comparison" class="quarto-float quarto-figure quarto-figure-center" data-tbl-cap-location="bottom" style="font-size: 0.7em;">
 <figure class="quarto-float quarto-float-tbl">
 <div aria-describedby="tbl-model-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top">
@@ -722,12 +722,12 @@ Table&nbsp;1: Source: <a href="https://bgreenwell.github.io/treebook/">Tree-base
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">py_require</span>(<span class="st">"tabicl"</span>)</span>
-<span id="cb3-2"><a></a>features <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"bill_length_mm"</span>, <span class="st">"bill_depth_mm"</span>)</span>
+<span id="cb3-2"><a></a>features <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"bill_length_mm"</span>, <span class="st">"bill_depth_mm"</span>)</span>
 <span id="cb3-3"><a></a></span>
 <span id="cb3-4"><a></a><span class="co"># Import tabicl python function</span></span>
-<span id="cb3-5"><a></a>tabicl <span class="ot">=</span> <span class="fu">import</span>(<span class="st">"tabicl"</span>)</span>
+<span id="cb3-5"><a></a>tabicl <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"tabicl"</span>)</span>
 <span id="cb3-6"><a></a></span>
-<span id="cb3-7"><a></a>clf <span class="ot">=</span> tabicl<span class="sc">$</span><span class="fu">TabICLClassifier</span>()</span>
+<span id="cb3-7"><a></a>clf <span class="ot">&lt;-</span> tabicl<span class="sc">$</span><span class="fu">TabICLClassifier</span>()</span>
 <span id="cb3-8"><a></a>clf<span class="sc">$</span><span class="fu">fit</span>(<span class="fu">as.matrix</span>(X_train[, features]), <span class="fu">as.character</span>(y_train))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>TabICLClassifier()</code></pre>
@@ -863,26 +863,26 @@ Table&nbsp;1: Source: <a href="https://bgreenwell.github.io/treebook/">Tree-base
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="co"># fold1 predicted by fold2 and fold3</span></span>
-<span id="cb15-2"><a></a>modelA.l <span class="ot">=</span> <span class="fu">glm</span>(sex <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
+<span id="cb15-2"><a></a>modelA.l <span class="ot">&lt;-</span> <span class="fu">glm</span>(sex <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
 <span id="cb15-3"><a></a>             <span class="at">data =</span> <span class="fu">rbind</span>(fold2, fold3), <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
 <span id="cb15-4"><a></a></span>
 <span id="cb15-5"><a></a><span class="co"># fold2 predicted by fold1 and fold3</span></span>
-<span id="cb15-6"><a></a>modelB.l <span class="ot">=</span> <span class="fu">glm</span>(sex <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
+<span id="cb15-6"><a></a>modelB.l <span class="ot">&lt;-</span> <span class="fu">glm</span>(sex <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
 <span id="cb15-7"><a></a>             <span class="at">data =</span> <span class="fu">rbind</span>(fold1, fold3), <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
 <span id="cb15-8"><a></a></span>
 <span id="cb15-9"><a></a><span class="co"># fold3 predicted by fold1 and fold2</span></span>
-<span id="cb15-10"><a></a>modelC.l <span class="ot">=</span> <span class="fu">glm</span>(sex <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
+<span id="cb15-10"><a></a>modelC.l <span class="ot">&lt;-</span> <span class="fu">glm</span>(sex <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
 <span id="cb15-11"><a></a>             <span class="at">data =</span> <span class="fu">rbind</span>(fold1, fold2), <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>Getting the predictions</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>pred_model_A <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">predict</span>(modelA.l, <span class="at">newdata =</span> fold1,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>pred_model_A <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">predict</span>(modelA.l, <span class="at">newdata =</span> fold1,</span>
 <span id="cb16-2"><a></a>                                <span class="at">type =</span> <span class="st">"response"</span>) <span class="sc">&gt;=</span> <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb16-3"><a></a>pred_model_B <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">predict</span>(modelB.l, <span class="at">newdata =</span> fold2,</span>
+<span id="cb16-3"><a></a>pred_model_B <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">predict</span>(modelB.l, <span class="at">newdata =</span> fold2,</span>
 <span id="cb16-4"><a></a>                               <span class="at">type =</span> <span class="st">"response"</span>) <span class="sc">&gt;=</span> <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb16-5"><a></a>pred_model_C <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">predict</span>(modelC.l, <span class="at">newdata =</span> fold3,</span>
+<span id="cb16-5"><a></a>pred_model_C <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">predict</span>(modelC.l, <span class="at">newdata =</span> fold3,</span>
 <span id="cb16-6"><a></a>                               <span class="at">type =</span> <span class="st">"response"</span>) <span class="sc">&gt;=</span> <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -913,11 +913,11 @@ Table&nbsp;1: Source: <a href="https://bgreenwell.github.io/treebook/">Tree-base
 <section id="cv-for-decision-trees" class="slide level2 smaller">
 <h2>CV for Decision trees</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>modelA.t <span class="ot">=</span> <span class="fu">rpart</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>modelA.t <span class="ot">&lt;-</span> <span class="fu">rpart</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
 <span id="cb23-2"><a></a>                  <span class="at">data =</span> <span class="fu">rbind</span>(fold2, fold3), <span class="at">method =</span> <span class="st">"class"</span>)</span>
-<span id="cb23-3"><a></a>modelB.t <span class="ot">=</span> <span class="fu">rpart</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
+<span id="cb23-3"><a></a>modelB.t <span class="ot">&lt;-</span> <span class="fu">rpart</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
 <span id="cb23-4"><a></a>                  <span class="at">data =</span> <span class="fu">rbind</span>(fold1, fold3), <span class="at">method =</span> <span class="st">"class"</span>)</span>
-<span id="cb23-5"><a></a>modelC.t <span class="ot">=</span> <span class="fu">rpart</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
+<span id="cb23-5"><a></a>modelC.t <span class="ot">&lt;-</span> <span class="fu">rpart</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
 <span id="cb23-6"><a></a>                  <span class="at">data =</span> <span class="fu">rbind</span>(fold1, fold2), <span class="at">method =</span> <span class="st">"class"</span>)</span>
 <span id="cb23-7"><a></a></span>
 <span id="cb23-8"><a></a>pred_model_A.t <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_tree, <span class="at">newdata =</span> fold1, <span class="at">type =</span> <span class="st">"class"</span>)</span>
@@ -944,11 +944,11 @@ Table&nbsp;1: Source: <a href="https://bgreenwell.github.io/treebook/">Tree-base
 <section id="cv-for-random-forests" class="slide level2 smaller">
 <h2>CV for Random forests</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>modelA.f <span class="ot">=</span> <span class="fu">randomForest</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>modelA.f <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
 <span id="cb29-2"><a></a>                           <span class="at">data =</span> <span class="fu">rbind</span>(fold2, fold3), <span class="at">ntree =</span> <span class="dv">500</span>)</span>
-<span id="cb29-3"><a></a>modelB.f <span class="ot">=</span> <span class="fu">randomForest</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
+<span id="cb29-3"><a></a>modelB.f <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
 <span id="cb29-4"><a></a>                           <span class="at">data =</span> <span class="fu">rbind</span>(fold1, fold3), <span class="at">ntree =</span> <span class="dv">500</span>)</span>
-<span id="cb29-5"><a></a>modelC.f <span class="ot">=</span> <span class="fu">randomForest</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
+<span id="cb29-5"><a></a>modelC.f <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm,</span>
 <span id="cb29-6"><a></a>                           <span class="at">data =</span> <span class="fu">rbind</span>(fold1, fold2), <span class="at">ntree =</span> <span class="dv">500</span>)</span>
 <span id="cb29-7"><a></a></span>
 <span id="cb29-8"><a></a>pred_model_A.f <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_forest, <span class="at">newdata =</span> fold1)</span>
@@ -976,9 +976,9 @@ Table&nbsp;1: Source: <a href="https://bgreenwell.github.io/treebook/">Tree-base
 <h2>CV for TAbICL</h2>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="co"># Set the classifiers</span></span>
-<span id="cb35-2"><a></a>clf.A <span class="ot">=</span> tabicl<span class="sc">$</span><span class="fu">TabICLClassifier</span>()</span>
-<span id="cb35-3"><a></a>clf.B <span class="ot">=</span> tabicl<span class="sc">$</span><span class="fu">TabICLClassifier</span>()</span>
-<span id="cb35-4"><a></a>clf.C <span class="ot">=</span> tabicl<span class="sc">$</span><span class="fu">TabICLClassifier</span>()</span>
+<span id="cb35-2"><a></a>clf.A <span class="ot">&lt;-</span> tabicl<span class="sc">$</span><span class="fu">TabICLClassifier</span>()</span>
+<span id="cb35-3"><a></a>clf.B <span class="ot">&lt;-</span> tabicl<span class="sc">$</span><span class="fu">TabICLClassifier</span>()</span>
+<span id="cb35-4"><a></a>clf.C <span class="ot">&lt;-</span> tabicl<span class="sc">$</span><span class="fu">TabICLClassifier</span>()</span>
 <span id="cb35-5"><a></a></span>
 <span id="cb35-6"><a></a><span class="co"># invisible - hides the messages from the prediction function</span></span>
 <span id="cb35-7"><a></a><span class="fu">invisible</span>(clf.A<span class="sc">$</span><span class="fu">fit</span>(<span class="fu">as.matrix</span>(<span class="fu">rbind</span>(fold2, fold3)[, features]), <span class="fu">as.character</span>(<span class="fu">rbind</span>(fold2, fold3)[, <span class="st">'sex'</span>])))</span>

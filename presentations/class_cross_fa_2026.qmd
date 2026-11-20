@@ -130,6 +130,7 @@ knit_hooks$set(output = function(x, options) {
 ::: {style="text-align: center; font-size: 1.5em;"}
 "When a measure becomes a target, it ceases to be a good measure."
 :::
+
 Goodhart's law
 
 ## [STA 301]{style="color: #bf5700;"} - Introduction to Data Science
