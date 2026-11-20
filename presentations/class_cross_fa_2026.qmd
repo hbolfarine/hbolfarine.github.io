@@ -81,7 +81,7 @@ knit_hooks$set(output = function(x, options) {
 - email: [henrique.bolfarine\@austin.utexas.edu](henrique.bolfarine@austin.utexas.edu)
 - website: [hbolfarine.github.io](https://hbolfarine.github.io)
 - Link with [CV](https://hbolfarine.github.io/Henrique_Bolfarine_s_CV.pdf)
-- Fun fact about me: I was born in the U.S. while my father was doing his Ph.D. in statistics at Berkeley.
+- Curious fact about me: I was born in the U.S. while my father was doing his Ph.D. in statistics at Berkeley.
 :::
 ::::::
 
