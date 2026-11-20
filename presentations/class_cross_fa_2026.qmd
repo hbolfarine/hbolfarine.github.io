@@ -455,12 +455,12 @@ fit_forest <- randomForest(as.factor(sex) ~ bill_length_mm + bill_depth_mm,
 
 ```{r, echo = TRUE}
 py_require("tabicl")
-features = c("bill_length_mm", "bill_depth_mm")
+features <- c("bill_length_mm", "bill_depth_mm")
 
 # Import tabicl python function
-tabicl = import("tabicl")
+tabicl <- import("tabicl")
 
-clf = tabicl$TabICLClassifier()
+clf <- tabicl$TabICLClassifier()
 clf$fit(as.matrix(X_train[, features]), as.character(y_train))
 ```
 
@@ -562,26 +562,26 @@ Now we need to run the model 3 times:
 
 ```{r, echo = TRUE}
 # fold1 predicted by fold2 and fold3
-modelA.l = glm(sex ~ bill_length_mm + bill_depth_mm,
+modelA.l <- glm(sex ~ bill_length_mm + bill_depth_mm,
              data = rbind(fold2, fold3), family = "binomial")
 
 # fold2 predicted by fold1 and fold3
-modelB.l = glm(sex ~ bill_length_mm + bill_depth_mm,
+modelB.l <- glm(sex ~ bill_length_mm + bill_depth_mm,
              data = rbind(fold1, fold3), family = "binomial")
 
 # fold3 predicted by fold1 and fold2
-modelC.l = glm(sex ~ bill_length_mm + bill_depth_mm,
+modelC.l <- glm(sex ~ bill_length_mm + bill_depth_mm,
              data = rbind(fold1, fold2), family = "binomial")
 ```
 
 - Getting the predictions
 
 ```{r, echo = TRUE}
-pred_model_A = ifelse(predict(modelA.l, newdata = fold1,
+pred_model_A <- ifelse(predict(modelA.l, newdata = fold1,
                                 type = "response") >= 0.5, 1, 0)
-pred_model_B = ifelse(predict(modelB.l, newdata = fold2,
+pred_model_B <- ifelse(predict(modelB.l, newdata = fold2,
                                type = "response") >= 0.5, 1, 0)
-pred_model_C = ifelse(predict(modelC.l, newdata = fold3,
+pred_model_C <- ifelse(predict(modelC.l, newdata = fold3,
                                type = "response") >= 0.5, 1, 0)
 ```
 
@@ -606,11 +606,11 @@ We'll do the same for the other methods
 ## CV for Decision trees {.smaller}
 
 ```{r, echo = TRUE}
-modelA.t = rpart(as.factor(sex) ~ bill_length_mm + bill_depth_mm,
+modelA.t <- rpart(as.factor(sex) ~ bill_length_mm + bill_depth_mm,
                   data = rbind(fold2, fold3), method = "class")
-modelB.t = rpart(as.factor(sex) ~ bill_length_mm + bill_depth_mm,
+modelB.t <- rpart(as.factor(sex) ~ bill_length_mm + bill_depth_mm,
                   data = rbind(fold1, fold3), method = "class")
-modelC.t = rpart(as.factor(sex) ~ bill_length_mm + bill_depth_mm,
+modelC.t <- rpart(as.factor(sex) ~ bill_length_mm + bill_depth_mm,
                   data = rbind(fold1, fold2), method = "class")
 
 pred_model_A.t <- predict(fit_tree, newdata = fold1, type = "class")
@@ -629,11 +629,11 @@ Accuracy$_{\text{CV}}$ = $\frac{0.84 + 0.87 + 0.86}{3} \approx 0.86$
 ## CV for Random forests {.smaller}
 
 ```{r, echo = TRUE}
-modelA.f = randomForest(as.factor(sex) ~ bill_length_mm + bill_depth_mm,
+modelA.f <- randomForest(as.factor(sex) ~ bill_length_mm + bill_depth_mm,
                            data = rbind(fold2, fold3), ntree = 500)
-modelB.f = randomForest(as.factor(sex) ~ bill_length_mm + bill_depth_mm,
+modelB.f <- randomForest(as.factor(sex) ~ bill_length_mm + bill_depth_mm,
                            data = rbind(fold1, fold3), ntree = 500)
-modelC.f = randomForest(as.factor(sex) ~ bill_length_mm + bill_depth_mm,
+modelC.f <- randomForest(as.factor(sex) ~ bill_length_mm + bill_depth_mm,
                            data = rbind(fold1, fold2), ntree = 500)
 
 pred_model_A.f <- predict(fit_forest, newdata = fold1)
@@ -653,9 +653,9 @@ Accuracy$_{\text{CV}}$ = $\frac{0.96 + 0.96 + 0.92}{3} \approx 0.95$
 
 ```{r, echo = TRUE}
 # Set the classifiers
-clf.A = tabicl$TabICLClassifier()
-clf.B = tabicl$TabICLClassifier()
-clf.C = tabicl$TabICLClassifier()
+clf.A <- tabicl$TabICLClassifier()
+clf.B <- tabicl$TabICLClassifier()
+clf.C <- tabicl$TabICLClassifier()
 
 # invisible - hides the messages from the prediction function
 invisible(clf.A$fit(as.matrix(rbind(fold2, fold3)[, features]), as.character(rbind(fold2, fold3)[, 'sex'])))
