@@ -375,7 +375,6 @@ ggplot(penguins, aes(x = bill_depth_mm, y = bill_length_mm, col = factor(sex))) 
   - Use the same cross-validation folds for all models
 - Compare the models based on their cross-validation results and [choose one]{style="color: #bf5700;"}.
 
-
 ## Training/test splits in general {.smaller}
 
 \
@@ -410,10 +409,9 @@ if (virtualenv_exists("r-tabicl")) {
 ```
 
 ```{r, echo = TRUE}
-library(tidyverse)
 library(rpart) # Decsion Trees
 library(randomForest) # Random Forest
-library(reticulate)
+library(reticulate) # Load Python libraries
 set.seed(1234)
 
 # Number of samples
@@ -470,11 +468,11 @@ clf$fit(as.matrix(X_train[, features]), as.character(y_train))
 - Get their predictions on the test set:
 
 ```{r, echo = TRUE}
-# Prediction for logistic regression using 0.5 threshold
+# Prediction using logistic regression using 0.5 threshold
 pred_logistic <- ifelse(predict(fit_logistic, newdata = X_test,
                                 type = "response") >= 0.5, 1, 0)
  
-# Prediction for decision trees
+# Prediction using decision trees
 pred_tree <- predict(fit_tree, newdata = X_test, type = "class")
 
 # Prediction using random forest

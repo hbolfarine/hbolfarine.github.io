@@ -513,7 +513,7 @@ Henrique Bolfarine
 </section>
 <section id="classification-models" class="slide level2 smaller">
 <h2>Classification Models</h2>
-<div id="tbl-model-comparison" class="quarto-float quarto-figure quarto-figure-center" style="font-size: 0.7em;" data-tbl-cap-location="bottom">
+<div id="tbl-model-comparison" class="quarto-float quarto-figure quarto-figure-center" data-tbl-cap-location="bottom" style="font-size: 0.7em;">
 <figure class="quarto-float quarto-float-tbl">
 <div aria-describedby="tbl-model-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top">
@@ -672,25 +672,24 @@ Table&nbsp;1: Source: <a href="https://bgreenwell.github.io/treebook/">Tree-base
 <h2>Creating a train/test split</h2>
 <p>Let’s do the same thing for the <code>penguins</code> data, but by randomly splitting the data into a training and test set</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a></a><span class="fu">library</span>(rpart) <span class="co"># Decsion Trees</span></span>
-<span id="cb1-3"><a></a><span class="fu">library</span>(randomForest) <span class="co"># Random Forest</span></span>
-<span id="cb1-4"><a></a><span class="fu">library</span>(reticulate)</span>
-<span id="cb1-5"><a></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb1-6"><a></a></span>
-<span id="cb1-7"><a></a><span class="co"># Number of samples</span></span>
-<span id="cb1-8"><a></a>n <span class="ot">=</span> <span class="fu">nrow</span>(penguins)</span>
-<span id="cb1-9"><a></a></span>
-<span id="cb1-10"><a></a><span class="co"># Indexes created from 80% of the original data</span></span>
-<span id="cb1-11"><a></a>idx <span class="ot">=</span> <span class="fu">sample</span>(n, <span class="fl">0.8</span><span class="sc">*</span>n)</span>
-<span id="cb1-12"><a></a></span>
-<span id="cb1-13"><a></a><span class="co"># Create a 80% training and 20% testing split </span></span>
-<span id="cb1-14"><a></a>X_train <span class="ot">=</span> penguins[idx, ]</span>
-<span id="cb1-15"><a></a>X_test <span class="ot">=</span> penguins[<span class="sc">-</span>idx, ]</span>
-<span id="cb1-16"><a></a></span>
-<span id="cb1-17"><a></a><span class="co"># Response variable from the original split</span></span>
-<span id="cb1-18"><a></a>y_train <span class="ot">&lt;-</span> X_train<span class="sc">$</span>sex</span>
-<span id="cb1-19"><a></a>y_test  <span class="ot">&lt;-</span> X_test<span class="sc">$</span>sex</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(rpart) <span class="co"># Decsion Trees</span></span>
+<span id="cb1-2"><a></a><span class="fu">library</span>(randomForest) <span class="co"># Random Forest</span></span>
+<span id="cb1-3"><a></a><span class="fu">library</span>(reticulate) <span class="co"># Load Python libraries</span></span>
+<span id="cb1-4"><a></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb1-5"><a></a></span>
+<span id="cb1-6"><a></a><span class="co"># Number of samples</span></span>
+<span id="cb1-7"><a></a>n <span class="ot">=</span> <span class="fu">nrow</span>(penguins)</span>
+<span id="cb1-8"><a></a></span>
+<span id="cb1-9"><a></a><span class="co"># Indexes created from 80% of the original data</span></span>
+<span id="cb1-10"><a></a>idx <span class="ot">=</span> <span class="fu">sample</span>(n, <span class="fl">0.8</span><span class="sc">*</span>n)</span>
+<span id="cb1-11"><a></a></span>
+<span id="cb1-12"><a></a><span class="co"># Create a 80% training and 20% testing split </span></span>
+<span id="cb1-13"><a></a>X_train <span class="ot">=</span> penguins[idx, ]</span>
+<span id="cb1-14"><a></a>X_test <span class="ot">=</span> penguins[<span class="sc">-</span>idx, ]</span>
+<span id="cb1-15"><a></a></span>
+<span id="cb1-16"><a></a><span class="co"># Response variable from the original split</span></span>
+<span id="cb1-17"><a></a>y_train <span class="ot">&lt;-</span> X_train<span class="sc">$</span>sex</span>
+<span id="cb1-18"><a></a>y_test  <span class="ot">&lt;-</span> X_test<span class="sc">$</span>sex</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>The <code>set.seed(1234)</code> command ensures <span style="color: #bf5700;">reproducible</span> “random” splits.</li>
@@ -740,11 +739,11 @@ Table&nbsp;1: Source: <a href="https://bgreenwell.github.io/treebook/">Tree-base
 <li>Get their predictions on the test set:</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="co"># Prediction for logistic regression using 0.5 threshold</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="co"># Prediction using logistic regression using 0.5 threshold</span></span>
 <span id="cb5-2"><a></a>pred_logistic <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">predict</span>(fit_logistic, <span class="at">newdata =</span> X_test,</span>
 <span id="cb5-3"><a></a>                                <span class="at">type =</span> <span class="st">"response"</span>) <span class="sc">&gt;=</span> <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
 <span id="cb5-4"><a></a> </span>
-<span id="cb5-5"><a></a><span class="co"># Prediction for decision trees</span></span>
+<span id="cb5-5"><a></a><span class="co"># Prediction using decision trees</span></span>
 <span id="cb5-6"><a></a>pred_tree <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_tree, <span class="at">newdata =</span> X_test, <span class="at">type =</span> <span class="st">"class"</span>)</span>
 <span id="cb5-7"><a></a></span>
 <span id="cb5-8"><a></a><span class="co"># Prediction using random forest</span></span>

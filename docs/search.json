@@ -10504,7 +10504,7 @@
     "href": "presentations/class_cross_fa_2026.html#creating-a-traintest-split",
     "title": "Regression to Foundation Models",
     "section": "Creating a train/test split",
-    "text": "Creating a train/test split\nLet’s do the same thing for the penguins data, but by randomly splitting the data into a training and test set\n\nlibrary(tidyverse)\nlibrary(rpart) # Decsion Trees\nlibrary(randomForest) # Random Forest\nlibrary(reticulate)\nset.seed(1234)\n\n# Number of samples\nn = nrow(penguins)\n\n# Indexes created from 80% of the original data\nidx = sample(n, 0.8*n)\n\n# Create a 80% training and 20% testing split \nX_train = penguins[idx, ]\nX_test = penguins[-idx, ]\n\n# Response variable from the original split\ny_train &lt;- X_train$sex\ny_test  &lt;- X_test$sex\n\n\nThe set.seed(1234) command ensures reproducible “random” splits."
+    "text": "Creating a train/test split\nLet’s do the same thing for the penguins data, but by randomly splitting the data into a training and test set\n\nlibrary(rpart) # Decsion Trees\nlibrary(randomForest) # Random Forest\nlibrary(reticulate) # Load Python libraries\nset.seed(1234)\n\n# Number of samples\nn = nrow(penguins)\n\n# Indexes created from 80% of the original data\nidx = sample(n, 0.8*n)\n\n# Create a 80% training and 20% testing split \nX_train = penguins[idx, ]\nX_test = penguins[-idx, ]\n\n# Response variable from the original split\ny_train &lt;- X_train$sex\ny_test  &lt;- X_test$sex\n\n\nThe set.seed(1234) command ensures reproducible “random” splits."
   },
   {
     "objectID": "presentations/class_cross_fa_2026.html#train-the-models",
@@ -10518,7 +10518,7 @@
     "href": "presentations/class_cross_fa_2026.html#generate-predictions",
     "title": "Regression to Foundation Models",
     "section": "Generate predictions",
-    "text": "Generate predictions\n\nGet their predictions on the test set:\n\n\n# Prediction for logistic regression using 0.5 threshold\npred_logistic &lt;- ifelse(predict(fit_logistic, newdata = X_test,\n                                type = \"response\") &gt;= 0.5, 1, 0)\n \n# Prediction for decision trees\npred_tree &lt;- predict(fit_tree, newdata = X_test, type = \"class\")\n\n# Prediction using random forest\npred_forest &lt;- predict(fit_forest, newdata = X_test)\n\n# Prediction for TabICL\npred_tabicl &lt;- clf$predict(as.matrix(X_test[, features]))\n\n\nPerformance is defined by\n\n\nAccuracy = \\(\\frac{\\text{TP + TN}}{\\text{Total}}\\)\n\nHere, \\(\\text{TP}\\) is the number of true positives, \\(\\text{TN}\\) is the number of true negatives, and \\(\\text{Total}\\) is the size of the data set."
+    "text": "Generate predictions\n\nGet their predictions on the test set:\n\n\n# Prediction using logistic regression using 0.5 threshold\npred_logistic &lt;- ifelse(predict(fit_logistic, newdata = X_test,\n                                type = \"response\") &gt;= 0.5, 1, 0)\n \n# Prediction using decision trees\npred_tree &lt;- predict(fit_tree, newdata = X_test, type = \"class\")\n\n# Prediction using random forest\npred_forest &lt;- predict(fit_forest, newdata = X_test)\n\n# Prediction for TabICL\npred_tabicl &lt;- clf$predict(as.matrix(X_test[, features]))\n\n\nPerformance is defined by\n\n\nAccuracy = \\(\\frac{\\text{TP + TN}}{\\text{Total}}\\)\n\nHere, \\(\\text{TP}\\) is the number of true positives, \\(\\text{TN}\\) is the number of true negatives, and \\(\\text{Total}\\) is the size of the data set."
   },
   {
     "objectID": "presentations/class_cross_fa_2026.html#measuring-performance",
