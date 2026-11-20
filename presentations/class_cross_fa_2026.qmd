@@ -87,7 +87,7 @@ knit_hooks$set(output = function(x, options) {
 
 ## About me
 
-[**Teaching:**]{style="color: #bf5700;"} I served as a Lecturer in Statistics at the McCombs School of Business at UT Austin from spring 2022 to fall 2026. Previously, I taught at the University of São Paulo, where I completed my doctorate under Prof. Hedibert F. Lopes (Duke alumni and former University of Chicago professor).\
+[**Teaching:**]{style="color: #bf5700;"} I served as a Lecturer in Statistics at the [McCombs School of Business at UT Austin]{style="color: #bf5700;"} from spring 2022 to fall 2026. Previously, I taught at the University of São Paulo, where I completed my doctorate under Prof. Hedibert F. Lopes (Duke alumni and former University of Chicago professor).\
 \
 
 [**Post-Doc:**]{style="color: #bf5700;"} I served as a Visiting Researcher at the McCombs School of Business at UT Austin from the spring to the fall of 2021 under Prof. Carlos M. Carvalho.
