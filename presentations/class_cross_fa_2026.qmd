@@ -330,13 +330,6 @@ Naive approach - [no fine tuning]{style="color: #bf5700;"}
 Source: [Tree-based methods](https://bgreenwell.github.io/treebook/) and [Tabular Foundation Models: First Look](https://tabularfoundationmodels.com/first-look).
 :::
 
-## Details on the Analysis
-
-- To keep the [analysis fair]{style="color: #bf5700;"}:
-  - Use the same train/test split
-  - Use the same cross-validation folds for all models
-- Compare the models based on their cross-validation results and [choose one]{style="color: #bf5700;"}.
-
 ## Palmer Penguins
 
 ::::::: {style="font-size: 0.75em;"}
@@ -374,6 +367,14 @@ ggplot(penguins, aes(x = bill_depth_mm, y = bill_length_mm, col = factor(sex))) 
   theme_minimal(base_size = 14) +
   theme(legend.position = "bottom")
 ```
+
+## Details on the Analysis
+
+- To keep the [analysis fair]{style="color: #bf5700;"}:
+  - Use the same train/test split
+  - Use the same cross-validation folds for all models
+- Compare the models based on their cross-validation results and [choose one]{style="color: #bf5700;"}.
+
 
 ## Training/test splits in general {.smaller}
 
