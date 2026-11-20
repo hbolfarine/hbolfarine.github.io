@@ -713,8 +713,7 @@ library(tidymodels)
 # Randomly split the data into 5 folds
 folds <- vfold_cv(penguins, v=5)
 
-# Build a tidymodels "workflow" for a linear model
-# with the formula dailyspend ~ temp, using RMSE as the target metric
+# Build a tidymodels "workflow" for a logistic regression
 workflow() |> 
   add_model(logistic_reg()) |> 
   add_formula(as.factor(sex) ~ bill_length_mm + bill_depth_mm) %>%

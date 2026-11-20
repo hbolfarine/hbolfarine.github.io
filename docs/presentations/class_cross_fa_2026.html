@@ -513,7 +513,7 @@ Henrique Bolfarine
 </section>
 <section id="classification-models" class="slide level2 smaller">
 <h2>Classification Models</h2>
-<div id="tbl-model-comparison" class="quarto-float quarto-figure quarto-figure-center" data-tbl-cap-location="bottom" style="font-size: 0.7em;">
+<div id="tbl-model-comparison" class="quarto-float quarto-figure quarto-figure-center" style="font-size: 0.7em;" data-tbl-cap-location="bottom">
 <figure class="quarto-float quarto-float-tbl">
 <div aria-describedby="tbl-model-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top">
@@ -1084,13 +1084,12 @@ Table&nbsp;1: Source: <a href="https://bgreenwell.github.io/treebook/">Tree-base
 <span id="cb42-3"><a></a><span class="co"># Randomly split the data into 5 folds</span></span>
 <span id="cb42-4"><a></a>folds <span class="ot">&lt;-</span> <span class="fu">vfold_cv</span>(penguins, <span class="at">v=</span><span class="dv">5</span>)</span>
 <span id="cb42-5"><a></a></span>
-<span id="cb42-6"><a></a><span class="co"># Build a tidymodels "workflow" for a linear model</span></span>
-<span id="cb42-7"><a></a><span class="co"># with the formula dailyspend ~ temp, using RMSE as the target metric</span></span>
-<span id="cb42-8"><a></a><span class="fu">workflow</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb42-9"><a></a>  <span class="fu">add_model</span>(<span class="fu">logistic_reg</span>()) <span class="sc">|&gt;</span> </span>
-<span id="cb42-10"><a></a>  <span class="fu">add_formula</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm) <span class="sc">%&gt;%</span></span>
-<span id="cb42-11"><a></a>  <span class="fu">fit_resamples</span>(folds, <span class="at">metrics =</span> <span class="fu">metric_set</span>(accuracy)) <span class="sc">%&gt;%</span></span>
-<span id="cb42-12"><a></a>  <span class="fu">collect_metrics</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb42-6"><a></a><span class="co"># Build a tidymodels "workflow" for a logistic regression</span></span>
+<span id="cb42-7"><a></a><span class="fu">workflow</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb42-8"><a></a>  <span class="fu">add_model</span>(<span class="fu">logistic_reg</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb42-9"><a></a>  <span class="fu">add_formula</span>(<span class="fu">as.factor</span>(sex) <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm) <span class="sc">%&gt;%</span></span>
+<span id="cb42-10"><a></a>  <span class="fu">fit_resamples</span>(folds, <span class="at">metrics =</span> <span class="fu">metric_set</span>(accuracy)) <span class="sc">%&gt;%</span></span>
+<span id="cb42-11"><a></a>  <span class="fu">collect_metrics</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 6
   .metric  .estimator  mean     n std_err .config        
